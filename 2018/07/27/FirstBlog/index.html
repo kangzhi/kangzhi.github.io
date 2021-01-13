@@ -106,7 +106,7 @@
 <meta property="og:site_name" content="KinGil&#39;s Blog">
 <meta property="og:description" content="谷歌搞定一切，搞不定，问GF。能找到一个自己写点东西而且不用被注册手机号码，不用被监管的平台，不易。所以，有了今天的第一篇博文。 前言如果想拥有自己的公开博客，程序员也好，文字爱好者也罢，通常有三种方式：1 在现有博客平台上注册，方便上手主题直接用，博客园、CSDN、新浪、腾讯和网易LOFTER（有一点小逼格,以摄影爱好者为主）2 利用博客框架搭建，专注内容，WordPress，Jekyll，he">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-18T02:52:16.000Z">
+<meta property="og:updated_time" content="2021-01-13T09:06:49.674Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Github Pages+Hexo博客教程">
 <meta name="twitter:description" content="谷歌搞定一切，搞不定，问GF。能找到一个自己写点东西而且不用被注册手机号码，不用被监管的平台，不易。所以，有了今天的第一篇博文。 前言如果想拥有自己的公开博客，程序员也好，文字爱好者也罢，通常有三种方式：1 在现有博客平台上注册，方便上手主题直接用，博客园、CSDN、新浪、腾讯和网易LOFTER（有一点小逼格,以摄影爱好者为主）2 利用博客框架搭建，专注内容，WordPress，Jekyll，he">
@@ -367,15 +367,15 @@
 
       
         <p>谷歌搞定一切，搞不定，问GF。<br>能找到一个自己写点东西而且不用被注册手机号码，不用被监管的平台，不易。<br>所以，有了今天的第一篇博文。</p>
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>如果想拥有自己的公开博客，程序员也好，文字爱好者也罢，通常有三种方式：<br>1 在现有博客平台上注册，方便上手主题直接用，博客园、CSDN、新浪、腾讯和网易LOFTER（有一点小逼格,以摄影爱好者为主）<br>2 利用博客框架搭建，专注内容，WordPress，Jekyll，hexo<br>3 自己写一个网站</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>如果想拥有自己的公开博客，程序员也好，文字爱好者也罢，通常有三种方式：<br>1 在现有博客平台上注册，方便上手主题直接用，博客园、CSDN、新浪、腾讯和网易LOFTER（有一点小逼格,以摄影爱好者为主）<br>2 利用博客框架搭建，专注内容，WordPress，Jekyll，hexo<br>3 自己写一个网站</p>
 <p>1-简单，会被删帖删号。2-比较折腾，需要购买自己的服务器，如果内容太多而的话。3-对前端编程能力要求比较高，当然也需要自己维护，如果你想，就去吧。这里我用的是第二种github pages+hexo，花费了两个小时搭建完成。<br><a id="more"></a></p>
-<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>Windows：<br>安装node.js和git，node.js无脑下载双击安装，git也是。下载后，可以稍微研究下git，以及github使用。简单来说，它的作用是完成多人协同工程和版本管理，以及分享你的代码到网络，你要是简单理解为工程文件的双向云同步，也没问题。<br>记住，账号是核心，git全局账号、名称最好跟github一致。鉴于github有个人资源大小1GB的限制，据说会发提醒邮件，单独为自己的博客注册一个github账号。<br>建立和注册github账号。教程网上一大堆，小懂点英语的人都可以，不懂，猜也行。</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>Windows：<br>安装node.js和git，node.js无脑下载双击安装，git也是。下载后，可以稍微研究下git，以及github使用。简单来说，它的作用是完成多人协同工程和版本管理，以及分享你的代码到网络，你要是简单理解为工程文件的双向云同步，也没问题。<br>记住，账号是核心，git全局账号、名称最好跟github一致。鉴于github有个人资源大小1GB的限制，据说会发提醒邮件，单独为自己的博客注册一个github账号。<br>建立和注册github账号。教程网上一大堆，小懂点英语的人都可以，不懂，猜也行。</p>
 <p>完成这些后，你最好也习惯下在cmd/git bash下敲命令行，对当前的工作目录/工作文件夹有个概念，所有东西都离不开内容，这个意思。</p>
 <p>如果想快速知道如何使用和建立起概念，点击<a href="https://kangzhi.github.io">Git</a>, <a href="https://blog.csdn.net/Hanani_Jia/article/details/77950594" target="_blank" rel="noopener">github</a></p>
 <p>Mac：<br>由于mac系统自带了npm工具，所以只需要安装git，同理无脑安装。其后所有过程基本和windows差不多，有不一样的我会特别指出来。</p>
-<h3 id="建立个人主页"><a href="#建立个人主页" class="headerlink" title="建立个人主页"></a>建立个人主页</h3><p>利用Github Pages构建免费站点，网址以username.github.io结尾，如果嫌丑，以后自己买域名。<br>假设你已经熟悉github，在github上新建repo，工程名写成USERNAME.github.io，名字注意和自己GitHub的用户名保持一致，否则会出问题。其他设置不用管。如果需要用hexo建博客，到此为止。</p>
+<h2 id="建立个人主页"><a href="#建立个人主页" class="headerlink" title="建立个人主页"></a>建立个人主页</h2><p>利用Github Pages构建免费站点，网址以username.github.io结尾，如果嫌丑，以后自己买域名。<br>假设你已经熟悉github，在github上新建repo，工程名写成USERNAME.github.io，名字注意和自己GitHub的用户名保持一致，否则会出问题。其他设置不用管。如果需要用hexo建博客，到此为止。</p>
 <p>以下可选（如果需要自己编辑网页）：<br>然后，setup-desktop/或者使用git建立链接，本地编辑并保存index.html–此时为一静态网页，上传至github远程仓库<br>Done！此时你已经有自己的网站了，可以直接访问，然而，没什么内容，你还需要研究排版、样式等很多html知识，所以，我的方案是githubio+hexo。</p>
-<h3 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h3><p><strong>检查安装环境</strong></p>
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><p><strong>检查安装环境</strong></p>
 <p>进入cmd/git bash<br>‘npm -v’<br>‘node -v’<br>命令行安装hexo：<br>‘npm install hexo-cli -g’</p>
 <p><strong>建立Hexo工程</strong></p>
 <p><strong>windows：</strong><br>在当前目录创建文件夹MyHexoProj，同时也是工程目录<br>新建hexo工程，也就是你的网页内容所在，往后你所有的内容编辑、样式修改都跟这个工程有关。<br>‘hexo init MyHexoProj’<br>cd进入该MyHexoProj目录后<br><strong>Mac：</strong><br>‘mkdir YourFolder’<br>‘cd YourFolder’<br>‘hexo init’</p>
@@ -383,17 +383,41 @@
 <p>‘npm install hexo-deployer-git –save’</p>
 <p><strong>本地发布和查看</strong></p>
 <p>‘hexo clean’<br>‘hexo g(enerate)’<br>‘hexo server’<br>到这，你的hexo网页已经构建好了，可以在<a href="http://0.0.0.0:4000" target="_blank" rel="noopener">本地Local4000端口</a>查看构建好的静态网页。</p>
-<h3 id="发布到githubio"><a href="#发布到githubio" class="headerlink" title="发布到githubio"></a>发布到githubio</h3><p>修改发布方式：<br>根目录下的_config.yml，当然，细心的你还可以修改其他无关紧要的内容。<br>deploy:<br>type: git<br>repo: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:kangzhi/kangzhi.github.io.git<br>branch: master<br>(冒号后空格，注意这里我们一般是通过ssh访问，所以链接贴ssh，不是https)<br>‘hexo clean’<br>‘hexo g’<br>发布到githubio<br>‘hexo d’<br>或者一行代码代替’hexo d -g’</p>
+<h2 id="发布到githubio"><a href="#发布到githubio" class="headerlink" title="发布到githubio"></a>发布到githubio</h2><p>修改发布方式：<br>根目录下的_config.yml，当然，细心的你还可以修改其他无关紧要的内容。<br>deploy:<br>type: git<br>repo: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:kangzhi/kangzhi.github.io.git<br>branch: master<br>(冒号后空格，注意这里我们一般是通过ssh访问，所以链接贴ssh，不是https)<br>‘hexo clean’<br>‘hexo g’<br>发布到githubio<br>‘hexo d’<br>或者一行代码代替’hexo d -g’</p>
 <p>中途可能遇到无法链接到GitHub的问题（其实就是建立本地仓库和远程仓库链接问题，如果之前没建立过，可能会有这个坑）输入：<br>‘ssh <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>‘<br>检测是否连接到远程，如出现’Hi XXX! You’ve successfully authenticated, but GitHub does not provide shell access.Connection to github.com closed.’说明你链接成功了。<br>如果不是，恭喜，顺便陪你再复习下和github远程仓库建立ssh链接：<br>‘ssh-keygen -t rsa -C “<a href="mailto:your_email@youremail.com" target="_blank" rel="noopener">your_email@youremail.com</a>“‘<br>一路回车，然后打开C/users/你的用户名/.ssh/文件夹里面id_rsa.pub,记事本打开全部复制。在github-&gt;settings里新建SSH连接，随便起个名字，粘贴内容。<br>再次检测，Done。<br>此时，可以到网站上去查看你全新的网页了。</p>
-<h3 id="编辑和维护"><a href="#编辑和维护" class="headerlink" title="编辑和维护"></a>编辑和维护</h3><p>hexo支持markdown编辑，在你的MyHexoProj/source/_postm剥下，有一个hello-world.md的markdown文本，他就是你的默认第一篇博客。<br>新建你自己的第一篇文章：<br>‘hexo new “Your Title”‘<br>此时，该目录下会有一个新的“Your Title.md”文件，开启你的书写之旅吧。</p>
+<h2 id="编辑和个性化"><a href="#编辑和个性化" class="headerlink" title="编辑和个性化"></a>编辑和个性化</h2><p>hexo支持markdown编辑，在你的MyHexoProj/source/_post目录下，有一个hello-world.md的markdown文本，他就是你的默认第一篇博客。<br>新建你自己的第一篇文章：<br>‘hexo new “Your Title”‘<br>此时，该目录下会有一个新的“Your Title.md”文件，开启你的书写之旅吧。</p>
 <p>如果想了解下markdown，可以推荐几个好用的编辑器：<br><strong>markdown编辑器</strong></p>
 <p>hexo支持markdown编辑，关于他的争议见仁见智，如果你只想专注于你的内容而非排版，花十分钟了解和上手还是很值得的。<br>cmd markdown（登陆体验差）<br>Haroopad</p>
 <p>windows平台：<br>markdown pad<br>论文幻灯片用Modoko<br>MarkPad</p>
 <p>Mac平台：<br><strong>Mou，暂时不支持OSX Sieera，强推</strong><br>macdown</p>
 <p>IOS：<br>Drafts，Day one(收费)</p>
 <p>马克飞象</p>
-<h3 id="设置主题"><a href="#设置主题" class="headerlink" title="设置主题"></a>设置主题</h3><p>更换主题：<br>hexo默认的主题是landscape，比较简约大气的一个主题，你可以自己更换背景图片之类的。当然，各有所爱，你可以选择设置成自己喜欢的主题，基本就是下载资源，然后修改相应的配置文件就可以了，这是主题的集合<a href="https://hexo.io/themes" target="_blank" rel="noopener">链接</a>。<br>这里推荐几个比较符合中国人习惯的主题：iissnan／yilia／jacman／packman<br>以yilia举例说明下如何设置：<br>‘git clone <a href="https://github.com/litten/hexo-theme-yilia.git" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia’<br>相当于将资源下载到你的工程目录，然后设置根目录了yml文件下：<br>theme: yilia<br>更换背景图片：<br>添加一张图片到themes/next/spource/images<br>themes/next/source/css/_custom/custom.styl增加：<br>body<br>{<br>    background-image:url(/images/background1.png);<br>    background-repeat: no-repeat;<br>    background-attachment:fixed;<br>    background-position:50% 50%;<br>}<br>添加动态特效：<br>在主题文件config.yml中设置canvas_nest:true<br>Done！发布你的网站，就成另外一个样子了。如果想做其他细节的设置，到themes/yilia目录的yml文件，修改里面的各种配置参数就可以。</p>
-<h3 id="异地维护"><a href="#异地维护" class="headerlink" title="异地维护"></a>异地维护</h3><p>hexo的宗旨是不管你在哪里，只要拥有博客内容（比如说md文件），都可以在半个小时之搭建起你的博客，迁移非常方便和省事。强迫症患者们非得考虑维护问题，也可以。<br>首先，将你的本地hexo目录下面的themes目录下的.git文件删除，然后将整个目录push到远程仓库，github或者git.oschina.net都可以。push上去之后，当你换了一台电脑或者操作环境，执行git clone将整个目录复制到本地，然后安装本地环境’hexo isntall hexo –save’,’npm install’等。最后发布博客，并且git pull你的内容到远程仓库，保证远程资源内容最新。</p>
+<p>最终使用：Typora(mac+windows)</p>
+<h2 id="设置主题"><a href="#设置主题" class="headerlink" title="设置主题"></a>设置主题</h2><p>更换主题：<br>hexo默认的主题是landscape，比较简约大气的一个主题，你可以自己更换背景图片之类的。当然，各有所爱，你可以选择设置成自己喜欢的主题，基本就是下载资源，然后修改相应的配置文件就可以了，这是主题的集合<a href="https://hexo.io/themes" target="_blank" rel="noopener">链接</a>。<br>这里推荐几个比较符合中国人习惯的主题：iissnan／yilia／jacman／packman<br>以yilia举例说明下如何设置：<br>‘git clone <a href="https://github.com/litten/hexo-theme-yilia.git" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia’<br>相当于将资源下载到你的工程目录，然后设置根目录了yml文件下：<br>theme: yilia<br>更换背景图片：<br>添加一张图片到themes/next/spource/images<br>themes/next/source/css/_custom/custom.styl增加：<br>body<br>{<br>    background-image:url(/images/background1.png);<br>    background-repeat: no-repeat;<br>    background-attachment:fixed;<br>    background-position:50% 50%;<br>}<br>添加动态特效：<br>在主题文件config.yml中设置canvas_nest:true<br>Done！发布你的网站，就成另外一个样子了。如果想做其他细节的设置，到themes/yilia目录的yml文件，修改里面的各种配置参数就可以。</p>
+<p>个人使用主题记录：<br>1Next.Pisces<br>2hexo-theme-Butterfly</p>
+<h2 id="域名和备案"><a href="#域名和备案" class="headerlink" title="域名和备案"></a>域名和备案</h2><p>source下面有CNAME文件</p>
+<h2 id="博客迁移和维护"><a href="#博客迁移和维护" class="headerlink" title="博客迁移和维护"></a>博客迁移和维护</h2><p>hexo的宗旨是不管你在哪里，只要拥有博客内容（比如说md文件），都可以在半个小时之搭建起你的博客，迁移非常方便和省事。<br>开始之前，你需要先搞清楚两件事，博客的备份+迁移，博客的异地部署是两件事。如果你搞混淆了，那么网络上所有的教程只会越看越乱。</p>
+<h3 id="备份和迁移"><a href="#备份和迁移" class="headerlink" title="备份和迁移"></a>备份和迁移</h3><p>首先，假设已经有完整的工程了，hexo整个工程目录结构如下：<br>.deploy_git ： 执行hexo deploy命令部署到GitHub上的内容目录<br>node_modules<br>public ： hexo generate的输出，输出的静态网页内容目录<br>scaffolds ： layout模板文件目录，其中的md文件可以添加编辑<br>source ： 文章源码目录，该目录下的markdown和html文件均会被hexo处理。该页面对应repo的根目录，404文件、favicon.ico文件<br>themes ： 主题文件目录<br>.gitignore<br>_config.yml : 全局配置文件，大多数的设置都在这里<br>db.json<br>package.json : 应用程序数据，指明hexo的版本等信息，类似于一般软件中的关于按钮<br>package-lock.json</p>
+<p>可以看到，理论上，迁移博客你需要迁移的核心内容是：<br>scaffolds+source+themes+ .gitignore+_config.yml+package.json+packagelock.json<br>所以迁移的过程如下：<br>将上述目录copy到新的电脑/目录<br>A 暴力拷贝 完事了，直接copy过去，就完成迁移了。百度云、坚果云、硬盘、U盘随意用。</p>
+<p>B 利用在github上新建分支hexo，先进性远程同步，再拉去到异地的目录。所有你编辑、同步、拉取的都是你要迁移的文件目录。所以这里唯一需要注意的就是，设置正确的gitignore，管理好你的资源内容，而不是博客的发布/生成内容。</p>
+<p>注意事项：如果你之前克隆过theme中的主题文件，那么应该把主题文件中的.git文件夹删掉，因为git不能嵌套上传，最好是显示隐藏文件，检查一下有没有，否则上传的时候会出错，导致你的主题文件无法上传，这样你的配置在别的电脑上就用不了了。</p>
+<h3 id="博客重新部署"><a href="#博客重新部署" class="headerlink" title="博客重新部署"></a>博客重新部署</h3><p>所以，部署要做的事情，就是在本地安装好环境，然后通过SSH建立和githubio托管服务器的远程连接。<br>1 在新的电脑/目录配置环境<br>安装node<br>安装npm<br>安装hexo<br> npm install<br> npm install -g hexo-cli</p>
+<p> 以下不一执行，因为npm install已经执行了所有必要包的操作。<br> npm install hexo-deployer-git –save<br> npm install hexo-generator-feed –save<br> npm install hexo-generator-sitemap –save</p>
+<p>这里遇到hexo command not found 的问题:<br>sudo apt-get update<br>curl -sL <a href="https://deb.nodesource.com/setup_10.x" target="_blank" rel="noopener">https://deb.nodesource.com/setup_10.x</a> | sudo -E bash -<br>sudo apt-get install -y nodejs</p>
+<p>先把node升级到最新版本12<br>然后重新安装hexo<br>sudo npm install hexo -g<br>hexo -v<br>输出正确信息，OK</p>
+<p>2 由于编辑的博客本质上还是要通过github pages托管，所以你需要在新目录本地把git上的ssh那些密钥搞好。</p>
+<ul>
+<li>查看ssh是否存在 到~/.ssh 目录下查看，或者直接输入 ls -al ~/.ssh<br>如果不存在，则只有known_hosts</li>
+<li>任意路径 ssh-keygen -t rsa -C “<a href="mailto:your_email@example.com" target="_blank" rel="noopener">your_email@example.com</a>“ //这里邮箱随便填，不一定必须跟githubio的账户邮箱一致，这里甚至是表明你以一个本地git用户的身份和远程建立连接<br>现在，生成了id_rsa文件和id_rsa.pub文件，前面是私有密钥，后面是公有密钥，可以任意公开。</li>
+<li>在githubio的博客账户settings里找到增加SSHKey项目，新建一个SSHKey，将id_rsa.pub的内容复制进去。<br>这样你的本地git就和远程仓库建立了连接。如果你有多台设备，你可以将这些设备都添加到github上去。</li>
+<li>验证 ssh-T <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a></li>
+</ul>
+<ul>
+<li>3 git init 如果之前不小心生成了.deploygit目录，全部删除，重新生成<br>4 正常的hexo发布流程 hexo clean/ hexo g -&gt; hexo d // hexo d -g</li>
+</ul>
+<p>个人迁移记录：<br>备份文件：直接复制原工程下必要的文件夹，到ubuntu的新系统<br>安装：安装node/npm/hexo，期间遇到问题 node/npm安装版本太低，导致hexo一直安装不成功。解决办法如上述。<br>环境：git全局是一个账号，github博客是另一个账号。SSHkey使用的是非githubio邮箱。<br>全局账号配置：git config –global user.name “Mona Lisa”<br>局部配置：git config user.name “Mona Lisa”</p>
+<p>之后hexo clean-hexo g 均没有问题，但是hexo d 报错：<br>Error: EACCES: permission denied, unlink ‘/home/cs18/_Blog/.deploy_git/archives/index.html’<br>看提示应该是权限问题，到文件夹下查看.deploygit的很多文件都上了锁。猜测可能是在git初始化以前就生成了某些文件。<br>删除该目录，重新生成发布。<br>OK。</p>
+<p>进一步测试：是否必须是git仓库才可以发布。<br>hexo clean  删除public文件夹，deploygit仍然存在<br>删除.git文件夹，hexo d -g 一切OK。<br>所以博客的文件目录不是必须为git，hexo的部署命令和git push到远程仓促并不是同一性质。</p>
 
       
     </div>
@@ -513,7 +537,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -605,7 +629,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立个人主页"><span class="nav-number">3.</span> <span class="nav-text">建立个人主页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo"><span class="nav-number">4.</span> <span class="nav-text">Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布到githubio"><span class="nav-number">5.</span> <span class="nav-text">发布到githubio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑和维护"><span class="nav-number">6.</span> <span class="nav-text">编辑和维护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置主题"><span class="nav-number">7.</span> <span class="nav-text">设置主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异地维护"><span class="nav-number">8.</span> <span class="nav-text">异地维护</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立个人主页"><span class="nav-number">3.</span> <span class="nav-text">建立个人主页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo"><span class="nav-number">4.</span> <span class="nav-text">Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布到githubio"><span class="nav-number">5.</span> <span class="nav-text">发布到githubio</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑和个性化"><span class="nav-number">6.</span> <span class="nav-text">编辑和个性化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置主题"><span class="nav-number">7.</span> <span class="nav-text">设置主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域名和备案"><span class="nav-number">8.</span> <span class="nav-text">域名和备案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博客迁移和维护"><span class="nav-number">9.</span> <span class="nav-text">博客迁移和维护</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#备份和迁移"><span class="nav-number">9.1.</span> <span class="nav-text">备份和迁移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#博客重新部署"><span class="nav-number">9.2.</span> <span class="nav-text">博客重新部署</span></a></li></ol></li></ol></div>
             
 
           </div>
