@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+
+
+<script type="text/javascript" color="253,253,253" opacity="0.5" zindex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="OpenGL,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="OpenGL的一些高级特性，也就是核心的一些技巧和流程，主要包括深度测试、模板测试等内容。">
+<meta name="keywords" content="OpenGL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenGL-Learning-3">
+<meta property="og:url" content="http://kangzhi.github.io/2019/01/23/OpenGL-Learning-3/index.html">
+<meta property="og:site_name" content="KinGil&#39;s Blog">
+<meta property="og:description" content="OpenGL的一些高级特性，也就是核心的一些技巧和流程，主要包括深度测试、模板测试等内容。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T02:52:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenGL-Learning-3">
+<meta name="twitter:description" content="OpenGL的一些高级特性，也就是核心的一些技巧和流程，主要包括深度测试、模板测试等内容。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kangzhi.github.io/2019/01/23/OpenGL-Learning-3/">
+
+
+
+
+
+  <title>OpenGL-Learning-3 | KinGil's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KinGil's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">April is coming</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kangzhi.github.io/2019/01/23/OpenGL-Learning-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KinGil">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KinGil's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OpenGL-Learning-3</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T21:10:47+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenGL/" itemprop="url" rel="index">
+                    <span itemprop="name">OpenGL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>OpenGL的一些高级特性，也就是核心的一些技巧和流程，主要包括深度测试、模板测试等内容。</p>
+<a id="more"></a>
+<h1 id="高级OpenGL"><a href="#高级OpenGL" class="headerlink" title="高级OpenGL"></a>高级OpenGL</h1><h2 id="depth-testing"><a href="#depth-testing" class="headerlink" title="depth testing"></a>depth testing</h2><p>color buffer绿色是OpenGL对象<br>同样，depth buffer绿色，也是对象，而且跟colorbuffer有同样的宽度和高度，系统自动生成的。fs运行后，深度测试是在屏幕空间内进行的（实际上是在模板测试以后的）。屏幕空间坐标直接由glviewport决定，能够通过fs 的内建gl_FraCoord得到，xy坐标分别代表屏幕内的坐标，还有一个z表示该像素的实际深度值，这个z值是跟depth buffer的值比较的那个值。</p>
+<ul>
+<li>现在gpu通常也容许在fs之前的深度测试，如果确定一个像素肯定不可见被遮挡的话，直接忽略这个片元。</li>
+<li>不要直接写入片元的深度值，不然提前深度测试就不可能了</li>
+</ul>
+<ol>
+<li>默认是gl_LESS，也就是说保留了深度值小的片元，深度值小意味着？？？？？</li>
+<li>如果换成gl_always,等于没有开深度测试<h3 id="深度值到底是什么"><a href="#深度值到底是什么" class="headerlink" title="深度值到底是什么"></a>深度值到底是什么</h3>depth buffer绿色的值是一个0-1的数值。物体的z值（在view space，也就是离真实观察者的距离）跟他比较。但是显然没法直接比较，用一个公式转换成0-1<br>Fdepth = ）（z- near）/（far -near）<br>简单示意，实际上并不是，因为没有考虑距离上的效果，远的模糊近的清晰。<br>问题:<br>void main()<br>{<br>​    FragColor = vec4(vec3(gl_FragCoord.z), 1.0);<br>}<br>这里fragColor最后一个分量1.0 表示的是RGBA的A，是透明度，跟深度测试没有关系。<h3 id="zfight"><a href="#zfight" class="headerlink" title="zfight"></a>zfight</h3>两个面离得太近，最后转化得到的深度值精度值不够，没法判断哪个在前哪个在后。<br>离得近了，物体考的特别近才会比较明显，但是离得远的物体，两个物体发生打架的可能更大。<br>怎么避免呢？</li>
+<li>手动调整</li>
+<li>将near平面放的尽可能远些</li>
+<li>提高depthbuffer 的精度，显然这是要吃内存的哈哈<h2 id="模板测试"><a href="#模板测试" class="headerlink" title="模板测试"></a>模板测试</h2>先模板测试，再深度测试；<br>在fragment shader处理片元之后，进行模板测试，可以舍弃掉一些片元，模板缓冲区stencil buffer是被容许直接在渲染的时候改变的；<br>每一个片元的stencil buffer值有8bits，也就是可以设置256个不同的值；<h3 id="stenciil-functions"><a href="#stenciil-functions" class="headerlink" title="stenciil functions"></a>stenciil functions</h3></li>
+</ol>
+<ul>
+<li><p>glStencilMask(0xFF);<br> // each bit is written to the stencil buffer as is<br> glStencilMask(0x00); // each bit ends up as 0 in the stencil buffer (disabling writes)</p>
+</li>
+<li><p>glStencilFunc(GLenum func, GLint ref, GLuint mask)<br>分别是：<br>选项，比较buffer的值和ref的值；（buffer的值就是片元的stencil<br>value？？？？？？？）<br>比较值；<br>测试比较这两个值（ref 值和存储的buffer值）之前加上去的一个mask</p>
+</li>
+<li>glStencilOp(GLenum sfail, GLenum dpfail, GLenum dppass)<br>分别是：<br>模板测试失败；<br>模板测试通过，深度测试失败；<br>两个测试都失败；<br>默认两个测试的话都是GL_KEEP,不会改变stencil的值<h3 id="外发光shader"><a href="#外发光shader" class="headerlink" title="外发光shader"></a>外发光shader</h3>卧槽，原来外发光是这么实现的，这个shader很早就在用了，但是一直没仔细研究过。思路挺巧妙：</li>
+</ul>
+<ol>
+<li>Set the stencil func to GL_ALWAYS before drawing the (to be outlined) objects, updating the stencil buffer with 1s wherever the objects’ fragments are rendered.</li>
+<li>Render the objects.</li>
+<li>Disable stencil writing and depth testing.</li>
+<li>Scale each of the objects by a small amount.</li>
+<li>Use a different fragment shader that outputs a single (border) color.</li>
+<li>Draw the objects again, but only if their fragments’ stencil values are not equal to </li>
+<li>Enable stencil writing and depth testing again.</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">glEnable(GL_DEPTH_TEST);</span><br><span class="line">glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);  </span><br><span class="line">  </span><br><span class="line">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); </span><br><span class="line"></span><br><span class="line">glStencilMask(<span class="number">0x00</span>); <span class="comment">// make sure we don't update the stencil buffer while drawing the floor</span></span><br><span class="line">normalShader.use();</span><br><span class="line">DrawFloor()  </span><br><span class="line">  </span><br><span class="line">glStencilFunc(GL_ALWAYS, <span class="number">1</span>, <span class="number">0xFF</span>); <span class="comment">// all fragments should update the stencil buffer</span></span><br><span class="line">glStencilMask(<span class="number">0xFF</span>); <span class="comment">// enable writing to the stencil buffer</span></span><br><span class="line">DrawTwoContainers();</span><br><span class="line">  </span><br><span class="line">glStencilFunc(GL_NOTEQUAL, <span class="number">1</span>, <span class="number">0xFF</span>);</span><br><span class="line">glStencilMask(<span class="number">0x00</span>); <span class="comment">// disable writing to the stencil buffer</span></span><br><span class="line">glDisable(GL_DEPTH_TEST);</span><br><span class="line">shaderSingleColor.use(); </span><br><span class="line">DrawTwoScaledUpContainers();</span><br><span class="line">glStencilMask(<span class="number">0xFF</span>);</span><br><span class="line">glEnable(GL_DEPTH_TEST);</span><br></pre></td></tr></table></figure>
+<p>见图learn3-001</p>
+<h2 id="Blending"><a href="#Blending" class="headerlink" title="Blending"></a>Blending</h2><p>这个怎么理解呢，彩色的玻璃，嗯，你就知道大致实现的是一个什么样的目标了。全透明、半透明。这个核心就在于color数据RGB后面的A。</p>
+<h3 id="区域部分透明Discarding-Fragments"><a href="#区域部分透明Discarding-Fragments" class="headerlink" title="区域部分透明Discarding Fragments"></a>区域部分透明Discarding Fragments</h3><p>不是全透明也不是全不透明。<br>比如对于有透明通道的草的图片，如图001，首先opengl会自动加载RGBA的方式，然后shader里面也做出相应的改变：<br><strong>glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data); </strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#version 330 core</span></span><br><span class="line">out vec4 FragColor;</span><br><span class="line">in vec2 TexCoords;</span><br><span class="line">uniform sampler2D texture1;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;             </span><br><span class="line">    vec4 texColor = texture(texture1, TexCoords);</span><br><span class="line">    <span class="keyword">if</span>(texColor.a &lt; <span class="number">0.1</span>)</span><br><span class="line">        discard;</span><br><span class="line">    FragColor = texColor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意渲染透明材质的时候，边缘的处理可能会出现一些花边出现。将wrappingmode设置成GL_CLAMP_TO_EDGE可能会好一些。</p>
+<h3 id="混合"><a href="#混合" class="headerlink" title="混合"></a>混合</h3><p>混合的计算公式如002.<br>des通常指的是远处的颜色在颜色缓冲区的颜色，source指的是近处的颜色/纹理的颜色？？？</p>
+<h3 id="渲染半透明物体"><a href="#渲染半透明物体" class="headerlink" title="渲染半透明物体"></a>渲染半透明物体</h3><p>首先<br>glEnable(GL_BLEND);<br>glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#version 330 core</span></span><br><span class="line">out vec4 FragColor;</span><br><span class="line">in vec2 TexCoords;</span><br><span class="line">uniform sampler2D texture1;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;             </span><br><span class="line">    FragColor = texture(texture1, TexCoords);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看上去是这样：003<br>这是因为深度测试的问题。如果是全透明的，没问题。半透明的，就会有渲染顺序的问题。话说回来，这里还是上面的那个问题，那个是前景色那个是背景色的问题，opengl到底如何处理的。<br>After the fragment shader has run and all the tests have passed, this blend equation is let loose on the fragment’s color output and with whatever is currently in the color buffer (previous fragment color stored before the current fragment).<br>这句话特么的说清楚了，理论上可以说是先渲染元的地方的，这样他就是在color buffer里面。近处的透明物体就可以根据alpha值来混合之前buffer里面的颜色值。<br>所以说，这个是要注意渲染顺序的。</p>
+<h3 id="顺序"><a href="#顺序" class="headerlink" title="顺序"></a>顺序</h3><ol>
+<li>绘制所有的不透明物体</li>
+<li>对所有的透明物体进行排序</li>
+<li>按照（观察相机）从远到近的顺序进行渲染透明-半透明物体</li>
+</ol>
+<p>最后，渲染透明物体还是一件很麻烦的事，还有一些其他的技术比如order independent transparency绿色。</p>
+<h2 id="Face-culling"><a href="#Face-culling" class="headerlink" title="Face culling"></a>Face culling</h2><p>开启以后，按照渲染三角形的顺序，可以避免渲染背后的内容，节省显存的资源？还是内存的资源？？？不确定<br>还是减少两个交互的资源，也就是drawcall的次数？？？这里先都留问好吧。</p>
+<h2 id="frame-buffer"><a href="#frame-buffer" class="headerlink" title="frame buffer"></a>frame buffer</h2><h3 id="关于内存的问题"><a href="#关于内存的问题" class="headerlink" title="关于内存的问题"></a>关于内存的问题</h3><p>OpenGL关于内存这块其实比较模糊，自己维护了一套内存和显存的交互机制？反正不是特别清晰，这个可能需要慢慢渗入才可以了解到更多。这里是两个说OpenGL内存的帖子：<br><a href="https://stackoverflow.com/questions/15138483/where-and-what-is-opengl-memory-used-by-vbos-etc" target="_blank" rel="noopener">https://stackoverflow.com/questions/15138483/where-and-what-is-opengl-memory-used-by-vbos-etc</a><br><a href="https://stackoverflow.com/questions/16854825/confusion-regarding-memory-management-in-opengl" target="_blank" rel="noopener">https://stackoverflow.com/questions/16854825/confusion-regarding-memory-management-in-opengl</a></p>
+<h3 id="创建framebuffer"><a href="#创建framebuffer" class="headerlink" title="创建framebuffer"></a>创建framebuffer</h3><p>colorbuffer，depthbuffer以及stencilbuffer的结合体叫做framebuffer，存在memory里（具体是那里的memory先不管）。默认的default frambuffer绿色是在你创建glfw窗口的时候创建和配置好的，主要作用就是做一些postprocessing处理。<br>主要方式：<br>create - bind- do-unbind<br>unsigned int fbo;<br>glGenFramebuffers(1, &amp;fbo);<br>glBindFramebuffer(GL_FRAMEBUFFER, fbo);<br>绑定的framebuffer对象通常有三种，read/write/both，一般不用管默认就好。在使用framebuffer之前还有一些事要做：</p>
+<ol>
+<li>We have to attach at least one buffer (color, depth or stencil buffer).</li>
+<li>There should be at least one color attachment.</li>
+<li>All attachments should be complete as well (reserved memory).</li>
+<li>Each buffer should have the same number of samples.<br>因为创建的buffer不是默认的buffer，所以任渲染的命令都不会影响我们的渲染输出。这叫off-screen rendering。要让他渲染在窗口中，需要绑定到2来激活他：<br>glBindFramebuffer(GL_FRAMEBUFFER, 0);<br>完了再删除：<br>glDeleteFramebuffers(1, &amp;fbo);</li>
+</ol>
+<p>现在为了让它有实际意义，需要给它添加至少一个attachment绿色。An attachment is a memory location that can act as a buffer for the framebuffer, think of it as an image.<br>有两种方法：textures或者renderbuffer绿色对象。</p>
+<h4 id="texture-attachments"><a href="#texture-attachments" class="headerlink" title="texture attachments"></a>texture attachments</h4><p>When attaching a texture to a framebuffer, all rendering commands will write to the texture as if it was a normal color/depth or stencil buffer. The advantage of using textures is that the result of all rendering operations will be stored as a texture image that we can then easily use in our shaders.</p>
+<ol>
+<li>create texture for framebuffer<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> texture;</span><br><span class="line">glGenTextures(<span class="number">1</span>, &amp;texture);</span><br><span class="line">glBindTexture(GL_TEXTURE_2D, texture);</span><br><span class="line">glTexImage2D(GL_TEXTURE_2D, <span class="number">0</span>, GL_RGB, <span class="number">800</span>, <span class="number">600</span>, <span class="number">0</span>, GL_RGB, GL_UNSIGNED_BYTE, <span class="literal">NULL</span>);</span><br><span class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);</span><br><span class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>大小和屏幕一样大。指定了内存区域，但是并没有填充，我们在渲染到framebuffer的时候填充texture。注意如果要将你的整个屏幕渲染到一个更小或者更大的尺寸，你需要在渲染到framebuffer之前调用vlviewport红色。</p>
+<ol start="2">
+<li>attach texture给 framebuffer<br>glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);<br>参数也可以是：<br>GL_DEPTH_ATTACHMENT—GL_DEPTH_COMPONENT紫色<br>GL_STENCIL_ATTACHMENT—GL_STENCIL_INDEX紫色<br>也可以组合：GL_DEPTH_STENCIL_ATTACHMENT紫色</li>
+</ol>
+<h4 id="framebuffer-对象attachments"><a href="#framebuffer-对象attachments" class="headerlink" title="framebuffer 对象attachments"></a>framebuffer 对象attachments</h4><p>framebuffer的存储方式都比较快速，格式比较原声，在拷贝给其他buffer或者写入的时候速度比较突出。所以对于swapbuffers这类的操作，renderbuffer 对象很适合。</p>
+<ol>
+<li>创建<br>unsigned int rbo;<br>glGenRenderbuffers(1, &amp;rbo);</li>
+<li>绑定<br>glBindRenderbuffer(GL_RENDERBUFFER, rbo); </li>
+<li>其他操作<br>RBO是只写的，所以一般在深度和模板测试中用的比较多，，因为这些数据我们一般不需要采样，只需要关注深度和模板测试，创建深度和模板EBO：<br>glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 800, 600);</li>
+<li>attach RBO<br>glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);</li>
+</ol>
+<p>什么时候用RBO，什么失手用texture呢，简单的原则就是，你不需要从一个特定的buffer里面读取/采样数据的话，用RBO来作为attachment。反之如果你需要从一个特定buffer采样比如颜色值或者深度值，那就用texture attachment代替。</p>
+<h3 id="渲染到texture-使用framebuffer"><a href="#渲染到texture-使用framebuffer" class="headerlink" title="渲染到texture-使用framebuffer"></a>渲染到texture-使用framebuffer</h3><p>大致流程是：<br>创建framebuffer，然后将整个场景渲染到附着在framebuffer的一个color texture上。然后将这个texture绘制到一个简单的quad上。流程跟一般渲染一样。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// first pass</span></span><br><span class="line">glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);</span><br><span class="line">glClearColor(<span class="number">0.1f</span>, <span class="number">0.1f</span>, <span class="number">0.1f</span>, <span class="number">1.0f</span>);</span><br><span class="line">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); <span class="comment">// we're not using the stencil buffer now</span></span><br><span class="line">glEnable(GL_DEPTH_TEST);</span><br><span class="line">DrawScene();	</span><br><span class="line">  </span><br><span class="line"><span class="comment">// second pass</span></span><br><span class="line">glBindFramebuffer(GL_FRAMEBUFFER, <span class="number">0</span>); <span class="comment">// back to default</span></span><br><span class="line">glClearColor(<span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>); </span><br><span class="line">glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line">  </span><br><span class="line">screenShader.use();  </span><br><span class="line">glBindVertexArray(quadVAO);</span><br><span class="line">glDisable(GL_DEPTH_TEST);</span><br><span class="line">glBindTexture(GL_TEXTURE_2D, textureColorbuffer);</span><br><span class="line">glDrawArrays(GL_TRIANGLES, <span class="number">0</span>, <span class="number">6</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="完整的流程和代码解释"><a href="#完整的流程和代码解释" class="headerlink" title="完整的流程和代码解释"></a>完整的流程和代码解释</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///准备工作</span></span><br><span class="line"><span class="function">Shader <span class="title">shader</span><span class="params">(<span class="string">"framebuffers.vs"</span>, <span class="string">"framebuffers.fs"</span>)</span></span>;</span><br><span class="line"><span class="function">Shader <span class="title">screenShader</span><span class="params">(<span class="string">"framebuffers_screen.vs"</span>,<span class="string">"framebuffers_screen.fs"</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">float</span> cubeVertices[] = &#123;</span><br><span class="line">        <span class="comment">// positions          // texture Coords</span></span><br><span class="line">        <span class="number">-0.5f</span>, <span class="number">-0.5f</span>, <span class="number">-0.5f</span>,  <span class="number">0.0f</span>, <span class="number">0.0f</span>,</span><br><span class="line">         <span class="number">0.5f</span>, <span class="number">-0.5f</span>, <span class="number">-0.5f</span>,  <span class="number">1.0f</span>, <span class="number">0.0f</span>,</span><br><span class="line">         <span class="number">0.5f</span>,  <span class="number">0.5f</span>, <span class="number">-0.5f</span>,  <span class="number">1.0f</span>, <span class="number">1.0f</span>,</span><br><span class="line">         <span class="number">0.5f</span>,  <span class="number">0.5f</span>, <span class="number">-0.5f</span>,  <span class="number">1.0f</span>, <span class="number">1.0f</span>,</span><br><span class="line">        <span class="number">-0.5f</span>,  <span class="number">0.5f</span>, <span class="number">-0.5f</span>,  <span class="number">0.0f</span>, <span class="number">1.0f</span>,</span><br><span class="line">        <span class="number">-0.5f</span>, <span class="number">-0.5f</span>, <span class="number">-0.5f</span>,  <span class="number">0.0f</span>, <span class="number">0.0f</span>,<span class="comment">//...</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">float</span> planeVertices[] = &#123;</span><br><span class="line">        <span class="comment">// positions          // texture Coords </span></span><br><span class="line">         <span class="number">5.0f</span>, <span class="number">-0.5f</span>,  <span class="number">5.0f</span>,  <span class="number">2.0f</span>, <span class="number">0.0f</span>,</span><br><span class="line">        <span class="number">-5.0f</span>, <span class="number">-0.5f</span>,  <span class="number">5.0f</span>,  <span class="number">0.0f</span>, <span class="number">0.0f</span>,</span><br><span class="line">        <span class="number">-5.0f</span>, <span class="number">-0.5f</span>, <span class="number">-5.0f</span>,  <span class="number">0.0f</span>, <span class="number">2.0f</span>,</span><br><span class="line"></span><br><span class="line">         <span class="number">5.0f</span>, <span class="number">-0.5f</span>,  <span class="number">5.0f</span>,  <span class="number">2.0f</span>, <span class="number">0.0f</span>,</span><br><span class="line">        <span class="number">-5.0f</span>, <span class="number">-0.5f</span>, <span class="number">-5.0f</span>,  <span class="number">0.0f</span>, <span class="number">2.0f</span>,</span><br><span class="line">         <span class="number">5.0f</span>, <span class="number">-0.5f</span>, <span class="number">-5.0f</span>,  <span class="number">2.0f</span>, <span class="number">2.0f</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">float</span> quadVertices[] = &#123; <span class="comment">// vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.</span></span><br><span class="line">        <span class="comment">// positions   // texCoords</span></span><br><span class="line">        <span class="number">-1.0f</span>,  <span class="number">1.0f</span>,  <span class="number">0.0f</span>, <span class="number">1.0f</span>,</span><br><span class="line">        <span class="number">-1.0f</span>, <span class="number">-1.0f</span>,  <span class="number">0.0f</span>, <span class="number">0.0f</span>,</span><br><span class="line">         <span class="number">1.0f</span>, <span class="number">-1.0f</span>,  <span class="number">1.0f</span>, <span class="number">0.0f</span>,</span><br><span class="line"></span><br><span class="line">        <span class="number">-1.0f</span>,  <span class="number">1.0f</span>,  <span class="number">0.0f</span>, <span class="number">1.0f</span>,</span><br><span class="line">         <span class="number">1.0f</span>, <span class="number">-1.0f</span>,  <span class="number">1.0f</span>, <span class="number">0.0f</span>,</span><br><span class="line">         <span class="number">1.0f</span>,  <span class="number">1.0f</span>,  <span class="number">1.0f</span>, <span class="number">1.0f</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">///VAO VBOs</span></span><br><span class="line">	<span class="comment">//cube VAO</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> cubeVAO, cubeVBO;</span><br><span class="line">    glGenVertexArrays(<span class="number">1</span>, &amp;cubeVAO);</span><br><span class="line">    glGenBuffers(<span class="number">1</span>, &amp;cubeVBO);</span><br><span class="line">    glBindVertexArray(cubeVAO);</span><br><span class="line">    glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);</span><br><span class="line">    glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(cubeVertices), &amp;cubeVertices, GL_STATIC_DRAW);</span><br><span class="line">    glEnableVertexAttribArray(<span class="number">0</span>);</span><br><span class="line">    glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">5</span> * <span class="keyword">sizeof</span>(<span class="keyword">float</span>), (<span class="keyword">void</span>*)<span class="number">0</span>);</span><br><span class="line">    glEnableVertexAttribArray(<span class="number">1</span>);</span><br><span class="line">    glVertexAttribPointer(<span class="number">1</span>, <span class="number">2</span>, GL_FLOAT, GL_FALSE, <span class="number">5</span> * <span class="keyword">sizeof</span>(<span class="keyword">float</span>), (<span class="keyword">void</span>*)(<span class="number">3</span> * <span class="keyword">sizeof</span>(<span class="keyword">float</span>)));</span><br><span class="line">    <span class="comment">// plane VAO</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> planeVAO, planeVBO;</span><br><span class="line">    glGenVertexArrays(<span class="number">1</span>, &amp;planeVAO);</span><br><span class="line">    glGenBuffers(<span class="number">1</span>, &amp;planeVBO);</span><br><span class="line">    glBindVertexArray(planeVAO);</span><br><span class="line">    glBindBuffer(GL_ARRAY_BUFFER, planeVBO);</span><br><span class="line">    glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(planeVertices), &amp;planeVertices, GL_STATIC_DRAW);</span><br><span class="line">    glEnableVertexAttribArray(<span class="number">0</span>);</span><br><span class="line">    glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">5</span> * <span class="keyword">sizeof</span>(<span class="keyword">float</span>), (<span class="keyword">void</span>*)<span class="number">0</span>);</span><br><span class="line">    glEnableVertexAttribArray(<span class="number">1</span>);</span><br><span class="line">    glVertexAttribPointer(<span class="number">1</span>, <span class="number">2</span>, GL_FLOAT, GL_FALSE, <span class="number">5</span> * <span class="keyword">sizeof</span>(<span class="keyword">float</span>), (<span class="keyword">void</span>*)(<span class="number">3</span> * <span class="keyword">sizeof</span>(<span class="keyword">float</span>)));</span><br><span class="line">    <span class="comment">// screen quad VAO</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> quadVAO, quadVBO;</span><br><span class="line">    glGenVertexArrays(<span class="number">1</span>, &amp;quadVAO);</span><br><span class="line">    glGenBuffers(<span class="number">1</span>, &amp;quadVBO);</span><br><span class="line">    glBindVertexArray(quadVAO);</span><br><span class="line">    glBindBuffer(GL_ARRAY_BUFFER, quadVBO);</span><br><span class="line">    glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(quadVertices), &amp;quadVertices, GL_STATIC_DRAW);</span><br><span class="line">    glEnableVertexAttribArray(<span class="number">0</span>);</span><br><span class="line">    glVertexAttribPointer(<span class="number">0</span>, <span class="number">2</span>, GL_FLOAT, GL_FALSE, <span class="number">4</span> * <span class="keyword">sizeof</span>(<span class="keyword">float</span>), (<span class="keyword">void</span>*)<span class="number">0</span>);</span><br><span class="line">    glEnableVertexAttribArray(<span class="number">1</span>);</span><br><span class="line">    glVertexAttribPointer(<span class="number">1</span>, <span class="number">2</span>, GL_FLOAT, GL_FALSE, <span class="number">4</span> * <span class="keyword">sizeof</span>(<span class="keyword">float</span>), (<span class="keyword">void</span>*)(<span class="number">2</span> * <span class="keyword">sizeof</span>(<span class="keyword">float</span>)));</span><br><span class="line"></span><br><span class="line"><span class="comment">///加载贴图</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> cubeTexture = loadTexture(getPath(<span class="string">"marble.jpg"</span>).c_str());</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> floorTexture =loadTexture(getPath(<span class="string">"metal.png"</span>).c_str());</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 配置shader</span></span><br><span class="line">shader.use();</span><br><span class="line">shader.setInt(<span class="string">"texture1"</span>, <span class="number">0</span>);</span><br><span class="line">screenShader.use();</span><br><span class="line">screenShader.setInt(<span class="string">"screenTexture"</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">///创建framebuffer对象</span></span><br><span class="line">	<span class="comment">//framebuffer configuration</span></span><br><span class="line">	<span class="comment">//-------------------------</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> framebuffer;</span><br><span class="line">    glGenFramebuffers(<span class="number">1</span>, &amp;framebuffer);</span><br><span class="line">    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);</span><br><span class="line">    <span class="comment">///创建一个texture图像，作为赋给frambuffer对象的color buffer</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> textureColorbuffer;</span><br><span class="line">    glGenTextures(<span class="number">1</span>, &amp;textureColorbuffer);</span><br><span class="line">    glBindTexture(GL_TEXTURE_2D, textureColorbuffer);</span><br><span class="line">    glTexImage2D(GL_TEXTURE_2D, <span class="number">0</span>, GL_RGB, SCR_WIDTH, SCR_HEIGHT, <span class="number">0</span>, GL_RGB, GL_UNSIGNED_BYTE, <span class="literal">NULL</span>);</span><br><span class="line">    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);</span><br><span class="line">    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</span><br><span class="line">    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">///深度和模板测试，用RBO即可，赋给framebuffer，因为不需要读取</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> rbo;</span><br><span class="line">    glGenRenderbuffers(<span class="number">1</span>, &amp;rbo);</span><br><span class="line">    glBindRenderbuffer(GL_RENDERBUFFER, rbo);</span><br><span class="line">    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, SCR_WIDTH, SCR_HEIGHT); <span class="comment">// use a single renderbuffer object for both a depth AND stencil buffer.</span></span><br><span class="line">    <span class="comment">///在完成framebuffer之前，将depth和stencil赋给framebuffer</span></span><br><span class="line">    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo); <span class="comment">// now actually attach it</span></span><br><span class="line">    <span class="comment">// now that we actually created the framebuffer and added all attachments we want to check if it is actually complete now</span></span><br><span class="line">    <span class="keyword">if</span> (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Framebuffer is not complete!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">///（已经完成allocate memory）unbind</span></span><br><span class="line">    glBindFramebuffer(GL_FRAMEBUFFER, <span class="number">0</span>);</span><br><span class="line"><span class="comment">///-----------------------------------------renderloop</span></span><br><span class="line"><span class="comment">///draw the scene给这个framebuffer</span></span><br><span class="line"></span><br><span class="line"><span class="comment">///1.当前绑定的framebuffer为激活的buffer，跟往常一样绘制</span></span><br><span class="line">  glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);</span><br><span class="line">  glEnable(GL_DEPTH_TEST); <span class="comment">// enable depth testing (is disabled for rendering screen-space quad)</span></span><br><span class="line">    <span class="comment">// make sure we clear the framebuffer's content</span></span><br><span class="line">    glClearColor(<span class="number">0.1f</span>, <span class="number">0.1f</span>, <span class="number">0.1f</span>, <span class="number">1.0f</span>);</span><br><span class="line">    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</span><br><span class="line"></span><br><span class="line">    shader.use();</span><br><span class="line">    glm::mat4 model = glm::mat4(<span class="number">1.0f</span>);</span><br><span class="line">    glm::mat4 view = camera.GetViewMatrix();</span><br><span class="line">    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (<span class="keyword">float</span>)SCR_WIDTH / (<span class="keyword">float</span>)SCR_HEIGHT, <span class="number">0.1f</span>, <span class="number">100.0f</span>);</span><br><span class="line">    shader.setMat4(<span class="string">"view"</span>, view);</span><br><span class="line">    shader.setMat4(<span class="string">"projection"</span>, projection);</span><br><span class="line">    <span class="comment">// cubes</span></span><br><span class="line">    glBindVertexArray(cubeVAO);</span><br><span class="line">    glActiveTexture(GL_TEXTURE0);</span><br><span class="line">    glBindTexture(GL_TEXTURE_2D, cubeTexture);</span><br><span class="line">    model = glm::translate(model, glm::vec3(<span class="number">-1.0f</span>, <span class="number">0.0f</span>, <span class="number">-1.0f</span>));</span><br><span class="line">    shader.setMat4(<span class="string">"model"</span>, model);</span><br><span class="line">    glDrawArrays(GL_TRIANGLES, <span class="number">0</span>, <span class="number">36</span>);</span><br><span class="line">    model = glm::mat4(<span class="number">1.0f</span>);</span><br><span class="line">    model = glm::translate(model, glm::vec3(<span class="number">2.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>));</span><br><span class="line">    shader.setMat4(<span class="string">"model"</span>, model);</span><br><span class="line">    glDrawArrays(GL_TRIANGLES, <span class="number">0</span>, <span class="number">36</span>);</span><br><span class="line">    <span class="comment">// floor</span></span><br><span class="line">    glBindVertexArray(planeVAO);</span><br><span class="line">    glBindTexture(GL_TEXTURE_2D, floorTexture);</span><br><span class="line">    shader.setMat4(<span class="string">"model"</span>, glm::mat4(<span class="number">1.0f</span>));</span><br><span class="line">    glDrawArrays(GL_TRIANGLES, <span class="number">0</span>, <span class="number">6</span>);</span><br><span class="line">    glBindVertexArray(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">///2.绑定默认framebuffer</span></span><br><span class="line">	<span class="comment">//now bind back to default framebuffer and draw a quad plane with the attached framebuffer color texture</span></span><br><span class="line">    glBindFramebuffer(GL_FRAMEBUFFER, <span class="number">0</span>);</span><br><span class="line">    glDisable(GL_DEPTH_TEST); <span class="comment">// disable depth test so screen-space quad isn't discarded due to depth test.</span></span><br><span class="line">    <span class="comment">// clear all relevant buffers</span></span><br><span class="line">    glClearColor(<span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>); <span class="comment">// set clear color to white (not really necessery actually, since we won't be able to see behind the quad anyways)</span></span><br><span class="line">    glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line"></span><br><span class="line"><span class="comment">///3.用shader绘制一个quad，将新的framebuffer的color buffer当作它的texture</span></span><br><span class="line">	screenShader.use();</span><br><span class="line">    glBindVertexArray(quadVAO);</span><br><span class="line">    glBindTexture(GL_TEXTURE_2D, textureColorbuffer);	<span class="comment">// use the color attachment texture as the texture of the quad plane</span></span><br><span class="line">    glDrawArrays(GL_TRIANGLES, <span class="number">0</span>, <span class="number">6</span>);</span><br><span class="line"><span class="comment">///最后</span></span><br><span class="line">	<span class="comment">// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)</span></span><br><span class="line">    glfwSwapBuffers(window);</span><br><span class="line">    glfwPollEvents();</span><br><span class="line"><span class="comment">///-----------------------------------------renderloop end</span></span><br><span class="line">	glDeleteVertexArrays(<span class="number">1</span>, &amp;cubeVAO);</span><br><span class="line">    glDeleteVertexArrays(<span class="number">1</span>, &amp;planeVAO);</span><br><span class="line">    glDeleteVertexArrays(<span class="number">1</span>, &amp;quadVAO);</span><br><span class="line">    glDeleteBuffers(<span class="number">1</span>, &amp;cubeVBO);</span><br><span class="line">    glDeleteBuffers(<span class="number">1</span>, &amp;planeVBO);</span><br><span class="line">    glDeleteBuffers(<span class="number">1</span>, &amp;quadVBO);</span><br><span class="line"></span><br><span class="line">    glfwTerminate();</span><br><span class="line"></span><br><span class="line"><span class="comment">///4个shader</span></span><br><span class="line"><span class="comment">//frameshader.vs</span></span><br><span class="line"><span class="meta">#version 330 core</span></span><br><span class="line">layout (location = <span class="number">0</span>) in vec3 aPos;</span><br><span class="line">layout (location = <span class="number">1</span>) in vec2 aTexCoords;</span><br><span class="line">out vec2 TexCoords;</span><br><span class="line">uniform mat4 model;</span><br><span class="line">uniform mat4 view;</span><br><span class="line">uniform mat4 projection;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    TexCoords = aTexCoords;    </span><br><span class="line">    gl_Position = projection * view * model * vec4(aPos, <span class="number">1.0</span>);&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//frameshader.fs</span></span><br><span class="line"><span class="meta">#version 330 core</span></span><br><span class="line">out vec4 FragColor;</span><br><span class="line">in vec2 TexCoords;</span><br><span class="line">uniform sampler2D texture1;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;    </span><br><span class="line">    FragColor = texture(texture1, TexCoords);&#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">//frameshaderscreen.vs</span></span><br><span class="line"><span class="meta">#version 330 core</span></span><br><span class="line">layout (location = <span class="number">0</span>) in vec2 aPos;</span><br><span class="line">layout (location = <span class="number">1</span>) in vec2 aTexCoords;</span><br><span class="line">out vec2 TexCoords;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    TexCoords = aTexCoords;</span><br><span class="line">    gl_Position = vec4(aPos.x, aPos.y, <span class="number">0.0</span>, <span class="number">1.0</span>); &#125;  </span><br><span class="line">    </span><br><span class="line"><span class="comment">//frameshaderscreen.fs</span></span><br><span class="line"><span class="meta">#version 330 core</span></span><br><span class="line">out vec4 FragColor;</span><br><span class="line">in vec2 TexCoords;</span><br><span class="line">uniform sampler2D screenTexture;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    vec3 col = texture(screenTexture, TexCoords).rgb;</span><br><span class="line">    FragColor = vec4(col, <span class="number">1.0</span>);&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="post-processing"><a href="#post-processing" class="headerlink" title="post-processing"></a>post-processing</h3><p>这个时候就soeasy，知道了每个图像像素点的value，直接利用图像处理就OK了，能做的算法啥的忒多了，就不一一介绍，很多滤波算法、边缘检测算法，甚至可以将流行的图像处理结合起来进行识别和进行智能游戏识别？主力主要处理的是frameshaderscreen就可以。<br>常用的几个算法和效果包括：</p>
+<ul>
+<li>取反</li>
+<li>灰度/二值化</li>
+<li>kernel effect</li>
+<li>blur模糊<br>举个例子：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//blur模糊</span></span><br><span class="line"><span class="keyword">float</span> kernel[<span class="number">9</span>] = <span class="keyword">float</span>[](</span><br><span class="line">    <span class="number">1.0</span> / <span class="number">16</span>, <span class="number">2.0</span> / <span class="number">16</span>, <span class="number">1.0</span> / <span class="number">16</span>,</span><br><span class="line">    <span class="number">2.0</span> / <span class="number">16</span>, <span class="number">4.0</span> / <span class="number">16</span>, <span class="number">2.0</span> / <span class="number">16</span>,</span><br><span class="line">    <span class="number">1.0</span> / <span class="number">16</span>, <span class="number">2.0</span> / <span class="number">16</span>, <span class="number">1.0</span> / <span class="number">16</span>  </span><br><span class="line">);</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/23/OpenGL-Learning-2/" rel="next" title="OpenGL-Learning-2">
+                <i class="fa fa-chevron-left"></i> OpenGL-Learning-2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/23/OpenGL-Learning-4/" rel="prev" title="OpenGL-Learning-4">
+                OpenGL-Learning-4 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="KinGil">
+          <p class="site-author-name" itemprop="name">KinGil</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kingiluob" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/2283641104/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100007092155441" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Facebook
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#高级OpenGL"><span class="nav-number">1.</span> <span class="nav-text">高级OpenGL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#depth-testing"><span class="nav-number">1.1.</span> <span class="nav-text">depth testing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#深度值到底是什么"><span class="nav-number">1.1.1.</span> <span class="nav-text">深度值到底是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zfight"><span class="nav-number">1.1.2.</span> <span class="nav-text">zfight</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板测试"><span class="nav-number">1.2.</span> <span class="nav-text">模板测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stenciil-functions"><span class="nav-number">1.2.1.</span> <span class="nav-text">stenciil functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外发光shader"><span class="nav-number">1.2.2.</span> <span class="nav-text">外发光shader</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Blending"><span class="nav-number">1.3.</span> <span class="nav-text">Blending</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#区域部分透明Discarding-Fragments"><span class="nav-number">1.3.1.</span> <span class="nav-text">区域部分透明Discarding Fragments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#混合"><span class="nav-number">1.3.2.</span> <span class="nav-text">混合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染半透明物体"><span class="nav-number">1.3.3.</span> <span class="nav-text">渲染半透明物体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序"><span class="nav-number">1.3.4.</span> <span class="nav-text">顺序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Face-culling"><span class="nav-number">1.4.</span> <span class="nav-text">Face culling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#frame-buffer"><span class="nav-number">1.5.</span> <span class="nav-text">frame buffer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于内存的问题"><span class="nav-number">1.5.1.</span> <span class="nav-text">关于内存的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建framebuffer"><span class="nav-number">1.5.2.</span> <span class="nav-text">创建framebuffer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#texture-attachments"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">texture attachments</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#framebuffer-对象attachments"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">framebuffer 对象attachments</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染到texture-使用framebuffer"><span class="nav-number">1.5.3.</span> <span class="nav-text">渲染到texture-使用framebuffer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完整的流程和代码解释"><span class="nav-number">1.5.4.</span> <span class="nav-text">完整的流程和代码解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#post-processing"><span class="nav-number">1.5.5.</span> <span class="nav-text">post-processing</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KinGil</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

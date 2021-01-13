@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+
+
+<script type="text/javascript" color="253,253,253" opacity="0.5" zindex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Unity,AssetBundle,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="简介之前有段时间研究过unityAssetBundle，读了一大堆的文章和相关的案例，废话不少而且讲的也不是很详细很通俗，所以抽空结合Unity的最新官方教程(2018.7.30)给出了自己对于Assetbundle的思考和一些通俗解释，以及上手示例。别人的官方的好的解释我会原搬过来，整个思路我会给出自己的理解。资源包就是一个为特定平台打包的在运行时可以加载的特定资源的文件系统（包括 Models">
+<meta name="keywords" content="Unity,AssetBundle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UnityAssetBundle详解">
+<meta property="og:url" content="http://kangzhi.github.io/2018/08/02/UnityAssetBundleMaster/index.html">
+<meta property="og:site_name" content="KinGil&#39;s Blog">
+<meta property="og:description" content="简介之前有段时间研究过unityAssetBundle，读了一大堆的文章和相关的案例，废话不少而且讲的也不是很详细很通俗，所以抽空结合Unity的最新官方教程(2018.7.30)给出了自己对于Assetbundle的思考和一些通俗解释，以及上手示例。别人的官方的好的解释我会原搬过来，整个思路我会给出自己的理解。资源包就是一个为特定平台打包的在运行时可以加载的特定资源的文件系统（包括 Models">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T02:52:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UnityAssetBundle详解">
+<meta name="twitter:description" content="简介之前有段时间研究过unityAssetBundle，读了一大堆的文章和相关的案例，废话不少而且讲的也不是很详细很通俗，所以抽空结合Unity的最新官方教程(2018.7.30)给出了自己对于Assetbundle的思考和一些通俗解释，以及上手示例。别人的官方的好的解释我会原搬过来，整个思路我会给出自己的理解。资源包就是一个为特定平台打包的在运行时可以加载的特定资源的文件系统（包括 Models">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kangzhi.github.io/2018/08/02/UnityAssetBundleMaster/">
+
+
+
+
+
+  <title>UnityAssetBundle详解 | KinGil's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KinGil's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">April is coming</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kangzhi.github.io/2018/08/02/UnityAssetBundleMaster/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KinGil">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KinGil's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">UnityAssetBundle详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-02T21:41:49+08:00">
+                2018-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity/" itemprop="url" rel="index">
+                    <span itemprop="name">Unity</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>之前有段时间研究过unityAssetBundle，读了一大堆的文章和相关的案例，废话不少而且讲的也不是很详细很通俗，所以抽空结合Unity的最新官方教程(2018.7.30)给出了自己对于Assetbundle的思考和一些通俗解释，以及上手示例。别人的官方的好的解释我会原搬过来，整个思路我会给出自己的理解。<br>资源包就是一个为特定平台打包的在运行时可以加载的特定资源的文件系统（包括 Models, Textures, Prefabs, Audio clips, and even entire Scenes）。它的最大的特性官网也说的很清晰，就是资源之间的相互依赖关系（后面再通过例子详细解释）。同时为了网络传输的方便，自带了一些压缩的算法。<br>所以自然而然主要的用途就包括：下载游戏内容/减少初始安装包的大小/加载针对特定平台的资源/减少运行时的内存压力。<br><a id="more"></a><br>AB一方面指向硬盘上的额外文件（除了安装包）。主要有两类：序列化的文件和资源文件。序列化文件，就是将你的资源分成独立的对象然后被写进单个文件（这里不求深究，接着往下看），而资源文件指的是为某些资源单独存储的二进制数据块，方便你利用其他线程高效的调用。<br>另一方面，是通过代码去交互的AB对象，可以从特定的文件档案加载资源。这个对象加载了你需要的一些东西，是什么呢，原文真特么长，分开看，这个AB对象包含了一幅映射地图–所有你想加载到这个归档里的资源的文件路径的映射地图，一旦你需要加载该资源内的某个对象，你通知AB，AB就可以帮你调取相应的文件路径并加载相应的资源。</p>
+<h3 id="Unity资源"><a href="#Unity资源" class="headerlink" title="Unity资源"></a>Unity资源</h3><p>Unity资源有三种分类，Unity自动打包的资源，Resources资源，另外一个是AssetBundle：<br><strong>自动打包资源</strong><br>场景中用到的资源会被自动打包，只要放在Asset下任何目录就行，程序不关心它的打包和加载，这些资源都是静态加载的。<br><strong>Resources资源</strong><br>Assets/Resources文件夹下，该目录下的资源，无论是否使用都会被打包到游戏中，通过Resources.Load方法动态加载。常用，缺点是没法更新。<br><strong>AB资源</strong><br>通过编辑器脚本控制的计划性打包资源，这些AB和游戏包是分离的，恶意通过www类加载，目录比较灵活。</p>
+<h3 id="资源文件夹"><a href="#资源文件夹" class="headerlink" title="资源文件夹"></a>资源文件夹</h3><p><strong>Assets</strong><br>为Unity编辑器下的资源文件夹，Unity项目编辑时的所有资源都将置入此文件夹内。在编辑器下，可以使用以下方法获得资源对象：<br>        AssetDatabase.LoadAssetAtPath(“Assets/x.txt”);<br>注意：此方法只能在编辑器下使用，当项目打包后，在游戏内无法运作。参数为包含Assets内的文件全路径，并且需要文件后缀。</p>
+<p><strong>Resources</strong><br>资源载入：<br>Assets下的特殊文件夹，此文件夹内的资源将会在项目打包时，全部打入包内，并能通过以下方法获得对象：Resources.Load(“fileName”);<br>        注意：函数内的参数为相对于Resource目录下的文件路径与名称，不包含后缀。Assets目录下可以拥有任意路径及数量的Resources文件夹，在运行时,Resources下的文件路径将被合并。<br>        例：Assets/Resources/test.txt与 Assets/TestFloder/Resources/test.png在使用Resource.Load(“test”)载入时，将被视为同一资源，只会返回第一个符合名称的对象。<br>        如果使用Resource.Load(“test”)将返回text.txt；<br>        如果在Resources下有相同路径及名称的资源，使用以上方法只能获得第一个符合查找条件的对象，使用以下方法能或得到所有符合条件的对象：<br>        Object[] assets = Resources.LoadAll(“fileName”);<br>        TextAsset[] assets = Resources.LoadAll(“fileName”);</p>
+<p>相关机制：<br>在工程进行打包后，Resource文件夹中的资源将进行加密与压缩，打包后的程序内将不存在Resource文件夹，故无法通过路径访问以及更新资源。<br>在程序启动时会为Resource下的所有对象进行初始化，构建实例ID。随着Resource内资源的数量增加，此过程耗时的增加是非线性的。故会出现程序启动时间过长的问题，请密切留意Resource内的资源数量。</p>
+<p>卸载资源：<br>所有实例化后的GameObject可以通过Destroy函数销毁。请留意Object与GameObject之间的区别与联系。<br>Object可以通过Resources中的相关Api进行卸载<br>        Resources.UnloadAsset(Object);//卸载对应Object<br>        Resources.UnloadUnusedAssets();//卸载所有没有被引用以及实例化的Object<br>注意以下情况：<br>        Object obj = Resources.Load(“MyPrefab”);<br>        GameObject instance = Instantiate(obj) as GameObjct;<br>        ……<br>        Destroy(instance);<br>        Resources.UnloadUnusedAssets();<br>此时UnloadUnusedAssets将不会生效，因为obj依然引用了MyPrefab，需要将obj = null，才可生效。</p>
+<p><strong>StreamingAssets</strong><br>StreamingAssets必须在Assets根目录下，文件夹为流媒体文件夹，此文件夹内的资源将不会经过压缩与加密，原封不动的打包进游戏包内。在游戏安装时，StreamAssets文件件内的资源将根据平台，移动到对应的文件夹内。StreamingAssets文件夹在Android与IOS平台上为只读文件夹。<br>Unity基本也没有提供从该路径下直接读取资源的方法，只有www可以加载audioClip、texture和二进制文件。但Unity提供了从该目录加载AssetBundle的方法，我们一般直接在这个目录下存放AssetBundle文件。可以通过Application.streamingAssetsPath访问该路径。<br>你可以使用以下函数获得不同平台下的StreamingAssets文件夹路径：<br>        Application.streamingAssetsPath<br>请参考以下各平台下StreamingAssets文件夹的等价路径，Application.dataPath为程序安装路径。Android平台下的路径比较特殊，请留意此路径的前缀，在一些资源读取的方法中是不必要的<br>        Windows/MacOS：Application.dataPath+”/StreamingAssets”<br>        IOS：Application.dataPath+”/Raw” //<br>        Android：”jar:file://“+Application.dataPath+”!/assets/“ //jar:file:///data/app/com.myCompany.myProj-1/base.apk!/assets</p>
+<p>文件读取：<br>StreamingAssets文件夹下的文件在游戏中只能通过IO Stream或者WWW的方式读取（AssetBundle除外）<br>IO Stream方式<br>        using(FileStream stream =<br>        File.Open(Application.streamingAssetsPath+”fileName”,<br>        FileMode.Open))<br>        {<br>        //处理方法<br>        }<br>WWW方式（注意协议与不同平台下路径的区别）<br>        using(WWW www = new WWW(<br>        Application.streamingAssetsPath+”fileName”))<br>        {<br>        yield return www;<br>        <a href="http://www.text" target="_blank" rel="noopener">www.text</a>;<br>        <a href="http://www.texture" target="_blank" rel="noopener">www.texture</a>;<br>        }<br>AssetBundle特有的同步读取方式（注意安卓平台下的路径区别）<br>        string assetbundlePath =<br>        ‘#if UNITY_ANDROID<br>        Application.dataPath+”!/assets”;<br>        ‘#else<br>        Application.streamingAssetsPath;<br>        ‘#endif<br>        AssetBundle.LoadFromFile(assetbundlePath+”/name.unity3d”);</p>
+<p><strong>PersistentDataPath</strong><br>Application.persistentDataPath<br>沙盒目录，应用程序安装后才出现。Unity指定的一个可读写的外部文件夹，该路径因平台及系统配置不同而不同。可以用来保存数据及文件。该目录下的资源不会在打包时被打入包中，也不会自动被Unity导入及转换。该文件夹只能通过IO Stream以及WWW的方式进行资源加载。<br>注意：一般将下载的assetbundle放在这里，使用Application.persistentDataPath访问。<br>　　各平台PersistentDataPath路径打印：<br>　　Win：C:/Users/lodypig/Appdata/LocalLow/myCompany/myProj<br>　　Mac : /Users/lodypig/Library/Application Support/myCompany/myProj<br>　　Andorid：/data/data/com.myCompany.myProj/files<br>　　iOS: /var/mobile/Containers/Data/Appliction/A112252D-6B0E-459Z-9D49-CD3EAC6D47D/Documents</p>
+<h3 id="www载入资源"><a href="#www载入资源" class="headerlink" title="www载入资源"></a>www载入资源</h3><p>概述：<br>WWW是一个Unity封装的网络下载模块，支持Http以及file两种URL协议，并会尝试将资源转换成Unity能使用的AssetsComponents（如果资源是Unity不支持的格式，则只能取出byte[]）。WWW加载是异步方法。<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">byte</span>[] bytes = WWW.bytes;</span><br><span class="line"><span class="keyword">string</span> text = WWW.text;</span><br><span class="line">Texture2D texture = WWW.texture;</span><br><span class="line">MovieTexture movie = WWW.movie;</span><br><span class="line">AssetBundle assetbundle = WWW.assetBundle;</span><br><span class="line">AudioClip audioClip = WWW.audioClip;</span><br></pre></td></tr></table></figure></p>
+<p>相关机制:<br>new WWW<br>每次new WWW时，Unity都会启用一个线程去进行下载。通过此方式读取或者下载资源，会在内存中生成WebStream，WebStream为下载文件转换后的内容，占用内存较大。使用WWW.Dispose将终止仍在加载过程中的进程，并释放掉内存中的WebStream。<br>如果WWW不及时释放，将占用大量的内存，推荐搭配using方式使用，以下两种方式等价。<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">WWW www = <span class="keyword">new</span> WWW(Application.streamingAssetsPath+<span class="string">"fileName"</span>);</span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">yield</span> <span class="keyword">return</span> www;</span><br><span class="line">www.text;</span><br><span class="line">www.texture;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">finally</span></span><br><span class="line">&#123;</span><br><span class="line">www.Dispose();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span>(WWW www = <span class="keyword">new</span> WWW( Application.streamingAssetsPath+<span class="string">"fileName"</span>))</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">yield</span> <span class="keyword">return</span> www;</span><br><span class="line">www.text;</span><br><span class="line">www.texture;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果载入的为Assetbundle且进行过压缩，则还会在内存中占用一份AssetBundle解压用的缓冲区Deompresion Buffer,AssetBundle压缩格式的不同会影响此区域的大小。<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WWW.LoadFromCacheOrDownload</span><br><span class="line"><span class="keyword">int</span> version = <span class="number">1</span>;</span><br><span class="line">WWW.LoadFromCacheOrDownload(PathURL+<span class="string">"/fileName"</span>,version);</span><br></pre></td></tr></table></figure></p>
+<p>使用此方式加载，将先从硬盘上的存储区域查找是否有对应的资源，再验证本地Version与传入值之间的关系，如果传入的Version&gt;本地，则从传入的URL地址下载资源，并缓存到硬盘，替换掉现有资源，如果传入Version&lt;=本地，则直接从本地读取资源；如果本地没有存储资源，则下载资源。此方法的存储路径无法设定以及访问。使用此方法载入资源，不会在内存中生成 WebStream（其实已经将WebStream保存在本地），如果硬盘空间不够进行存储，将自动使用new WWW方法加载，并在内存中生成WebStream。在本地存储中，使用fileName作为标识符，所以更换URL地址而不更改文件名，将不会造成缓存资源的变更。 保存的路径无法更改，也没有接口去获取此路径。</p>
+<h3 id="各种ID认知"><a href="#各种ID认知" class="headerlink" title="各种ID认知"></a>各种ID认知</h3><p>GUID与fileID(本地ID)<br>        Unity会为每个导入到Assets目录中的资源创建一个meta文件，文件中记录了GUID，GUID用来记录资源之间的引用关系。还有fileID（本地ID），用于标识资源内部的资源。资源间的依赖关系通过GUID来确定；资源内部的依赖关系使用fileID来确定。<br>InstanceID(实例ID)<br>        Unity为了在运行时，提升资源管理的效率，会在内部维护一个缓存表，负责将文件的GUID与fileID转换成为整数数值，这个数值在本次会话中是唯一的，称作实例ID(InstanceID)。程序启动时，实例ID缓存与所有工程内建的对象(例如在场景中被引用)，以及Resource文件夹下的所有对象，都会被一起初始化。如果在运行时导入了新的资源，或从AssetBundle中载入了新的对象，缓存会被更新，并为这些对象添加相应条目。实例ID仅在失效时才会被从缓存中移除，当提供了指定文件GUID和fileID的AssetBundle被卸载时会产生移除操作。卸载AssetBundle会使实例ID失效，实例ID与其文件GUID和fileID之间的映射会被删除以便节省内存。重新载入AssetBundle后，载入的每个对象都会获得新的实例ID。</p>
+<h3 id="资源的生命周期和内存管理"><a href="#资源的生命周期和内存管理" class="headerlink" title="资源的生命周期和内存管理"></a>资源的生命周期和内存管理</h3><p>Object从内存中加载或卸载的时间点是定义好的。Object有两种加载方式：自动加载与外部加载。当对象的实例ID与对象本身解引用，对象当前未被加载到内存中，而且可以定位到对象的源数据，此时对象会被自动加载。对象也可以外部加载，通过在脚本中创建对象或者调用资源加载API来载入对象（例如:AssetBundle.LoadAsset）。<br>对象加载后，Unity会尝试修复任何可能存在的引用关系，通过将每个引用文件的GUID与FileID转化成实例ID的方式。一旦对象的实例ID被解引用且满足以下两个标准时，对象会被强制加载：<br>    实例ID引用了一个没有被加载的对象。<br>    实例ID在缓存中存在对应的有效GUID和本地ID。<br>如果文件GUID和本地ID没有实例ID，或一个已卸载对象的实例ID引用了非法的文件GUID和本地ID，则引用本身会被保留，但实例对象不会被加载。在Unity编辑器中表现为空引用，在运行的应用中，或场景视图里，空对象会以多种方式表示，取决于丢失对象的类型：网格会变得不可见，纹理呈现为紫红色等等。</p>
+<p>注意：<br>不管是www还是reatefromfile创建Assetbundle都是创建了一个文件内存镜像。直到AssetBundle.LoadAsset或者Resource.Load才真正创建出了asset，而instaniate复制了这个对象，包括深拷贝和浅拷贝，比如比较大的texture是只读的，肯定是浅拷贝（拷贝引用）。<br>这里其实说的是一个资源从加载到实例化有三块内存被创建，对应的三种内存释放：<br>    1 文件内存释放 assetbundle.unload<br>    2 实例化的object内存通过destroy释放<br>    3 AssetBundle.Unload(true)不单会释放文件内存镜像，还会释放AssetBundle.Load创建的Assets。这个方法是不安全的，除非你能保证这些Assets没有Object在引用，否则就出问题了。<br>    4 Resources.UnloadAsset和Resources.UnloadUnusedAssets可以用来释放Asset。</p>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>Unity5以及之后的版本打包已经大大简化。在每个资源的设置中设置好包体名称后，一般打包过程只需要BuildPipeline.BuildAssetBundles一句话就行了，Unity5会根据依赖关系自动生成所有的包。每个包还会生成一个manifest文件，这个文件描述了包大小、crc验证、包之间的依赖关系等等，通过这个manifest打包工具在下次打包的时候可以判断哪些包中的资源有改变，只打包资源改变的包，加快了打包速度。manifest只是打包工具自己用的，发布包的时候并不需要。</p>
+<h2 id="AB的工作流程"><a href="#AB的工作流程" class="headerlink" title="AB的工作流程"></a>AB的工作流程</h2><h3 id="简要步骤"><a href="#简要步骤" class="headerlink" title="简要步骤"></a>简要步骤</h3><p>将某个资源分配给一个AB，基本是以下步骤：<br>1.从工程目录下，选择你想添加到一个AB的资源<br>2.检查inspector下面的选中对象<br>3.在inspector底部，可以看到分配AB和Variants的区域<br>4.左边是AB，右边是Varriants（变种，你也可以理解为版本？）<br>5.6.7制定自定义的AB名字，AB名字支持/来定义子目录，比如environment/forest<br>8.variants名字并不是必须的</p>
+<p>至于怎么组织和管理AB，有一些常用的建议：<br>1 同频率同时间使用的资源最好同时打包（和加载）<br>2 同一个对象的相关模型、贴图、动画最好同时加载<br>3 如果不同包的不同游戏对象同时依赖与另一个不同的AB包，将依赖单独做成一个包。减少重复。<br>4 如果两套资源不可能在同一时间加载，务必放在单独的AB包里。<br>5 如果这个包里50%的资源很少同时被夹在，单独打包。<br>6 频率使用高但是资源相对少的包可以一起打包<br>7 同一个对象的不同版本，设置成不同的Variants名称</p>
+<h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><p>最通用的打包方式，打包所有被配置过的AB资源，不会自动分配AB名称<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEditor;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CreateAssetBundles</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">MenuItem(<span class="meta-string">"Assets/Build AssetBundles"</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">BuildAllAssetBundles</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">string</span> assetBundleDirectory = <span class="string">"Assets/AssetBundles"</span>;</span><br><span class="line">        <span class="keyword">if</span>(!Directory.Exists(assetBundleDirectory))</span><br><span class="line">		&#123;</span><br><span class="line">    		Directory.CreateDirectory(assetBundleDirectory);</span><br><span class="line">		&#125;</span><br><span class="line">		BuildPipeline.BuildAssetBundles(assetBundleDirectory,</span><br><span class="line">		BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>打包的核心代码，必须在编辑模式下才有BuildPipeline 的接口，打包的目标是你所配置过的资源对象。如果是None的话是不会被打包的。打包的路径是你所指定的路径。<br>    BuildAssetBundleOptions.None：使用LZMA算法压缩，压缩的包更小，但是加载时间更长。使用之前需要整体解压。一旦被解压，这个包会使用LZ4重新压缩。使用资源的时候不需要整体解压。在下载的时候可以使用LZMA算法，一旦它被下载了之后，它会使用LZ4算法保存到本地上。<br>    BuildAssetBundleOptions.UncompressedAssetBundle：不压缩，包大，加载快<br>    BuildAssetBundleOptions.ChunkBasedCompression：使用LZ4压缩，压缩率没有LZMA高，但是我们可以加载指定资源而不用解压全部。<br>    注意使用LZ4压缩，可以获得可以跟不压缩想媲美的加载速度，而且比不压缩文件要小。</p>
+<p>测试结果：<br>理论上应该只有我们自定义的test和相应的manifest文件。但是多出来一个，是根据目录来命名的一个AB文件和相应的manifest文件。包含这次打包所有的包信息以及依赖信息。（以后再说用处）参考图ab001，ab002.<br>The AssetBundle File也就是没有manifest后缀的文件，就是你在游戏运行时需要加载资源的文件。（文件内部）一般的结构是这样：参考图ab003<br>The manifest文件，包含着CLC(cylic redundancy check)循环冗余校验和bundle 的依赖。<br>materialab.manifest：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">ManifestFileVersion: 0</span><br><span class="line">CRC: 143795399</span><br><span class="line">Hashes:</span><br><span class="line">  AssetFileHash:</span><br><span class="line">    serializedVersion: 2</span><br><span class="line">    Hash: 0105f2fffeb3f03e3478a86bcb970218</span><br><span class="line">  TypeTreeHash:</span><br><span class="line">    serializedVersion: 2</span><br><span class="line">    Hash: cc983a3149e5fb03ce027e70c7a1a559</span><br><span class="line">HashAppended: 0</span><br><span class="line">ClassTypes:</span><br><span class="line">- Class: 21</span><br><span class="line">  Script: &#123;instanceID: 0&#125;</span><br><span class="line">- Class: 28</span><br><span class="line">  Script: &#123;instanceID: 0&#125;</span><br><span class="line">- Class: 48</span><br><span class="line">  Script: &#123;instanceID: 0&#125;</span><br><span class="line">Assets:</span><br><span class="line">- Assets/AB/cubematerials.mat</span><br><span class="line">Dependencies:</span><br><span class="line">- C:/Users/hp/Desktop/UnityTestDemoAll/Assets/AssetBundles/textureab</span><br></pre></td></tr></table></figure></p>
+<p>包含资源、依赖以及其他信息，另外一个是这样（AssetBundle.manifest）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ManifestFileVersion: 0</span><br><span class="line">CRC: 1228010060</span><br><span class="line">AssetBundleManifest:</span><br><span class="line">  AssetBundleInfos:</span><br><span class="line">    Info_0:</span><br><span class="line">      Name: <span class="built_in">test</span></span><br><span class="line">      Dependencies: &#123;&#125;</span><br><span class="line">    Info_1:</span><br><span class="line">      Name: materialab</span><br><span class="line">      Dependencies:</span><br><span class="line">        Dependency_0: textureab</span><br><span class="line">    Info_2:</span><br><span class="line">      Name: textureab</span><br><span class="line">      Dependencies: &#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里包含了包的依赖信息，可以利用这个信息加载一些依赖包：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">AssetBundle manifesAB = AssetBundle.LoadFromFile(<span class="string">"AssetBundles/AssetBundles"</span>);</span><br><span class="line">    AssetBundleManifest manifest= manifesAB.LoadAsset&lt;AssetBundleManifest&gt;(<span class="string">"AssetBundleManifest"</span>);</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="keyword">string</span> name <span class="keyword">in</span> manifest.GetAllAssetBundles())</span><br><span class="line">    &#123;</span><br><span class="line">        print(name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">string</span> []strs=manifest.GetAllDependencies(<span class="string">"Cube.ab"</span>);</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="keyword">var</span> name <span class="keyword">in</span> strs)</span><br><span class="line">    &#123;</span><br><span class="line">        AssetBundle.LoadFromFile(<span class="string">"AssetBundles/"</span>+name);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="上传包"><a href="#上传包" class="headerlink" title="上传包"></a>上传包</h3><p>第三方服务器或者本地均可</p>
+<h3 id="加载AssetBundles"><a href="#加载AssetBundles" class="headerlink" title="加载AssetBundles"></a>加载AssetBundles</h3><p>核心：AssetBundles.LoadFromFile API<br>简单用例1：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">LoadFromFileExample</span> <span class="title">extends</span> <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line">    <span class="function">function <span class="title">Start</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> myLoadedAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, <span class="string">"myassetBundle"</span>));</span><br><span class="line">        <span class="keyword">if</span> (myLoadedAssetBundle == <span class="literal">null</span>) &#123;</span><br><span class="line">            Debug.Log(<span class="string">"Failed to load AssetBundle!"</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> prefab = myLoadedAssetBundle.LoadAsset.&lt;GameObject&gt;(<span class="string">"MyObject"</span>);</span><br><span class="line">        Instantiate(prefab);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>简单用例2：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">IEnumerator <span class="title">InstantiateObject</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">string</span> uri = <span class="string">"file:///"</span> + Application.dataPath + <span class="string">"/AssetBundles/"</span> + assetBundleName;        </span><br><span class="line">        UnityEngine.__Networking__.UnityWebRequest request = UnityEngine.__Networking__.UnityWebRequest.GetAssetBundle(uri, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">yield</span> <span class="keyword">return</span> request.Send();</span><br><span class="line">        AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);</span><br><span class="line">        GameObject cube = bundle.LoadAsset&lt;GameObject&gt;(<span class="string">"Cube"</span>);</span><br><span class="line">        GameObject sprite = bundle.LoadAsset&lt;GameObject&gt;(<span class="string">"Sprite"</span>);</span><br><span class="line">        Instantiate(cube);</span><br><span class="line">        Instantiate(sprite);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>GetAssetBundle（string,int）加载包的目标位置和版本。UnityWebRequest有一个特殊的handleDownloadHandlerAssetBundle，将从request拿到AB（这里的request应该是http/ftp请求之类的）。<br>然后Unity会将这部分资源加载到内存镜像,然后使用loadasset加载对象，类似于resource.load之类的。</p>
+<p><strong>加载和使用的四种API：</strong><br>1AssetBundle.LoadFromMemoryAsync<br>2AssetBundle.LoadFromFile<br>3WWW.LoadfromCacheOrDownload<br>4UnityWebRequest’s DownloadHandlerAssetBundle (Unity 5.3 or newer)</p>
+<p>1-AssetBundle.LoadFromMemoryAsync<br>加载包含AB资源包的二进制数组<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Example</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">IEnumerator <span class="title">LoadFromMemoryAsync</span>(<span class="params"><span class="keyword">string</span> path</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        AssetBundleCreateRequest createRequest = AssetBundle.LoadFromMemoryAsync(File.ReadAllBytes(path));</span><br><span class="line">        <span class="keyword">yield</span> <span class="keyword">return</span> createRequest;</span><br><span class="line">        AssetBundle bundle = createRequest.assetBundle;</span><br><span class="line">        <span class="keyword">var</span> prefab = bundle.LoadAsset&lt;GameObject&gt;(<span class="string">"MyObject"</span>);</span><br><span class="line">        Instantiate(prefab);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然而，这并不是让使用LaodFromMemoryAsync成为可能的唯一途径。File.ReadAllBytes(path)可以被任何其他类似的接口或者方法代替。</p>
+<p>2-AssetBundle.LoadFromFile<br>2.1同步加载<br>加载非压缩数据时非常高效，如果是使用这个方法加载LZMA数据的话肯定要先解压再加载到内存中。<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">LoadFromFileExample</span> <span class="title">extends</span> <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line">    <span class="function">function <span class="title">Start</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> myLoadedAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, <span class="string">"myassetBundle"</span>));</span><br><span class="line">        <span class="keyword">if</span> (myLoadedAssetBundle == <span class="literal">null</span>) &#123;</span><br><span class="line">            Debug.Log(<span class="string">"Failed to load AssetBundle!"</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> prefab = myLoadedAssetBundle.LoadAsset.&lt;GameObject&gt;(<span class="string">"MyObject"</span>);</span><br><span class="line">        Instantiate(prefab);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意在不同平台/不同路径类型上可能会有不一致：<br>比如说：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AssetBundleLoader</span> &#123;</span><br><span class="line">    <span class="comment">// 根据不同平台，声明StreamingAssetsPath路径</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span> STREAMING_ASSET_PATH =</span><br><span class="line">        <span class="meta">#<span class="meta-keyword">if</span> UNITY_ANDROID</span></span><br><span class="line">             Application.dataPath + <span class="string">"!assets"</span>;   <span class="comment">// 安卓平台</span></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">else</span>  </span></span><br><span class="line">             Application.streamingAssetsPath;  <span class="comment">// 其他平台</span></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="comment">// 从StreamingAssetsPath加载</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> AssetBundle <span class="title">LoadFromStreamingAssetsPath</span>(<span class="params"><span class="keyword">string</span> assetbundle</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> AssetBundle.LoadFromFile(STREAMING_ASSET_PATH + <span class="string">"/"</span> + assetbundle);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// PersistantDataPath加载</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> AssetBundle <span class="title">LoadFromPersistantDataPath</span>(<span class="params"><span class="keyword">string</span> assetbundle</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> AssetBundle.LoadFromFile(Application.persistentDataPath+ <span class="string">"/"</span> + assetbundle)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.2异步加载<br>核心函数：AssetBundleCreateRequest AssetBundle.LoadFromFileAsync(string path, uint crc = 0, ulong offset = 0);<br>异步加载类：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AssetBundleLoader</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line">    <span class="comment">// 声明StreamingAssetsPath如上</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span> STREAMING_ASSET_PATH = ...</span><br><span class="line">    <span class="comment">// 协程实现</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> IEnumerator <span class="title">LoadAsyncCoroutine</span>(<span class="params"><span class="keyword">string</span> path, Action&lt;AssetBundle&gt; callback</span>)</span> &#123;</span><br><span class="line">        AssetBundleCreateRequest abcr = AssetBundle.LoadFromFileAsync(path);</span><br><span class="line">        <span class="keyword">yield</span> <span class="keyword">return</span> abcr;        </span><br><span class="line">        callback(abcr.assetBundle);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 开启协程</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">LoadAssetbundleAsync</span>(<span class="params"><span class="keyword">string</span> finalPath, Action&lt;AssetBundle&gt; callback</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        StartCoroutine(LoadAsyncCoroutine(finalPath, callback));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 从StreamingAssetsPath异步加载</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> AssetBundle <span class="title">LoadFromStreamingAssetsPathAsync</span>(<span class="params"><span class="keyword">string</span> assetbundle</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> LoadAssetbundleAsync(STREAMING_ASSET_PATH + <span class="string">"/"</span> + assetbundle);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// PersistantDataPath异步加载</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> AssetBundle <span class="title">LoadFromPersistantDataPathAsync</span>(<span class="params"><span class="keyword">string</span> assetbundle</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> LoadAssetbundleAsync(Application.persistentDataPath+ <span class="string">"/"</span> + assetbundle)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3WWW.LoadfromCacheOrDownload<br>将被弃用，会被unitywebrequest代替。简单将用法罗列：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">LoadFromCacheOrDownloadExample</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">IEnumerator <span class="title">Start</span> (<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">            <span class="keyword">while</span> (!Caching.ready)</span><br><span class="line">                    <span class="keyword">yield</span> <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">var</span> www = WWW.LoadFromCacheOrDownload(<span class="string">"http://myserver.com/myassetBundle"</span>, <span class="number">5</span>);</span><br><span class="line">        <span class="keyword">yield</span> <span class="keyword">return</span> www;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">string</span>.IsNullOrEmpty(www.error))</span><br><span class="line">        &#123;</span><br><span class="line">            Debug.Log(www.error);</span><br><span class="line">            <span class="keyword">yield</span> <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> myLoadedAssetBundle = www.assetBundle;</span><br><span class="line">        <span class="keyword">var</span> asset = myLoadedAssetBundle.mainAsset;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>建议：<br>移动平台上对内存限制比较苛刻，所以该方法相对来说比较耗内存和资源，尽量保持同时只有一个包在被下载中。而且，尽量限制下载包体大小在少量MB大小。<br>同时，如果缓冲区比较小，该方法也会自动删除掉旧的AB包，除非空间再次被满足。如果实在空间不足，该方法会同时支配一部分内存出来来存储数据流。</p>
+<p>4-UnityWebRequest’s DownloadHandlerAssetBundle (Unity 5.3 or newer)<br>下面是一个下载两个物体的一个包体的实例代码：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">IEnumerator <span class="title">InstantiateObject</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">string</span> uri = <span class="string">"file:///"</span> + Application.dataPath + <span class="string">"/AssetBundles/"</span> + assetBundleName;        </span><br><span class="line">UnityEngine.Networking.UnityWebRequest request = UnityEngine.Networking.UnityWebRequest.GetAssetBundle(uri, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">yield</span> <span class="keyword">return</span> request.Send();</span><br><span class="line">        AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);</span><br><span class="line">        GameObject cube = bundle.LoadAsset&lt;GameObject&gt;(<span class="string">"Cube"</span>);</span><br><span class="line">        GameObject sprite = bundle.LoadAsset&lt;GameObject&gt;(<span class="string">"Sprite"</span>);</span><br><span class="line">        Instantiate(cube);</span><br><span class="line">        Instantiate(sprite);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>方法具体的流程是创建一个request对象，然后将这个对象传递给DownloadHandlerAssetBundle.GetContent(request)，getcontent会返回AB对象。<br>这个方法的优点是，它容许开发者更灵活地处理下载数据。（怎么灵活？）</p>
+<h3 id="加载资源"><a href="#加载资源" class="headerlink" title="加载资源"></a>加载资源</h3><p>T objectFromBundle = bundleObject.LoadAsset<t>(assetName);<br>基本的方法包括LoadAsset，LoadAllAsset以及相应的异步方法loadassetasync/loadassetasync<br>加载一个单的的gameobject：<br>    GameOject gameObject = loadedAssetBundle.LoadAsset<gameobject>(assetName);<br>加载一个AB包里的所有对象：<br>    Unity.Object[] = ojjectArray = loadedAssetBundle.LoadAllAssets();</gameobject></t></p>
+<p>之前的方法返回的都是对象的类型或者对象数组，异步的(加载)方法返回的是一个AssetBundleRequest。在完成操作完成之后才可以访问资源：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AssetBundleRequest request = loadedAssetBundleObject.LoadAssetAsync&lt;GameObject&gt;(assetName)</span><br><span class="line"><span class="keyword">yield</span> <span class="keyword">return</span> request;</span><br><span class="line"><span class="keyword">var</span> loadedAsset = request.asset;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AssetBundleRequesr request = loadedAssetBundle.LoadAllAssetAsync();</span><br><span class="line"><span class="keyword">yield</span> <span class="keyword">return</span> request;</span><br><span class="line"><span class="keyword">var</span> loadedAssets = request.allAssets;</span><br></pre></td></tr></table></figure>
+<h3 id="AB依赖"><a href="#AB依赖" class="headerlink" title="AB依赖"></a>AB依赖</h3><p>如果一个或者多个UnityEngine.object引用了另一个bundle 的UnityEngine.object对象，就会形成依赖。比如Bundle A的 材料引用了Bundle B的贴图，一般B要在A之前加载。需要注意的是，在加载这个物体前，要确保贴图已经加载，其实跟具体包的加载顺序不是特别相关。</p>
+<h3 id="加载AB-Manifest"><a href="#加载AB-Manifest" class="headerlink" title="加载AB Manifest"></a>加载AB Manifest</h3><p>在处理包的依赖的时候，AB manifest非常有用。<br>为了得到AssetBundleManifest对象，需要先加载额外的AB包（对，同名同姓那个），然后加载一个AssetBundleManifest类型的对象。<br>加载ABManifest方法同AB基本相同：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AssetBundle assetBundle = AssetBundle.LoadFromFile(manifestFilePath);</span><br><span class="line">AssetBundleManifest manifest = assetBundle.LoadAsset&lt;AssetBundleManifest&gt;(<span class="string">"AssetBundleManifest"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>现在可以从该文件加载manifest文件信息，包括依赖数据/哈希数据/variants数据。正是manifest让动态地搜索依赖变得可能。比如，需要加载“assetbundle”的所有依赖：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">AssetBundle assetBundle = AssetBundle.LoadFromFile(manifestFilePath);</span><br><span class="line">AssetBundleManifest manifest = assetBundle.LoadAsset&lt;AssetBundleManifest&gt;(<span class="string">"AssetBundleManifest"</span>);</span><br><span class="line"><span class="keyword">string</span>[] dependencies = manifest.GetAllDependencies(<span class="string">"assetBundle"</span>); <span class="comment">//Pass the name of the bundle you want the dependencies for.</span></span><br><span class="line"><span class="keyword">foreach</span>(<span class="keyword">string</span> dependency <span class="keyword">in</span> dependencies)</span><br><span class="line">&#123;</span><br><span class="line">    AssetBundle.LoadFromFile(Path.Combine(assetBundlePath, dependency));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>现在，加载了AB，也加载了AB的依赖，以及资源。</p>
+<h2 id="管理加载资源"><a href="#管理加载资源" class="headerlink" title="管理加载资源"></a>管理加载资源</h2><p>关于管理加载资源的详细教程，也可以参考这里：<br><a href="https://unity3d.com/fr/learn/tutorials/topics/best-practices/assetbundle-usage-patterns?&amp;_ga=2.211534165.1107157193.1532930499-1934737889.1507532948#Managing_Loaded_Assets" target="_blank" rel="noopener">https://unity3d.com/fr/learn/tutorials/topics/best-practices/assetbundle-usage-patterns?&amp;_ga=2.211534165.1107157193.1532930499-1934737889.1507532948#Managing_Loaded_Assets</a><br>unity不会自动地将对象从活动的scene 里面卸载，asset资源的清理在特定的时间被触发，或者可以手动触发。知道何时加载和卸载资源比较关键。<br>首先AssetBundle.Unload(bool),unload是一个卸载AB包的非静态方法，该API卸载被调用的AB的header信息，这个参数也同时决定是不是要卸载从这个AB包实例化的对象。</p>
+<p><strong>AssetBundle.Unload(true)</strong><br>卸载(unload)从该AB加载的所有的游戏对象（包括依赖），但是不包括复制的GameObjects(比如实例化的GameObjects),因为这些游戏对象以及不属于AB（而是属于内存）<br>这种情况下，如果是从该AB加载的纹理资源，将会消失，会被unity当作missing textures。<br>假设，材质M是从资源包AB加载过来的：<br>如果调用AB.Unload(true):<br>活动场景中所有的M实例都会被销毁。<br><strong>AB.Unload(false)</strong><br>只是打断了实例M和AB包之间的联系。如果AB再次被加载（AB.LoadAsset()被调用），unity 并不会重新将M和新加载的材质M链接，所以会造成有两个M材质的实例拷贝。<br>我自己做的测试：<br>一个材质materialcube，打包到materialab<br>一个贴图texturecube，打包到textureab<br>materialcube材质依赖贴图textureab<br>按照不同的顺序加载和卸载游戏资源的和对象，结果略；</p>
+<p>所以，通常的两种卸载包的方案比较<br>AB.Unload(true):<br>保证物体不会被重复复制，两种通常的方案<br>1 很清晰地知道什么对象什么资源会在何时被创建和卸载，关卡之间或者在执行加载界面的时候<br>2 为独立的对象维护引用计数，并当且仅当所有他们的组成对象没有被使用时卸载AB，这容许应用程序在不复制内存的情况下卸载和重新加载独立的对象。<br>AB.Unload(false):<br>如果一个应用程序必须使用unloadfalse，独立的对象有两种方法被卸载：<br>1 消除所有不期望对象的引用，包括代码中的或者场景中的，然后，调用 Resources.UnloadUnusedAssets.<br>2 Load a scene non-additively，这会销毁当前场景中的所有对象，并且自动唤醒 Resources.UnloadUnusedAssets.</p>
+<h3 id="AssetBundle-Manager"><a href="#AssetBundle-Manager" class="headerlink" title="AssetBundle Manager"></a>AssetBundle Manager</h3><p>如果你不想手动管理AB，我们来探讨AB Manager。看了下简单来说就是不用真的创建和加载AB就可以调试，并没有多少用。需要学习的自行转移<a href="https://docs.unity3d.com/Manual/AssetBundles-Manager.html" target="_blank" rel="noopener">https://docs.unity3d.com/Manual/AssetBundles-Manager.html</a></p>
+<h3 id="AssetBundle-Patching-System"><a href="#AssetBundle-Patching-System" class="headerlink" title="AssetBundle Patching System"></a>AssetBundle Patching System</h3><p>打包、下载还是更新包都比较容易，如果使用WWW.LoadFromCacheOrDownload 和 UnityWebRequest进行应用缓冲AB的管理，传递不同的版本参数将会触发新资源包的下载。<br>Patching系统比较麻烦的事情是检测哪一个包需要被替代，一个打包系统需要两列（list）信息：<br>    当前已经被下载的包名单和相应的版本信息<br>    服务器上的包列表以及他们的版本信息<br>打包器(The patcher)需要下载服务器上的包列表名单并跟本地的比较，缺失的包以及版本有更新的包都需要重新下载。一般来说，开发者自己来进行版本控制，比如通过JSON文件和标准的C#类来行进行校验，比如使用MD5。<br>Unity以确定的排序方式来构建AB，这容许程序有自定义的下载系统来进行差异修补。但是并没有为差异化打包提供任何的内建机制，不管是WWW.LoadFromCacheOrDownload还是UnityWebRequest都没有。如果需要差异化打包的话，还是需要自己来设计整个下载系统。</p>
+<h3 id="几个常见的问题"><a href="#几个常见的问题" class="headerlink" title="几个常见的问题"></a>几个常见的问题</h3><h4 id="资源重复"><a href="#资源重复" class="headerlink" title="资源重复"></a>资源重复</h4><p>如果两个不同的对象被打包进了不同的AB包，但两个对象都引用了共同的另外一个对象（依赖对象），那这个依赖对象会被拷贝进这两个AB。重复的依赖也会被实例化，这就意味着依赖对象的两份拷贝会被当成两个不同的对象从而有不同的ID。这会增加整个应用程序的包体大小。也会造成如果应用加载了这两个父对象的话，这个依赖对象的两份拷贝也会被加载进内存中。避免这个问题有三种方案：<br>    1 避免打包到不同AB的对象不共享依赖对象，哪个包依赖就打包到哪个AB包里。但是这种方法对那种有特别多shader 的项目不适用，会造成单片的不可分割AB包必须被频繁地重构和重新下载。<br>    2 分割AB包，使得不会同时加载依赖同一个对象所在包的不同包。在某种程度上还是有用的，尤其在关卡类型的项目中，但是对减少包体大小、游戏build时间和加载时间仍然没有好处。<br>    3 确保所有的依赖资源被打包进自己的包体，从而大大减少重复包体的风险，同时也增加了复杂度。应用程序必须跟踪不同包体间的依赖关系，确保在执行任何AssetBundle.LoadAsset调用前正确地加载所有的包。</p>
+<p>Unity5中，包体依赖可以通过AssetDataBase API追踪（在UnityEditor模块中），AssetDatabase.GetDependencies 能够用来定位特定对象或者资源的即时依赖信息。要注意，这些依赖还有可能有自己的依赖。另外， AssetImporter API 可以被用来查询特定的对象被分配给那个AB。<br>结合AssetDatabase and AssetImporter APIs，可以在通过自己构建Editor代码来保证所有AB包直接和间接的依赖能够指派给AB包（指的就是这些个对象所在的AB包），不会出现：没有两个AB共享依赖的包但是却没有被打包进相应的包里，<strong>所有的项目都强烈建议</strong>使用这样一个打包的脚本。</p>
+<h4 id="精灵地图集复制"><a href="#精灵地图集复制" class="headerlink" title="精灵地图集复制"></a>精灵地图集复制</h4><p>这块说的是资源打包和精灵地图自动生成之间的冲突。<br>有关Sprite Atlas的资料请阅读 <a href="https://docs.unity3d.com/Manual/SpriteAtlas.html" target="_blank" rel="noopener">https://docs.unity3d.com/Manual/SpriteAtlas.html</a><br>简单来说Sprite也是一种资源，也可以作为AB打包的资源内容。所有自动生成的sprite atlas会被分配给这个SA包含的sprite被打包的那个包中。如果这个SA下的sprites对象被指定给了多个AB包，那么这个SA就不会被分配给某个AB，而且会被复制。如果这些sprites 并没有给分配给任何一个AB，那么这个SA也并不会被分配给任何AB。<br>所以这里就又产生了资源重复打包的问题，跟之前类似，而且对应不同版本有不同的解决方法。</p>
+<h4 id="安卓贴图"><a href="#安卓贴图" class="headerlink" title="安卓贴图"></a>安卓贴图</h4><p>由于安卓系统的碎片化问题比较严重，所以贴图需要被压缩成不同的格式。然而，所有安卓设备支持ETC1，但是ETC1不支持带有透明通道的贴图。如果一个应用不需要OpenGLES2 支持的话，那么最清晰的方法就是使用ETC2，这是被所有OPENGLES3设备支持的。其他的不详述。</p>
+<h2 id="Unity-Asset-Bundle-Browser-Tool"><a href="#Unity-Asset-Bundle-Browser-Tool" class="headerlink" title="Unity Asset Bundle Browser Tool"></a>Unity Asset Bundle Browser Tool</h2><p>这是unity官方的一个工具，使得我们能够可视化编辑AB的配置。它会自动屏蔽掉会生成无效AB的，并通知你一些存在的问题。当然也支持最基本的打包功能。</p>
+<h2 id="AssetBundle的实际用例"><a href="#AssetBundle的实际用例" class="headerlink" title="AssetBundle的实际用例"></a>AssetBundle的实际用例</h2><h3 id="打包解包完整解决方案"><a href="#打包解包完整解决方案" class="headerlink" title="打包解包完整解决方案"></a>打包解包完整解决方案</h3><p><strong>实现思路</strong><br>一，确定好什么资源是不变化的，直接扔到resources里面就可以，需要更新的放到assetbundle这里。如何来确定一个资源是从Resources加载还是AssetBundle加载。为此我们需要一个配置文件resourcesinfo。这个文件随打包过程自动生成。里面包含了资源版本号version，所有包的名字，每个包的HashCode以及每个包里面包含的资源的名字。HashCode直接可以从Unity生成的manifest中得到（AssetBundleManifest.GetAssetBundleHash），用来检查包的内容是否发生变化。这个resourceinfo每次打包AssetBundle时都会生成一个，发布增量时将它和新的Bundle一起全部复制到服务器上。同时在Resources文件夹下也存一份，随完整安装包发布，这就保证了新安装游戏的玩家手机上也有一份完整的资源配置文件，记录了这个完整包包含的资源。</p>
+<p>二，AB的粒度问题。两个极端情况的取舍，一个是一个资源一个ab包，开销比较大。另一个极端是，所有资源一个包，显然如果有不同场景、关卡、角色的不同资源，这样只会给内存带来负担，所以，一般根据我们之前提到的类型来划分和分配资源包。</p>
+<p>三，游戏启动，请求服务器版本号，客户端用的版本号就是存在Resources下面的resourcesinfo中的version。对比版本号，是否更新。<br>更新：获取服务器的resourceinfo（说白了就是资源版本信息），对比每个bundle 的hashcode，下载更新的资源包。下载完成后，保存新的服务器的这个resourcesinfo到本地resources。<br>可以有一个ResourceManager类，先读取resourcesinfo，知道了所有游戏中bundle 的资源，去外部存储路径搜索这个资源是不是存在，在的话加载，不在，就从resources加载。</p>
+<p>四，加载AssetBundle，我们直接使用WWW类而不用WWW.LoadFromCacheOrDownload, 因为我们的资源在游戏开始的时候已经下载到外部存储了，不要再Download也不要再Cache。注意WWW类加载是异步的，在游戏中我们需要同步加载资源的地方就要注意把资源预加载好存在ResourceManager中，不然等用的时候加载肯定要写异步代码了。大部分时候我们应该在一个场景初始化时就预加载好所有资源，用的时候直接从ResourceManager的缓存取就可以了。</p>
+<p>所以设置BundleName这个工作最好还是由编辑器脚本来完成。<br><strong>打包方案</strong></p>
+<p>步骤1 设置目标AssetBundle的包体名和变种名<br>用asset.assetBundleName=“text”设置AssetBundleName，核心函数AssetImporter asset= AssetImporter.GetAtPath(path);方法获取AssetImporter</p>
+<p>方案一，手动设置每个资源的包体名，然后默认所有配置资源都打包<br>不需要代码，手动设置即可，适用于资源项目不是特别多而且你很闲的时候。</p>
+<p>方案二，按照资源文件路径/文件名来设置包体名称。<br>这里面的一些核心机制和API：</p>
+<p>Object[] selects = Selection.objects;//选中的所有对象<br>Object selected in selects //selected表示所选的对象<br>selected.name //所选对象的名称string 不包含后缀名</p>
+<p>string path = AssetDatabase.GetAssetPath(selected);//对象的全路径字符串，包含对象及其扩展名：Assets/Resources/ab1/model1.prefab<br>AssetImporter asset = AssetImporter.GetAtPath(path);//这里path必须是资源的全路径：Assets/Resources/ab1/model1.prefab<br>asset.assetBundleName = “”; //设置Bundle文件的名称<br>asset.assetBundleVariant = “unity3d”;//设置Bundle文件的扩展名<br>asset.SaveAndReimport();//编辑器下重新导入资源<br>AssetDatabase.Refresh();//刷新显示</p>
+<p>步骤2 打包 BuildPipeline.BuildAssetBundles(dataPath, Options, BuildTarget);（其他不常用的API略）<br>打包输出的目录为datapath<br>如果打包名称中有类似结构：//ab2/picprefab.unity3d(具体的资源完整路径名，包含有资源名)，则会在打包的路径下按照这个组织形式新建文档路径；</p>
+<p>方案一：直接打包</p>
+<p>方案二：使用buildmap<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BuildAssetBundlesBuildMapExample</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">MenuItem(<span class="meta-string">"Example/Build Asset Bundles Using BuildMap"</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">BuildMapABs</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="comment">// 创建映射数组</span></span><br><span class="line">        AssetBundleBuild[] buildMap = <span class="keyword">new</span> AssetBundleBuild[<span class="number">2</span>];</span><br><span class="line">        <span class="comment">//修改assetBundleName第一个</span></span><br><span class="line">        buildMap[<span class="number">0</span>].assetBundleName = <span class="string">"enemybundle"</span>;</span><br><span class="line">        <span class="comment">//assetBundleName = "enemybundle"下的所有资源名称数组</span></span><br><span class="line">        <span class="keyword">string</span>[] enemyAssets = <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">2</span>];</span><br><span class="line">        enemyAssets[<span class="number">0</span>] = <span class="string">"Assets/Textures/char_enemy_alienShip.jpg"</span>;</span><br><span class="line">        enemyAssets[<span class="number">1</span>] = <span class="string">"Assets/Textures/char_enemy_alienShip-damaged.jpg"</span>;</span><br><span class="line">        buildMap[<span class="number">0</span>].assetNames = enemyAssets;</span><br><span class="line">        <span class="comment">//修改assetBundleName第二个</span></span><br><span class="line">        buildMap[<span class="number">1</span>].assetBundleName = <span class="string">"herobundle"</span>;</span><br><span class="line">        <span class="comment">//assetBundleName = "herobundle"下的所有资源名称数组</span></span><br><span class="line">        <span class="keyword">string</span>[] heroAssets = <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">1</span>];</span><br><span class="line">        heroAssets[<span class="number">0</span>] = <span class="string">"char_hero_beanMan"</span>;</span><br><span class="line">        buildMap[<span class="number">1</span>].assetNames = heroAssets;</span><br><span class="line">        <span class="comment">//创建Bundle包</span></span><br><span class="line">        <span class="comment">//将这些资源包放在一个名为ABs的目录下</span></span><br><span class="line">        <span class="keyword">string</span> assetBundleDirectory = <span class="string">"Assets/ABs"</span>;</span><br><span class="line">        <span class="comment">//如果目录不存在，就创建一个目录</span></span><br><span class="line">        <span class="keyword">if</span> (!Directory.Exists(assetBundleDirectory))</span><br><span class="line">        &#123;</span><br><span class="line">            Directory.CreateDirectory(assetBundleDirectory);</span><br><span class="line">        &#125;</span><br><span class="line">        BuildPipeline.BuildAssetBundles(assetBundleDirectory, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>一些辅助API</strong><br>1 需要用到的一些处理路径，或者建立打包目录方案的接口<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//public static string sourcePath = Application.dataPath + "/Resources";</span></span><br><span class="line"><span class="comment">//传入路径，这是需要打包的资源所在的总路径</span></span><br><span class="line">DirectoryInfo folder = <span class="keyword">new</span> DirectoryInfo(sourcePath);</span><br><span class="line">FileSystemInfo[] files = folder.GetFileSystemInfos();<span class="comment">//files返回的是这个路径下的子目录</span></span><br><span class="line">files[i] <span class="keyword">is</span> DirectoryInfo<span class="comment">//判断这个子目录是不是还是目录，是的话继续搜索当前目录</span></span><br><span class="line"><span class="comment">//不是的话，这是我们要找到的资源</span></span><br><span class="line">!files[i].Name.EndsWith(<span class="string">".meta"</span>)<span class="comment">//如果这个资源不是meta资源，那么就是我们要锁定的资源本身，接下来根据这个处理路径字符串给资源分配相应的资源包名称</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">file</span>(<span class="params"><span class="keyword">string</span> source</span>)<span class="comment">//最终给资源命名，这个命名带有目录结构，所以自动按照资源包名称安排目录结构，一个资源对应一个资源包</span></span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">    <span class="keyword">string</span> _source = Replace(source);<span class="comment">//source =</span></span><br><span class="line">    <span class="keyword">string</span> _assetPath = <span class="string">"Assets"</span> + _source.Substring(Application.dataPath.Length);<span class="comment">//Assets/Resources/ab1/model1.prefab</span></span><br><span class="line">    <span class="keyword">string</span> _assetPath2 = _source.Substring(Application.dataPath.Length + <span class="number">1</span>);<span class="comment">//Resources/ab1/model1.prefab</span></span><br><span class="line">    <span class="comment">//在代码中给资源设置AssetBundleName  </span></span><br><span class="line">    AssetImporter assetImporter = AssetImporter.GetAtPath(_assetPath);</span><br><span class="line">    <span class="keyword">string</span> assetName = _assetPath2.Substring(_assetPath2.IndexOf(<span class="string">"/"</span>) + <span class="number">1</span>);<span class="comment">//ab2/picprefab.prefab</span></span><br><span class="line">    assetName = assetName.Replace(Path.GetExtension(assetName), <span class="string">".unity3d"</span>);<span class="comment">//ab2/picprefab.unity3d(具体的资源完整路径名，包含有资源名)</span></span><br><span class="line">    assetImporter.assetBundleName = assetName;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意：<br>用IO流的DirectoryInfo.GetFileSystemInfos()和FileInfonfo获取完整目录（这种方法要注意：获取到的目录如果是”\”或者”//”要替换为“/”）。</p>
+<p>2 清除所有AssetDataBase数据集里的AB包配置<br>var names = AssetDatabase.GetAllAssetBundleNames();//所有配置包体的名称<br>AssetDatabase.RemoveAssetBundleName(oldAssetBundleNames[j], true);//删除某个名称的包体的资源配置</p>
+<p>3 当目录下的资源有任何变动或者重新导入、移动位置时，出发AssetPostprocessor方法，进行资源的打包，参考ab004,用AssetPostprocessor的OnPostprocessAllAssets方法<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">using</span> UnityEngine;</span><br><span class="line">  <span class="keyword">using</span> System.Collections;</span><br><span class="line">  <span class="keyword">using</span> UnityEditor;</span><br><span class="line"><span class="comment">//自动设置Assetbundle名字为全路径--文件夹路径名_文件名</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AutoSetTextureUISprite</span> : <span class="title">AssetPostprocessor</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">OnPostprocessAllAssets</span>(<span class="params"><span class="keyword">string</span>[] importedAssets, <span class="keyword">string</span>[] deletedAssets, <span class="keyword">string</span>[] movedAssets, <span class="keyword">string</span>[] movedFromAssetPaths</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">var</span> str <span class="keyword">in</span> importedAssets)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!str.EndsWith(<span class="string">".cs"</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                AssetImporter importer = AssetImporter.GetAtPath(str);</span><br><span class="line">                importer.assetBundleName = str;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">var</span> str <span class="keyword">in</span> deletedAssets)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!str.EndsWith(<span class="string">".cs"</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                AssetImporter importer = AssetImporter.GetAtPath(str);</span><br><span class="line">                importer.assetBundleName = str;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; movedAssets.Length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//Debug.Log("Moved Asset: " + movedAssets[i] + " from: " + movedFromAssetPaths[i]);</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>打包解包的整体解决方案代码参考这里<a href>github</a></p>
+<p><strong>解包方案</strong><br>解压的包体路径<br>///解包<br>///按照固定路径读AB包，不管何种解压包，核心的方法和思路都在这里<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">loadasset</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">LoadAssetBundle</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">    Debug.Log(Application.streamingAssetsPath);</span><br><span class="line">    <span class="keyword">string</span> path2 = Application.streamingAssetsPath + <span class="string">"/One/Model1"</span>;</span><br><span class="line">    <span class="comment">//本地文件地址加载AssetBundle</span></span><br><span class="line">    AssetBundle asset2 = AssetBundle.LoadFromFile(path2);</span><br><span class="line">    <span class="keyword">if</span> (asset2 != <span class="literal">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        GameObject obj = asset2.LoadAsset(<span class="string">"Model1"</span>) <span class="keyword">as</span> GameObject;</span><br><span class="line">        <span class="comment">//实例化</span></span><br><span class="line">        Instantiate(obj);</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>解包的整个流程需要根据自己的资源管理合理规划和读取。所以并没有一套方案适用全部，需要的自己去搭建和测试。最近根据项目需求和版本管理简单写了一个适合自己的管理类。这里不做赘述。</p>
+<h3 id="配置游戏数据的本地读取"><a href="#配置游戏数据的本地读取" class="headerlink" title="配置游戏数据的本地读取"></a>配置游戏数据的本地读取</h3><p>一般：解决思路是将xml文件直接打包使用<br>改进：excel-xml-prefab-ab-游戏运行读取数据<br><a href="https://blog.csdn.net/cglzy1982/article/details/77033170" target="_blank" rel="noopener">https://blog.csdn.net/cglzy1982/article/details/77033170</a></p>
+<h2 id="其他常见问题归纳"><a href="#其他常见问题归纳" class="headerlink" title="其他常见问题归纳"></a>其他常见问题归纳</h2><p>1 Resources.Load方法传入的资源路径需是从Resources文件夹下一级开始的相对路径且不能包含扩展名；而AssetBundle.LoadAsset方法传入的资源名需是从Assets文件开始的全路径且要包含扩展名。路径不区分大小写，建议全用小写，因为AssetBundle.GetAllAssetNames方法返回的资源名都是小写的。<br>2 Unity5打包AssetBundle时会自动处理依赖关系，但是在运行时加载的时候却不会，程序需要自己处理，先加载依赖包。<br>3 AssetBundle.CreateFromFile不能加载压缩过的AssetBundle，所以我们只能用WWW来异步加载AssetBundle。<br>4 在AssetBundle中嵌入脚本<br>AssetBundle中的资源上如果Attach了脚本，打包的时候该脚本是不会被打到AssetBundle中的，其实这里只是保存了一个类似于指针的关联，如果需要把脚本也动态打到AssetBundle中，还需要做一番工作。<br>首先，将脚本预先编译成assembly，把assembly保存成.bytes文件，这样Unity会把它识别为TextAsset，就可以将这个TextAsset打包到AssetBundle中了，载入后可以通过反射机制使用该脚本，代码如下：<br>AssetBundle bundle = WWWW.assetBundle;<br>TextAsset txt = bundle.load(“MyBinaryAsText”, typeof(TextAsset)) as TextAsset;<br>byte[] bytes = txt.bytes;<br>var assembly = System.Reflection.Assembly.Load(bytes);<br>需要注意的是，IOS平台不支持动态载入脚本。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unity/" rel="tag"># Unity</a>
+          
+            <a href="/tags/AssetBundle/" rel="tag"># AssetBundle</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/27/FirstBlog/" rel="next" title="Github Pages+Hexo博客教程">
+                <i class="fa fa-chevron-left"></i> Github Pages+Hexo博客教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/13/webRTC-Quick-Start/" rel="prev" title="webRTC_Quick_Start">
+                webRTC_Quick_Start <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="KinGil">
+          <p class="site-author-name" itemprop="name">KinGil</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kingiluob" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/2283641104/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100007092155441" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Facebook
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Unity资源"><span class="nav-number">1.1.</span> <span class="nav-text">Unity资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资源文件夹"><span class="nav-number">1.2.</span> <span class="nav-text">资源文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#www载入资源"><span class="nav-number">1.3.</span> <span class="nav-text">www载入资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各种ID认知"><span class="nav-number">1.4.</span> <span class="nav-text">各种ID认知</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资源的生命周期和内存管理"><span class="nav-number">1.5.</span> <span class="nav-text">资源的生命周期和内存管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说明"><span class="nav-number">1.6.</span> <span class="nav-text">说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AB的工作流程"><span class="nav-number">2.</span> <span class="nav-text">AB的工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简要步骤"><span class="nav-number">2.1.</span> <span class="nav-text">简要步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打包"><span class="nav-number">2.2.</span> <span class="nav-text">打包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传包"><span class="nav-number">2.3.</span> <span class="nav-text">上传包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载AssetBundles"><span class="nav-number">2.4.</span> <span class="nav-text">加载AssetBundles</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载资源"><span class="nav-number">2.5.</span> <span class="nav-text">加载资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AB依赖"><span class="nav-number">2.6.</span> <span class="nav-text">AB依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载AB-Manifest"><span class="nav-number">2.7.</span> <span class="nav-text">加载AB Manifest</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管理加载资源"><span class="nav-number">3.</span> <span class="nav-text">管理加载资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AssetBundle-Manager"><span class="nav-number">3.1.</span> <span class="nav-text">AssetBundle Manager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AssetBundle-Patching-System"><span class="nav-number">3.2.</span> <span class="nav-text">AssetBundle Patching System</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几个常见的问题"><span class="nav-number">3.3.</span> <span class="nav-text">几个常见的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#资源重复"><span class="nav-number">3.3.1.</span> <span class="nav-text">资源重复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#精灵地图集复制"><span class="nav-number">3.3.2.</span> <span class="nav-text">精灵地图集复制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安卓贴图"><span class="nav-number">3.3.3.</span> <span class="nav-text">安卓贴图</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unity-Asset-Bundle-Browser-Tool"><span class="nav-number">4.</span> <span class="nav-text">Unity Asset Bundle Browser Tool</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AssetBundle的实际用例"><span class="nav-number">5.</span> <span class="nav-text">AssetBundle的实际用例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#打包解包完整解决方案"><span class="nav-number">5.1.</span> <span class="nav-text">打包解包完整解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置游戏数据的本地读取"><span class="nav-number">5.2.</span> <span class="nav-text">配置游戏数据的本地读取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他常见问题归纳"><span class="nav-number">6.</span> <span class="nav-text">其他常见问题归纳</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KinGil</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+
+
+<script type="text/javascript" color="253,253,253" opacity="0.5" zindex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="OpenGL,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="Loading model介绍Assimp 一个模型导入库的介绍，通常OpenGL所能用到的最小的渲染单元应该是mesh，一个model由多个mesh组成。A single mesh is the minimal representation of what we need to draw an object in OpenGL (vertex data, indices and material">
+<meta name="keywords" content="OpenGL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenGL-Learning-2">
+<meta property="og:url" content="http://kangzhi.github.io/2019/01/23/OpenGL-Learning-2/index.html">
+<meta property="og:site_name" content="KinGil&#39;s Blog">
+<meta property="og:description" content="Loading model介绍Assimp 一个模型导入库的介绍，通常OpenGL所能用到的最小的渲染单元应该是mesh，一个model由多个mesh组成。A single mesh is the minimal representation of what we need to draw an object in OpenGL (vertex data, indices and material">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T02:52:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenGL-Learning-2">
+<meta name="twitter:description" content="Loading model介绍Assimp 一个模型导入库的介绍，通常OpenGL所能用到的最小的渲染单元应该是mesh，一个model由多个mesh组成。A single mesh is the minimal representation of what we need to draw an object in OpenGL (vertex data, indices and material">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kangzhi.github.io/2019/01/23/OpenGL-Learning-2/">
+
+
+
+
+
+  <title>OpenGL-Learning-2 | KinGil's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KinGil's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">April is coming</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kangzhi.github.io/2019/01/23/OpenGL-Learning-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KinGil">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KinGil's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OpenGL-Learning-2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T21:10:40+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenGL/" itemprop="url" rel="index">
+                    <span itemprop="name">OpenGL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Loading-model"><a href="#Loading-model" class="headerlink" title="Loading model"></a>Loading model</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Assimp 一个模型导入库的介绍，通常OpenGL所能用到的最小的渲染单元应该是mesh，一个model由多个mesh组成。<br>A single mesh is the minimal representation of what we need to draw an object in OpenGL (vertex data, indices and material properties). A model (usually) consists of several meshes.</p>
+<a id="more"></a>
+<h2 id="mesh"><a href="#mesh" class="headerlink" title="mesh"></a>mesh</h2><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>核心是mesh类和几个数据结构体<br>注意，结构体在cpp内存中是连续的，这是个很重要的点。<br>比如，这个是等价的：<br>Vertex vertex;<br>vertex.Position  = glm::vec3(0.2f, 0.4f, 0.6f);<br>vertex.Normal    = glm::vec3(0.0f, 1.0f, 0.0f);<br>vertex.TexCoords = glm::vec2(1.0f, 0.0f);<br>// = [0.2f, 0.4f, 0.6f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f];</p>
+<h3 id="渲染"><a href="#渲染" class="headerlink" title="渲染"></a>渲染</h3><p>核心问题，不知道有多少个texture，我们在mesh.h中实现绘制mesh方法的时候，可以根据texture数组的size和type来确定有多少个什么阳仔的shader，然后经过字符处理将它传给shader。注意shader中我们可以定义很多texture，但是不一定都用到。。占存储空间吗？</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Vertex</span> &#123;</span></span><br><span class="line">    glm::vec3 Position;</span><br><span class="line">    glm::vec3 Normal;</span><br><span class="line">    glm::vec2 TexCoords;</span><br><span class="line">    glm::vec3 Tangent;</span><br><span class="line">    glm::vec3 Bitangent;&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Texture</span> &#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="built_in">string</span> type;</span><br><span class="line">    <span class="built_in">string</span> path;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mesh</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/*  Mesh Data  */</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;Vertex&gt; vertices;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt; indices;</span><br><span class="line">    <span class="built_in">vector</span>&lt;Texture&gt; textures;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> VAO;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*  Functions  */</span></span><br><span class="line">    <span class="comment">// constructor</span></span><br><span class="line">    Mesh(<span class="built_in">vector</span>&lt;Vertex&gt; vertices, <span class="built_in">vector</span>&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt; indices, <span class="built_in">vector</span>&lt;Texture&gt; textures)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;vertices = vertices;</span><br><span class="line">        <span class="keyword">this</span>-&gt;indices = indices;</span><br><span class="line">        <span class="keyword">this</span>-&gt;textures = textures;</span><br><span class="line">        setupMesh();&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// render the mesh</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Draw</span><span class="params">(Shader shader)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// bind appropriate textures</span></span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">int</span> diffuseNr  = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">int</span> specularNr = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">int</span> normalNr   = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">int</span> heightNr   = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; textures.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            glActiveTexture(GL_TEXTURE0 + i); <span class="comment">// active proper texture unit before binding</span></span><br><span class="line">            <span class="comment">// retrieve texture number (the N in diffuse_textureN)</span></span><br><span class="line">            <span class="built_in">string</span> number;</span><br><span class="line">            <span class="built_in">string</span> name = textures[i].type;</span><br><span class="line">            <span class="keyword">if</span>(name == <span class="string">"texture_diffuse"</span>)</span><br><span class="line">				number = <span class="built_in">std</span>::to_string(diffuseNr++);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(name == <span class="string">"texture_specular"</span>)</span><br><span class="line">				number = <span class="built_in">std</span>::to_string(specularNr++); <span class="comment">// transfer unsigned int to stream</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(name == <span class="string">"texture_normal"</span>)</span><br><span class="line">				number = <span class="built_in">std</span>::to_string(normalNr++); <span class="comment">// transfer unsigned int to stream</span></span><br><span class="line">             <span class="keyword">else</span> <span class="keyword">if</span>(name == <span class="string">"texture_height"</span>)</span><br><span class="line">			    number = <span class="built_in">std</span>::to_string(heightNr++); <span class="comment">// transfer unsigned int to stream</span></span><br><span class="line"></span><br><span class="line">													 <span class="comment">// now set the sampler to the correct texture unit</span></span><br><span class="line">            glUniform1i(glGetUniformLocation(shader.ID, (name + number).c_str()), i);</span><br><span class="line">            <span class="comment">// and finally bind the texture</span></span><br><span class="line">            glBindTexture(GL_TEXTURE_2D, textures[i].id);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// draw mesh</span></span><br><span class="line">        glBindVertexArray(VAO);</span><br><span class="line">        glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, <span class="number">0</span>);</span><br><span class="line">        glBindVertexArray(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// always good practice to set everything back to defaults once configured.</span></span><br><span class="line">        glActiveTexture(GL_TEXTURE0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">/*  Render data  */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> VBO, EBO;</span><br><span class="line">    <span class="comment">/*  Functions    */</span></span><br><span class="line">    <span class="comment">// initializes all the buffer objects/arrays</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setupMesh</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// create buffers/arrays</span></span><br><span class="line">        glGenVertexArrays(<span class="number">1</span>, &amp;VAO);</span><br><span class="line">        glGenBuffers(<span class="number">1</span>, &amp;VBO);</span><br><span class="line">        glGenBuffers(<span class="number">1</span>, &amp;EBO);</span><br><span class="line"></span><br><span class="line">        glBindVertexArray(VAO);</span><br><span class="line">        <span class="comment">// load data into vertex buffers</span></span><br><span class="line">        glBindBuffer(GL_ARRAY_BUFFER, VBO);</span><br><span class="line">        <span class="comment">// A great thing about structs is that their memory layout is sequential for all its items.</span></span><br><span class="line">        <span class="comment">// The effect is that we can simply pass a pointer to the struct and it translates perfectly to a glm::vec3/2 array which</span></span><br><span class="line">        <span class="comment">// again translates to 3/2 floats which translates to a byte array.</span></span><br><span class="line">        glBufferData(GL_ARRAY_BUFFER, vertices.size() * <span class="keyword">sizeof</span>(Vertex), &amp;vertices[<span class="number">0</span>], GL_STATIC_DRAW);  </span><br><span class="line"></span><br><span class="line">        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);</span><br><span class="line">        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * <span class="keyword">sizeof</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span>), &amp;indices[<span class="number">0</span>], GL_STATIC_DRAW);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// set the vertex attribute pointers</span></span><br><span class="line">        <span class="comment">// vertex Positions</span></span><br><span class="line">        glEnableVertexAttribArray(<span class="number">0</span>);	</span><br><span class="line">        glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="keyword">sizeof</span>(Vertex), (<span class="keyword">void</span>*)<span class="number">0</span>);</span><br><span class="line">        <span class="comment">// vertex normals</span></span><br><span class="line">        glEnableVertexAttribArray(<span class="number">1</span>);	</span><br><span class="line">        glVertexAttribPointer(<span class="number">1</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="keyword">sizeof</span>(Vertex), (<span class="keyword">void</span>*)offsetof(Vertex, Normal));</span><br><span class="line">        <span class="comment">// vertex texture coords</span></span><br><span class="line">        glEnableVertexAttribArray(<span class="number">2</span>);	</span><br><span class="line">        glVertexAttribPointer(<span class="number">2</span>, <span class="number">2</span>, GL_FLOAT, GL_FALSE, <span class="keyword">sizeof</span>(Vertex), (<span class="keyword">void</span>*)offsetof(Vertex, TexCoords));</span><br><span class="line">        <span class="comment">// vertex tangent</span></span><br><span class="line">        glEnableVertexAttribArray(<span class="number">3</span>);</span><br><span class="line">        glVertexAttribPointer(<span class="number">3</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="keyword">sizeof</span>(Vertex), (<span class="keyword">void</span>*)offsetof(Vertex, Tangent));</span><br><span class="line">        <span class="comment">// vertex bitangent</span></span><br><span class="line">        glEnableVertexAttribArray(<span class="number">4</span>);</span><br><span class="line">        glVertexAttribPointer(<span class="number">4</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="keyword">sizeof</span>(Vertex), (<span class="keyword">void</span>*)offsetof(Vertex, Bitangent));</span><br><span class="line"></span><br><span class="line">        glBindVertexArray(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>这两天过OpenGL的这个过程中才发现，一个好的设计思路和清晰的思维比代码能力（我指的是编码能力）重要多了，这个的能力基础就是对IO、数据结构、算法、内存、显存、整个架构的正确理解。比如，我们这里要加载模型，根据模型文件的定义，我们核心要处理的是mesh。上一节，mesh搞定了，基于此我们来想model应该做什么：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Model</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="comment">/*  Functions   */</span></span><br><span class="line">        Model(<span class="keyword">char</span> *path)</span><br><span class="line">        &#123;</span><br><span class="line">            loadModel(path);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">Draw</span><span class="params">(Shader shader)</span></span>;	</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="comment">/*  Model Data  */</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;Mesh&gt; meshes;</span><br><span class="line">        <span class="built_in">string</span> directory;</span><br><span class="line">        <span class="comment">/*  Functions   */</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">loadModel</span><span class="params">(<span class="built_in">string</span> path)</span></span>;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">processNode</span><span class="params">(aiNode *node, <span class="keyword">const</span> aiScene *scene)</span></span>;</span><br><span class="line">        <span class="function">Mesh <span class="title">processMesh</span><span class="params">(aiMesh *mesh, <span class="keyword">const</span> aiScene *scene)</span></span>;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;Texture&gt; <span class="title">loadMaterialTextures</span><span class="params">(aiMaterial *mat, aiTextureType type, </span></span></span><br><span class="line"><span class="function"><span class="params">                                             <span class="built_in">string</span> typeName)</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>剩下的实现，就是经验的问题了。</p>
+<h3 id="加载贴图的优化"><a href="#加载贴图的优化" class="headerlink" title="加载贴图的优化"></a>加载贴图的优化</h3><p>这里需要主义的问题是，一个贴图资源，很有可能很多的模型都在用，所以避免重复加载资源或者优化处理比较重要。这是模型加载的性能瓶颈。<br>怎么解决呢，我们把已经加载的texture在global空间存起来，每次加载前先看是不是已经加载过了。</p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">TextureFromFile</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">const</span> <span class="built_in">string</span> &amp;directory, <span class="keyword">bool</span> gamma = <span class="literal">false</span>)</span></span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Model</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/*  Model Data */</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;Texture&gt; textures_loaded;</span><br><span class="line">    <span class="built_in">vector</span>&lt;Mesh&gt; meshes;</span><br><span class="line">    <span class="built_in">string</span> directory;</span><br><span class="line">    <span class="keyword">bool</span> gammaCorrection;</span><br><span class="line">    <span class="comment">/*  Functions   */</span></span><br><span class="line">    Model(<span class="built_in">string</span> <span class="keyword">const</span> &amp;path, <span class="keyword">bool</span> gamma = <span class="literal">false</span>) : gammaCorrection(gamma)</span><br><span class="line">    &#123;</span><br><span class="line">        loadModel(path);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Draw</span><span class="params">(Shader shader)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; meshes.size(); i++)  meshes[i].Draw(shader); </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">/*  Functions   */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">loadModel</span><span class="params">(<span class="built_in">string</span> <span class="keyword">const</span> &amp;path)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);</span><br><span class="line">        directory = path.substr(<span class="number">0</span>, path.find_last_of(<span class="string">'/'</span>));</span><br><span class="line">        processNode(scene-&gt;mRootNode, scene);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// processes a node in a recursive fashion. Processes each individual mesh located at the node and repeats this process on its children nodes (if any).</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">processNode</span><span class="params">(aiNode *node, <span class="keyword">const</span> aiScene *scene)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// process each mesh located at the current node</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; node-&gt;mNumMeshes; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// the node object only contains indices to index the actual objects in the scene. </span></span><br><span class="line">            <span class="comment">// the scene contains all the data, node is just to keep stuff organized (like relations between nodes).</span></span><br><span class="line">            aiMesh* mesh = scene-&gt;mMeshes[node-&gt;mMeshes[i]];</span><br><span class="line">            meshes.push_back(processMesh(mesh, scene));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// after we've processed all of the meshes (if any) we then recursively process each of the children nodes</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; node-&gt;mNumChildren; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            processNode(node-&gt;mChildren[i], scene);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Mesh <span class="title">processMesh</span><span class="params">(aiMesh *mesh, <span class="keyword">const</span> aiScene *scene)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// data to fill</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;Vertex&gt; vertices;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt; indices;</span><br><span class="line">        <span class="built_in">vector</span>&lt;Texture&gt; textures;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Walk through each of the mesh's vertices</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mesh-&gt;mNumVertices; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            Vertex vertex;</span><br><span class="line">			<span class="comment">//。。。</span></span><br><span class="line">            vertices.push_back(vertex);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mesh-&gt;mNumFaces; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            aiFace face = mesh-&gt;mFaces[i];</span><br><span class="line">            <span class="comment">// retrieve all indices of the face and store them in the indices vector</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; face.mNumIndices; j++)</span><br><span class="line">                indices.push_back(face.mIndices[j]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// process materials</span></span><br><span class="line">        aiMaterial* material = scene-&gt;mMaterials[mesh-&gt;mMaterialIndex];    </span><br><span class="line">        <span class="comment">// return a mesh object created from the extracted mesh data</span></span><br><span class="line">        <span class="keyword">return</span> Mesh(vertices, indices, textures);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// checks all material textures of a given type and loads the textures if they're not loaded yet.</span></span><br><span class="line">    <span class="comment">// the required info is returned as a Texture struct.</span></span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;Texture&gt; <span class="title">loadMaterialTextures</span><span class="params">(aiMaterial *mat, aiTextureType type, <span class="built_in">string</span> typeName)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;Texture&gt; textures;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mat-&gt;GetTextureCount(type); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            aiString str;</span><br><span class="line">            mat-&gt;GetTexture(type, i, &amp;str);</span><br><span class="line">            <span class="comment">// check if texture was loaded before and if so, continue to next iteration: skip loading a new texture</span></span><br><span class="line">            <span class="keyword">bool</span> skip = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; textures_loaded.size(); j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">std</span>::<span class="built_in">strcmp</span>(textures_loaded[j].path.data(), str.C_Str()) == <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    textures.push_back(textures_loaded[j]);</span><br><span class="line">                    skip = <span class="literal">true</span>; <span class="comment">// a texture with the same filepath has already been loaded, continue to next one. (optimization)</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!skip)</span><br><span class="line">            &#123;   <span class="comment">// if texture hasn't been loaded already, load it</span></span><br><span class="line">                Texture texture;</span><br><span class="line">                texture.id = TextureFromFile(str.C_Str(), <span class="keyword">this</span>-&gt;directory);</span><br><span class="line">                texture.type = typeName;</span><br><span class="line">                texture.path = str.C_Str();</span><br><span class="line">                textures.push_back(texture);</span><br><span class="line">                textures_loaded.push_back(texture);  <span class="comment">// store it as texture loaded for entire model, to ensure we won't unnecesery load duplicate textures.</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> textures;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">TextureFromFile</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">const</span> <span class="built_in">string</span> &amp;directory, <span class="keyword">bool</span> gamma)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> textureID;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;learnopengl/shader_m.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;learnopengl/camera.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;learnopengl/model.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">Shader <span class="title">ourShader</span><span class="params">(<span class="string">"1.model_loading.vs"</span>, <span class="string">"1.model_loading.fs"</span>)</span></span>;</span><br><span class="line"><span class="function">Model <span class="title">ourModel</span><span class="params">(FileSystem::getPath(<span class="string">"nanosuit.obj"</span>))</span></span>;</span><br><span class="line">renderloop()</span><br><span class="line">&#123;</span><br><span class="line">    ourShader.use();</span><br><span class="line">    ourShader.setMat4(<span class="string">"projection"</span>, projection);</span><br><span class="line">    ourShader.setMat4(<span class="string">"view"</span>, view);</span><br><span class="line">    ourShader.setMat4(<span class="string">"model"</span>, model);</span><br><span class="line">    ourModel.Draw(ourShader);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/23/OpenGL-Learning-1/" rel="next" title="OpenGL-Learning-1">
+                <i class="fa fa-chevron-left"></i> OpenGL-Learning-1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/23/OpenGL-Learning-3/" rel="prev" title="OpenGL-Learning-3">
+                OpenGL-Learning-3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="KinGil">
+          <p class="site-author-name" itemprop="name">KinGil</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kingiluob" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/2283641104/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100007092155441" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Facebook
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Loading-model"><span class="nav-number">1.</span> <span class="nav-text">Loading model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mesh"><span class="nav-number">1.2.</span> <span class="nav-text">mesh</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">1.2.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染"><span class="nav-number">1.2.2.</span> <span class="nav-text">渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">1.2.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-number">1.3.</span> <span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加载贴图的优化"><span class="nav-number">1.3.1.</span> <span class="nav-text">加载贴图的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#整体结构"><span class="nav-number">1.3.3.</span> <span class="nav-text">整体结构</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KinGil</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

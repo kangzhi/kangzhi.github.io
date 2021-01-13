@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+
+
+<script type="text/javascript" color="253,253,253" opacity="0.5" zindex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="OpenGL,Win32,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="背景公司产品需要，探索一些增强现实技术方案的实现，并转化成桌面式虚拟现实设备的内容集成，所以需要基于一些底层的引擎做一些本地化的开发，于是在短时间内重拾了线性代数，并且学习了openGL的引擎使用，并且了解了一些关于OSG的开发。还好，一直对三维内容的实现和展现兴趣依旧，所以将之前探索openGL的学习过程大致记录下来，一方面帮助自己整理思路，另一方面希望通过自己的理解来将整个流程解释的更加清楚。">
+<meta name="keywords" content="OpenGL,Win32">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenGL-HelloWorld-Windows">
+<meta property="og:url" content="http://kangzhi.github.io/2019/01/05/OpenGL-HelloWorld/index.html">
+<meta property="og:site_name" content="KinGil&#39;s Blog">
+<meta property="og:description" content="背景公司产品需要，探索一些增强现实技术方案的实现，并转化成桌面式虚拟现实设备的内容集成，所以需要基于一些底层的引擎做一些本地化的开发，于是在短时间内重拾了线性代数，并且学习了openGL的引擎使用，并且了解了一些关于OSG的开发。还好，一直对三维内容的实现和展现兴趣依旧，所以将之前探索openGL的学习过程大致记录下来，一方面帮助自己整理思路，另一方面希望通过自己的理解来将整个流程解释的更加清楚。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i2.bvimg.com/673749/49e75bb7ce3b7531.png">
+<meta property="og:image" content="http://i2.bvimg.com/673749/cee721143ff3272f.png">
+<meta property="og:image" content="http://i2.bvimg.com/673749/538a15f113463d41.jpg">
+<meta property="og:image" content="http://i2.bvimg.com/673749/d261b255e3474133.png">
+<meta property="og:updated_time" content="2019-02-18T02:52:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenGL-HelloWorld-Windows">
+<meta name="twitter:description" content="背景公司产品需要，探索一些增强现实技术方案的实现，并转化成桌面式虚拟现实设备的内容集成，所以需要基于一些底层的引擎做一些本地化的开发，于是在短时间内重拾了线性代数，并且学习了openGL的引擎使用，并且了解了一些关于OSG的开发。还好，一直对三维内容的实现和展现兴趣依旧，所以将之前探索openGL的学习过程大致记录下来，一方面帮助自己整理思路，另一方面希望通过自己的理解来将整个流程解释的更加清楚。">
+<meta name="twitter:image" content="http://i2.bvimg.com/673749/49e75bb7ce3b7531.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kangzhi.github.io/2019/01/05/OpenGL-HelloWorld/">
+
+
+
+
+
+  <title>OpenGL-HelloWorld-Windows | KinGil's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KinGil's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">April is coming</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kangzhi.github.io/2019/01/05/OpenGL-HelloWorld/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KinGil">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KinGil's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OpenGL-HelloWorld-Windows</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-05T16:00:33+08:00">
+                2019-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenGL/" itemprop="url" rel="index">
+                    <span itemprop="name">OpenGL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>公司产品需要，探索一些增强现实技术方案的实现，并转化成桌面式虚拟现实设备的内容集成，所以需要基于一些底层的引擎做一些本地化的开发，于是在短时间内重拾了线性代数，并且学习了openGL的引擎使用，并且了解了一些关于OSG的开发。还好，一直对三维内容的实现和展现兴趣依旧，所以将之前探索openGL的学习过程大致记录下来，一方面帮助自己整理思路，另一方面希望通过自己的理解来将整个流程解释的更加清楚。由于时间紧迫，所以一路都是自己摸索，靠着自己的理解和谷歌。<br>对了，顺便提一嘴，一般大家的思路直接给你将配置什么环境变量，去哪里哪里设置还有一堆添加库的，我这里不会也懒得去说那么详细，我的初衷还是给你一个思路把这些东西的来龙去脉讲清晰，建立起一个整体的工程概念，然后剩下的你自己一步步去实施。</p>
+<a id="more"></a>
+<p>由于是在windows环境下，所以opengl的相关配置相对麻烦了一些，而且整个开发过程你还需要了解windows下编程的一些常用接口和GUI应用。<br><em>win32编程接口</em><br><em>openGL</em><br><em>openCV</em>后面项目会用到<br><em>unity</em><br><em>进程数据通信</em></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><p>openGL是一个多平台的2d3d图形渲染接口。这套接口提供了跟GPU交互的一套东西来实现硬件加速渲染。你要调用这些接口必须要考虑在不同的平台实现，尤其是窗口。win32是其中之一。<br>开发工具，visualstudio，语言cpp。<br>这里扯一点题外话，就是cpp的语言。每个人都学过c，但是cpp的设计思路才是每一个技术人应该熟知并且掌握的利器，毫无疑问。这里面涉及两个事情，一个是面向对象编程的模式设计，另外一个就是对内存、算法以及线程进程等。cpp难点包括指针以及其他一些概念如模板类、虚基类、纯虚函数等。平时接触到的纯虚函数应该算比较多，其实可以跟csharp中的抽象方法或者接口中的方法类似，只定义不实现。好处是多态，由派生类决定。<br>opengl可以用来使用的界面一大堆，比如：<br>交互界面包括 SDL, Allegro, SFML, FLTK, and Qt等。<br>wiki官方对opengl支持的图形界面接口的描述：<br><strong>基础的一些工具：</strong><br>1 glut 老的窗口处理，不再维护，对应的开源实现是freeglut<br>2 freeglut 多平台支持，支持键鼠，比glut强大稳定并且一直在更新维护；<br>3 glfw 基本同glfw，面向游戏。一个轻量级的特性库。提供给开发者管理窗口和上下文比如手柄、键盘以及鼠标。GLFW有何优势呢？glut太老了，最后一个版本还是90年代的。freeglut完全兼容glut，算是glut的代替品，功能齐全，但是bug太多。稳定性也不好（不是我说的啊），GLFW应运而生。<br>4 glew opengl2.0以后的一个工具函数。<br>不同的显卡公司，也会发布一些只有自家显卡才支 持的扩展函数，你要想用这数涵数，不得不去寻找最新的glext.h,有了GLEW扩展库，你就再也不用为找不到函数的接口而烦恼，因为GLEW能自动识别你的平台所支持的全部OpenGL高级扩展函数。也就是说，只要包含一个glew.h头文件，你就能使用gl,glu,glext,wgl,glx的全部函数。</p>
+<p><strong>多媒体工具库：</strong><br>1 Allegro 5 面向游戏开发的多平台支持库，有c接口；<br>2 SDL c接口的多媒体库；<br>3 SFML 多平台支持cpp接口，支持其他绑定比如cs，java，haskell，go；<br><strong>控件工具包：</strong><br>FLTK 多平台cpp小控件库 ；<br>QT 多平台cpp控件库，提供了很多opengl帮助对象，甚至抽象出OpenGL和opengl ES之间的区别；<br>wxWidgets 多平台cpp控件库；<br><strong>扩展加载工具：</strong><br>glee/glew和glbinding<br><strong>opengl库函数</strong><br>opengl每个库函数均有特定的前缀，gl,glu,aux分别对应基于opengl基本库、实用库、辅助库。（aux很大程度上已经被glut取代）<br>wgl指的是windows专用的库函数。</p>
+<p>总结：<br>windows：Qt，glut，win32<br>Mac：cocoa，SDL<br>Linux：X window<br>话说为什么要用win32来开发呢，因为我们这里要实现跟其他应用程序的交互，以及多窗口等操作，相对来说win32的一些开发文档和支持比较好。</p>
+<h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><p>1 [环境配置-Hello World][]<br>2 [渲染管线][]<br>3 [纹理和矩阵知识][]<br>4 [深度绘制][]<br>5 [多窗口绘制][]<br>6 [模型加载][]<br>7 <a href>虚实融合</a> [][]</p>
+<h2 id="win32开发"><a href="#win32开发" class="headerlink" title="win32开发"></a>win32开发</h2><p>废话不说，建立win32应用程序，直接上一个案例代码，然后解释部分要点。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="comment">// 必须要进行前导声明</span></span><br><span class="line"><span class="function">LRESULT CALLBACK <span class="title">WindowProc</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_  HWND hwnd,</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_  UINT uMsg,</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_  WPARAM wParam,</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_  LPARAM lParam</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 程序入口点</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> CALLBACK <span class="title">WinMain</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    _In_  HINSTANCE hInstance,</span></span></span><br><span class="line"><span class="function"><span class="params">    _In_  HINSTANCE hPrevInstance,</span></span></span><br><span class="line"><span class="function"><span class="params">    _In_  LPSTR lpCmdLine,</span></span></span><br><span class="line"><span class="function"><span class="params">    _In_  <span class="keyword">int</span> nCmdShow</span></span></span><br><span class="line"><span class="function"><span class="params">  )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 类名</span></span><br><span class="line">	WCHAR* cls_Name = <span class="string">L"My Class"</span>;</span><br><span class="line">	<span class="comment">// 设计窗口类</span></span><br><span class="line">	WNDCLASS wc = &#123; &#125;;</span><br><span class="line">	wc.hbrBackground = (HBRUSH)COLOR_WINDOW;</span><br><span class="line">	wc.lpfnWndProc = WindowProc;</span><br><span class="line">	wc.lpszClassName = cls_Name;</span><br><span class="line">	wc.hInstance = hInstance;</span><br><span class="line">	<span class="comment">// 注册窗口类</span></span><br><span class="line">	RegisterClass(&amp;wc);</span><br><span class="line"> </span><br><span class="line">	<span class="comment">// 创建窗口</span></span><br><span class="line">	HWND hwnd = CreateWindow(</span><br><span class="line">		cls_Name,			<span class="comment">//类名，要和刚才注册的一致</span></span><br><span class="line">		<span class="string">L"我的应用程序"</span>,	<span class="comment">//窗口标题文字</span></span><br><span class="line">		WS_OVERLAPPEDWINDOW, <span class="comment">//窗口外观样式</span></span><br><span class="line">		<span class="number">38</span>,					<span class="comment">//窗口相对于父级的X坐标</span></span><br><span class="line">		<span class="number">20</span>,					<span class="comment">//窗口相对于父级的Y坐标</span></span><br><span class="line">		<span class="number">480</span>,				<span class="comment">//窗口的宽度</span></span><br><span class="line">		<span class="number">250</span>,				<span class="comment">//窗口的高度</span></span><br><span class="line">		<span class="literal">NULL</span>,				<span class="comment">//没有父窗口，为NULL</span></span><br><span class="line">		<span class="literal">NULL</span>,				<span class="comment">//没有菜单，为NULL</span></span><br><span class="line">		hInstance,			<span class="comment">//当前应用程序的实例句柄</span></span><br><span class="line">		<span class="literal">NULL</span>);				<span class="comment">//没有附加数据，为NULL</span></span><br><span class="line">	<span class="keyword">if</span>(hwnd == <span class="literal">NULL</span>) <span class="comment">//检查窗口是否创建成功</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> </span><br><span class="line">	<span class="comment">// 显示窗口</span></span><br><span class="line">	ShowWindow(hwnd, SW_SHOW);</span><br><span class="line"> </span><br><span class="line">	<span class="comment">// 更新窗口</span></span><br><span class="line">	UpdateWindow(hwnd);</span><br><span class="line"> </span><br><span class="line">	<span class="comment">// 消息循环</span></span><br><span class="line">	MSG msg;</span><br><span class="line">	<span class="keyword">while</span>(GetMessage(&amp;msg, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="number">0</span>)&gt;<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		TranslateMessage(&amp;msg);</span><br><span class="line">		DispatchMessage(&amp;msg);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 在WinMain后实现</span></span><br><span class="line"><span class="function">LRESULT CALLBACK <span class="title">WindowProc</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_  HWND hwnd,</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_  UINT uMsg,</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_  WPARAM wParam,</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_  LPARAM lParam</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">switch</span>(uMsg)</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="keyword">case</span> WM_DESTROY:</span><br><span class="line">		&#123;</span><br><span class="line">			PostQuitMessage(<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> DefWindowProc(hwnd, uMsg, wParam, lParam);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>下面按照我的理解和逻辑来解释下win32的基本架构。</p>
+<h3 id="程序入口点-WinMain"><a href="#程序入口点-WinMain" class="headerlink" title="程序入口点 WinMain"></a>程序入口点 WinMain</h3><p>入口函数，从winmain中跳出时候，程序就结束了。<br>函数带了一个callback？什么是callback，转到定义，它其实就是<strong>stdcall，是和</strong>cdec对应的，专门用来调用win api的。所以，callback的意思，函数不是我们调用的，函数只定义了模型没有具体处理，而代码处置权在被调用者手里。如果你知道c#，你可以理解为这是一个委托，只声明了方法的参数和返回值，并没有具体处理代码。<br>关于参数，其实都特么的是整数，不过换了名字，就这样。<br>_In_  HINSTANCE hInstance,<br>_In_  HINSTANCE hPrevInstance,<br>_In_  LPSTR lpCmdLine,<br>_In_  int nCmdShow<br>分别是<br>1 当前应用程序实例句柄；<br>2 前一个实例，比如我运行了两个进程xxx.exe，进程列表中会有两个，第一次的实例号假设为0001，就传递一个参数hInstance，第二次运行的实例号0002，就传给了hPrevInstance参数。<br>3 lpcmdline 命令行参数，LPSTR或者其他以P/LP开头的参数，实际上就是指针类型。<br>4 ncmdshow定义了窗口显示方式。参数是操作系统传入的，你可以在app右键属性里看到。</p>
+<p>在定义winmain之前声明了WindowProc函数。我们在WinMain设计窗口类时要用到它的指针。所以预先定义下。在WindowProc中返回DefWindowProc是把我们不感兴趣或者没有处理的消息交回给操作系统来处理。名字可以随便改。但是返回值和参数类型必须一致。这个函数带了callback，说明也是操作系统调用的。</p>
+<h3 id="设计与注册窗口类"><a href="#设计与注册窗口类" class="headerlink" title="设计与注册窗口类"></a>设计与注册窗口类</h3><p>设计窗口类，就是程序主窗口。可以用WNDCLASS或者带EX的。配置好类以后，向系统注册，使用RegisterClass函数，参数就是一个指向刚刚设计好的WNDCLASS结构体的指针。<br>A Window Class stores information about a type of window, including it’s Window Procedure which controls the window, the small and large icons for the window, and the background color. This way, you can register a class once, and create as many windows as you want from it, without having to specify all those attributes over and over.</p>
+<h3 id="创建和显示窗口"><a href="#创建和显示窗口" class="headerlink" title="创建和显示窗口"></a>创建和显示窗口</h3><p>创建窗口，返回一个窗口句柄。<br>然后调用showwindow(para)显示窗口。参数你可以自己传入；或者传入winMain的最后一个参数，由操作系统（用户）指定。</p>
+<h3 id="更新窗口"><a href="#更新窗口" class="headerlink" title="更新窗口"></a>更新窗口</h3><p>UpdateWindow()只要窗口没有最小化，应用程序会不断地接收WM_PAINT消息。</p>
+<h3 id="消息循环和处理"><a href="#消息循环和处理" class="headerlink" title="消息循环和处理"></a>消息循环和处理</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MSG msg;</span><br><span class="line"><span class="keyword">while</span>(GetMessage(&amp;msg, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="number">0</span>))</span><br><span class="line">&#123;</span><br><span class="line">	TranslateMessage(&amp;msg);</span><br><span class="line">	DispatchMessage(&amp;msg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>理论上来说，你没有循环的话，程序运行完马上就结束了。所以你需要一个消息处理机制，与用户交互，有跳出的条件时程序才跳出结束。这里就需要一个消息队列。<br>1 MSG定义：<br>typedef struct tagMSG {<br>​    HWND   hwnd;//窗口句柄。windowProc交给谁处理，hwnd就是谁的句柄。<br>​    UINT   message;//消息代码<br>​    WPARAM wParam;//消息信息<br>​    LPARAM lParam;//消息信息<br>​    DWORD  time;<br>​    POINT  pt;<br>  } MSG, <em>PMSG, </em>LPMSG;<br>一些message定义</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WM_INITDIALOG                   0x0110</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WM_COMMAND                      0x0111</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WM_LBUTTONDOWN                  0x0201</span></span><br></pre></td></tr></table></figure>
+<p>2 GetMessage()函数声明<br>BOOL WINAPI GetMessage(<br>​    <em>Out</em>     LPMSG lpMsg,//指向MSG结构体的指针<br>​    _In_opt_  HWND hWnd,//通常为null，捕捉整个应用程序的消息<br>​    _In_      UINT wMsgFilterMin,<br>​    _In_      UINT wMsgFilterMax<br>  );<br>该函数从呼叫进程的消息队列中检索消息，如果被检索到的消息为可分派消息，则该函数就分派该消息，如果被检索到的消息为不可分派消息，则GetMessage返回非正值，导致消息循环的结束。例如可分派的消息有：WM_PAINT、WM_SIZE、WM_CREATE等，不可分派的消息有WM_QUIT等。<br>与GetMessage不同，PeekMessage函数不会在返回之前等待发布消息。<br>3 translatemessage()<br>将虚拟密钥消息转换为字符消息。字符消息被发布到调用线程的消息队列，以便在线程下次调用GetMessage或PeekMessage函数时读取。<br>4 Dispatch message()<br>将消息调度到窗口过程。它通常用于分派由GetMessage函数检索的消息。<br>消息用GetMessage读入后(注意这个消息可不是WM_QUIT消息)，它首先要经过函数TranslateMessage()进行翻译，这个函数会转换成一些键盘消息，它检索匹配的WM_KEYDOWN和WM_KEYUP消息，并为窗口产生相应的ASCII字符消息(WM_CHAR),它包含指定键的ANSI字符.但对大多数消息来说它并不起什么作用，所以现在没有必要考虑它。<br>下一个函数调用DispatchMessage()要求Windows将消息传送给在MSG结构中为窗口所指定的窗口过程。我们在讲到登记窗口类时曾提到过，登记窗口类时，我们曾指定Windows把函数WindosProc作为咱们这个窗口的窗口过程(就是指处理这个消息的东东)。就是说，Windows会调用函数WindowsProc()来处理这个消息。在WindowProc()处理完消息后，代码又循环到开始去接收另一个消息，这样就完成了一个消息循环。<br>What DispatchMessage() does is take the message, checks which window it is for and then looks up the Window Procedure for the window. It then calls that procedure, sending as parameters the handle of the window, the message, and wParam and lParam.<br>Once you have finished processing the message, your windows procedure returns, DispatchMessage() returns, and we go back to the beginning of the loop.<br>5 其他<br>DefWindowProc(hwnd, uMsg, wParam, lParam);<br>你不会处理的消息交给系统去解决。<br>Well our message loop is responsible for ALL of the windows in our program, this includes things like buttons and list boxes that have their own window procedures, so we need to make sure that we call the right procedure for the window. Since more than one window can use the same window procedure, the first parameter (the handle to the window) is used to tell the window procedure which window the message is intended for.<br>程序退出：<br>But what do you do when you want your program to exit? Since we’re using a while() loop, if GetMessage() were to return FALSE (aka 0), the loop would end and we would reach the end of our WinMain() thus exiting the program. This is exactly what PostQuitMessage() accomplishes. It places a WM_QUIT message into the queue, and instead of returning a positive value, GetMessage() fills in the Msg structure and returns 0. At this point, the wParam member of Msg contains the value that you passed to PostQuitMessage() and you can either ignore it, or return it from WinMain() which will then be used as the exit code when the process terminates.<br>最后一步需要弄清楚的是，退出窗体和程序之间的关系。当窗口被关闭，为窗口所分配的内存会被销毁，同时，我们会收到一条WM_DESTROY消息，因而，我们只要在收到这条消息时调用PostQuitMessage函数，这个函数提交一条WM_QUIT消息，而在消息循环中，WM_QUIT消息使GetMessage函数返回0，这样一来，GetMessage返回FALSE，就可以跳出消息循环了，这样应用程序就可以退出了。<br>所以，我们要做的就是捕捉WM_DESTROY消息，然后PostQuitMessage.</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>win32，应用程序与用户以及操作系统的交互主要通过消息机制来处理。发生鼠标或者按键响应时，MSG消息会被添加到应用的消息队列里，然后每个窗口对应一个消息处理程序winproc。<br>根据自己的理解简单画了张流程图[001]<img src="http://i2.bvimg.com/673749/49e75bb7ce3b7531.png" alt="Markdown">：<br>还有一张网络图，很清晰，可以参考[002]<img src="http://i2.bvimg.com/673749/cee721143ff3272f.png" alt="Markdown">：</p>
+<h3 id="几个win32消息机制的参考阅读"><a href="#几个win32消息机制的参考阅读" class="headerlink" title="几个win32消息机制的参考阅读"></a>几个win32消息机制的参考阅读</h3><p>0 [外网很清晰的解释][<a href="http://www.winprog.org/tutorial/message_loop.html]" target="_blank" rel="noopener">http://www.winprog.org/tutorial/message_loop.html]</a><br>1 [win32主函数流程][<a href="https://blog.csdn.net/tcjiaan/article/details/8497535]" target="_blank" rel="noopener">https://blog.csdn.net/tcjiaan/article/details/8497535]</a><br>2 [消息机制][<a href="https://blog.csdn.net/feixiaoxing/article/details/78787876]" target="_blank" rel="noopener">https://blog.csdn.net/feixiaoxing/article/details/78787876]</a><br>3 [消息机制][<a href="https://blog.csdn.net/hyman_c/article/details/70144952][2][https://blog.csdn.net/u013777351/article/details/49522219]" target="_blank" rel="noopener">https://blog.csdn.net/hyman_c/article/details/70144952][2][https://blog.csdn.net/u013777351/article/details/49522219]</a></p>
+<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><h2 id="glut配置"><a href="#glut配置" class="headerlink" title="glut配置"></a>glut配置</h2><p>[下载glut][<a href="https://www.opengl.org/resources/libraries/glut/glut_downloads.php]" target="_blank" rel="noopener">https://www.opengl.org/resources/libraries/glut/glut_downloads.php]</a><br>解压后，5个文件。glut.h/glut.dll/glut32.dll/glut.lib/glut32.lib<br>1 找到vs2017安装的目录，路径为 （D:\Program）\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.11.25503\include ，创建一个名为gl的文件夹，并将解压到的glut.h文件复制其中。<br>2 再找到路径为 （D:\Program）\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.11.25503\lib\x86 ，将解压到的glut.lib，glut32.lib复制其中。<br>3 最后把解压到的glut.dll和glut32.dll复制到C:\Windows\System32文件夹内（32位系统）或C:\Windows\SysWOW64(64位系统）。</p>
+<h2 id="win32-opengl配置"><a href="#win32-opengl配置" class="headerlink" title="win32+opengl配置"></a>win32+opengl配置</h2><p>基本同上，如果不安装glfw和glew等库的话。安装的话这里再详细展开。目前的配置够了。<br>如果你是Windows平台，opengl32.lib已经包含在Microsoft SDK里了，它在Visual Studio安装的时候就默认安装了。由于这篇教程用的是VS编译器，并且是在Windows操作系统上，我们只需将opengl32.lib添加进连接器设置里就行了。</p>
+<h2 id="OpenGL-mac-环境配置"><a href="#OpenGL-mac-环境配置" class="headerlink" title="OpenGL mac 环境配置"></a>OpenGL mac 环境配置</h2><p>因为mac系统集成了opengl，所以你只需要包含相应的头文件进行开发即可。但是要注意的是，mac平台已经在最新的几版系统里建议使用metal/vulkan开发了，尤其在游戏开发方面，windows＋dxd独孤求败。多的不展开，配置平台还是比较简单，而且可选的方式也比较多。<br>首先，Xcode是必须安装的，mac下开发的大器；<br>其次窗口gui你可以选择glut，glfw或者cocoa等：<br>glut：<br>只需要饱含glut头文件即可简单创建opengl窗口程序，但是要注意的是mac os 10.9以后官方不建议使用glut等库，你可以强行这样使用：</p>
+<p>在仅仅进行一些小的测试方面还是很方便的。<br>glfw：</p>
+<h1 id="HelloWorld"><a href="#HelloWorld" class="headerlink" title="HelloWorld"></a>HelloWorld</h1><h2 id="console应用"><a href="#console应用" class="headerlink" title="console应用"></a>console应用</h2><p>建立控制台应用程序，头文件只需要包含#include &lt;GL/glut.h&gt; 即可<br>进行一个矩形的简单绘制：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GL/glut.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Show</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line">    glRectf(<span class="number">-0.1f</span>, <span class="number">-0.1f</span>, <span class="number">0.5f</span>, <span class="number">0.5f</span>);</span><br><span class="line">    glFlush();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    glutInit(&amp;argc, argv);</span><br><span class="line">    glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);</span><br><span class="line">    glutInitWindowPosition(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    glutInitWindowSize(<span class="number">800</span>, <span class="number">600</span>);</span><br><span class="line">    glutCreateWindow(<span class="string">"OpenGL-ONE"</span>);</span><br><span class="line">    glutDisplayFunc(Show);</span><br><span class="line">    glutMainLoop();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Done！<br>基本就是这么简单<br>参考图002<img src="http://i2.bvimg.com/673749/538a15f113463d41.jpg" alt="Markdown"></p>
+<h2 id="win32-窗口应用"><a href="#win32-窗口应用" class="headerlink" title="win32 窗口应用"></a>win32 窗口应用</h2><p>嗯，如果只用glut的话比较好折腾。用win32就比较麻烦了，坑比较多，尤其对于win32或者opengl编程新手来说，稍微麻烦一点。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* An example of the minimal Win32 &amp; OpenGL program.  It only works in</span></span><br><span class="line"><span class="comment">16 bit color modes or higher (since it doesn't create a</span></span><br><span class="line"><span class="comment">palette). */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;			/* must include this before GL/gl.h */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GL/gl.h&gt;			/* OpenGL header file */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GL/glu.h&gt;			/* OpenGL utilities header file */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment ( lib , <span class="meta-string">"opengl32.lib"</span> )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment ( lib , <span class="meta-string">"glu32.lib"</span> ) </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">/* rotate a triangle around */</span></span><br><span class="line">	glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line">	glBegin(GL_TRIANGLES);</span><br><span class="line">	glColor3f(<span class="number">1.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	glVertex2i(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">	glColor3f(<span class="number">0.0f</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	glVertex2i(<span class="number">-1</span>, <span class="number">-1</span>);</span><br><span class="line">	glColor3f(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line">	glVertex2i(<span class="number">1</span>, <span class="number">-1</span>);</span><br><span class="line">	glEnd();</span><br><span class="line">	glFlush();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">LONG WINAPI</span><br><span class="line">WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">static</span> PAINTSTRUCT ps;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">switch</span> (uMsg) &#123;</span><br><span class="line">	<span class="keyword">case</span> WM_PAINT:</span><br><span class="line">		display();</span><br><span class="line">		BeginPaint(hWnd, &amp;ps);</span><br><span class="line">		EndPaint(hWnd, &amp;ps);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">case</span> WM_SIZE:</span><br><span class="line">		glViewport(<span class="number">0</span>, <span class="number">0</span>, LOWORD(lParam), HIWORD(lParam));</span><br><span class="line">		PostMessage(hWnd, WM_PAINT, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">case</span> WM_CHAR:</span><br><span class="line">		<span class="keyword">switch</span> (wParam) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">27</span>:			<span class="comment">/* ESC key */</span></span><br><span class="line">			PostQuitMessage(<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">case</span> WM_CLOSE:</span><br><span class="line">		PostQuitMessage(<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> DefWindowProc(hWnd, uMsg, wParam, lParam);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">HWND</span><br><span class="line">CreateOpenGLWindow(<span class="keyword">char</span>* title, <span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> width, <span class="keyword">int</span> height,</span><br><span class="line">BYTE type, DWORD flags)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span>         pf;</span><br><span class="line">	HDC         hDC;</span><br><span class="line">	HWND        hWnd;</span><br><span class="line">	WNDCLASS    wc;</span><br><span class="line">	PIXELFORMATDESCRIPTOR pfd;</span><br><span class="line">	<span class="keyword">static</span> HINSTANCE hInstance = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* only register the window class once - use hInstance as a flag. */</span></span><br><span class="line">	<span class="keyword">if</span> (!hInstance) &#123;</span><br><span class="line">		hInstance = GetModuleHandle(<span class="literal">NULL</span>);</span><br><span class="line">		wc.style = CS_OWNDC;</span><br><span class="line">		wc.lpfnWndProc = (WNDPROC)WindowProc;</span><br><span class="line">		wc.cbClsExtra = <span class="number">0</span>;</span><br><span class="line">		wc.cbWndExtra = <span class="number">0</span>;</span><br><span class="line">		wc.hInstance = hInstance;</span><br><span class="line">		wc.hIcon = LoadIcon(<span class="literal">NULL</span>, IDI_WINLOGO);</span><br><span class="line">		wc.hCursor = LoadCursor(<span class="literal">NULL</span>, IDC_ARROW);</span><br><span class="line">		wc.hbrBackground = <span class="literal">NULL</span>;</span><br><span class="line">		wc.lpszMenuName = <span class="literal">NULL</span>;</span><br><span class="line">		wc.lpszClassName = <span class="string">"OpenGL"</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (!RegisterClass(&amp;wc)) &#123;</span><br><span class="line">			MessageBox(<span class="literal">NULL</span>, <span class="string">"RegisterClass() failed:  "</span></span><br><span class="line">				<span class="string">"Cannot register window class."</span>, <span class="string">"Error"</span>, MB_OK);</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	hWnd = CreateWindow(<span class="string">"OpenGL"</span>, title, WS_OVERLAPPEDWINDOW |</span><br><span class="line">		WS_CLIPSIBLINGS | WS_CLIPCHILDREN,</span><br><span class="line">		x, y, width, height, <span class="literal">NULL</span>, <span class="literal">NULL</span>, hInstance, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (hWnd == <span class="literal">NULL</span>) &#123;</span><br><span class="line">		MessageBox(<span class="literal">NULL</span>, <span class="string">"CreateWindow() failed:  Cannot create a window."</span>,</span><br><span class="line">			<span class="string">"Error"</span>, MB_OK);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	hDC = GetDC(hWnd);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* there is no guarantee that the contents of the stack that become</span></span><br><span class="line"><span class="comment">	the pfd are zeroed, therefore _make sure_ to clear these bits. */</span></span><br><span class="line">	<span class="built_in">memset</span>(&amp;pfd, <span class="number">0</span>, <span class="keyword">sizeof</span>(pfd));</span><br><span class="line">	pfd.nSize = <span class="keyword">sizeof</span>(pfd);</span><br><span class="line">	pfd.nVersion = <span class="number">1</span>;</span><br><span class="line">	pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | flags;</span><br><span class="line">	pfd.iPixelType = type;</span><br><span class="line">	pfd.cColorBits = <span class="number">32</span>;</span><br><span class="line"></span><br><span class="line">	pf = ChoosePixelFormat(hDC, &amp;pfd);</span><br><span class="line">	<span class="keyword">if</span> (pf == <span class="number">0</span>) &#123;</span><br><span class="line">		MessageBox(<span class="literal">NULL</span>, <span class="string">"ChoosePixelFormat() failed:  "</span></span><br><span class="line">			<span class="string">"Cannot find a suitable pixel format."</span>, <span class="string">"Error"</span>, MB_OK);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (SetPixelFormat(hDC, pf, &amp;pfd) == FALSE) &#123;</span><br><span class="line">		MessageBox(<span class="literal">NULL</span>, <span class="string">"SetPixelFormat() failed:  "</span></span><br><span class="line">			<span class="string">"Cannot set format specified."</span>, <span class="string">"Error"</span>, MB_OK);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	DescribePixelFormat(hDC, pf, <span class="keyword">sizeof</span>(PIXELFORMATDESCRIPTOR), &amp;pfd);</span><br><span class="line"></span><br><span class="line">	ReleaseDC(hWnd,hDC );</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> hWnd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> APIENTRY</span><br><span class="line">WinMain(HINSTANCE hCurrentInst, HINSTANCE hPreviousInst,</span><br><span class="line">LPSTR lpszCmdLine, <span class="keyword">int</span> nCmdShow)</span><br><span class="line">&#123;</span><br><span class="line">	HDC hDC;				<span class="comment">/* device context */</span></span><br><span class="line">	HGLRC hRC;				<span class="comment">/* opengl context */</span></span><br><span class="line">	HWND  hWnd;				<span class="comment">/* window */</span></span><br><span class="line">	MSG   msg;				<span class="comment">/* message */</span></span><br><span class="line"></span><br><span class="line">	hWnd = CreateOpenGLWindow(<span class="string">"minimal"</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">256</span>, <span class="number">256</span>, PFD_TYPE_RGBA, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span> (hWnd == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">	hDC = GetDC(hWnd);</span><br><span class="line">	hRC = wglCreateContext(hDC);</span><br><span class="line">	wglMakeCurrent(hDC, hRC);</span><br><span class="line"></span><br><span class="line">	ShowWindow(hWnd, nCmdShow);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (GetMessage(&amp;msg, hWnd, <span class="number">0</span>, <span class="number">0</span>)) &#123;</span><br><span class="line">		TranslateMessage(&amp;msg);</span><br><span class="line">		DispatchMessage(&amp;msg);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	wglMakeCurrent(<span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">	ReleaseDC(hWnd, hDC);</span><br><span class="line">	wglDeleteContext(hRC);</span><br><span class="line">	DestroyWindow(hWnd);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> msg.wParam;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果OK，你会得到图片003<img src="http://i2.bvimg.com/673749/d261b255e3474133.png" alt="Markdown"></p>
+<h3 id="调试时候的坑"><a href="#调试时候的坑" class="headerlink" title="调试时候的坑"></a>调试时候的坑</h3><p>1 const.char 类型形参与LPWSTR 类型的实参不兼容<br>右键项目-属性-常规-字符集，将unicode改为多字符集，为了向下兼容<br>2 如果没有配置环境并且没有<br>//#pragma comment ( lib , “opengl32.lib” )<br>//#pragma comment ( lib , “glu32.lib” )<br>这两行的话，你会得到error LNK1120 等类似的错误提示 无法解析的外部命令.原因就是这些库文件没有成功包含进项目。链接时没有找到对应的OpenGL库。<br>为了方便可以直接通过上面语句完成（vc++的特性）。</p>
+<h3 id="代码解释"><a href="#代码解释" class="headerlink" title="代码解释"></a>代码解释</h3><p>后续的章节再说吧。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>[1 nehe的参考][<a href="https://www.opengl.org/archives/resources/code/samples/win32_tutorial/]" target="_blank" rel="noopener">https://www.opengl.org/archives/resources/code/samples/win32_tutorial/]</a><br>[2 其他的参考][<a href="https://blog.csdn.net/vagrxie/article/details/4602961]" target="_blank" rel="noopener">https://blog.csdn.net/vagrxie/article/details/4602961]</a></p>
+<h1 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h1><p>1 [opengl wiki][<a href="https://en.wikipedia.org/wiki/OpenGL#Context_and_window_toolkits]" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/OpenGL#Context_and_window_toolkits]</a><br>2 [两个配置参考]<br><a href="https://blog.csdn.net/wangwei19951128/article/details/78410869" target="_blank" rel="noopener">https://blog.csdn.net/wangwei19951128/article/details/78410869</a><br><a href="https://blog.csdn.net/qq_19003345/article/details/76098781" target="_blank" rel="noopener">https://blog.csdn.net/qq_19003345/article/details/76098781</a><br><a href="https://blog.csdn.net/AvatarForTest/article/details/79199807" target="_blank" rel="noopener">https://blog.csdn.net/AvatarForTest/article/details/79199807</a></p>
+<p>3 关于opengl 的背景，可以参考</p>
+<p><a href="http://openglbook.com/chapter-0-preface-what-is-opengl.html" target="_blank" rel="noopener">http://openglbook.com/chapter-0-preface-what-is-opengl.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+          
+            <a href="/tags/Win32/" rel="tag"># Win32</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/13/webRTC-Quick-Start/" rel="next" title="webRTC_Quick_Start">
+                <i class="fa fa-chevron-left"></i> webRTC_Quick_Start
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/11/OpenGL-Rendering-Pipeline/" rel="prev" title="OpenGL Rendering Pipeline">
+                OpenGL Rendering Pipeline <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="KinGil">
+          <p class="site-author-name" itemprop="name">KinGil</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kingiluob" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/2283641104/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100007092155441" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Facebook
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景知识"><span class="nav-number">2.1.</span> <span class="nav-text">背景知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系列文章"><span class="nav-number">2.2.</span> <span class="nav-text">系列文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#win32开发"><span class="nav-number">2.3.</span> <span class="nav-text">win32开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序入口点-WinMain"><span class="nav-number">2.3.1.</span> <span class="nav-text">程序入口点 WinMain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计与注册窗口类"><span class="nav-number">2.3.2.</span> <span class="nav-text">设计与注册窗口类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建和显示窗口"><span class="nav-number">2.3.3.</span> <span class="nav-text">创建和显示窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新窗口"><span class="nav-number">2.3.4.</span> <span class="nav-text">更新窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息循环和处理"><span class="nav-number">2.3.5.</span> <span class="nav-text">消息循环和处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.3.6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几个win32消息机制的参考阅读"><span class="nav-number">2.3.7.</span> <span class="nav-text">几个win32消息机制的参考阅读</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环境配置"><span class="nav-number">3.</span> <span class="nav-text">环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#glut配置"><span class="nav-number">3.1.</span> <span class="nav-text">glut配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#win32-opengl配置"><span class="nav-number">3.2.</span> <span class="nav-text">win32+opengl配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenGL-mac-环境配置"><span class="nav-number">3.3.</span> <span class="nav-text">OpenGL mac 环境配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HelloWorld"><span class="nav-number">4.</span> <span class="nav-text">HelloWorld</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#console应用"><span class="nav-number">4.1.</span> <span class="nav-text">console应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#win32-窗口应用"><span class="nav-number">4.2.</span> <span class="nav-text">win32 窗口应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">4.2.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试时候的坑"><span class="nav-number">4.2.2.</span> <span class="nav-text">调试时候的坑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码解释"><span class="nav-number">4.2.3.</span> <span class="nav-text">代码解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">4.2.4.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考-1"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KinGil</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

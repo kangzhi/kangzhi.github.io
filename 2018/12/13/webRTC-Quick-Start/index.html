@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+
+
+<script type="text/javascript" color="253,253,253" opacity="0.5" zindex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="WebRTC,Hololens,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="该接触到webrtc，是因为某次搜索腾讯视频直播软件的技术实现，看到早年有人试图用webrtc开发机遇浏览器的多人视频聊天室。（当然了解后才发现视频直播和基于社交的单人视频聊天基本完全是不同的解决方案）再后来由于老板要求，需要探索下基于Hololens设备的远程协助的解决方案，这里涉及到了实现异地远程端对端的视频和其他数据传输。国内hololens开发还在依靠文档的阶段，所以思路并不是很多，最后还">
+<meta name="keywords" content="WebRTC,Hololens">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webRTC_Quick_Start">
+<meta property="og:url" content="http://kangzhi.github.io/2018/12/13/webRTC-Quick-Start/index.html">
+<meta property="og:site_name" content="KinGil&#39;s Blog">
+<meta property="og:description" content="该接触到webrtc，是因为某次搜索腾讯视频直播软件的技术实现，看到早年有人试图用webrtc开发机遇浏览器的多人视频聊天室。（当然了解后才发现视频直播和基于社交的单人视频聊天基本完全是不同的解决方案）再后来由于老板要求，需要探索下基于Hololens设备的远程协助的解决方案，这里涉及到了实现异地远程端对端的视频和其他数据传输。国内hololens开发还在依靠文档的阶段，所以思路并不是很多，最后还">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i2.bvimg.com/673749/bb248aecbb79b9d8.png">
+<meta property="og:image" content="http://i2.bvimg.com/673749/64523ff1982ae925.png">
+<meta property="og:image" content="http://i2.bvimg.com/673749/50f23919b30be10d.png">
+<meta property="og:image" content="http://i2.bvimg.com/673749/c63200c3b648f324.png">
+<meta property="og:image" content="http://i2.bvimg.com/673749/9779a1dfb50383f9.png">
+<meta property="og:updated_time" content="2019-02-18T02:52:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webRTC_Quick_Start">
+<meta name="twitter:description" content="该接触到webrtc，是因为某次搜索腾讯视频直播软件的技术实现，看到早年有人试图用webrtc开发机遇浏览器的多人视频聊天室。（当然了解后才发现视频直播和基于社交的单人视频聊天基本完全是不同的解决方案）再后来由于老板要求，需要探索下基于Hololens设备的远程协助的解决方案，这里涉及到了实现异地远程端对端的视频和其他数据传输。国内hololens开发还在依靠文档的阶段，所以思路并不是很多，最后还">
+<meta name="twitter:image" content="http://i2.bvimg.com/673749/bb248aecbb79b9d8.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kangzhi.github.io/2018/12/13/webRTC-Quick-Start/">
+
+
+
+
+
+  <title>webRTC_Quick_Start | KinGil's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KinGil's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">April is coming</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kangzhi.github.io/2018/12/13/webRTC-Quick-Start/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KinGil">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KinGil's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">webRTC_Quick_Start</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-13T15:16:17+08:00">
+                2018-12-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>该接触到webrtc，是因为某次搜索腾讯视频直播软件的技术实现，看到早年有人试图用webrtc开发机遇浏览器的多人视频聊天室。（当然了解后才发现视频直播和基于社交的单人视频聊天基本完全是不同的解决方案）再后来由于老板要求，需要探索下基于Hololens设备的远程协助的解决方案，这里涉及到了实现异地远程端对端的视频和其他数据传输。国内hololens开发还在依靠文档的阶段，所以思路并不是很多，最后还是谷歌给出了可靠的实现思路。奈何对webrtc了解太少，所以先撸了遍webrtc的一些代码，实现了基于浏览器的视多人协同室。在web开发方面只是菜鸟，所以这篇文章主要是以codelab的上手教程为主线，梳理下webrtc主要的实现思路和流程。之后还会有专门的文章来贴出基于hololens实现的协同解决方案和关键实现步骤。<br>BTW，现在一般关于webrtc的开发基本在这两个方向上，一个是基于浏览器的web应用开发，一个是基于c的一些底层开发（webrtc是开源项目）。<br><a id="more"></a></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>web realtime communication由一组标准、协议和javascript api组成，用于实现浏览器之间（端到端）的音频、视频和数据共享。webrtc使得实时通信变成一种标准功能，，任何web应用都无需借助第三方插件和专有软件，通过简单地javascript API即可完成。<br>webrtc三个最重要的接口<br><em>MediaStream</em> 获取音频喝视频流<br><em>RTCPeerConnection</em> 音频和视频数据通信<br><em>RTCDataChannel</em>其他数据通信</p>
+<h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><p>本文实现的案例和所有内容都是基于Chrome的，所以需要了解一些网页前端开发的内容，包括但不仅限于：<br><em>HTML</em><br><em>JavaScript</em><br><em>node.js</em><br><em>socket.io</em><br>后期实现还会用到.net相关的开发</p>
+<h2 id="支持平台"><a href="#支持平台" class="headerlink" title="支持平台"></a>支持平台</h2><p>PC，Chrome，Firefox，Opera<br>Android<br>iOS</p>
+<h2 id="javascript支持"><a href="#javascript支持" class="headerlink" title="javascript支持"></a>javascript支持</h2><p>4个主要的API：getUserMedia，MediaRecorder，RTCPeerConnection，RTCDataChannel。</p>
+<h2 id="几个概念"><a href="#几个概念" class="headerlink" title="几个概念"></a>几个概念</h2><p>［1］signaling 信令<br>webRTC利用RTCPeerConnection在浏览器之间传输流数据，但是还需要一种机制来定位通信、发送受控制的消息，这就是信令。对于webrtc来说并没有统一标准的信令方式，通常来讲利用socket／TCP／UDP／websocket理论上都是可行的。具体取决于使用代价。在本文实现的例子中，使用的事socket.io<br>［2］STUN和TURN<br>webrtc设计之初是一种p2p的工作方式，用户直连。但是要和现实网络协同工作的话，客户端必须穿越NAT网关和防火墙，而且p2p网络在直连失败时需要反馈机制。作为webrtc过程中的一部分，webrtc api接口利用STUN服务器来得到客户端PC的IP地址，用TURN做为连接时的中继服务器（relay server）。详细可以阅读<a href="https://www.html5rocks.com/en/tutorials/webrtc/infrastructure/" target="_blank" rel="noopener">https://www.html5rocks.com/en/tutorials/webrtc/infrastructure/</a><br>（有必要以后会专门翻译）<br>［3］安全性<br>所有webrtc组件都必须加密，js api只能够悲安全的源代码调用，比如https和localhost。通信方面，webrtc没有定义，需要在使用具体通信协议时自己注意。</p>
+<h1 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h1><p>源码获取：<br>git clone <a href="https://github.com/googlecodelabs/webrtc-web" target="_blank" rel="noopener">https://github.com/googlecodelabs/webrtc-web</a><br>关于web服务器，你可以使用自己的服务器，也可以使用很方便的一个chrome服务器插件，web server for chrome。（为什么要使用web服务器？？？<br>如图001 所示，设置工作路径为上一步源码的work路径，默认端口为local8887，确保勾选options中的automatically show index.html。通过开关来关闭和重启webserver。<br>设置完成画面如001<br><img src="http://i2.bvimg.com/673749/bb248aecbb79b9d8.png" alt="Markdown"></p>
+<h1 id="获取视频流"><a href="#获取视频流" class="headerlink" title="获取视频流"></a>获取视频流</h1><p>章节完整代码全部在step-01目录<br>index.html：添加element元素，并且关联一个script元素main.js：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"><span class="comment">// 例子中只获取视频数据</span></span><br><span class="line"><span class="keyword">const</span> mediaStreamConstraints = &#123;</span><br><span class="line">  video: <span class="literal">true</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 视频流将会被赋给video元素</span></span><br><span class="line"><span class="keyword">const</span> localVideo = <span class="built_in">document</span>.querySelector(<span class="string">'video'</span>);</span><br><span class="line"><span class="comment">// 在video上产生的本地视频流</span></span><br><span class="line"><span class="keyword">let</span> localStream;</span><br><span class="line"><span class="comment">// 如果成功把MediaStream添加给video元素</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">gotLocalMediaStream</span>(<span class="params">mediaStream</span>) </span>&#123;</span><br><span class="line">  localStream = mediaStream;</span><br><span class="line">  localVideo.srcObject = mediaStream;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 如果错误打印错误信息</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleLocalMediaStreamError</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'navigator.getUserMedia error: '</span>, error);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 初始化视频流</span></span><br><span class="line">navigator.mediaDevices.getUserMedia(mediaStreamConstraints)</span><br><span class="line">  .then(gotLocalMediaStream).catch(handleLocalMediaStreamError);</span><br></pre></td></tr></table></figure></p>
+<p>打开本地服务器端口，应该可以看到003画面。<br><img src="http://i2.bvimg.com/673749/64523ff1982ae925.png" alt="Markdown"></p>
+<p>代码解释：<br>getUserMedia()，浏览器向用户请求获取相机权限，如果成功的话，返回MediaStream，可以被media 元素通过srcobject属性使用。<br>如果getUserMedia成功，从网络摄像头得到的视频流就会被传给video元素当作视频源。</p>
+<h1 id="通过RTCPeerConnection传输视频流"><a href="#通过RTCPeerConnection传输视频流" class="headerlink" title="通过RTCPeerConnection传输视频流"></a>通过RTCPeerConnection传输视频流</h1><p>目标：<br>1 使用shim<br>2 用RTCPeerConnection来stream video<br>3 控制视频数据的获取和传输<br>4 通过建立webrtc call在peers之间共享媒体数据和网络信息<br>目标是完成在同一个网页中，在两个RTCPeerConnection对象（peers）中建立连接。<br>首先html中添加两个video元素以及三个按键：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">"localVideo"</span> <span class="attr">autoplay</span> <span class="attr">playsinline</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">"remoteVideo"</span> <span class="attr">autoplay</span> <span class="attr">playsinline</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"startButton"</span>&gt;</span>Start<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"callButton"</span>&gt;</span>Call<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"hangupButton"</span>&gt;</span>Hang Up<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>一个显示从getUserMedia拿来的视频流，一个显示通过RTCPeerConnection传输过来的视频流。<br>然后添加adapter.js.是一个shim，可以将应用程序与规范更改和前缀差异隔离开来。<br>（一种小型函数库，截取API调用、修改传入参数、最后自行处理对应操作或者转交给其他地方执行。可以用来做新老api 的适配，尤其在一些并没有针对平台开的的程序。）<br>然后应该得到下面正确的画面：004<br><img src="http://i2.bvimg.com/673749/50f23919b30be10d.png" alt="Markdown"><br> 代码解释：<br> webrtc利用rtcPC API建立链接，在wenrtc客户（peers）之间传输视频流。该例子中，两个RTCPC对象pc1 pc2在同一个网页中。建立这个来凝结需要三个任务：</p>
+<ul>
+<li>给每一个端创建RTCPC，而且在每一个端，从getUserMedia添加本地视频流</li>
+<li>获取并且共享网络信息：潜在的连接端点称为ICE候选者</li>
+<li>获取并且共享本地和远程的描述：有关SDP格式的本地媒体的元数据<br>设想Alice和Bob使用RTCPC来建立一个视频对话：<h2 id="首先"><a href="#首先" class="headerlink" title="首先"></a>首先</h2>Alice和Bob交换网络信息。‘finding expression’指的是利用ICE framework找到网络接口和端口的过程。<br>1 Alice创建一个RTCPC对象，带有onicecandidate (addEventListener(‘icecandidate’))handler，这个同main.js里的下列代码协同：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> localPeerConnection;</span><br><span class="line">localPeerConnection = <span class="keyword">new</span> RTCPeerConnection(servers);</span><br><span class="line">localPeerConnection.addEventListener(<span class="string">'icecandidate'</span>, handleConnection);</span><br><span class="line">localPeerConnection.addEventListener(</span><br><span class="line">    <span class="string">'iceconnectionstatechange'</span>, handleConnectionChange);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>servers 参数在本例中并没有被用到，这里应该是你配置STUN和TURN服务器的地方。<br>webrtc是p2p连接，所以在大多数直连路由下用户可以直接连接。但是，webrtc需要跟现实网络匹配，客户端需要穿过NAT网关和防火墙，而且一旦直连失败的话需要反馈（上面提到）。<br>这个过程中的部分处理是：webrtc利用STUN服务器来得到你的电脑的IP，利用TURN服务器来当作中继服务器一旦p2p通信失败。更多参考<a href="https://www.html5rocks.com/en/tutorials/webrtc/infrastructure/" target="_blank" rel="noopener">https://www.html5rocks.com/en/tutorials/webrtc/infrastructure/</a><br>2 Alice调用getUserMedia，添加传给他的stream：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">navigator.mediaDevices.getUserMedia(mediaStreamConstraints).</span><br><span class="line">  then(gotLocalMediaStream).</span><br><span class="line">  <span class="keyword">catch</span>(handleLocalMediaStreamError);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">gotLocalMediaStream</span>(<span class="params">mediaStream</span>) </span>&#123;</span><br><span class="line">  localVideo.srcObject = mediaStream;</span><br><span class="line">  localStream = mediaStream;</span><br><span class="line">  trace(<span class="string">'Received local stream.'</span>);</span><br><span class="line">  callButton.disabled = <span class="literal">false</span>;  <span class="comment">// Enable call button.</span></span><br><span class="line">&#125;</span><br><span class="line">localPeerConnection.addStream(localStream);</span><br><span class="line">trace(<span class="string">'Added local stream to localPeerConnection.'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>3 当网络连接候选人可用时，步骤1中的onicecandidate 处理被调用<br>4 Alice把序列化的候选人数据传输给Bob。在真实使用环境中，这个过程，signaling过程，通过消息服务实现（随后说）。在这个例子中，两个RTCPC对象在同一网页中，所需不需要任何外部的消息收发。<br>5 当Bob从Alice那里得到一个参与者消息时，会调用addIceCandidate()，将参与者添加给远程peer的描述。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleConnection</span>(<span class="params">event</span>) </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">const</span> peerConnection = event.target;</span><br><span class="line">  <span class="keyword">const</span> iceCandidate = event.candidate;  </span><br><span class="line">  <span class="keyword">if</span> (iceCandidate) &#123;</span><br><span class="line">    <span class="keyword">const</span> newIceCandidate = <span class="keyword">new</span> RTCIceCandidate(iceCandidate);</span><br><span class="line">    <span class="keyword">const</span> otherPeer = getOtherPeer(peerConnection);</span><br><span class="line">    otherPeer.addIceCandidate(newIceCandidate)</span><br><span class="line">      .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        handleConnectionSuccess(peerConnection);</span><br><span class="line">      &#125;).catch(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">        handleConnectionFailure(peerConnection, error);</span><br><span class="line">      &#125;);</span><br><span class="line">    trace(<span class="string">`<span class="subst">$&#123;getPeerName(peerConnection)&#125;</span> ICE candidate:\n`</span> +</span><br><span class="line">          <span class="string">`<span class="subst">$&#123;event.candidate.candidate&#125;</span>.`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="其次"><a href="#其次" class="headerlink" title="其次"></a>其次</h2><p>webrtc peers也需要寻找并且交换本地和远程的音视频信息，比如分辨率以及编解码器功能。这其中有个过程，叫offer和answer，使用SDP协议格式，通过交换元数据的块，实现媒体配置信息的交换。<br>1 Alice进行 RTCPC createOffer 方法。返回的约定信息提供了一个RTCSessionDescription：Alice的本地会话描述：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">trace(<span class="string">'localPeerConnection createOffer start.'</span>);</span><br><span class="line">localPeerConnection.createOffer(offerOptions)</span><br><span class="line">  .then(createdOffer).catch(setSessionDescriptionError);</span><br></pre></td></tr></table></figure></p>
+<p>2 如果成功，Alice利用setLocalDescription()设置本地描述，然后把这个会话描述通过signaling channel传给Bob<br>3 Bob把Alice发送过来的信息用setRemoteDescription设置成remote description<br>4 Bob调用createAnswer(),传入从Alice得到的remote decription，这样一个同Alice匹配的本地会话被建立。createAnswer约定传递RTCSessionDescription：Bob将其设置为本地描述并且发送给Alice<br>5 当Alice接收到Bob的会话描述，Alice把用setRemoteDescription它设置为远程描述<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Logs offer creation and sets peer connection session descriptions.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createdOffer</span>(<span class="params">description</span>) </span>&#123;</span><br><span class="line">  trace(<span class="string">'Offer from localPeerConnection:\n$&#123;description.sdp&#125;'</span>);</span><br><span class="line">  trace(<span class="string">'localPeerConnection setLocalDescription start.'</span>);</span><br><span class="line">  localPeerConnection.setLocalDescription(description)</span><br><span class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      setLocalDescriptionSuccess(localPeerConnection);</span><br><span class="line">    &#125;).catch(setSessionDescriptionError);</span><br><span class="line">  trace(<span class="string">'remotePeerConnection setRemoteDescription start.'</span>);</span><br><span class="line">  remotePeerConnection.setRemoteDescription(description)</span><br><span class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      setRemoteDescriptionSuccess(remotePeerConnection);</span><br><span class="line">    &#125;).catch(setSessionDescriptionError);</span><br><span class="line">  trace(<span class="string">'remotePeerConnection createAnswer start.'</span>);</span><br><span class="line">  remotePeerConnection.createAnswer()</span><br><span class="line">    .then(createdAnswer)</span><br><span class="line">    .catch(setSessionDescriptionError);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Logs answer to offer creation and sets peer connection session descriptions.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createdAnswer</span>(<span class="params">description</span>) </span>&#123;</span><br><span class="line">  trace(<span class="string">'Answer from remotePeerConnection:\n$&#123;description.sdp&#125;.'</span>);</span><br><span class="line">  trace(<span class="string">'remotePeerConnection setLocalDescription start.'</span>);</span><br><span class="line">  remotePeerConnection.setLocalDescription(description)</span><br><span class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      setLocalDescriptionSuccess(remotePeerConnection);</span><br><span class="line">    &#125;).catch(setSessionDescriptionError);</span><br><span class="line">  trace(<span class="string">'localPeerConnection setRemoteDescription start.'</span>);</span><br><span class="line">  localPeerConnection.setRemoteDescription(description)</span><br><span class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      setRemoteDescriptionSuccess(localPeerConnection);</span><br><span class="line">    &#125;).catch(setSessionDescriptionError);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>6 ping<br><em>流程图见005</em><br><img src="http://i2.bvimg.com/673749/c63200c3b648f324.png" alt="Markdown"></p>
+<h1 id="使用RTCDataChannel交换数据"><a href="#使用RTCDataChannel交换数据" class="headerlink" title="使用RTCDataChannel交换数据"></a>使用RTCDataChannel交换数据</h1><p>index.html<br>添加两个textarea，然后通过交互控制发送消息，三个button<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;textarea id=<span class="string">"dataChannelSend"</span> disabled</span><br><span class="line">    placeholder=<span class="string">"Press Start, enter some text, then press Send."</span>&gt;&lt;<span class="regexp">/textarea&gt;</span></span><br><span class="line"><span class="regexp">&lt;textarea id="dataChannelReceive" disabled&gt;&lt;/</span>textarea&gt;</span><br><span class="line">&lt;div id=<span class="string">"buttons"</span>&gt;</span><br><span class="line">  &lt;button id=<span class="string">"startButton"</span>&gt;Start&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">  &lt;button id="sendButton"&gt;Send&lt;/</span>button&gt;</span><br><span class="line">  &lt;button id=<span class="string">"closeButton"</span>&gt;Stop&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure></p>
+<p> 代码解释<br> 利用RTCPeerConnection和RTCDataChannel交换消息，基本同RTCPeerConnection例子中的流程一致，但是多了两个处理函数：<br> sendData() 和creatteConnection()<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">createConnection</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  dataChannelSend.placeholder = <span class="string">''</span>;</span><br><span class="line">  <span class="keyword">var</span> servers = <span class="literal">null</span>;</span><br><span class="line">  pcConstraint = <span class="literal">null</span>;</span><br><span class="line">  dataConstraint = <span class="literal">null</span>;</span><br><span class="line">  trace(<span class="string">'Using SCTP based data channels'</span>);</span><br><span class="line">  <span class="comment">// For SCTP, reliable and ordered delivery is true by default.</span></span><br><span class="line">  <span class="comment">// Add localConnection to global scope to make it visible</span></span><br><span class="line">  <span class="comment">// from the browser console.</span></span><br><span class="line">  <span class="built_in">window</span>.localConnection = localConnection =</span><br><span class="line">      <span class="keyword">new</span> RTCPeerConnection(servers, pcConstraint);</span><br><span class="line">  trace(<span class="string">'Created local peer connection object localConnection'</span>);</span><br><span class="line">  sendChannel = localConnection.createDataChannel(<span class="string">'sendDataChannel'</span>,</span><br><span class="line">      dataConstraint);</span><br><span class="line">  trace(<span class="string">'Created send data channel'</span>);</span><br><span class="line">  localConnection.onicecandidate = iceCallback1;</span><br><span class="line">  sendChannel.onopen = onSendChannelStateChange;</span><br><span class="line">  sendChannel.onclose = onSendChannelStateChange;</span><br><span class="line">  <span class="comment">// Add remoteConnection to global scope to make it visible</span></span><br><span class="line">  <span class="comment">// from the browser console.</span></span><br><span class="line">  <span class="built_in">window</span>.remoteConnection = remoteConnection =</span><br><span class="line">      <span class="keyword">new</span> RTCPeerConnection(servers, pcConstraint);</span><br><span class="line">  trace(<span class="string">'Created remote peer connection object remoteConnection'</span>);</span><br><span class="line">  remoteConnection.onicecandidate = iceCallback2;</span><br><span class="line">  remoteConnection.ondatachannel = receiveChannelCallback;</span><br><span class="line">  localConnection.createOffer().then(</span><br><span class="line">    gotDescription1,</span><br><span class="line">    onCreateSessionDescriptionError</span><br><span class="line">  );</span><br><span class="line">  startButton.disabled = <span class="literal">true</span>;</span><br><span class="line">  closeButton.disabled = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sendData</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> data = dataChannelSend.value;</span><br><span class="line">  sendChannel.send(data);</span><br><span class="line">  trace(<span class="string">'Sent Data: '</span> + data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>RTCDataChannel类似于websocket，有一个send方法以及message事件。<br>dataConstraint，数据channel可以配置成不同类型数据肚饿共享，比如可靠性优先与性能。详细这里不赘述，可以参考[Mozilla Developer Network][<a href="https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/createDataChannel]" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/createDataChannel]</a></p>
+<p><em>发散思考</em><br>1 使用webrtc数据通道默认的SCTP协议，数据传输是可靠的。需要考虑什么时候性能优先，什么时候可靠性优先？<br>2 使用css来提升网页的布局和美观<br>3 移动设备上测试网页</p>
+<h1 id="建立信道传输消息"><a href="#建立信道传输消息" class="headerlink" title="建立信道传输消息"></a>建立信道传输消息</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>1 使用npm安装package.json描述的依赖项<br>2 启用Node.js服务器，利用node-static 服务静态文件<br>3 使用socket.io在nodejs上建立消息服务器<br>4 基于此创建聊天室交换消息</p>
+<h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><p>为了建立和维护一个webrtc call，clients或者说peers需要交换元数据：<br><em>Candidate(network)信息</em><br><em>提供媒体(比如分辨率和编码)信息的Offer和 Answer消息</em><br>也就是说，在发送音视频流和数据之前，metadata数据需要首先进行交换。这个过程就叫做signaling。<br>之前的例子中，发送和接收的RTCPC对象在同一网页中，所以所谓的singnaling就是在两个对象中传递元数据。<br>在真实的webrtc应用中，这两玩意在不同的设备和网页上，所以需要传输元数据的方法。<br>这样的话，你就需要使用一个信令服务器signaling server，一个可以在peers之间传输消息的服务器。实际上这些消息就是text，字符串话的javascript对象。</p>
+<h2 id="准备-安装nodejs"><a href="#准备-安装nodejs" class="headerlink" title="准备 安装nodejs"></a>准备 安装nodejs</h2><p>在localhost运行一个nodejs服务器。<br>命令行：node index.js 来启用服务器</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>webrtc使用一个客户端的javascript API，但是针对真实情况，需要一个信令服务器以及STUN TURN服务器。<br>接下来我们使用socketio nodejs模块和js库来传输消息r，来建立一个简单的信令服务器。<br>下面例子中，the server也就是nodejs application在index.js中实现，跑在它（thewebapp）上的客户端在index.html上实现</p>
+<h3 id="nodejs应用有两个任务"><a href="#nodejs应用有两个任务" class="headerlink" title="nodejs应用有两个任务"></a>nodejs应用有两个任务</h3><p>1 它作为一个消息中继<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">socket.on(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">message</span>) </span>&#123;</span><br><span class="line">  log(<span class="string">'Got message: '</span>, message);</span><br><span class="line">  socket.broadcast.emit(<span class="string">'message'</span>, message);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>2 管理webrtc视频聊天的“室”<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (numClients === <span class="number">0</span>) &#123;</span><br><span class="line">  socket.join(room);</span><br><span class="line">  socket.emit(<span class="string">'created'</span>, room, socket.id);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (numClients === <span class="number">1</span>) &#123;</span><br><span class="line">  socket.join(room);</span><br><span class="line">  socket.emit(<span class="string">'joined'</span>, room, socket.id);</span><br><span class="line">  io.sockets.in(room).emit(<span class="string">'ready'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123; <span class="comment">// max two clients</span></span><br><span class="line">  socket.emit(<span class="string">'full'</span>, room);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上设置房间最多支持两人通话。</p>
+<h2 id="HTML-amp-JS"><a href="#HTML-amp-JS" class="headerlink" title="HTML&amp;JS"></a>HTML&amp;JS</h2><p>注意需要看控制台输出的话，Chrome-Ctrl-Shift-J, 或者Command-Option-J，如果是mac。<br>HTML：</p>
+<p><script src="/socket.io/socket.io.js"></script><br>  <script src="js/main.js"></script><br>main.js：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"><span class="keyword">var</span> isInitiator;</span><br><span class="line"><span class="built_in">window</span>.room = prompt(<span class="string">"Enter room name:"</span>);</span><br><span class="line"><span class="keyword">var</span> socket = io.connect();</span><br><span class="line"><span class="keyword">if</span> (room !== <span class="string">""</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Message from client: Asking to join room '</span> + room);</span><br><span class="line">  socket.emit(<span class="string">'create or join'</span>, room);</span><br><span class="line">&#125;</span><br><span class="line">socket.on(<span class="string">'created'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">room, clientId</span>) </span>&#123;</span><br><span class="line">  isInitiator = <span class="literal">true</span>;</span><br><span class="line">&#125;);</span><br><span class="line">socket.on(<span class="string">'full'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">room</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Message from client: Room '</span> + room + <span class="string">' is full :^('</span>);</span><br><span class="line">&#125;);</span><br><span class="line">socket.on(<span class="string">'ipaddr'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ipaddr</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Message from client: Server IP address is '</span> + ipaddr);</span><br><span class="line">&#125;);</span><br><span class="line">socket.on(<span class="string">'joined'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">room, clientId</span>) </span>&#123;</span><br><span class="line">  isInitiator = <span class="literal">false</span>;</span><br><span class="line">&#125;);</span><br><span class="line">socket.on(<span class="string">'log'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log.apply(<span class="built_in">console</span>, array);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="设置运行在Nodejs上的socketio"><a href="#设置运行在Nodejs上的socketio" class="headerlink" title="设置运行在Nodejs上的socketio"></a>设置运行在Nodejs上的socketio</h2><p>创建一个package.json在根目录：<br>{<br>  “name”: “webrtc-codelab”,<br>  “version”: “0.0.1”,<br>  “description”: “WebRTC codelab”,<br>  “dependencies”: {<br>​    “node-static”: “^0.7.10”,<br>​    “socket.io”: “^1.2.0”<br>  }<br>}<br>这是告诉NPM(Node Package Manager)需要安装依赖项的配置文件。<br>运行 npm install安装相应的包。<br>根目录(不是js目录)创建index.js文件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"><span class="keyword">var</span> os = <span class="built_in">require</span>(<span class="string">'os'</span>);</span><br><span class="line"><span class="keyword">var</span> nodeStatic = <span class="built_in">require</span>(<span class="string">'node-static'</span>);</span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">var</span> socketIO = <span class="built_in">require</span>(<span class="string">'socket.io'</span>);</span><br><span class="line"><span class="keyword">var</span> fileServer = <span class="keyword">new</span>(nodeStatic.Server)();</span><br><span class="line"><span class="keyword">var</span> app = http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  fileServer.serve(req, res);</span><br><span class="line">&#125;).listen(<span class="number">8080</span>);</span><br><span class="line"><span class="keyword">var</span> io = socketIO.listen(app);</span><br><span class="line">io.sockets.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">socket</span>) </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// convenience function to log server messages on the client</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> array = [<span class="string">'Message from server:'</span>];</span><br><span class="line">    array.push.apply(array, <span class="built_in">arguments</span>);</span><br><span class="line">    socket.emit(<span class="string">'log'</span>, array);</span><br><span class="line">  &#125;</span><br><span class="line">  socket.on(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">message</span>) </span>&#123;</span><br><span class="line">    log(<span class="string">'Client said: '</span>, message);</span><br><span class="line">    <span class="comment">// for a real app, would be room-only (not broadcast)</span></span><br><span class="line">    socket.broadcast.emit(<span class="string">'message'</span>, message);</span><br><span class="line">  &#125;);</span><br><span class="line">  socket.on(<span class="string">'create or join'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">room</span>) </span>&#123;</span><br><span class="line">    log(<span class="string">'Received request to create or join room '</span> + room);</span><br><span class="line">    <span class="keyword">var</span> clientsInRoom = io.sockets.adapter.rooms[room];</span><br><span class="line">    <span class="keyword">var</span> numClients = clientsInRoom ? <span class="built_in">Object</span>.keys(clientsInRoom.sockets).length : <span class="number">0</span>;</span><br><span class="line">    log(<span class="string">'Room '</span> + room + <span class="string">' now has '</span> + numClients + <span class="string">' client(s)'</span>);</span><br><span class="line">    <span class="keyword">if</span> (numClients === <span class="number">0</span>) &#123;</span><br><span class="line">      socket.join(room);</span><br><span class="line">      log(<span class="string">'Client ID '</span> + socket.id + <span class="string">' created room '</span> + room);</span><br><span class="line">      socket.emit(<span class="string">'created'</span>, room, socket.id);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (numClients === <span class="number">1</span>) &#123;</span><br><span class="line">      log(<span class="string">'Client ID '</span> + socket.id + <span class="string">' joined room '</span> + room);</span><br><span class="line">      io.sockets.in(room).emit(<span class="string">'join'</span>, room);</span><br><span class="line">      socket.join(room);</span><br><span class="line">      socket.emit(<span class="string">'joined'</span>, room, socket.id);</span><br><span class="line">      io.sockets.in(room).emit(<span class="string">'ready'</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// max two clients</span></span><br><span class="line">      socket.emit(<span class="string">'full'</span>, room);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  socket.on(<span class="string">'ipaddr'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> ifaces = os.networkInterfaces();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> dev <span class="keyword">in</span> ifaces) &#123;</span><br><span class="line">      ifaces[dev].forEach(<span class="function"><span class="keyword">function</span>(<span class="params">details</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (details.family === <span class="string">'IPv4'</span> &amp;&amp; details.address !== <span class="string">'127.0.0.1'</span>) &#123;</span><br><span class="line">          socket.emit(<span class="string">'ipaddr'</span>, details.address);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>运行node index.js,并在浏览器打开localhost8080</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>1 可以选择其他的消息机制？<br>2 处理大量同时的房间加入请求时应该怎么做？<br>3 尝试直接通过URL获取房间名字</p>
+<h1 id="结合peer连接和signaling"><a href="#结合peer连接和signaling" class="headerlink" title="结合peer连接和signaling"></a>结合peer连接和signaling</h1><h2 id="目标-1"><a href="#目标-1" class="headerlink" title="目标"></a>目标</h2><p>1 使用在nodejs上运行的socketio搞定一个webrtc signaling服务<br>2 使用上述服务在peer之间交换webrtc元数据</p>
+<h2 id="HTML-amp-JS-1"><a href="#HTML-amp-JS-1" class="headerlink" title="HTML&amp;JS"></a>HTML&amp;JS</h2><p>HTML：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"videos"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">"localVideo"</span> <span class="attr">autoplay</span> <span class="attr">muted</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">"remoteVideo"</span> <span class="attr">autoplay</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/socket.io/socket.io.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://webrtc.github.io/adapter/adapter-latest.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/main.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="运行nodejs服务器"><a href="#运行nodejs服务器" class="headerlink" title="运行nodejs服务器"></a>运行nodejs服务器</h2><p>node index.js</p>
+<h2 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a>思考</h2><p>多人聊天、灵活输入房间名、分享房间名字、</p>
+<h1 id="拍照并发送"><a href="#拍照并发送" class="headerlink" title="拍照并发送"></a>拍照并发送</h1><h2 id="目标-2"><a href="#目标-2" class="headerlink" title="目标"></a>目标</h2><p>1 使用canvas元素拍照以及显示<br>2 在远程用户之间交换数据</p>
+<h2 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h2><p>实现怎么共享整个数据文件：通过getUserMedia拍照，主要有两步：<br>1 建立一个数据通道。注意这步里你没有向peer connection增减任何媒体流<br>2 用getUserMedia捕获摄像头的视频流<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> video = <span class="built_in">document</span>.getElementById(<span class="string">'video'</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">grabWebCamVideo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Getting user media (video) ...'</span>);</span><br><span class="line">  navigator.mediaDevices.getUserMedia(&#123;</span><br><span class="line">    video: <span class="literal">true</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .then(gotStream)</span><br><span class="line">  .catch(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">'getUserMedia() error: '</span> + e.name);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3 用户点击 Snap 按钮，从视频流里得到一帧画面并且在 canvas 元素中显示：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> photo = <span class="built_in">document</span>.getElementById(<span class="string">'photo'</span>);</span><br><span class="line"><span class="keyword">var</span> photoContext = photo.getContext(<span class="string">'2d'</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">snapPhoto</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  photoContext.drawImage(video, <span class="number">0</span>, <span class="number">0</span>, photo.width, photo.height);</span><br><span class="line">  show(photo, sendBtn);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>4 用户点击 Send 按钮，将图像转换成字节流通过数据通道发送：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sendPhoto</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Split data channel message in chunks of this byte length.</span></span><br><span class="line">  <span class="keyword">var</span> CHUNK_LEN = <span class="number">64000</span>;</span><br><span class="line">  <span class="keyword">var</span> img = photoContext.getImageData(<span class="number">0</span>, <span class="number">0</span>, photoContextW, photoContextH),</span><br><span class="line">    len = img.data.byteLength,</span><br><span class="line">    n = len / CHUNK_LEN | <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Sending a total of '</span> + len + <span class="string">' byte(s)'</span>);</span><br><span class="line">  dataChannel.send(len);</span><br><span class="line">  <span class="comment">// split the photo and send in chunks of about 64KB</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> start = i * CHUNK_LEN,</span><br><span class="line">      end = (i + <span class="number">1</span>) * CHUNK_LEN;</span><br><span class="line">    <span class="built_in">console</span>.log(start + <span class="string">' - '</span> + (end - <span class="number">1</span>));</span><br><span class="line">    dataChannel.send(img.data.subarray(start, end));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// send the reminder, if any</span></span><br><span class="line">  <span class="keyword">if</span> (len % CHUNK_LEN) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'last '</span> + len % CHUNK_LEN + <span class="string">' byte(s)'</span>);</span><br><span class="line">    dataChannel.send(img.data.subarray(n * CHUNK_LEN));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>5 接收端将字节流转换成图像并且给用户显示：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">receiveDataChromeFactory</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> buf, count;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">onmessage</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> event.data === <span class="string">'string'</span>) &#123;</span><br><span class="line">      buf = <span class="built_in">window</span>.buf = <span class="keyword">new</span> <span class="built_in">Uint8ClampedArray</span>(<span class="built_in">parseInt</span>(event.data));</span><br><span class="line">      count = <span class="number">0</span>;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'Expecting a total of '</span> + buf.byteLength + <span class="string">' bytes'</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> data = <span class="keyword">new</span> <span class="built_in">Uint8ClampedArray</span>(event.data);</span><br><span class="line">    buf.set(data, count);</span><br><span class="line">    count += data.byteLength;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'count: '</span> + count);</span><br><span class="line">    <span class="keyword">if</span> (count === buf.byteLength) &#123;</span><br><span class="line">      <span class="comment">// we're done: all data chunks have been received</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'Done. Rendering photo.'</span>);</span><br><span class="line">      renderPhoto(buf);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderPhoto</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>);</span><br><span class="line">  canvas.width = photoContextW;</span><br><span class="line">  canvas.height = photoContextH;</span><br><span class="line">  canvas.classList.add(<span class="string">'incomingPhoto'</span>);</span><br><span class="line">  <span class="comment">// trail is the element holding the incoming images</span></span><br><span class="line">  trail.insertBefore(canvas, trail.firstChild);</span><br><span class="line">  <span class="keyword">var</span> context = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">  <span class="keyword">var</span> img = context.createImageData(photoContextW, photoContextH);</span><br><span class="line">  img.data.set(data);</span><br><span class="line">  context.putImageData(img, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>正确的结果应该如图[006]<br><img src="http://i2.bvimg.com/673749/9779a1dfb50383f9.png" alt="Markdown"></p>
+<h2 id="思考-2"><a href="#思考-2" class="headerlink" title="思考"></a>思考</h2><p>传输任意格式的文件？</p>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p>上手的主要API使用基本都结束了，基本内容都是翻译官方文档过来的。可以基本了解流程和API使用。推荐可以直接去看[apprtc][<a href="https://github.com/webrtc/apprtc]" target="_blank" rel="noopener">https://github.com/webrtc/apprtc]</a> 的源码了。<br>1 webrtc wiki <a href="https://en.wikipedia.org/wiki/WebRTC" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/WebRTC</a><br>2 官网 <a href="https://webrtc.org/" target="_blank" rel="noopener">https://webrtc.org/</a><br>3 html5webrtc学习教程 <a href="https://www.html5rocks.com/en/tutorials/webrtc/basics/" target="_blank" rel="noopener">https://www.html5rocks.com/en/tutorials/webrtc/basics/</a><br>4 webrtc [Getting Started][<a href="https://webrtc.org/start/]" target="_blank" rel="noopener">https://webrtc.org/start/]</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/WebRTC/" rel="tag"># WebRTC</a>
+          
+            <a href="/tags/Hololens/" rel="tag"># Hololens</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/02/UnityAssetBundleMaster/" rel="next" title="UnityAssetBundle详解">
+                <i class="fa fa-chevron-left"></i> UnityAssetBundle详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/05/OpenGL-HelloWorld/" rel="prev" title="OpenGL-HelloWorld-Windows">
+                OpenGL-HelloWorld-Windows <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="KinGil">
+          <p class="site-author-name" itemprop="name">KinGil</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kingiluob" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/2283641104/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100007092155441" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Facebook
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景知识"><span class="nav-number">1.1.</span> <span class="nav-text">背景知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持平台"><span class="nav-number">1.2.</span> <span class="nav-text">支持平台</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript支持"><span class="nav-number">1.3.</span> <span class="nav-text">javascript支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几个概念"><span class="nav-number">1.4.</span> <span class="nav-text">几个概念</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环境安装"><span class="nav-number">2.</span> <span class="nav-text">环境安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#获取视频流"><span class="nav-number">3.</span> <span class="nav-text">获取视频流</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过RTCPeerConnection传输视频流"><span class="nav-number">4.</span> <span class="nav-text">通过RTCPeerConnection传输视频流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先"><span class="nav-number">4.1.</span> <span class="nav-text">首先</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其次"><span class="nav-number">4.2.</span> <span class="nav-text">其次</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用RTCDataChannel交换数据"><span class="nav-number">5.</span> <span class="nav-text">使用RTCDataChannel交换数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建立信道传输消息"><span class="nav-number">6.</span> <span class="nav-text">建立信道传输消息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目标"><span class="nav-number">6.1.</span> <span class="nav-text">目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内容"><span class="nav-number">6.2.</span> <span class="nav-text">内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备-安装nodejs"><span class="nav-number">6.3.</span> <span class="nav-text">准备 安装nodejs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">6.4.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs应用有两个任务"><span class="nav-number">6.4.1.</span> <span class="nav-text">nodejs应用有两个任务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML-amp-JS"><span class="nav-number">6.5.</span> <span class="nav-text">HTML&amp;JS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置运行在Nodejs上的socketio"><span class="nav-number">6.6.</span> <span class="nav-text">设置运行在Nodejs上的socketio</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思考"><span class="nav-number">6.7.</span> <span class="nav-text">思考</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结合peer连接和signaling"><span class="nav-number">7.</span> <span class="nav-text">结合peer连接和signaling</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目标-1"><span class="nav-number">7.1.</span> <span class="nav-text">目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML-amp-JS-1"><span class="nav-number">7.2.</span> <span class="nav-text">HTML&amp;JS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行nodejs服务器"><span class="nav-number">7.3.</span> <span class="nav-text">运行nodejs服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思考-1"><span class="nav-number">7.4.</span> <span class="nav-text">思考</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拍照并发送"><span class="nav-number">8.</span> <span class="nav-text">拍照并发送</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目标-2"><span class="nav-number">8.1.</span> <span class="nav-text">目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解释"><span class="nav-number">8.2.</span> <span class="nav-text">解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思考-2"><span class="nav-number">8.3.</span> <span class="nav-text">思考</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">9.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KinGil</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+
+
+<script type="text/javascript" color="253,253,253" opacity="0.5" zindex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="OpenGL,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="这篇主要讲的是OpenGL的一些基础知识。">
+<meta name="keywords" content="OpenGL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenGL-Learning-1">
+<meta property="og:url" content="http://kangzhi.github.io/2019/01/23/OpenGL-Learning-1/index.html">
+<meta property="og:site_name" content="KinGil&#39;s Blog">
+<meta property="og:description" content="这篇主要讲的是OpenGL的一些基础知识。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T02:52:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenGL-Learning-1">
+<meta name="twitter:description" content="这篇主要讲的是OpenGL的一些基础知识。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kangzhi.github.io/2019/01/23/OpenGL-Learning-1/">
+
+
+
+
+
+  <title>OpenGL-Learning-1 | KinGil's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KinGil's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">April is coming</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kangzhi.github.io/2019/01/23/OpenGL-Learning-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KinGil">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KinGil's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OpenGL-Learning-1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T21:10:33+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenGL/" itemprop="url" rel="index">
+                    <span itemprop="name">OpenGL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这篇主要讲的是OpenGL的一些基础知识。</p>
+<a id="more"></a>
+<h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><h2 id="Camera"><a href="#Camera" class="headerlink" title="Camera"></a>Camera</h2><h3 id="movement-speed"><a href="#movement-speed" class="headerlink" title="movement speed"></a>movement speed</h3><p>这里还是先说一下渲染实际上做的就是一张张图片，但是根据计算机或者显卡的计算能力，每渲染两张图片的时间间隔在不同的硬件上是不以一样的，所以如果做一些交互处理的时候，比如在unity里每帧做移动交互或者OpenGL里面渲染循环里做按键、鼠标检测。<br>所以解决方案就是利用用每帧的deltatime来计算交互速度：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Camera <span class="title">camera</span><span class="params">(glm::vec3(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">3.0f</span>))</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">float</span> currentFrame = glfwGetTime();</span><br><span class="line">deltaTime = currentFrame - lastFrame;</span><br><span class="line">lastFrame = currentFrame;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processInput</span><span class="params">(GLFWwindow *window)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">float</span> cameraSpeed = <span class="number">2.5f</span> * deltaTime;</span><br><span class="line">  <span class="keyword">if</span> (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)</span><br><span class="line">        cameraPos += cameraSpeed * cameraFront;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="怎么交互"><a href="#怎么交互" class="headerlink" title="怎么交互"></a>怎么交互</h3><p>glfw系统里传入回调函数就好<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processInput</span><span class="params">(GLFWwindow *window)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)</span><br><span class="line">        glfwSetWindowShouldClose(window, <span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">if</span> (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)</span><br><span class="line">        camera.ProcessKeyboard(FORWARD, deltaTime);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// glfw: whenever the window size changed (by OS or user resize) this callback function executes</span></span><br><span class="line"><span class="comment">// ---------------------------------------------------------------------------------------------</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">framebuffer_size_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// make sure the viewport matches the new window dimensions; note that width and </span></span><br><span class="line">    <span class="comment">// height will be significantly larger than specified on retina displays.</span></span><br><span class="line">    glViewport(<span class="number">0</span>, <span class="number">0</span>, width, height);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// glfw: whenever the mouse moves, this callback is called</span></span><br><span class="line"><span class="comment">// -------------------------------------------------------</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mouse_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">double</span> xpos, <span class="keyword">double</span> ypos)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (firstMouse)</span><br><span class="line">    &#123;lastX = xpos;</span><br><span class="line">        lastY = ypos;</span><br><span class="line">        firstMouse = <span class="literal">false</span>;&#125;</span><br><span class="line">    <span class="keyword">float</span> xoffset = xpos - lastX;</span><br><span class="line">    <span class="keyword">float</span> yoffset = lastY - ypos; <span class="comment">// reversed since y-coordinates go from bottom to top</span></span><br><span class="line">    lastX = xpos;</span><br><span class="line">    lastY = ypos;</span><br><span class="line">    camera.ProcessMouseMovement(xoffset, yoffset);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// glfw: whenever the mouse scroll wheel scrolls, this callback is called</span></span><br><span class="line"><span class="comment">// --------------------------------------------------------------------</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">scroll_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">double</span> xoffset, <span class="keyword">double</span> yoffset)</span></span></span><br><span class="line"><span class="function"></span>&#123;camera.ProcessMouseScroll(yoffset);&#125;</span><br></pre></td></tr></table></figure></p>
+<p>相机类的实现：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> CAMERA_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CAMERA_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glad/glad.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glm/glm.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glm/gtc/matrix_transform.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="comment">// Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods</span></span><br><span class="line"><span class="keyword">enum</span> Camera_Movement &#123;</span><br><span class="line">    FORWARD,</span><br><span class="line">    BACKWARD,</span><br><span class="line">    LEFT,</span><br><span class="line">    RIGHT</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// Default camera values</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> YAW         = <span class="number">-90.0f</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> PITCH       =  <span class="number">0.0f</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> SPEED       =  <span class="number">2.5f</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> SENSITIVITY =  <span class="number">0.1f</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> ZOOM        =  <span class="number">45.0f</span>;</span><br><span class="line"><span class="comment">// An abstract camera class that processes input and calculates the corresponding Euler Angles, Vectors and Matrices for use in OpenGL</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Camera</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// Camera Attributes</span></span><br><span class="line">    glm::vec3 Position;</span><br><span class="line">    glm::vec3 Front;</span><br><span class="line">    glm::vec3 Up;</span><br><span class="line">    glm::vec3 Right;</span><br><span class="line">    glm::vec3 WorldUp;</span><br><span class="line">    <span class="comment">// Euler Angles</span></span><br><span class="line">    <span class="keyword">float</span> Yaw;</span><br><span class="line">    <span class="keyword">float</span> Pitch;</span><br><span class="line">    <span class="comment">// Camera options</span></span><br><span class="line">    <span class="keyword">float</span> MovementSpeed;</span><br><span class="line">    <span class="keyword">float</span> MouseSensitivity;</span><br><span class="line">    <span class="keyword">float</span> Zoom;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Constructor with vectors</span></span><br><span class="line">    Camera(glm::vec3 position = glm::vec3(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>), glm::vec3 up = glm::vec3(<span class="number">0.0f</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span>), <span class="keyword">float</span> yaw = YAW, <span class="keyword">float</span> pitch = PITCH) : Front(glm::vec3(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">-1.0f</span>)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)</span><br><span class="line">    &#123;</span><br><span class="line">        Position = position;</span><br><span class="line">        WorldUp = up;</span><br><span class="line">        Yaw = yaw;</span><br><span class="line">        Pitch = pitch;</span><br><span class="line">        updateCameraVectors();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Constructor with scalar values</span></span><br><span class="line">    Camera(<span class="keyword">float</span> posX, <span class="keyword">float</span> posY, <span class="keyword">float</span> posZ, <span class="keyword">float</span> upX, <span class="keyword">float</span> upY, <span class="keyword">float</span> upZ, <span class="keyword">float</span> yaw, <span class="keyword">float</span> pitch) : Front(glm::vec3(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">-1.0f</span>)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)</span><br><span class="line">    &#123;</span><br><span class="line">        Position = glm::vec3(posX, posY, posZ);</span><br><span class="line">        WorldUp = glm::vec3(upX, upY, upZ);</span><br><span class="line">        Yaw = yaw;</span><br><span class="line">        Pitch = pitch;</span><br><span class="line">        updateCameraVectors();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Returns the view matrix calculated using Euler Angles and the LookAt Matrix</span></span><br><span class="line">    <span class="function">glm::mat4 <span class="title">GetViewMatrix</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;<span class="keyword">return</span> glm::lookAt(Position, Position + Front, Up);&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">ProcessKeyboard</span><span class="params">(Camera_Movement direction, <span class="keyword">float</span> deltaTime)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">float</span> velocity = MovementSpeed * deltaTime;</span><br><span class="line">        <span class="keyword">if</span> (direction == FORWARD)</span><br><span class="line">            Position += Front * velocity;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Processes input received from a mouse input system. Expects the offset value in both the x and y direction.</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">ProcessMouseMovement</span><span class="params">(<span class="keyword">float</span> xoffset, <span class="keyword">float</span> yoffset, GLboolean constrainPitch = <span class="literal">true</span>)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        xoffset *= MouseSensitivity;</span><br><span class="line">        yoffset *= MouseSensitivity;</span><br><span class="line">        Yaw   += xoffset;</span><br><span class="line">        Pitch += yoffset;</span><br><span class="line">        <span class="comment">// Make sure that when pitch is out of bounds, screen doesn't get flipped</span></span><br><span class="line">        <span class="keyword">if</span> (constrainPitch)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (Pitch &gt; <span class="number">89.0f</span>)</span><br><span class="line">                Pitch = <span class="number">89.0f</span>;</span><br><span class="line">            <span class="keyword">if</span> (Pitch &lt; <span class="number">-89.0f</span>)</span><br><span class="line">                Pitch = <span class="number">-89.0f</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Update Front, Right and Up Vectors using the updated Euler angles</span></span><br><span class="line">        updateCameraVectors();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Processes input received from a mouse scroll-wheel event. Only requires input on the vertical wheel-axis</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">ProcessMouseScroll</span><span class="params">(<span class="keyword">float</span> yoffset)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (Zoom &gt;= <span class="number">1.0f</span> &amp;&amp; Zoom &lt;= <span class="number">45.0f</span>)</span><br><span class="line">            Zoom -= yoffset;</span><br><span class="line">        <span class="keyword">if</span> (Zoom &lt;= <span class="number">1.0f</span>)</span><br><span class="line">            Zoom = <span class="number">1.0f</span>;</span><br><span class="line">        <span class="keyword">if</span> (Zoom &gt;= <span class="number">45.0f</span>)</span><br><span class="line">            Zoom = <span class="number">45.0f</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// Calculates the front vector from the Camera's (updated) Euler Angles</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">updateCameraVectors</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// Calculate the new Front vector</span></span><br><span class="line">        glm::vec3 front;</span><br><span class="line">        front.x = <span class="built_in">cos</span>(glm::radians(Yaw)) * <span class="built_in">cos</span>(glm::radians(Pitch));</span><br><span class="line">        front.y = <span class="built_in">sin</span>(glm::radians(Pitch));</span><br><span class="line">        front.z = <span class="built_in">sin</span>(glm::radians(Yaw)) * <span class="built_in">cos</span>(glm::radians(Pitch));</span><br><span class="line">        Front = glm::normalize(front);</span><br><span class="line">        <span class="comment">// Also re-calculate the Right and Up vector</span></span><br><span class="line">        Right = glm::normalize(glm::cross(Front, WorldUp));  <span class="comment">// Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.</span></span><br><span class="line">        Up    = glm::normalize(glm::cross(Right, Front));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure></p>
+<h1 id="lighting"><a href="#lighting" class="headerlink" title="lighting"></a>lighting</h1><h2 id="colors"><a href="#colors" class="headerlink" title="colors"></a>colors</h2><p>一个物体颜色，实际上定义了可以反射的颜色<br>要给光线颜色，定义了环境光。<br>最终物体的颜色，简单来说<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">glm::vec3 <span class="title">lightColor</span><span class="params">(<span class="number">0.33f</span>, <span class="number">0.42f</span>, <span class="number">0.18f</span>)</span></span>;</span><br><span class="line"><span class="function">glm::vec3 <span class="title">toyColor</span><span class="params">(<span class="number">1.0f</span>, <span class="number">0.5f</span>, <span class="number">0.31f</span>)</span></span>;</span><br><span class="line">glm::vec3 result = lightColor * toyColor; <span class="comment">// = (0.33f, 0.21f, 0.06f);</span></span><br></pre></td></tr></table></figure></p>
+<p>这个计算的shader 实际上就是环境光的颜色 。<br>一个例子：<br>两组shader，一个表示用来画光lightingshader，一个用来用来画物体lampshader；<br>两个VAO，一个跟灯相关，一个跟物体相关；<br>一个VBO，实际上只存储的是一个cube的顶点数据；<br>图004 VAOVBO流程</p>
+<p>这里再复习一下VBO VAO EBO的使用。。。<br>unsigned int VBO, VAO, EBO;<br>glGenVertexArrays(1, &amp;VAO);//生成VAO对象<br>glGenBuffers(1, &amp;VBO);//生成buffer对象<br>glGenBuffers(1, &amp;EBO);</p>
+<p>glBindVertexArray(VAO);<br>//绑定一个VAO对象，任何后续的VBOEBO glVertexAttriPointer 或者 glEnableVertexAttribArray调用都存在当前绑定的VAO对象中。</p>
+<p>glBindBuffer(GL_ARRAY_BUFFER, VBO);<br>//把VBO绑定给OpenGL GL_ARRAY_BUFFER对象<br>glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);<br>//把数据喂给VBO，也就是给GL_ARRAY_BUFFER</p>
+<p>glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 <em> sizeof(float), (void</em>)0);<br>glEnableVertexAttribArray(0);<br>//告诉OpenGL怎么解释当前绑定的VBO的数据区域</p>
+<h2 id="basic-lighting"><a href="#basic-lighting" class="headerlink" title="basic lighting"></a>basic lighting</h2><p>Phong Lighting = combine(ambient, diffuse, specular)</p>
+<h3 id="ambient-light"><a href="#ambient-light" class="headerlink" title="ambient light"></a>ambient light</h3><p>fragment shader:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> ambientStrength = <span class="number">0.1</span>;</span><br><span class="line">    vec3 ambient = ambientStrength * lightColor;</span><br><span class="line"></span><br><span class="line">    vec3 result = ambient * objectColor;</span><br><span class="line">    FragColor = vec4(result, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="diffuse-color"><a href="#diffuse-color" class="headerlink" title="diffuse color"></a>diffuse color</h3><h3 id="specular-color"><a href="#specular-color" class="headerlink" title="specular color"></a>specular color</h3><p>都不细细展开<br>计算比较简单，弄清楚传入的参数和计算方法就好<br>最后的shader：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#version 330 core</span></span><br><span class="line">out vec4 FragColor;</span><br><span class="line"></span><br><span class="line">in vec3 Normal;  </span><br><span class="line">in vec3 FragPos;  </span><br><span class="line">  </span><br><span class="line">uniform vec3 lightPos; </span><br><span class="line">uniform vec3 viewPos; </span><br><span class="line">uniform vec3 lightColor;</span><br><span class="line">uniform vec3 objectColor;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// ambient</span></span><br><span class="line">    <span class="keyword">float</span> ambientStrength = <span class="number">0.1</span>;</span><br><span class="line">    vec3 ambient = ambientStrength * lightColor;</span><br><span class="line">    <span class="comment">// diffuse </span></span><br><span class="line">    vec3 norm = normalize(Normal);</span><br><span class="line">    vec3 lightDir = normalize(lightPos - FragPos);</span><br><span class="line">    <span class="keyword">float</span> diff = max(dot(norm, lightDir), <span class="number">0.0</span>);</span><br><span class="line">    vec3 diffuse = diff * lightColor;</span><br><span class="line">    <span class="comment">// specular</span></span><br><span class="line">    <span class="keyword">float</span> specularStrength = <span class="number">0.5</span>;</span><br><span class="line">    vec3 viewDir = normalize(viewPos - FragPos);</span><br><span class="line">    vec3 reflectDir = reflect(-lightDir, norm);  </span><br><span class="line">    <span class="keyword">float</span> spec = <span class="built_in">pow</span>(max(dot(viewDir, reflectDir), <span class="number">0.0</span>), <span class="number">32</span>);</span><br><span class="line">    vec3 specular = specularStrength * spec * lightColor;  </span><br><span class="line">        </span><br><span class="line">    vec3 result = (ambient + diffuse + specular) * objectColor;</span><br><span class="line">    FragColor = vec4(result, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="materials"><a href="#materials" class="headerlink" title="materials"></a>materials</h2><p>基本还是在上一节三个光效果的shader基础上进行的渲染，不过，这里我们考虑的是，尽管对同一个光源，材质不同也决定了物体看起来不同，我们用每个物体的不同属性来定义材质；<br>这样会出现什么问题呢，每个因子都以1的密度反应到物体表面。所以我们再次改进，加入光的属性；<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#version 330 core</span></span><br><span class="line">out vec4 FragColor;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Material</span> &#123;</span></span><br><span class="line">    vec3 ambient;</span><br><span class="line">    vec3 diffuse;</span><br><span class="line">    vec3 specular;    </span><br><span class="line">    <span class="keyword">float</span> shininess;</span><br><span class="line">&#125;; </span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Light</span> &#123;</span></span><br><span class="line">    vec3 position;</span><br><span class="line">    vec3 ambient;</span><br><span class="line">    vec3 diffuse;</span><br><span class="line">    vec3 specular;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">in vec3 FragPos;  </span><br><span class="line">in vec3 Normal;  </span><br><span class="line">  </span><br><span class="line">uniform vec3 viewPos;</span><br><span class="line">uniform Material material;</span><br><span class="line">uniform Light light;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// ambient</span></span><br><span class="line">    vec3 ambient = light.ambient * material.ambient;</span><br><span class="line">  	</span><br><span class="line">    <span class="comment">// diffuse </span></span><br><span class="line">    vec3 norm = normalize(Normal);</span><br><span class="line">    vec3 lightDir = normalize(light.position - FragPos);</span><br><span class="line">    <span class="keyword">float</span> diff = max(dot(norm, lightDir), <span class="number">0.0</span>);</span><br><span class="line">    vec3 diffuse = light.diffuse * (diff * material.diffuse);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// specular</span></span><br><span class="line">    vec3 viewDir = normalize(viewPos - FragPos);</span><br><span class="line">    vec3 reflectDir = reflect(-lightDir, norm);  </span><br><span class="line">    <span class="keyword">float</span> spec = <span class="built_in">pow</span>(max(dot(viewDir, reflectDir), <span class="number">0.0</span>), material.shininess);</span><br><span class="line">    vec3 specular = light.specular * (spec * material.specular);  </span><br><span class="line">        </span><br><span class="line">    vec3 result = ambient + diffuse + specular;</span><br><span class="line">    FragColor = vec4(result, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="lighting-maps"><a href="#lighting-maps" class="headerlink" title="lighting maps"></a>lighting maps</h2><p>Diffusemap 就是纹理颜色贴图<br>shader大体上类似，要做的就是把贴图的颜色texture确保传给shader，核心函数是什么呢，就是glUniform1i(glGetUniformLocation(ourShader.ID, “texture1”), 0)<br>或者用我们之前定义好的类ourShader.setInt(“texture2”, 1);<br>给出现在的shader：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#version 330 core</span></span><br><span class="line">out vec4 FragColor;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Material</span> &#123;</span>sampler2D diffuse;</span><br><span class="line">    vec3 specular;    </span><br><span class="line">    <span class="keyword">float</span> shininess;&#125;; </span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Light</span> &#123;</span>vec3 position;</span><br><span class="line">    vec3 ambient;</span><br><span class="line">    vec3 diffuse;</span><br><span class="line">    vec3 specular;&#125;;</span><br><span class="line">    </span><br><span class="line">in vec3 FragPos;  </span><br><span class="line">in vec3 Normal;  </span><br><span class="line">in vec2 TexCoords;</span><br><span class="line">uniform vec3 viewPos;</span><br><span class="line">uniform Material material;</span><br><span class="line">uniform Light light;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// ambient</span></span><br><span class="line">    vec3 ambient = light.ambient * texture(material.diffuse, TexCoords).rgb;</span><br><span class="line">    <span class="comment">// diffuse </span></span><br><span class="line">    vec3 norm = normalize(Normal);</span><br><span class="line">    vec3 lightDir = normalize(light.position - FragPos);</span><br><span class="line">    <span class="keyword">float</span> diff = max(dot(norm, lightDir), <span class="number">0.0</span>);</span><br><span class="line">    vec3 diffuse = light.diffuse * diff * texture(material.diffuse, TexCoords).rgb;  </span><br><span class="line">    <span class="comment">// specular</span></span><br><span class="line">    vec3 viewDir = normalize(viewPos - FragPos);</span><br><span class="line">    vec3 reflectDir = reflect(-lightDir, norm);  </span><br><span class="line">    <span class="keyword">float</span> spec = <span class="built_in">pow</span>(max(dot(viewDir, reflectDir), <span class="number">0.0</span>), material.shininess);</span><br><span class="line">    vec3 specular = light.specular * (spec * material.specular);  </span><br><span class="line">        </span><br><span class="line">    vec3 result = ambient + diffuse + specular;</span><br><span class="line">    FragColor = vec4(result, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如图：005</p>
+<p>同样，这样也有问题，diffusemap对了，但是高光还不对，不可能同一个物体木头和贴都是同样的反射强度，所以呢，此时我们就特么地再做一个specular贴图，根据这张图象的像素，区分出高光不同的地方。同样地传给shader：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> diffuseMap = loadTexture(FileSystem::getPath(<span class="string">"resources/textures/container2.png"</span>).c_str());</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> specularMap = loadTexture(FileSystem::getPath(<span class="string">"resources/textures/container2_specular.png"</span>).c_str());</span><br><span class="line">    <span class="comment">// shader configuration</span></span><br><span class="line">    <span class="comment">// --------------------</span></span><br><span class="line">    lightingShader.use();</span><br><span class="line">    lightingShader.setInt(<span class="string">"material.diffuse"</span>, <span class="number">0</span>);</span><br><span class="line">    lightingShader.setInt(<span class="string">"material.specular"</span>, <span class="number">1</span>);</span><br><span class="line"><span class="comment">/////////分割以上是cpp</span></span><br><span class="line"><span class="meta">#version 330 core</span></span><br><span class="line">out vec4 FragColor;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Material</span> &#123;</span></span><br><span class="line">    sampler2D diffuse;</span><br><span class="line">    sampler2D specular;    </span><br><span class="line">    <span class="keyword">float</span> shininess;&#125;; </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Light</span> &#123;</span>vec3 position;</span><br><span class="line">    vec3 ambient;</span><br><span class="line">    vec3 diffuse;</span><br><span class="line">    vec3 specular;&#125;;</span><br><span class="line">in vec3 FragPos;  </span><br><span class="line">in vec3 Normal;  </span><br><span class="line">in vec2 TexCoords; </span><br><span class="line">uniform vec3 viewPos;</span><br><span class="line">uniform Material material;</span><br><span class="line">uniform Light light;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// ambient</span></span><br><span class="line">    vec3 ambient = light.ambient * texture(material.diffuse, TexCoords).rgb;</span><br><span class="line">    <span class="comment">// diffuse </span></span><br><span class="line">    vec3 norm = normalize(Normal);</span><br><span class="line">    vec3 lightDir = normalize(light.position - FragPos);</span><br><span class="line">    <span class="keyword">float</span> diff = max(dot(norm, lightDir), <span class="number">0.0</span>);</span><br><span class="line">    vec3 diffuse = light.diffuse * diff * texture(material.diffuse, TexCoords).rgb;  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// specular</span></span><br><span class="line">    vec3 viewDir = normalize(viewPos - FragPos);</span><br><span class="line">    vec3 reflectDir = reflect(-lightDir, norm);  </span><br><span class="line">    <span class="keyword">float</span> spec = <span class="built_in">pow</span>(max(dot(viewDir, reflectDir), <span class="number">0.0</span>), material.shininess);</span><br><span class="line">    vec3 specular = light.specular * spec * texture(material.specular, TexCoords).rgb;  </span><br><span class="line">        </span><br><span class="line">    vec3 result = ambient + diffuse + specular;</span><br><span class="line">    FragColor = vec4(result, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Light-casters"><a href="#Light-casters" class="headerlink" title="Light casters"></a>Light casters</h2><p>几种光线，其实弄清楚怎么定义的，也就弄清楚了怎么根据数据去计算shader。</p>
+<ul>
+<li>direction light<br>一个方向 vec3 direction</li>
+<li><p>point light<br>一个位置 vec3 position<br>三个参数 constant linear quadratic 分别是表示随着距离衰减的参数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> distance    = length(light.position - FragPos);</span><br><span class="line"><span class="keyword">float</span> attenuation = <span class="number">1.0</span> / (light.constant + light.linear * distance+light.quadratic * (distance * distance));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>spotlight<br>三个参数 position direction range-angle：<br>For each fragment we calculate if the fragment is between the spotlight’s cutoff directions (thus in its cone) and if so, we lit the fragment accordingly. </p>
+</li>
+<li>flashlight<br>就是spotlight，不过一直随着观察者变化，</li>
+<li>边缘柔化<br>其实就是设置两个范围，一个全亮，一个全黑，两条线中间过度<h3 id="光线类实现方案"><a href="#光线类实现方案" class="headerlink" title="光线类实现方案"></a>光线类实现方案</h3>实现6个光源场景<br>shader，c编程，将原来功能比较复杂的代码做一个整理，编写成一些常用的函数。。其实再往远了讲可以写成库自己掉，进而发展成自己的小引擎也不是没有可能。嗯。想想就好，有必要实现也可以。<br>注意，fs里面需要的一些输入参数，跟顶点有关的数据，从vs里面拿：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这是vertex shader</span></span><br><span class="line"><span class="meta">#version 330 core</span></span><br><span class="line">layout (location = <span class="number">0</span>) in vec3 aPos;</span><br><span class="line">layout (location = <span class="number">1</span>) in vec3 aNormal;</span><br><span class="line">layout (location = <span class="number">2</span>) in vec2 aTexCoords;</span><br><span class="line"></span><br><span class="line">out vec3 FragPos;</span><br><span class="line">out vec3 Normal;</span><br><span class="line">out vec2 TexCoords;</span><br><span class="line"></span><br><span class="line">uniform mat4 model;</span><br><span class="line">uniform mat4 view;</span><br><span class="line">uniform mat4 projection;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    FragPos = vec3(model * vec4(aPos, <span class="number">1.0</span>));</span><br><span class="line">    Normal = mat3(transpose(inverse(model))) * aNormal;  </span><br><span class="line">    TexCoords = aTexCoords;</span><br><span class="line">    </span><br><span class="line">    gl_Position = projection * view * vec4(FragPos, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这是fragmentshader，注意看一下几种类型的数据<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#version 330 core</span></span><br><span class="line">out vec4 FragColor;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Material</span> &#123;</span></span><br><span class="line">    sampler2D diffuse;</span><br><span class="line">    sampler2D specular;</span><br><span class="line">    <span class="keyword">float</span> shininess;</span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">DirLight</span> &#123;</span></span><br><span class="line">    vec3 direction;</span><br><span class="line">	</span><br><span class="line">    vec3 ambient;</span><br><span class="line">    vec3 diffuse;</span><br><span class="line">    vec3 specular;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">in vec3 FragPos;</span><br><span class="line">in vec3 Normal;</span><br><span class="line">in vec2 TexCoords;</span><br><span class="line"></span><br><span class="line">uniform vec3 viewPos;</span><br><span class="line">uniform DirLight dirLight;</span><br><span class="line">uniform PointLight pointLights[NR_POINT_LIGHTS];</span><br><span class="line">uniform SpotLight spotLight;</span><br><span class="line">uniform Material material;</span><br><span class="line"></span><br><span class="line"><span class="comment">// function prototypes</span></span><br><span class="line"><span class="function">vec3 <span class="title">CalcDirLight</span><span class="params">(DirLight light, vec3 normal, vec3 viewDir)</span></span>;</span><br><span class="line"><span class="function">vec3 <span class="title">CalcPointLight</span><span class="params">(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)</span></span>;</span><br><span class="line"><span class="function">vec3 <span class="title">CalcSpotLight</span><span class="params">(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>截止目前为止，我们讨论的都收Phong Lighting模型，环境光、颜色以及高光。<br>计算光需要的东西，可以基本完整地看出来，确定好这些概念是什么，基本就没有什么大问题了。</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><h3 id="几个点"><a href="#几个点" class="headerlink" title="几个点"></a>几个点</h3><p>1 vertex shader<br>输入：<br>顶点，程序给；<br>法向量，程序给，或者用法向量贴图？(unity常用)；<br>纹理坐标，程序给；</p>
+<p>vertex输入是模型坐标系的顶点啊之类的<br>输出，gl_positon，就是最终给fragmentshader 的Fragpos输入</p>
+<p>2 fragment shader<br>输入：<br>顶点坐标／法向量／纹理坐标，vs自动传入<br>材质／光结构体，程序直接给；<br>uniforms，程序直接给，不能动态分配；</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/11/OpenGL-Transformation-and-Coordinate/" rel="next" title="OpenGL Transformation and Coordinate">
+                <i class="fa fa-chevron-left"></i> OpenGL Transformation and Coordinate
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/23/OpenGL-Learning-2/" rel="prev" title="OpenGL-Learning-2">
+                OpenGL-Learning-2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="KinGil">
+          <p class="site-author-name" itemprop="name">KinGil</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kingiluob" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/2283641104/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100007092155441" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Facebook
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Getting-Started"><span class="nav-number">1.</span> <span class="nav-text">Getting Started</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Camera"><span class="nav-number">1.1.</span> <span class="nav-text">Camera</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#movement-speed"><span class="nav-number">1.1.1.</span> <span class="nav-text">movement speed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么交互"><span class="nav-number">1.1.2.</span> <span class="nav-text">怎么交互</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lighting"><span class="nav-number">2.</span> <span class="nav-text">lighting</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#colors"><span class="nav-number">2.1.</span> <span class="nav-text">colors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#basic-lighting"><span class="nav-number">2.2.</span> <span class="nav-text">basic lighting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ambient-light"><span class="nav-number">2.2.1.</span> <span class="nav-text">ambient light</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diffuse-color"><span class="nav-number">2.2.2.</span> <span class="nav-text">diffuse color</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#specular-color"><span class="nav-number">2.2.3.</span> <span class="nav-text">specular color</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#materials"><span class="nav-number">2.3.</span> <span class="nav-text">materials</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lighting-maps"><span class="nav-number">2.4.</span> <span class="nav-text">lighting maps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Light-casters"><span class="nav-number">2.5.</span> <span class="nav-text">Light casters</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#光线类实现方案"><span class="nav-number">2.5.1.</span> <span class="nav-text">光线类实现方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.6.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">2.6.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几个点"><span class="nav-number">2.6.2.</span> <span class="nav-text">几个点</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KinGil</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
