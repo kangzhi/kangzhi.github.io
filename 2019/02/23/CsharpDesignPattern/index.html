@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+
+
+<script type="text/javascript" color="253,253,253" opacity="0.5" zindex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="CSharp,Design Pattern,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="前言">
+<meta name="keywords" content="CSharp,Design Pattern">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSharp-Design-Pattern">
+<meta property="og:url" content="http://kangzhi.github.io/2019/02/23/CsharpDesignPattern/index.html">
+<meta property="og:site_name" content="KinGil&#39;s Blog">
+<meta property="og:description" content="前言">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-01-14T07:59:38.552Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSharp-Design-Pattern">
+<meta name="twitter:description" content="前言">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kangzhi.github.io/2019/02/23/CsharpDesignPattern/">
+
+
+
+
+
+  <title>CSharp-Design-Pattern | KinGil's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KinGil's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">April is coming</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kangzhi.github.io/2019/02/23/CsharpDesignPattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KinGil">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KinGil's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CSharp-Design-Pattern</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-23T20:10:52+08:00">
+                2019-02-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSharp/" itemprop="url" rel="index">
+                    <span itemprop="name">CSharp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前言</p>
+<a id="more"></a>
+<h2 id="创建型"><a href="#创建型" class="headerlink" title="创建型"></a>创建型</h2><h2 id="结构性"><a href="#结构性" class="headerlink" title="结构性"></a>结构性</h2><h2 id="行为型"><a href="#行为型" class="headerlink" title="行为型"></a>行为型</h2><h3 id="Simple-Factory"><a href="#Simple-Factory" class="headerlink" title="Simple Factory"></a>Simple Factory</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">CsharpDesignPattern.SimpleFactory</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment"><span class="doctag">///</span>简单工厂</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 设计实现，一个工厂能生产A，也能生产B，根据传入的参数</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 1 是面向用户的类Factory</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 2 是该工厂生产所有产品的公共接口／方法 Product</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 3 则是具体的生产方法类ProductA，继承Product</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> </span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> https://blog.csdn.net/heyangyi_19940703/article/details/51181583</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">SimpleFactory</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Product <span class="title">createProduct</span>(<span class="params"><span class="keyword">string</span> productType</span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		<span class="keyword">if</span> (productType == <span class="string">"A"</span>) </span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> productA ();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (productType == <span class="string">"B"</span>) </span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> productB ();</span><br><span class="line">		&#125; <span class="keyword">else</span></span><br><span class="line">			<span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//这里用interface也可以</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">Product</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">UseProduct</span>(<span class="params"></span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">productA</span>:<span class="title">Product</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">productA</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		Debug.Log (<span class="string">"create product A."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">UseProduct</span> (<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		Debug.Log (<span class="string">"use product A."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">productB</span>:<span class="title">Product</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">productB</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		Debug.Log (<span class="string">"create product B."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">UseProduct</span> (<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		Debug.Log (<span class="string">"use product B."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"><span class="doctag">///</span>/--------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">//		Debug.Log ("Test Simple Factory:");</span></span><br><span class="line"><span class="comment">//		Product myproduct;</span></span><br><span class="line"><span class="comment">//		myproduct = SimpleFactory.createProduct ("A");</span></span><br><span class="line"><span class="comment">//		myproduct.UseProduct ();</span></span><br><span class="line"><span class="comment">//		myproduct = SimpleFactory.createProduct ("B");</span></span><br><span class="line"><span class="comment">//		myproduct.UseProduct ();</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Factory"><a href="#Factory" class="headerlink" title="Factory"></a>Factory</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CsharpDesignPattern.Factory</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> Factory </span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 解决：实现一个工厂，要求能在随时添加新的生产方法。比如Simple Factory中要加新方法就只能修改Factory中的if语句。</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 案例</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 1 抽象工厂Factory</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 2 具体工厂AB分别只负责A或者B的生产</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 3 抽象产品</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 4 具体产品生产</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> https://www.cnblogs.com/zhili/p/FactoryMethod.html</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> https://blog.csdn.net/heyangyi_19940703/article/details/51188966</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//产品</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">Product</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">UseProduct</span>(<span class="params"></span>)</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">productA</span>:<span class="title">Product</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">UseProduct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"use product A."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">productB</span>:<span class="title">Product</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">UseProduct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"use product B."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//工厂</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">Factory</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Product <span class="title">createProduct</span>(<span class="params"></span>)</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">FactoryA</span>:<span class="title">Factory</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> Product <span class="title">createProduct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> productA ();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">FactoryB</span>:<span class="title">Factory</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> Product <span class="title">createProduct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> productB ();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment"><span class="doctag">///</span>/--------------------------------------------------------------------</span></span><br><span class="line">	<span class="comment">//		Debug.Log ("Test Factory:");</span></span><br><span class="line">	<span class="comment">//		Factory createAFactory = new FactoryA ();</span></span><br><span class="line">	<span class="comment">//		Factory createBFactory = new FactoryB ();</span></span><br><span class="line">	<span class="comment">//		Product myproductA = createAFactory.createProduct ();</span></span><br><span class="line">	<span class="comment">//		myproductA.UseProduct ();</span></span><br><span class="line">	<span class="comment">//		Product myproductB = createBFactory.createProduct ();</span></span><br><span class="line">	<span class="comment">//		myproductB.UseProduct ();</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="AbstractFactory"><a href="#AbstractFactory" class="headerlink" title="AbstractFactory"></a>AbstractFactory</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CsharpDesignPattern.AbstractFactory</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> Abstract Factory</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 解决：每个工厂可以多元化地生产不同的产品，工厂A生产A1，A2，工厂B生产B1，B2</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 1 两个抽象的产品A B，具体的产品A1A2B1B2</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 2 抽象工厂，抽象的生产AB的方法</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 3 两个具体的工厂，均可以生产各自的AB</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">ProductTypeA</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">UseProductA</span> (<span class="params"></span>)</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">ProductTypeB</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">UseProductB</span> (<span class="params"></span>)</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ProductA_1</span>:<span class="title">ProductTypeA</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">UseProductA</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"Use product A1."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ProductB_1</span>:<span class="title">ProductTypeB</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">UseProductB</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"Use product B1."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ProductA_2</span>:<span class="title">ProductTypeA</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">UseProductA</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"Use product A2."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ProductB_2</span>:<span class="title">ProductTypeB</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">UseProductB</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"Use product B2."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">AbstractFactory</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> ProductTypeA <span class="title">createProductA</span>(<span class="params"></span>)</span>;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> ProductTypeB <span class="title">createProductB</span>(<span class="params"></span>)</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BeijingFactory</span>:<span class="title">AbstractFactory</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> ProductTypeA <span class="title">createProductA</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> ProductA_1 ();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> ProductTypeB <span class="title">createProductB</span> (<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> ProductB_1 ();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ShanghaiFactory</span>:<span class="title">AbstractFactory</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> ProductTypeA <span class="title">createProductA</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> ProductA_2 ();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> ProductTypeB <span class="title">createProductB</span> (<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> ProductB_2 ();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment"><span class="doctag">///</span>/--------------------------------------------------------------------</span></span><br><span class="line">	<span class="comment">//		Debug.Log ("Test Abstract Factory:");</span></span><br><span class="line">	<span class="comment">//		AbstractFactory beijingchang = new BeijingFactory ();</span></span><br><span class="line">	<span class="comment">//		AbstractFactory shanghaichang = new ShanghaiFactory ();</span></span><br><span class="line">	<span class="comment">//		ProductTypeA beijingA = beijingchang.createProductA ();</span></span><br><span class="line">	<span class="comment">//		beijingA.UseProductA ();</span></span><br><span class="line">	<span class="comment">//		ProductTypeB shanghaiB = shanghaichang.createProductB ();</span></span><br><span class="line">	<span class="comment">//		shanghaiB.UseProductB ();</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Singleton"><a href="#Singleton" class="headerlink" title="Singleton"></a>Singleton</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CsharpDesignPattern.Singleton</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 解决：单例，任务管理器等，文件操作等。</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 案例：所以有两点，1 只能有一个实例 2 提供一个全局访问节点</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 1 私有的构造函数－－外部不能通过new创建新的实例</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 2 私有静态变量－－对线程只能有一个实例</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 3 公开的静态访问方法</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Singleton</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton _theInstance;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Singleton</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">GetInstance</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		<span class="keyword">if</span> (_theInstance == <span class="literal">null</span>) </span><br><span class="line">		&#123;</span><br><span class="line">			_theInstance = <span class="keyword">new</span> Singleton ();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> _theInstance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">SingletonThread</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> SingletonThread _theInstance;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">object</span> locker = <span class="keyword">new</span> <span class="keyword">object</span>();<span class="comment">// new added</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">SingletonThread</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingletonThread <span class="title">GetInstance</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		<span class="comment">// 当第一个线程运行到这里时，此时会对locker对象 "加锁"，</span></span><br><span class="line">		<span class="comment">// 当第二个线程运行该方法时，首先检测到locker对象为"加锁"状态，该线程就会挂起等待第一个线程解锁</span></span><br><span class="line">		<span class="comment">// lock语句运行完之后（即线程运行完之后）会对该对象"解锁"</span></span><br><span class="line">		<span class="keyword">lock</span> (locker)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// 如果类的实例不存在则创建，否则直接返回</span></span><br><span class="line">			<span class="keyword">if</span> (_theInstance == <span class="literal">null</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				_theInstance = <span class="keyword">new</span> SingletonThread();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> _theInstance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Adapter"><a href="#Adapter" class="headerlink" title="Adapter"></a>Adapter</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CsharpDesignPattern.Adapter</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span> 类的适配器</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 解决：复用现有的一些类</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 案例：如二插头转三插头，我们已经有两个孔插头的电器了，目标是要适配三个孔的插座。我们构造一个转换头。</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 1 我们现有的类，有两个孔插头（适配者，Adaptee），方法SpecialRequest</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 2 客户希望调用三个孔（适配器，Adapter），方法Request，用接口实现</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 3 适配器类实现，三个孔的Interface，继承两个孔类。相当于是个外壳。</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ThreeHole</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">Request</span>(<span class="params"></span>)</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">TwoHole</span>  <span class="comment">//其实没必要是抽象的类吧？？？</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SpecialRequest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"This is two hole method."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Adaptor</span>:<span class="title">TwoHole</span>,<span class="title">ThreeHole</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Request</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			<span class="keyword">this</span>.SpecialRequest ();<span class="comment">//this or base???</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span>对象适配器</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 1 实现客户的Threehole需求</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 2 不能继承，但必须借用Twohole 的方法－－利用对象</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TwoHole_obj</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SpecialRequest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"This is two hole method...obj"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ThreeHole_obj</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Request</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Adaptor_obj</span>:<span class="title">ThreeHole_obj</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">public</span> TwoHole_obj mytwohole = <span class="keyword">new</span> TwoHole_obj();</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Request</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			mytwohole.SpecialRequest ();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment"><span class="doctag">///</span>/--------------------------------------------------------------------</span></span><br><span class="line">	<span class="comment">//		Debug.Log ("Test Adapter:");</span></span><br><span class="line">	<span class="comment">//		ThreeHole myhole = new Adaptor ();</span></span><br><span class="line">	<span class="comment">//		myhole.Request ();</span></span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">	<span class="comment">//		ThreeHole_obj mythreehole = new Adaptor_obj ();</span></span><br><span class="line">	<span class="comment">//		mythreehole.Request ();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CsharpDesignPattern.Proxy</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 代理模式主要用在：虚拟代理、远程代理、智能引用代理、保护代理等</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 解决：一个客户不想或者不能直接访问某个对象。如远程桌面。</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 案例：代购</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 1 抽象角色Person，代理者和被代理者的公共接口</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 2 真实角色Real 真实对象</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 3 代理角色Friend 含有对真实主题的引用，在需要的时候创建真实主题对象，从而操作真实主题对象；</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 代理角色通常在将客户端调用传递到真实主题之前或之后，都要执行一些其他的操作，而不是单纯地将调用传递给真实主题对象。</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">Person</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">BuySomething</span>(<span class="params"></span>)</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">RealBuyer</span>:<span class="title">Person</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">BuySomething</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"Someone real buy something..."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Friend</span>:<span class="title">Person</span></span><br><span class="line">	&#123;</span><br><span class="line">		RealBuyer TheBuyer;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">BuySomething</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			<span class="keyword">if</span> (TheBuyer == <span class="literal">null</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				TheBuyer = <span class="keyword">new</span> RealBuyer ();</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">this</span>.PreBuy ();</span><br><span class="line">			Debug.Log (<span class="string">"通过代理类访问真实实体对象的方法："</span>);</span><br><span class="line">			TheBuyer.BuySomething ();</span><br><span class="line">			<span class="keyword">this</span>.PostBuy ();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">PreBuy</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"Pre buying..."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">PostBuy</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"Post Buying..."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment"><span class="doctag">///</span>/--------------------------------------------------------------------</span></span><br><span class="line">	<span class="comment">//		Debug.Log ("Test Proxy:");</span></span><br><span class="line">	<span class="comment">//		Person myDaigou = new Friend ();</span></span><br><span class="line">	<span class="comment">//		myDaigou.BuySomething ();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Facade"><a href="#Facade" class="headerlink" title="Facade"></a>Facade</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CsharpDesignPattern.Facade</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> Design pattern.</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">	<span class="comment">//https://www.cnblogs.com/JiYF/p/6484208.html</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//外观模式：为子系统中一组接口提供一个一致的界面，即定义一个高层接口，增加子系统的易用性。</span></span><br><span class="line">	<span class="comment">//外观模式完美体现了依赖倒转原则和迪米特法则。</span></span><br><span class="line">	<span class="comment">//设计初期阶段，在MVC三层架构中，任意两层间建立外观Facade。</span></span><br><span class="line">	<span class="comment">//子系统会因不断演化变得复杂，增加外观Facade提供简单简单接口减少依赖。</span></span><br><span class="line">	<span class="comment">//在维护一个大的遗留系统时，新的开发又必须依赖其部分功能。此时，开发一个外观Facade类，从老系统中抽象出比较清晰的简单接口。让新系统只与Facade交互，而Facade与遗留代码交互所有的工作。</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//解决：系统和子系统：不同的power and off 命令</span></span><br><span class="line">	<span class="comment">//1 Facade负责子系统的封装调用</span></span><br><span class="line">	<span class="comment">//2 负责具体的子系统 subsystem</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Subsystem1</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">power1</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"power 1..."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">poweroff1</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"power off 1..."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Subsystem2</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">power2</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"power 2 ..."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">poweroff2</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"power off 2..."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Facade</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">private</span> Subsystem1 subsys1;</span><br><span class="line">		<span class="keyword">private</span> Subsystem2 subsys2;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Facade</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			subsys1 = <span class="keyword">new</span> Subsystem1 ();</span><br><span class="line">			subsys2 = <span class="keyword">new</span> Subsystem2 ();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">power</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			subsys1.power1 ();</span><br><span class="line">			subsys2.power2 ();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">poweroff</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			subsys1.poweroff1 ();</span><br><span class="line">			subsys2.poweroff2 ();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment"><span class="doctag">///</span>/--------------------------------------------------------------------</span></span><br><span class="line">	<span class="comment">//		Debug.Log ("Test Facade:");</span></span><br><span class="line">	<span class="comment">//		Facade myfacade = new Facade ();</span></span><br><span class="line">	<span class="comment">//		myfacade.power ();</span></span><br><span class="line">	<span class="comment">//		myfacade.poweroff ();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Mediator"><a href="#Mediator" class="headerlink" title="Mediator"></a>Mediator</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CsharpDesignPattern.Mediator</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 解决：各种中间平台，比如QQ、游戏平台</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 案例：聊天室</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 1 聊天室管理:注册成员Register，处理消息Operation</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 2 聊天的成员：设置中介SetRoom，发送消息Send，接收消息Receive</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">AbsMember</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">SetRoom</span>(<span class="params">ChatRoom room,<span class="keyword">string</span> name</span>)</span>;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">Send</span>(<span class="params">Member to,<span class="keyword">string</span> msg</span>)</span>;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">Receive</span>(<span class="params"><span class="keyword">string</span> msg</span>)</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">AbsChatRoom</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">Register</span>(<span class="params">Member a</span>)</span>;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">Operation</span>(<span class="params">Member a,<span class="keyword">string</span> b</span>)</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ChatRoom</span>:<span class="title">AbsChatRoom</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">private</span> List&lt;Member&gt; chatgroup; </span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">ChatRoom</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			chatgroup = <span class="keyword">new</span> List&lt;Member&gt;();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Register</span>(<span class="params">Member reg</span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			<span class="keyword">if</span>(!chatgroup.Contains(reg))</span><br><span class="line">			&#123;</span><br><span class="line">				chatgroup.Add (reg);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Operation</span>(<span class="params">Member toWho,<span class="keyword">string</span> message</span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			<span class="keyword">if</span> (!chatgroup.Contains (toWho)) &#123;</span><br><span class="line">				Debug.Log (<span class="string">"There is no people you want to send message to..."</span>);</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125; </span><br><span class="line">			<span class="keyword">else</span> </span><br><span class="line">			&#123;</span><br><span class="line">				toWho.Receive(message);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Member</span>:<span class="title">AbsMember</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">private</span> ChatRoom _Room;</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">string</span> _Name;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">SetRoom</span>(<span class="params">ChatRoom room,<span class="keyword">string</span> name</span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			<span class="keyword">this</span>._Room = room;</span><br><span class="line">			<span class="keyword">this</span>._Name = name;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Send</span>(<span class="params">Member to,<span class="keyword">string</span> sendmessage</span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			<span class="keyword">if</span> (_Room == <span class="literal">null</span>) &#123;</span><br><span class="line">				Debug.Log (<span class="string">"Register the room first"</span>);</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125; </span><br><span class="line">			<span class="keyword">else</span> </span><br><span class="line">			&#123;</span><br><span class="line">				_Room.Operation (to,sendmessage);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Receive</span>(<span class="params"><span class="keyword">string</span> recmessage</span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"Receive : "</span> + recmessage);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment"><span class="doctag">///</span>/--------------------------------------------------------------------</span></span><br><span class="line">	<span class="comment">//		Debug.Log ("Test Mediator:");</span></span><br><span class="line">	<span class="comment">//		ChatRoom TheRoom = new ChatRoom ();</span></span><br><span class="line">	<span class="comment">//		Member a = new Member ();</span></span><br><span class="line">	<span class="comment">//		Member b = new Member ();</span></span><br><span class="line">	<span class="comment">//		TheRoom.Register (a);</span></span><br><span class="line">	<span class="comment">//		TheRoom.Register (b);</span></span><br><span class="line">	<span class="comment">//		a.SetRoom (TheRoom,"A");</span></span><br><span class="line">	<span class="comment">//		b.SetRoom (TheRoom,"B");</span></span><br><span class="line">	<span class="comment">//		a.Send (b,"Hi I am A...");</span></span><br><span class="line">	<span class="comment">//		b.Send (a,"Hey I am B...");</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Observer"><a href="#Observer" class="headerlink" title="Observer"></a>Observer</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CsharpDesignPattern.Observer</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 解决：</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 1 解决一个对象状态发生改变，很多对象跟着更新。</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 2 观察者和被观察者，实际上衍生出来的是订阅者和订阅号，参考微信公众号；或者MVC架构，也是典型的观察者设计模式;</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 3 一般的使用delegate委托、事件来实现</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 案例：</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 1 订阅号 Subject（Tenxun）</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 2 订阅者 Subscriber</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 订阅号抽象类</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">TenXun</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 保存订阅者列表</span></span><br><span class="line">		<span class="keyword">private</span> List&lt;IObserver&gt; observers = <span class="keyword">new</span> List&lt;IObserver&gt;();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">string</span> Symbol &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">string</span> Info &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">TenXun</span>(<span class="params"><span class="keyword">string</span> symbol, <span class="keyword">string</span> info</span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			<span class="keyword">this</span>.Symbol = symbol;</span><br><span class="line">			<span class="keyword">this</span>.Info = info;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="meta">#<span class="meta-keyword">region</span> 新增对订阅号列表的维护操作</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">AddObserver</span>(<span class="params">IObserver ob</span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			observers.Add(ob);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">RemoveObserver</span>(<span class="params">IObserver ob</span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			observers.Remove(ob);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="meta">#<span class="meta-keyword">endregion</span></span></span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			<span class="comment">// 遍历订阅者列表进行通知</span></span><br><span class="line">			<span class="keyword">foreach</span> (IObserver ob <span class="keyword">in</span> observers)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (ob != <span class="literal">null</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					ob.ReceiveAndPrint(<span class="keyword">this</span>);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 具体订阅号类</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TenXunGame</span> : <span class="title">TenXun</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">TenXunGame</span>(<span class="params"><span class="keyword">string</span> symbol, <span class="keyword">string</span> info</span>) : <span class="title">base</span>(<span class="params">symbol, info</span>) </span></span><br><span class="line"><span class="function"></span>		&#123; </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 订阅者接口</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IObserver</span> </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">ReceiveAndPrint</span>(<span class="params">TenXun tenxun</span>)</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 具体的订阅者类</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Subscriber</span> : <span class="title">IObserver</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Subscriber</span>(<span class="params"><span class="keyword">string</span> name</span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			<span class="keyword">this</span>.Name = name;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ReceiveAndPrint</span>(<span class="params">TenXun tenxun</span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log(Name + tenxun.Symbol + tenxun.Info);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment"><span class="doctag">///</span>/--------------------------------------------------------------------</span></span><br><span class="line">	<span class="comment">//		Debug.Log ("Test Observer:");</span></span><br><span class="line">	<span class="comment">//		TenXun tenXun = new TenXunGame("TenXun Game", "Have a new game published ....");</span></span><br><span class="line">	<span class="comment">//		tenXun.AddObserver(new Subscriber("Learning Hard"));</span></span><br><span class="line">	<span class="comment">//		tenXun.AddObserver(new Subscriber("Tom"));</span></span><br><span class="line">	<span class="comment">//		tenXun.Update();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Strategy"><a href="#Strategy" class="headerlink" title="Strategy"></a>Strategy</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CsharpDesignPattern.Strategy</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 解决：干同一件事，需要实现不同的算法策略</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 案例：计算个税／各种搜索，按名字、刚体等等</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 1 接口，税计算Itax</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 2 上下文，策略的设置、分配制者</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> 3 具体的策略计算PersonTax/EnterTax，都继承自Itax</span></span><br><span class="line">	<span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">Itax</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">double</span> <span class="title">GetTax</span>(<span class="params"><span class="keyword">double</span> money</span>)</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PersonTax</span>:<span class="title">Itax</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">GetTax</span>(<span class="params"><span class="keyword">double</span> money</span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log(<span class="string">"Person Method called ..."</span>);</span><br><span class="line">			<span class="keyword">return</span> money * <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">EnterTax</span>:<span class="title">Itax</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">GetTax</span>(<span class="params"><span class="keyword">double</span> money</span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log(<span class="string">"Enterprise Method called ..."</span>);</span><br><span class="line">			<span class="keyword">return</span> money * <span class="number">3</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Context</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">private</span> Itax _Strategy;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Context</span>(<span class="params">Itax taxstrategy</span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"Set the strategy..."</span>);</span><br><span class="line">			<span class="keyword">this</span>._Strategy = taxstrategy;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">GetResult</span>(<span class="params"><span class="keyword">double</span> money</span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			<span class="keyword">return</span> _Strategy.GetTax (money);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//或者可以实现成静态类：</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">NewContext</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">NewGetResult</span>(<span class="params"><span class="keyword">double</span> money,Itax taxer</span>)</span></span><br><span class="line"><span class="function"></span>		&#123;</span><br><span class="line">			Debug.Log (<span class="string">"This is the static method..."</span>);</span><br><span class="line">			<span class="keyword">return</span> taxer.GetTax (money);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment"><span class="doctag">///</span>/--------------------------------------------------------------------</span></span><br><span class="line">	<span class="comment">//		Debug.Log ("Test Strategy: ");</span></span><br><span class="line">	<span class="comment">//		Context mycontext;</span></span><br><span class="line">	<span class="comment">//		mycontext = new Context (new PersonTax());</span></span><br><span class="line">	<span class="comment">//		Debug.Log( mycontext.GetResult (20));</span></span><br><span class="line">	<span class="comment">//		mycontext = new Context (new EnterTax());</span></span><br><span class="line">	<span class="comment">//		Debug.Log( mycontext.GetResult (20));</span></span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">	<span class="comment">//		//静态调用</span></span><br><span class="line">	<span class="comment">//		NewContext.NewGetResult (30,new PersonTax());</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSharp/" rel="tag"># CSharp</a>
+          
+            <a href="/tags/Design-Pattern/" rel="tag"># Design Pattern</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/15/Project-AR-Implementation/" rel="next" title="Project-AR-Implementation">
+                <i class="fa fa-chevron-left"></i> Project-AR-Implementation
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/13/Move-to-ubuntu/" rel="prev" title="Move to ubuntu">
+                Move to ubuntu <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="KinGil">
+          <p class="site-author-name" itemprop="name">KinGil</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kingiluob" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/2283641104/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100007092155441" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Facebook
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建型"><span class="nav-number">1.</span> <span class="nav-text">创建型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构性"><span class="nav-number">2.</span> <span class="nav-text">结构性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#行为型"><span class="nav-number">3.</span> <span class="nav-text">行为型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Simple-Factory"><span class="nav-number">3.1.</span> <span class="nav-text">Simple Factory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Factory"><span class="nav-number">3.2.</span> <span class="nav-text">Factory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AbstractFactory"><span class="nav-number">3.3.</span> <span class="nav-text">AbstractFactory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Singleton"><span class="nav-number">3.4.</span> <span class="nav-text">Singleton</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adapter"><span class="nav-number">3.5.</span> <span class="nav-text">Adapter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Proxy"><span class="nav-number">3.6.</span> <span class="nav-text">Proxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Facade"><span class="nav-number">3.7.</span> <span class="nav-text">Facade</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mediator"><span class="nav-number">3.8.</span> <span class="nav-text">Mediator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Observer"><span class="nav-number">3.9.</span> <span class="nav-text">Observer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Strategy"><span class="nav-number">3.10.</span> <span class="nav-text">Strategy</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KinGil</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
