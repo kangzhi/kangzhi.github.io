@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+
+
+<script type="text/javascript" color="253,253,253" opacity="0.5" zindex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="CSharp,面试,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="前言">
+<meta name="keywords" content="CSharp,面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSharp-Basic-Sum">
+<meta property="og:url" content="http://kangzhi.github.io/2018/01/23/CsharpBasic/index.html">
+<meta property="og:site_name" content="KinGil&#39;s Blog">
+<meta property="og:description" content="前言">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://kangzhi.github.io/Users/kingil/Documents/GitHub/TempBlog/Csharp/托管.png">
+<meta property="og:updated_time" content="2021-01-14T07:31:25.744Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSharp-Basic-Sum">
+<meta name="twitter:description" content="前言">
+<meta name="twitter:image" content="http://kangzhi.github.io/Users/kingil/Documents/GitHub/TempBlog/Csharp/托管.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kangzhi.github.io/2018/01/23/CsharpBasic/">
+
+
+
+
+
+  <title>CSharp-Basic-Sum | KinGil's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KinGil's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">April is coming</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kangzhi.github.io/2018/01/23/CsharpBasic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KinGil">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KinGil's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CSharp-Basic-Sum</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-23T21:10:52+08:00">
+                2018-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSharp/" itemprop="url" rel="index">
+                    <span itemprop="name">CSharp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前言</p>
+<a id="more"></a>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="面试问题汇总"><a href="#面试问题汇总" class="headerlink" title="面试问题汇总"></a>面试问题汇总</h3><p>csharp面试基础项目汇总</p>
+<p> <a href="https://zhuanlan.zhihu.com/p/56522099" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/56522099</a></p>
+<p><a href="https://www.w3cschool.cn/csharp/csharp-yzu92pj0.html" target="_blank" rel="noopener">https://www.w3cschool.cn/csharp/csharp-yzu92pj0.html</a></p>
+<p><a href="https://www.cnblogs.com/yuan-jun/p/6391192.html" target="_blank" rel="noopener">https://www.cnblogs.com/yuan-jun/p/6391192.html</a></p>
+<ol>
+<li><p>ref out<br>－ref 必须初始化 ，里外方向都可以<br>－out 必须赋值返回<br>string作为特殊的引用类型，其操作是与值类型看齐的，若要将方法内对形参赋值后的结果传递出来，需要加上ref或out关键字。</p>
+</li>
+<li><p>public protected private </p>
+</li>
+<li><p>委托 将方法作为参数传入另一种方法:<br>在C#中，委托（delegate）是一种引用类型，在其他语言中，与委托最接近的是函数指针，但委托不仅存储对方法入口点的引用，还存储对用于调用方法的对象实例的引用。</p>
+<p>public void delegate MyEventHandler();<br>MyEventHandler myDelegate = new MyEventHandler(Class.Method);<br>myDelegate += ClassX.MethodX;<br>myDelegate();<br>参考：<br><a href="https://blog.csdn.net/syx920301/article/details/6702747" target="_blank" rel="noopener">https://blog.csdn.net/syx920301/article/details/6702747</a><br><a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/tour-of-csharp/delegates" target="_blank" rel="noopener">https://docs.microsoft.com/zh-cn/dotnet/csharp/tour-of-csharp/delegates</a><br><a href="https://blog.csdn.net/Mr_Sun88/article/details/83689638" target="_blank" rel="noopener">https://blog.csdn.net/Mr_Sun88/article/details/83689638</a><br><a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/events/" target="_blank" rel="noopener">https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/events/</a></p>
+</li>
+<li><p>索引器<br>索引器允许类或结构的实例按照与数组相同的方式进行索引。</p>
+</li>
+<li><p>用.net做B/S结构的系统，您是用几层结构来开发，每一层之间的关系以及为什么要这样分层？</p>
+<p>使用MVC模式分层<br>一般为3层：数据访问层，业务层，表示层。<br>数据访问层对数据库进行增删查改。<br>业务层一般分为二层，业务表观层实现与表示层的沟通，业务规则层实现用户密码的安全等。<br>表示层为了与用户交互例如用户添加表单。</p>
+</li>
+<li><p>string问题<br>string str = null 是不给他分配内存空间,而string str = “” 给它分配长度为空字符串的内存空间。<br>String s = new String(“xyz”);创建两个对象，一个是“xyx”,一个是指向“xyx”的引用对象s。</p>
+<p>当你给一个字符串重新赋值之后，老值并没有销毁，而是重新开辟一块空间存储新值，当程序结束后，GC扫描整个内存，如果发现有的空间没有被指向，则立即把它销毁；</p>
+</li>
+<li><p>GC问题<br> System.gc()<br>Runtime.getRuntime().gc()</p>
+</li>
+<li><p>反射</p>
+</li>
+<li><p>常用类和接口<br>常用的类：StreamReader、WebClient、Dictionary&lt;K,V&gt;、StringBuilder、SqlConnection、FileStream、File、Regex、List<t><br>常用的接口：IDisposable、IEnumerable、IDbConnection、IComparable、ICollection、List、IDictionary</t></p>
+</li>
+<li><p>数据库里拿数据的命令</p>
+</li>
+<li><p>.NETeventhandler】<br><a href="https://docs.microsoft.com/en-us/dotnet/api/system.eventhandler-1?view=netframework-4.7.2" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/dotnet/api/system.eventhandler-1?view=netframework-4.7.2</a></p>
+</li>
+</ol>
+<h3 id="字段-属性-方法"><a href="#字段-属性-方法" class="headerlink" title="字段 属性 方法"></a>字段 属性 方法</h3><p>字段一般是private，尽量禁止外部访问，通过相应的属性来控制访问。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">private int _age; </span><br><span class="line">public int Age </span><br><span class="line">&#123; </span><br><span class="line">get&#123;return _age;&#125; </span><br><span class="line">set&#123;_age = value;&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="结构体和类"><a href="#结构体和类" class="headerlink" title="结构体和类"></a>结构体和类</h3><p>结构可带有方法、字段、索引、属性、运算符方法和事件。<br>结构成员不能指定为 abstract、virtual 或 protected。<br>当您使用 New 操作符创建一个结构对象时，会调用适当的构造函数来创建结构。与类不同，结构可以不使用 New 操作符即可被实例化。<br>如果不使用 New 操作符，只有在所有的字段都被初始化之后，字段才被赋值，对象才被使用。</p>
+<p>与类相比：<br>类是引用类型，结构是值类型。<br>结构不能继承其他的结构或类，但可实现一个或多个接口。<br>结构不能声明默认（无参）的构造函数。不能定义析构函数。<br>结构体字段无法赋初值。</p>
+<h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><p>C# 面向对象</p>
+<p><a href="https://www.cnblogs.com/Rock-Lee/p/7912646.html" target="_blank" rel="noopener">https://www.cnblogs.com/Rock-Lee/p/7912646.html</a></p>
+<h4 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h4><p>值类型：</p>
+<p>下面说到的三种方法，好像不常用。<br>InstanceByNewKey.Create() 用 New 关键字实例化一个类；<br>InstanceByActivator.Create() 用 Activator 实例化一个类；<br>InstanceByAssembly.Create() 用 Assembly 实例化一个类。</p>
+<p>值类型：</p>
+<p>int类型的初始化，栈内存中分配int等所有值类型的变量。</p>
+<p>到底是不是对象实例化？看上去定义里面是struct结构体类型，实际上是从system.valuetype中派生的。可以直接给它分配值。分配后在内存中的变化呢？</p>
+<p>1.不能从值类型派生新类型，但可以结构实现接口；<br>2.值类型不能包含 null 值；<br>3.每个值类型都具有一个初始化该类型的默认值的隐式默认构造函数。</p>
+<p>每一个值类型都有一个独立的内存区域保存自己的值，调用它的时候调用的是它的值，而引用类型调用的是内存中的地址。</p>
+<p>引用类型：</p>
+<p>只使用new关键字来进行对象的实例化。实例化的时候分配内存。返回对象的引用。</p>
+<p>堆中存值，栈中存地址。string特殊，虽然是引用类型，但是复制的时候是单独创建string一份深拷贝。</p>
+<p>下面说到的三种方法，好像不常用。<br>InstanceByNewKey.Create() 用 New 关键字实例化一个类；<br>InstanceByActivator.Create() 用 Activator 实例化一个类；<br>InstanceByAssembly.Create() 用 Assembly 实例化一个类。</p>
+<p>参考阅读：</p>
+<p><a href="https://www.runoob.com/csharp/csharp-data-types.html" target="_blank" rel="noopener">https://www.runoob.com/csharp/csharp-data-types.html</a></p>
+<h4 id="this-关键字"><a href="#this-关键字" class="headerlink" title="this 关键字"></a>this 关键字</h4><p>1 限定类似名称隐藏的成员<br>2 将对象作为参数传递给方法</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Employee</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">string</span> name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">string</span> <span class="keyword">alias</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">decimal</span> salary = <span class="number">3000.00</span>m;</span><br><span class="line">    <span class="comment">// Constructor:</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Employee</span>(<span class="params"><span class="keyword">string</span> name, <span class="keyword">string</span> <span class="keyword">alias</span></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="comment">// Use this to qualify the fields, name and alias:</span></span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.<span class="keyword">alias</span> = <span class="keyword">alias</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Printing method:</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printEmployee</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        Console.WriteLine(<span class="string">"Name: &#123;0&#125;\nAlias: &#123;1&#125;"</span>, name, <span class="keyword">alias</span>);</span><br><span class="line">        <span class="comment">// Passing the object to the CalcTax method by using this:</span></span><br><span class="line">        Console.WriteLine(<span class="string">"Taxes: &#123;0:C&#125;"</span>, Tax.CalcTax(<span class="keyword">this</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">decimal</span> Salary</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="keyword">return</span> salary; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title">Tax</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">decimal</span> <span class="title">CalcTax</span>(<span class="params">Employee E</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0.08</span>m * E.Salary;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title">MainClass</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="comment">// Create objects:</span></span><br><span class="line">        Employee E1 = <span class="keyword">new</span> Employee(<span class="string">"Mingda Pan"</span>, <span class="string">"mpan"</span>);</span><br><span class="line">        <span class="comment">// Display results:</span></span><br><span class="line">        E1.printEmployee();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">    Name: Mingda Pan</span></span><br><span class="line"><span class="comment">    Alias: mpan</span></span><br><span class="line"><span class="comment">    Taxes: $240.00</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<p>3 声明索引器</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span> <span class="keyword">this</span>[<span class="keyword">int</span> param]</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">get</span> &#123; <span class="keyword">return</span> array[param]; &#125;</span><br><span class="line">    <span class="keyword">set</span> &#123; array[param] = <span class="keyword">value</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Base关键字"><a href="#Base关键字" class="headerlink" title="Base关键字"></a>Base关键字</h4><p>base始终指向父类 </p>
+<h4 id="static关键字"><a href="#static关键字" class="headerlink" title="static关键字"></a>static关键字</h4><p>这两个关键字不能在静态方法中使用,静态成员不是实例的一部分</p>
+<p>外部通过关键字new来创建类的实例，但是如果类的构造函数是私有的，就没法从外部通过new创建类的实例了！</p>
+<p>构造函数修饰符只有public或者private</p>
+<h4 id="Override-amp-New"><a href="#Override-amp-New" class="headerlink" title="Override&amp;New"></a>Override&amp;New</h4><p>在 C# 中，派生类中的方法可具有与基类中的方法相同的名称。 可使用 new 和 override 关键字指定方法的交互方式。 override 修饰符用于扩展基类 virtual 方法，而 new 修饰符用于隐藏可访问的基类方法 。<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">OverrideAndNew</span>  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="keyword">class</span> <span class="title">Program</span>  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)  </span></span><br><span class="line"><span class="function"></span>        &#123;  </span><br><span class="line">            BaseClass bc = <span class="keyword">new</span> BaseClass();  </span><br><span class="line">            DerivedClass dc = <span class="keyword">new</span> DerivedClass();  </span><br><span class="line">            BaseClass bcdc = <span class="keyword">new</span> DerivedClass();  </span><br><span class="line">            <span class="comment">// The following two calls do what you would expect. They call  </span></span><br><span class="line">            <span class="comment">// the methods that are defined in BaseClass.  </span></span><br><span class="line">            bc.Method1();  </span><br><span class="line">            bc.Method2();  </span><br><span class="line">            <span class="comment">// Output:  </span></span><br><span class="line">            <span class="comment">// Base - Method1  </span></span><br><span class="line">            <span class="comment">// Base - Method2  </span></span><br><span class="line">  </span><br><span class="line">            <span class="comment">// The following two calls do what you would expect. They call  </span></span><br><span class="line">            <span class="comment">// the methods that are defined in DerivedClass.  </span></span><br><span class="line">            dc.Method1();  </span><br><span class="line">            dc.Method2();  </span><br><span class="line">            <span class="comment">// Output:  </span></span><br><span class="line">            <span class="comment">// Derived - Method1  </span></span><br><span class="line">            <span class="comment">// Derived - Method2  </span></span><br><span class="line">  </span><br><span class="line">            <span class="comment">// The following two calls produce different results, depending   </span></span><br><span class="line">            <span class="comment">// on whether override (Method1) or new (Method2) is used.  </span></span><br><span class="line">            bcdc.Method1();  </span><br><span class="line">            bcdc.Method2();  </span><br><span class="line">            <span class="comment">// Output:  </span></span><br><span class="line">            <span class="comment">// Derived - Method1  </span></span><br><span class="line">            <span class="comment">// Base - Method2  </span></span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">class</span> <span class="title">BaseClass</span>  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Method1</span>(<span class="params"></span>)  </span></span><br><span class="line"><span class="function"></span>        &#123;  </span><br><span class="line">            Console.WriteLine(<span class="string">"Base - Method1"</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Method2</span>(<span class="params"></span>)  </span></span><br><span class="line"><span class="function"></span>        &#123;  </span><br><span class="line">            Console.WriteLine(<span class="string">"Base - Method2"</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">class</span> <span class="title">DerivedClass</span> : <span class="title">BaseClass</span>  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Method1</span>(<span class="params"></span>)  </span></span><br><span class="line"><span class="function"></span>        &#123;  </span><br><span class="line">            Console.WriteLine(<span class="string">"Derived - Method1"</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="function"><span class="keyword">public</span> new <span class="keyword">void</span> <span class="title">Method2</span>(<span class="params"></span>)  </span></span><br><span class="line"><span class="function"></span>        &#123;  </span><br><span class="line">            Console.WriteLine(<span class="string">"Derived - Method2"</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>参考：<br>csharp官方指南<br>在 C# 中，派生类可以包含与基类方法同名的方法。<br>1 基类方法必须定义为 virtual。<br>2 如果派生类中的方法前面没有 new 或 override 关键字，则编译器将发出警告，该方法将如同存在 new 关键字一样执行操作。<br>3 如果派生类中的方法前面带有 new 关键字，则该方法被定义为独立于基类中的方法。<br>4 如果派生类中的方法前面带有 override 关键字，则派生类的对象将调用该方法，而不是调用基类方法。<br>5 可以从派生类中使用 base 关键字调用基类方法。<br>6 override、virtual 和 new 关键字还可以用于属性、索引器和事件中。</p>
+<h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">A</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">getvalue</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		Debug.Log (<span class="string">"class A getvalue method called..."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">B</span>:<span class="title">A</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getsomething</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		<span class="keyword">this</span>.getvalue ();<span class="comment">//如果改成base，则肯定调用父类的方法</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> new <span class="keyword">void</span> <span class="title">getvalue</span>(<span class="params"></span>)<span class="comment">//加不加new都一样</span></span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		Debug.Log (<span class="string">"class B getvalue method called..."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//output B method called</span></span><br><span class="line">B b = <span class="keyword">new</span> B ();</span><br><span class="line">b.getsomething ();</span><br></pre></td></tr></table></figure>
+<p>继承、父类初始化<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Point</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> x, y;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Point</span>(<span class="params"><span class="keyword">int</span> x, <span class="keyword">int</span> y</span>) </span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">this</span>.x = x;</span><br><span class="line">        <span class="keyword">this</span>.y = y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Point3D</span>: <span class="title">Point</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> z;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Point3D</span>(<span class="params"><span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> z</span>) : <span class="title">base</span>(<span class="params">x, y</span>) </span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">this</span>.z = z;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h5><p>默认public 不用加任何关键字。<br>接口必须实现。实现的时候直接实现就行。<br>一般是隐式实现，类和接口声明都可以调用到。</p>
+<p>概念：极度抽象的类，无成员变量，无实例属性和实例方法，只有抽象方法或抽象属性，生活中的例子：标准，规则。<br>写法：接口不用class，用interface，名字一般以I作为首字母；不用写abstract，里面所有都是，不用写public，必须是public。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title">ISampleInterface</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">SampleMethod</span>(<span class="params"></span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">ImplementationClass</span> : <span class="title">ISampleInterface</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//interface member implementation: </span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">SampleMethod</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="comment">// Method implementation.</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="comment">// Declare an interface instance.</span></span><br><span class="line">        ISampleInterface obj = <span class="keyword">new</span> ImplementationClass();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Call the member.</span></span><br><span class="line">        obj.SampleMethod();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h5><p>关键字abstract</p>
+<p>抽象方法：（可以看成一个虚函数）<br>public abstract void AbstractMethod1();//没有方法实体</p>
+<p>抽象类：<br>有抽象方法的类必须是抽象类，只能被继承，不能被实例化。反之，抽象类也可以有非抽象方法。<br>抽象类继承（抽象方法重写）才有意义。<br>如果抽象方法要在子类中实现，必须用override。如果抽象类中的方法在子类中没有被全部实现，那么这个子类还是抽象类。<br>抽象方法也是virtual的，但是不需要加关键字。</p>
+<p>参考：<br><a href="http://www.cnblogs.com/flyinthesky/archive/2008/06/18/1224774.html" target="_blank" rel="noopener">http://www.cnblogs.com/flyinthesky/archive/2008/06/18/1224774.html</a><br><a href="https://blog.csdn.net/yl2isoft/article/details/16850971" target="_blank" rel="noopener">https://blog.csdn.net/yl2isoft/article/details/16850971</a></p>
+<h5 id="Virtual"><a href="#Virtual" class="headerlink" title="Virtual"></a>Virtual</h5><p>Virtual CallSomeOne();</p>
+<p>声明该方法，表示可以被override重写，但非强制。重写时肯定用override。<br>基类中定义了virtual，子类中不重写，那么会调用基类方法。<br>有啥用？<br>virtual和new的区别：<br>virtual扩展了基类的方法。<br>new则隐藏了基类中的方法。表示你的这个方法跟基类的同名方法是独立的。</p>
+<h5 id="Static"><a href="#Static" class="headerlink" title="Static"></a>Static</h5><p>静态方法：<br>当一个方法被声明为Static时，这个方法是一个静态方法，编译器会在编译时保留这个方法的实现。也就是说，这个方法属于类，但是不属于任何成员，不管这个类的实例是否存在，它们都会存在。就像入口函数Static void Main，因为它是静态函数，所以可以直接被调用。<br>1.存储在静态成员中的信息只有在应用程序退出的时候才会从内存里释放出来。<br>2.静态成员不能通过对象访问，只能通过类名直接访问。<br>3.静态成员（内容）在内存中只存储一份。？？？存在静态区？？？<br>4.静态成员，在整个应用程序中任何一个地方都可以访问的到，所以静态成员直到程序退出后才会释放内存。而实例成员，  当没有变量使用就可以被垃圾回收，回收后内存就释放了.(可以把一些常用的工具函数，封装到一个静态类中，使用方便)<br>静态类：<br>1.在静态类中只能有静态成员，不能有实例成员<br>2.静态类不能创建对象，不能new对象<br>使用静态类跟使用静态成员的情景其实是一样的，即在整个应用程序中要共享数据的时候可以使用静态类。所以对于那些类中包含有大量的方法，并且类不需要创建对象的时候，可以使用静态类。</p>
+<p>参考：<br><a href="https://blog.csdn.net/u012252959/article/details/48262775" target="_blank" rel="noopener">https://blog.csdn.net/u012252959/article/details/48262775</a></p>
+<h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Fruit</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Fruit</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">Debug.Log(<span class="string">"1st Fruit Constructor Called"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Chop</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">Debug.Log(<span class="string">"The fruit has been chopped."</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SayHello</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">Debug.Log(<span class="string">"Hello, I am a fruit."</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Apple</span> : <span class="title">Fruit</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Apple</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">Debug.Log(<span class="string">"1st Apple Constructor Called"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//In this example, the "new" keyword is used to supress</span></span><br><span class="line"><span class="comment">//warnings from Unity while not overriding the methods</span></span><br><span class="line"><span class="comment">//in the Apple class.</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> new <span class="keyword">void</span> <span class="title">Chop</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">Debug.Log(<span class="string">"The apple has been chopped."</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> new <span class="keyword">void</span> <span class="title">SayHello</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">Debug.Log(<span class="string">"Hello, I am an apple."</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">FruitSalad</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span> (<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="comment">//Notice here how the variable "myFruit" is of type</span></span><br><span class="line"><span class="comment">//Fruit but is being assigned a reference to an Apple. This</span></span><br><span class="line"><span class="comment">//works because of Polymorphism. Since an Apple is a Fruit,</span></span><br><span class="line"><span class="comment">//this works just fine. While the Apple reference is stored</span></span><br><span class="line"><span class="comment">//in a Fruit variable, it can only be used like a Fruit</span></span><br><span class="line">Fruit myFruit = <span class="keyword">new</span> Apple();</span><br><span class="line"></span><br><span class="line">myFruit.SayHello();</span><br><span class="line">myFruit.Chop();</span><br><span class="line"><span class="comment">//This is called downcasting. The variable "myFruit" which is</span></span><br><span class="line"><span class="comment">//of type Fruit, actually contains a reference to an Apple. Therefore,</span></span><br><span class="line"><span class="comment">//it can safely be turned back into an Apple variable. This allows</span></span><br><span class="line"><span class="comment">//it to be used like an Apple, where before it could only be used</span></span><br><span class="line"><span class="comment">//like a Fruit.</span></span><br><span class="line">Apple myApple = (Apple)myFruit;</span><br><span class="line">myApple.SayHello();</span><br><span class="line">myApple.Chop();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="常用数据类型的使用"><a href="#常用数据类型的使用" class="headerlink" title="常用数据类型的使用"></a>常用数据类型的使用</h3><h4 id="int-string转换"><a href="#int-string转换" class="headerlink" title="int string转换"></a>int string转换</h4><p>(int) //int.Parse //int.TryParse//Convert.ToInt32<br>在进行数据转换前选择转换方法要谨慎，<br>如果是数字类型(float,int,uint)可以考虑直接用(int)强制转换，<br>如果是整型字符串类型的，考虑用int.Parse()进行转换，即各种整型ToString()之后的形式，不能为浮点型<br>如果不是这两种类型，再考虑用Convert.ToInt32()进行转换。</p>
+<ol>
+<li><p>int转成string<br>用toString<br>或者Convert.toString()如下 </p>
+<p>例如：<br>int varInt = 1;<br>string varString = Convert.ToString(varInt);<br>string varString2 = varInt.ToString();</p>
+</li>
+<li><p>string转成int<br>如果确定字符串中是可以转成数字的字符，可以用int.Parse(string s)，该语句返回的是转换得到的int值;<br>如果不能确定字符串是否可以转成数字，可以用int.TryParse(string s, out int result),该语句返回的是bool值，指示转换操作是否成功，参数result是存放转换结果的变量。</p>
+<p>例如：<br>string str = string.Empty;<br>str = “123”;<br>int result=int.Parse(str);</p>
+</li>
+</ol>
+<p>   string str = string.Empty;<br>   str = “xyz”;<br>   int result;<br>   int.TryParse(str, out result);</p>
+<p>常用<br><a href="https://blog.csdn.net/OnafioO/article/details/44525651" target="_blank" rel="noopener">https://blog.csdn.net/OnafioO/article/details/44525651</a></p>
+<h4 id="数组Array："><a href="#数组Array：" class="headerlink" title="数组Array："></a>数组Array：</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span>[] names = <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">2</span>];</span><br><span class="line"><span class="keyword">int</span>[] numbers = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>] &#123; <span class="number">4</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">5</span> &#125;;</span><br><span class="line"><span class="comment">//better:</span></span><br><span class="line"><span class="keyword">int</span>[] numbers = &#123; <span class="number">4</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">5</span> &#125;;</span><br><span class="line">Array.Sort(numbers);</span><br><span class="line"><span class="keyword">foreach</span> (<span class="keyword">int</span> i <span class="keyword">in</span> numbers);</span><br></pre></td></tr></table></figure>
+<h4 id="ArrayList动态数组"><a href="#ArrayList动态数组" class="headerlink" title="ArrayList动态数组"></a>ArrayList动态数组</h4><p>ArrayList test = new ArrayList();</p>
+<p>类型不安全</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ArrayList list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">            list.Add(<span class="string">"John Doe"</span>);</span><br><span class="line">            list.Add(<span class="string">"Jane Doe"</span>);</span><br><span class="line">            list.Add(<span class="string">"Someone Else"</span>);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">foreach</span>(<span class="keyword">string</span> name <span class="keyword">in</span> list)</span><br><span class="line">                Console.WriteLine(name);</span><br></pre></td></tr></table></figure>
+<h4 id="List"><a href="#List" class="headerlink" title="List"></a>List<t></t></h4><p>List<string> test = new List<string>();<br>.add/.removeat</string></string></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Car&gt; myList= <span class="keyword">new</span> List&lt;Car&gt;() &#123; </span><br><span class="line"><span class="keyword">new</span> Car &#123;Make = “asdas”,Model = “haha”&#125;, </span><br><span class="line"><span class="keyword">new</span> Car &#123;Make = “asdsd”,Model = “asdasd<span class="string">"&#125; </span></span><br><span class="line"><span class="string">&#125;; </span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string">List&lt;string&gt; listOfStrings = new List&lt;string&gt;();</span></span><br><span class="line"><span class="string">listOfStrings.Add("</span>a <span class="keyword">string</span><span class="string">");</span></span><br><span class="line"><span class="string">List&lt;string&gt; listOfNames = new List&lt;string&gt;()&#123; "</span>John Doe<span class="string">","</span>Jane Doe<span class="string">","</span>Joe Doe<span class="string">"&#125;;</span></span><br><span class="line"><span class="string">listOfNames.Insert(0, "</span>John Doe<span class="string">");</span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string">foreach(string str in listofstrings);</span></span><br></pre></td></tr></table></figure>
+<h4 id="Dictionary-类型安全"><a href="#Dictionary-类型安全" class="headerlink" title="Dictionary 类型安全"></a>Dictionary 类型安全</h4><p>Dictionary 使用前确保key是存在的，然后获取value。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Dictionary&lt;<span class="keyword">string</span>, <span class="keyword">string</span>&gt; openWith = <span class="keyword">new</span> Dictionary&lt;<span class="keyword">string</span>, <span class="keyword">string</span>&gt;();</span><br><span class="line"></span><br><span class="line">openWith.Add(<span class="string">"txt"</span>, <span class="string">"notepad.exe"</span>);</span><br><span class="line">openWith[<span class="string">"rtf"</span>] = <span class="string">"winword.exe"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> (<span class="keyword">string</span> key <span class="keyword">in</span> openWith.Keys)...</span><br><span class="line"><span class="keyword">foreach</span> (<span class="keyword">string</span> <span class="keyword">value</span> <span class="keyword">in</span> openWith.Values)...</span><br><span class="line"></span><br><span class="line">Dictionary&lt;<span class="keyword">string</span>, <span class="keyword">string</span>&gt;.ValueCollection valueColl = openWith.Values;</span><br><span class="line"><span class="keyword">foreach</span> (<span class="keyword">string</span> s <span class="keyword">in</span> valueColl)</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> (KeyValuePair&lt;<span class="keyword">string</span>, <span class="keyword">string</span>&gt; kvp <span class="keyword">in</span> openWith)</span><br><span class="line">&#123;</span><br><span class="line">​    Console.WriteLine(<span class="string">"Key = &#123;0&#125;, Value = &#123;1&#125;"</span>, kvp.Key, kvp.Value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">openWith.Remove(<span class="string">"doc"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (openWith.ContainsKey(<span class="string">"bmp"</span>))</span><br></pre></td></tr></table></figure>
+<p>Dictionary ,接口 identity，dictionary<br>简单用法：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * Dictionary:Dictionary:字典：属于泛型类容器，用来存储一对键值对 </span></span><br><span class="line"><span class="comment"> * 1.命名空间：System.Collections.Generic </span></span><br><span class="line"><span class="comment"> * 2.构造方法：Dictionary &lt;TKey,TValue&gt; dic=new Dictionary&lt;TKey,TValue&gt;(); </span></span><br><span class="line"><span class="comment"> * 3.常用属性：Count:返回字典中键值对的数目 </span></span><br><span class="line"><span class="comment"> * 4.常用方法： </span></span><br><span class="line"><span class="comment"> *      Add(TKey,TValue):要添加的键值对 </span></span><br><span class="line"><span class="comment"> *      TryGetValue(TKey):获得与指定键相关联的值 </span></span><br><span class="line"><span class="comment"> *      Remove（TKey）：从字典中移除 </span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h4 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h4><p>类型不安全。线程安全，单线程写入，多线程读取。</p>
+<p><a href="https://blog.csdn.net/snlei/article/details/3939206" target="_blank" rel="noopener">https://blog.csdn.net/snlei/article/details/3939206</a></p>
+<p><a href="https://www.cnblogs.com/cxchen/p/7278652.html" target="_blank" rel="noopener">https://www.cnblogs.com/cxchen/p/7278652.html</a></p>
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h3 id="文件IO"><a href="#文件IO" class="headerlink" title="文件IO"></a>文件IO</h3><p>FileStream<br>StreamWriter／StreamReader<br>unity网络用的NetworkStream</p>
+<h3 id="索引器"><a href="#索引器" class="headerlink" title="索引器"></a>索引器</h3><p>C#通过提供索引器，可以象处理数组一样处理对象。特别是属性，每一个元素都以一个get或set方法暴露。索引器不单能索引数字（数组下标），还能索引一些HASHMAP的字符串，所以，通常来说，C#中类的索引器通常只有一个，就是THIS，但也可以有无数个，只要你的参数列表不同就可以了。索引器和返回值无关, 索引器最大的好处是使代码看上去更自然，更符合实际的思考模式.</p>
+<p>索引器允许类或结构的实例按照与数组相同的方式进行索引。<br>索引器类似于属性，不同之处在于它们的访问器采用参数。</p>
+<p>在下面的示例中，定义了一个泛型类（class SampleCollection<t>），并为其提供了简单的 get  和 set 访问器方法（作为分配和检索值的方法）。Program 类为存储字符串创建了此类的一个实例。<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class SampleCollection&lt;T&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> T[] arr = <span class="keyword">new</span> T[<span class="number">100</span>];</span><br><span class="line">    <span class="keyword">public</span> T <span class="keyword">this</span>[<span class="keyword">int</span> i]   <span class="comment">//注意，定义索引器。this 关键字用于定义索引器。</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">get</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> arr[i]; <span class="comment">//访问器采用参数</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">set</span></span><br><span class="line">        &#123;</span><br><span class="line">            arr[i] = <span class="keyword">value</span>; <span class="comment">//访问器采用参数</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// This class shows how client code uses the indexer</span></span><br><span class="line"><span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        SampleCollection&lt;<span class="keyword">string</span>&gt; stringCollection = <span class="keyword">new</span> SampleCollection&lt;<span class="keyword">string</span>&gt;(); </span><br><span class="line">        stringCollection[<span class="number">0</span>] = <span class="string">"Hello, World"</span>; <span class="comment">//这里 使用索引器进行引用</span></span><br><span class="line">        System.Console.WriteLine(stringCollection[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></t></p>
+<p>索引器使得对象可按照与数组相似的方法进行索引。<br>get 访问器返回值。set 访问器分配值。<br>this 关键字用于定义索引器。<br>value 关键字用于定义由 set 索引器分配的值。<br>索引器不必根据整数值进行索引，由您决定如何定义特定的查找机制。<br>索引器可被重载。<br>索引器可以有多个形参，例如当访问二维数组时。</p>
+<h3 id="LINQ"><a href="#LINQ" class="headerlink" title="LINQ"></a>LINQ</h3><p>myCar是一个List </p>
+<p>方式一 LINQ query</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> bmws = <span class="keyword">from</span> car <span class="keyword">in</span> myCars </span><br><span class="line">​                    <span class="keyword">where</span> car.Make = “aaa” </span><br><span class="line">​                    <span class="keyword">select</span> car;</span><br></pre></td></tr></table></figure>
+<p>方式二 LINQ method </p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> bmws = myCars.Where(p=&gt;p.Make == “aaa”); </span><br><span class="line"><span class="keyword">foreach</span>(<span class="keyword">var</span> car <span class="keyword">in</span> bmws)...</span><br></pre></td></tr></table></figure>
+<h3 id="单例"><a href="#单例" class="headerlink" title="单例"></a>单例</h3><p>单例的设计一般用于通信的或者一些模块之间的耦合，只能有一个实例化的对象。<br>核心是两个点：私有的对象成员；公有的静态访问方法(如果没有对象，实例化一个再返回)；</p>
+<p><strong>一般的csharp类</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">singleton</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> singleton _instance = <span class="literal">null</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> singleton <span class="title">GetInstance</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">if</span> (_instance == <span class="literal">null</span>) </span><br><span class="line">        &#123;</span><br><span class="line">            _instance = <span class="keyword">new</span> singleton ();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> _instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>unity常用的monoehaviour单例类</strong></p>
+<p>一 属性方法 需要挂脚本／手动实例化</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">singleton</span>:<span class="title">monobehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">static</span> singleton _instance;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">awake</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">        _instance = <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> singleton <span class="title">GetInstance</span>(<span class="params"></span>)*<span class="comment">//公有静态属性获取*</span></span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">get</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> _instance;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>二 自动创建</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">singleton</span>:<span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> singleton _instance = <span class="literal">null</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        _instance = <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> singleton <span class="title">GetInstance</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">if</span> (_instance == <span class="literal">null</span>) </span><br><span class="line">        &#123;</span><br><span class="line">            GameObject go = <span class="keyword">new</span> GameObject(<span class="string">"_MyClass"</span>); *<span class="comment">//* *创建一个新的GameObject*</span></span><br><span class="line">            DontDestroyOnLoad(go);  *<span class="comment">//* *防止被销毁*</span></span><br><span class="line">            _instance = go.AddComponent&lt;singleton&gt;(); *<span class="comment">//* *将实例挂载到GameObject上*</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> _instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>线程安全单例</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ThreadSafeSingleton</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> ThreadSafeSingleton _instance;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">object</span> _lock = <span class="keyword">new</span> <span class="keyword">object</span>();</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ThreadSafeSingleton <span class="title">GetSingleton</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">		<span class="keyword">if</span> (_instance == <span class="literal">null</span>) </span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">lock</span>(_lock)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (_instance == <span class="literal">null</span>) </span><br><span class="line">				_instance = <span class="keyword">new</span> ThreadSafeSingleton ();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> _instance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><p>在unity开发中使用多线程的总结：<br><a href="https://www.jb51.net/article/82800.htm" target="_blank" rel="noopener">https://www.jb51.net/article/82800.htm</a><br>一个特别好的c#线程简单例子：<br><a href="https://www.cnblogs.com/dotnet261010/p/6159984.html" target="_blank" rel="noopener">https://www.cnblogs.com/dotnet261010/p/6159984.html</a><br><a href="http://www.runoob.com/csharp/csharp-multithreading.html" target="_blank" rel="noopener">http://www.runoob.com/csharp/csharp-multithreading.html</a></p>
+<p>多线程文章系列<br><a href="http://www.cnblogs.com/zpx1986/p/5571506.html" target="_blank" rel="noopener">http://www.cnblogs.com/zpx1986/p/5571506.html</a></p>
+<p>比较Thread、Task、await等关键字的方法：</p>
+<p><a href="https://www.cnblogs.com/doforfuture/p/6293926.html" target="_blank" rel="noopener">https://www.cnblogs.com/doforfuture/p/6293926.html</a></p>
+<p>Thread：</p>
+<p>每次都会实例化一个新线程</p>
+<p>Task ：</p>
+<p><a href="https://www.cnblogs.com/wjcnet/p/6955756.html" target="_blank" rel="noopener">https://www.cnblogs.com/wjcnet/p/6955756.html</a></p>
+<p>与ThreadPool类似，从线程池中调用。</p>
+<p>开启新任务的方法：Task.Run()或者Task.Factory.StartNew()，开启的是后台线程</p>
+<p>要在主线程中等待后台线程执行完毕，可以使用Wait方法(会以同步的方式来执行)。不用Wait则会以异步的方式来执行。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Console.WriteLine(<span class="string">"主线程启动"</span>);</span><br><span class="line">Task task = Task.Run(() =&gt; &#123; </span><br><span class="line">    Thread.Sleep(<span class="number">1500</span>);</span><br><span class="line">    Console.WriteLine(<span class="string">"task启动"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">Thread.Sleep(<span class="number">300</span>);</span><br><span class="line">task.Wait();</span><br><span class="line">Console.WriteLine(<span class="string">"主线程结束"</span>);</span><br></pre></td></tr></table></figure>
+<p>线程同步问题<br>－sleep<br>－lock<br>－信号和句柄 AutoResetEvent/ManualResetEvent，调用Set()和WaitOne()）?????????????????</p>
+<h4 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h4><p><a href="https://www.cnblogs.com/apsnet/archive/2012/07/08/2581475.html" target="_blank" rel="noopener">https://www.cnblogs.com/apsnet/archive/2012/07/08/2581475.html</a><br><a href="https://www.cnblogs.com/doforfuture/p/6293926.html" target="_blank" rel="noopener">https://www.cnblogs.com/doforfuture/p/6293926.html</a></p>
+<p>控制多线程对同一个对象的同时读写。<br>当同步对共享资源的线程访问时，请锁定专用对象实例（例如，private readonly object balanceLock = new object();）或另一个不太可能被代码无关部分用作 lock 对象的实例。 避免对不同的共享资源使用相同的 lock 对象实例，因为这可能导致死锁或锁争用。 具体而言，避免将以下对象用作 lock 对象：<br>1 this（调用方可能将其用作 lock）。<br>2 Type 实例（可以通过 typeof 运算符或反射获取）。<br>3 字符串实例，包括字符串文本，（这些可能是暂存的）。<br>为什么不要用lock this：<br><a href="https://www.cnblogs.com/wolf-sun/p/8405541.html" target="_blank" rel="noopener">https://www.cnblogs.com/wolf-sun/p/8405541.html</a></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Threading.Tasks;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Account</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> <span class="keyword">object</span> balanceLock = <span class="keyword">new</span> <span class="keyword">object</span>();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">decimal</span> balance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Account</span>(<span class="params"><span class="keyword">decimal</span> initialBalance</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        balance = initialBalance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">decimal</span> <span class="title">Debit</span>(<span class="params"><span class="keyword">decimal</span> amount</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">lock</span> (balanceLock)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (balance &gt;= amount)</span><br><span class="line">            &#123;</span><br><span class="line">                Console.WriteLine(<span class="string">$"Balance before debit :<span class="subst">&#123;balance, <span class="number">5</span>&#125;</span>"</span>);</span><br><span class="line">                Console.WriteLine(<span class="string">$"Amount to remove     :<span class="subst">&#123;amount, <span class="number">5</span>&#125;</span>"</span>);</span><br><span class="line">                balance = balance - amount;</span><br><span class="line">                Console.WriteLine(<span class="string">$"Balance after debit  :<span class="subst">&#123;balance, <span class="number">5</span>&#125;</span>"</span>);</span><br><span class="line">                <span class="keyword">return</span> amount;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Credit</span>(<span class="params"><span class="keyword">decimal</span> amount</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">lock</span> (balanceLock)</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">$"Balance before credit:<span class="subst">&#123;balance, <span class="number">5</span>&#125;</span>"</span>);</span><br><span class="line">            Console.WriteLine(<span class="string">$"Amount to add        :<span class="subst">&#123;amount, <span class="number">5</span>&#125;</span>"</span>);</span><br><span class="line">            balance = balance + amount;</span><br><span class="line">            Console.WriteLine(<span class="string">$"Balance after credit :<span class="subst">&#123;balance, <span class="number">5</span>&#125;</span>"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">AccountTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">var</span> account = <span class="keyword">new</span> Account(<span class="number">1000</span>);</span><br><span class="line">        <span class="keyword">var</span> tasks = <span class="keyword">new</span> Task[<span class="number">100</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; tasks.Length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            tasks[i] = Task.Run(() =&gt; RandomlyUpdate(account));</span><br><span class="line">        &#125;</span><br><span class="line">        Task.WaitAll(tasks);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">RandomlyUpdate</span>(<span class="params">Account account</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">var</span> rnd = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> amount = rnd.Next(<span class="number">1</span>, <span class="number">100</span>);</span><br><span class="line">            <span class="keyword">bool</span> doCredit = rnd.NextDouble() &lt; <span class="number">0.5</span>;</span><br><span class="line">            <span class="keyword">if</span> (doCredit)</span><br><span class="line">            &#123;</span><br><span class="line">                account.Credit(amount);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                account.Debit(amount);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Loom"><a href="#Loom" class="headerlink" title="Loom"></a>Loom</h4><p>unity是帧序列调用的，严格来讲并不是特别支持真正的多线程。一般的几种情况如下：</p>
+<ol>
+<li>变量都是共享的</li>
+<li>Unity Engine定义的基本结构int，float，struct如Vector3可以在分线程中计算，其他Texture2d就不行</li>
+<li>非UnityEngine API 都可以在分线程运行</li>
+</ol>
+<p>Loom的源代码就100多行，写的很精髓，可以自行研究下。最常用的是你在分线程里没法调用主线程的一些控件，但是通过Loom就可以：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">testLoom</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> Text mText;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Start</span> (<span class="params"></span>) </span></span><br><span class="line"><span class="function"></span>    &#123;  </span><br><span class="line">        <span class="comment">// 用Loom的方法调用一个线程</span></span><br><span class="line">        Loom.RunAsync(</span><br><span class="line">            () =&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                Thread thread = <span class="keyword">new</span> Thread(RefreshText);</span><br><span class="line">                thread.Start();</span><br><span class="line">            &#125;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RefreshText</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;  </span><br><span class="line">        <span class="comment">// 用Loom的方法在Unity主线程中调用Text组件</span></span><br><span class="line">        Loom.QueueOnMainThread((param) =&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                mText.text = <span class="string">"Hello Loom!"</span>;</span><br><span class="line">            &#125;,<span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="socket汇总"><a href="#socket汇总" class="headerlink" title="socket汇总"></a>socket汇总</h3><p><a href="https://www.cnblogs.com/JinT-Hwang/p/10114027.html" target="_blank" rel="noopener">https://www.cnblogs.com/JinT-Hwang/p/10114027.html</a></p>
+<p><a href="https://www.cnblogs.com/AbstractLee/p/8623454.html" target="_blank" rel="noopener">https://www.cnblogs.com/AbstractLee/p/8623454.html</a></p>
+<p>多线程异步socket<br>参考：详细的unity socket 异步多线程总结<br><a href="https://blog.csdn.net/linshuhe1/article/details/76580764" target="_blank" rel="noopener">https://blog.csdn.net/linshuhe1/article/details/76580764</a><br><a href="https://blog.csdn.net/naruto2011sasuke/article/details/77046878" target="_blank" rel="noopener">https://blog.csdn.net/naruto2011sasuke/article/details/77046878</a></p>
+<p><a href="https://blog.csdn.net/claine/article/details/52374546" target="_blank" rel="noopener">https://blog.csdn.net/claine/article/details/52374546</a></p>
+<h3 id="范型"><a href="#范型" class="headerlink" title="范型"></a>范型</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">SomeOtherClass</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span> (<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">SomeClass myClass = <span class="keyword">new</span> SomeClass();</span><br><span class="line"><span class="comment">//In order to use this method you must</span></span><br><span class="line"><span class="comment">//tell the method what type to replace</span></span><br><span class="line"><span class="comment">//'T' with.</span></span><br><span class="line">myClass.GenericMethod&lt;<span class="keyword">int</span>&gt;(<span class="number">5</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Here is a generic class. Notice the generic type 'T'.</span></span><br><span class="line"><span class="comment">//'T' will be replaced with an actual type, as will also</span></span><br><span class="line"><span class="comment">//instances of the type 'T' used in the class.</span></span><br><span class="line">public class GenericClass &lt;T&gt;</span><br><span class="line">&#123;</span><br><span class="line">T item;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">UpdateItem</span>(<span class="params">T newItem</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">item = newItem;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">GenericClassExample</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span> (<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="comment">//In order to create an object of a generic class, you must</span></span><br><span class="line"><span class="comment">//specify the type you want the class to have.</span></span><br><span class="line">GenericClass&lt;<span class="keyword">int</span>&gt; myClass = <span class="keyword">new</span> GenericClass&lt;<span class="keyword">int</span>&gt;();</span><br><span class="line">myClass.UpdateItem(<span class="number">5</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="委托和事件"><a href="#委托和事件" class="headerlink" title="委托和事件"></a>委托和事件</h3><p>一般实现时间的注册、监听等用delegate类实现起来比较自由，灵活性也高。<br>参考本人日志EventHandler。</p>
+<p>完全的参考：<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/delegates/" target="_blank" rel="noopener">https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/delegates/</a></p>
+<p>1 举一个简单的例子：</p>
+<p>两个方法，MAX和MIN，都是 int MAX(int a,int b)类型。<br>定义我的委托：<br>    delegate int myDelegate(int a,int b);<br>    myDelegate md = null;<br>两个checkbox,分别实现<br>    this.md = new myDelegate(this.MAX);<br>    this.md = new myDelegate(this.MIN);<br>用户点击计算按钮的时候：<br>    if(this.md == null) return;<br>    int c = this.md(inout.a,inout.b);<br>    this.text = c.tostring();</p>
+<p>2 多播：</p>
+<p>声明委托</p>
+<p>public void delegate MYMulticastDelegate(string path);</p>
+<p>//创建委托,并指向CreateLogFile方法<br>MyMulticastDelegate logDelegate = new MyMulticastDelegate(CreateLogFile);<br>//创建委托,并指向WriteToDb<br>MyMulticastDelegate dbDelagate = new MyMulticastDelegate(WriteToDb);<br>MyMulticastDelegate multicastDelegate = logDelegate;<br>//在多播委托的调用链中添加新的委托元素<br>multicastDelegate = multicastDelegate + dbDelagate;<br>//调用多播委托,并且序列执行两个委托所指的方法<br>multicastDelegate(“new file.txt”);</p>
+<p>自己常用的是Action和Func类，用来声明触发和调用都比较实用简单。参考Unity测试脚本。</p>
+<p>3 一个非常简单的委托完整代码：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 小张类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MrZhang</span></span><br><span class="line">    &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">BuyTicket</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">"NND,每次都让我去买票，鸡人呀！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">BuyMovieTicket</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        Console.WriteLine(<span class="string">"我去，自己泡妞，还要让我带电影票！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//小明类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title">MrMing</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 声明一个委托，其实就是个“命令”</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">delegate</span> <span class="keyword">void</span> <span class="title">BugTicketEventHandler</span>(<span class="params"></span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="comment">// 这里就是具体阐述这个命令是干什么的，本例是MrZhang.BuyTicket“小张买车票”</span></span><br><span class="line">        BugTicketEventHandler myDelegate = <span class="keyword">new</span> BugTicketEventHandler(MrZhang.BuyTicket);</span><br><span class="line">        myDelegate += MrZhang.BuyMovieTicket;<span class="comment">// 这时候委托被附上了具体的方法</span></span><br><span class="line">        myDelegate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4 csharp也支持匿名委托，结合Lamda表达式，多线程编程代码会很方便。<br><a href="https://blog.csdn.net/syx920301/article/details/6702747" target="_blank" rel="noopener">https://blog.csdn.net/syx920301/article/details/6702747</a></p>
+<h2 id="内存相关"><a href="#内存相关" class="headerlink" title="内存相关"></a>内存相关</h2><h3 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">A</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">int</span> a = <span class="number">12</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">B</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">A C1 = <span class="keyword">new</span> A();</span><br><span class="line">A C2 = <span class="keyword">new</span> A(); </span><br><span class="line">Console.WriteLine(<span class="string">"C1.a"</span>);</span><br><span class="line">C2.a=<span class="number">6</span></span><br><span class="line">Console.WriteLine(<span class="string">"C2.a"</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果输出的是 12 6 吗？我的问题是当A被实例化两次，a变量是在内存中如何分配的？？都分配在堆栈中吗？？<br>首先，堆和栈是两码事。堆（heap）主要用于动态内存分配，而栈（stack）主要是用于函数内自动变量的空间分配。<br>在C#中，任何引用类型的变量，都是在堆上分配的。（强制声明stackalloc等特殊情况除外）<br>各种class就是引用类型，所以都是在堆上分配的。<br>你那个例子，有两个变量，一个是C1，一个是C2，它们各自有一个成员a，彼此互不影响。<br>二者都分配在堆上，位置不同。所以你C1中a的值是12，C2中a的值是6，二者之间没有影响。<br>“值类型变量存储在栈中” 这句话不完全正确。只有在函数内部直接定义的值类型，比如你在函数内部定义了一个int a，它才是在stack上面分配的。而对象内部的成员变量（除非静态），不管是值还是引用类型，它都只是整个对象的一部分，而整个对象是在堆上分配的。</p>
+<p>类似地参考：<br><a href="https://bbs.csdn.net/topics/391995748?page=1" target="_blank" rel="noopener">https://bbs.csdn.net/topics/391995748?page=1</a><br><a href="https://bbs.csdn.net/topics/300084871" target="_blank" rel="noopener">https://bbs.csdn.net/topics/300084871</a></p>
+<p>在c#中，当我们将一个class实例化后，系统会给class里面的方法分配内存吗？如果分配的话是每个实例化的方法都分配还是实例化对象共享一块方法分配的内存？</p>
+<p>方法的实例只有一份，所有实例共享。<br>类是引用类型的，实例化时会在托管堆中创建一块内存，存放类中的变量值，及类本身的一些标识信息，而方法最终于也是操作变量，所以不会给方法分配内存<br>另外，类每实例化一次时都会重新创建新的内存空间，当类实例不在被任何对象引用时，GC 就会遍历到这个对象，然后把它标记为删除，在某一时刻清除实例所占用的内存。</p>
+<p>参考：<br>内存管理：<a href="https://www.cnblogs.com/flyptt/archive/2013/12/16/3477512.html" target="_blank" rel="noopener">https://www.cnblogs.com/flyptt/archive/2013/12/16/3477512.html</a><br>C语言内存，特别详细的分析 <a href="https://www.cnblogs.com/tuhooo/p/7221136.html" target="_blank" rel="noopener">https://www.cnblogs.com/tuhooo/p/7221136.html</a><br>C#内存管理和回收超经典文章<br><a href="http://www.cnblogs.com/riccc/archive/2009/09/01/dotnet-memory-management-and-garbage-collection.html" target="_blank" rel="noopener">http://www.cnblogs.com/riccc/archive/2009/09/01/dotnet-memory-management-and-garbage-collection.html</a><br><a href="https://zhidao.baidu.com/question/339055693.html" target="_blank" rel="noopener">https://zhidao.baidu.com/question/339055693.html</a></p>
+<h3 id="托管和非托管资源"><a href="#托管和非托管资源" class="headerlink" title="托管和非托管资源"></a>托管和非托管资源</h3><p>####托管资源</p>
+<p>[图片托管]</p>
+<p><img src="/Users/kingil/Documents/GitHub/TempBlog/Csharp/托管.png" alt="托管"></p>
+<p>.NET中的所有类型都是（直接或间接）从System.Object类型派生的。CTS中的类型被分成两大类——引用类型（reference type，又叫托管类型[managed type]），分配在内存堆上；值类型（value type），分配在堆栈上。 </p>
+<p>［图片参考托管］</p>
+<p>​           托管类型                                            非托管类型 </p>
+<h4 id="非托管资源"><a href="#非托管资源" class="headerlink" title="非托管资源"></a>非托管资源</h4><p>ApplicationContext, Brush, Component, ComponentDesigner, Container, Context, Cursor, FileStream, Font, Icon, Image, Matrix, Object, OdbcDataReader, OleDBDataReader, Pen, Regex, Socket, StreamWriter, Timer, Tooltip, 文件句柄, GDI资源, 数据库连接等等资源。 </p>
+<h4 id="GC的问题"><a href="#GC的问题" class="headerlink" title="GC的问题"></a>GC的问题</h4><p>首先，GC并不是能释放所有的资源。它不能自动释放非托管资源。<br>第二，GC并不是实时性的，这将会造成系统性能上的瓶颈和不确定性。<br>GC并不是实时性的，这会造成系统性能上的瓶颈和不确定性。所以有了IDisposable接口，IDisposable接口定义了Dispose方法，这个方法用来供程序员显式调用以释放非托管资源。使用using语句可以简化资源管理。 </p>
+<h4 id="判断一个对象为垃圾的办法"><a href="#判断一个对象为垃圾的办法" class="headerlink" title="判断一个对象为垃圾的办法"></a>判断一个对象为垃圾的办法</h4><h5 id="计数器算法"><a href="#计数器算法" class="headerlink" title="计数器算法"></a>计数器算法</h5><p>每当一个对象被引用，计数器+1，引用失效，计数器减1.计数器为0的对象就会被当作垃圾回收。<br>效率高，但是循环引用没法甄别。 </p>
+<h5 id="可达性算法"><a href="#可达性算法" class="headerlink" title="可达性算法"></a>可达性算法</h5><p>Garbage Collector（垃圾收集器，在不至于混淆的情况下也成为GC）以应用程序的root为基础，遍历应用程序在Heap上动态分配的所有对象[2]，通过识别它们是否被引用来确定哪些对象是已经死亡的、哪些仍需要被使用。已经不再被应用程序的root或者别的对象所引用的对象就是已经死亡的对象，即所谓的垃圾，需要被回收。这就是GC工作的原理。为了实现这个原理，GC有多种算法。比较常见的算法有Reference Counting，Mark Sweep，Copy Collection等等。目前主流的虚拟系统.NET CLR，Java VM和Rotor都是采用的Mark Sweep算法。 </p>
+<p>通过一系列的称为 “GC Roots” 的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径称为 引用链(Reference Chain) ，当一个对象到GC Roots没有任何引用链相连（用图论的话来说，就是从GC Roots到这个对象不可达）时，则证明此对象是不可用的。 </p>
+<p>对象销毁和垃圾回收延伸阅读：<br><a href="https://www.cnblogs.com/yang_sy/p/3784151.html" target="_blank" rel="noopener">https://www.cnblogs.com/yang_sy/p/3784151.html</a></p>
+<h3 id="装箱和拆箱"><a href="#装箱和拆箱" class="headerlink" title="装箱和拆箱"></a>装箱和拆箱</h3><p>本质上，所有的类型基类都是object，引用类型；<br>装箱，值－引用：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> val = <span class="number">100</span>; </span><br><span class="line"><span class="keyword">object</span> obj = val; </span><br><span class="line">Console.WriteLine (<span class="string">"对象的值 = &#123;0&#125;"</span>, obj); <span class="comment">//对象的值 = 100</span></span><br></pre></td></tr></table></figure>
+<p>拆箱，引用－值：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> val = <span class="number">100</span>; </span><br><span class="line"><span class="keyword">object</span> obj = val; </span><br><span class="line"><span class="keyword">int</span> num = (<span class="keyword">int</span>) obj; </span><br><span class="line">Console.WriteLine (<span class="string">"num: &#123;0&#125;"</span>, num); <span class="comment">//num: 100</span></span><br></pre></td></tr></table></figure>
+<p>装箱以后，才能被拆箱。</p>
+<p>参考：<br><a href="https://blog.csdn.net/qiaoquan3/article/details/51439726" target="_blank" rel="noopener">https://blog.csdn.net/qiaoquan3/article/details/51439726</a><br><a href="http://www.cnblogs.com/huashanlin/archive/2007/05/16/749359.html" target="_blank" rel="noopener">http://www.cnblogs.com/huashanlin/archive/2007/05/16/749359.html</a></p>
+<h3 id="序列化和反序列化"><a href="#序列化和反序列化" class="headerlink" title="序列化和反序列化"></a>序列化和反序列化</h3><h3 id="值类型引用类型、堆栈"><a href="#值类型引用类型、堆栈" class="headerlink" title="值类型引用类型、堆栈"></a>值类型引用类型、堆栈</h3><p>C#中定义的值类型包括原类型<br>（Sbyte、Byte、Short、Ushort、Int、Uint、Long、Ulong、Char、Float、Double、Bool、Decimal）、枚举(enum)、结构(struct)，</p>
+<p>引用类型包括<br>class、数组、接口、委托、string等。</p>
+<p>值类型-栈<br>引用类型-堆</p>
+<p>延伸阅读：<br><a href="https://blog.csdn.net/just0kk/article/details/51523374" target="_blank" rel="noopener">https://blog.csdn.net/just0kk/article/details/51523374</a><br><a href="http://www.cnblogs.com/siqing99/archive/2012/04/03/2430918.html" target="_blank" rel="noopener">http://www.cnblogs.com/siqing99/archive/2012/04/03/2430918.html</a><br><a href="https://www.cnblogs.com/bakuhert/articles/5878086.html" target="_blank" rel="noopener">https://www.cnblogs.com/bakuhert/articles/5878086.html</a><br><a href="https://blog.csdn.net/qiaoquan3/article/details/51202926" target="_blank" rel="noopener">https://blog.csdn.net/qiaoquan3/article/details/51202926</a><br><a href="https://blog.csdn.net/qq_26545305/article/details/52903658" target="_blank" rel="noopener">https://blog.csdn.net/qq_26545305/article/details/52903658</a></p>
+<h3 id="深拷贝和浅拷贝"><a href="#深拷贝和浅拷贝" class="headerlink" title="深拷贝和浅拷贝"></a>深拷贝和浅拷贝</h3><p>为对象创建副本的技术称为拷贝（也叫克隆）。我们将拷贝分为浅拷贝和深拷贝。图表总结：</p>
+<p>浅拷贝： 值类型 真拷贝／引用类型 假拷贝<br>深拷贝：值类型 真拷贝／引用类型 真拷贝</p>
+<p>特殊：浅拷贝中，string看成值类型<br>无论是浅拷贝还是深拷贝，微软都建议用类型继承ICloneable接口的方式明确告诉调用者：该类型可以被拷贝。当然，ICloneable接口只提供了一个声明为Clone的方法，我们可以根据需求在Clone方法内实现浅拷贝或深拷贝。<br>浅拷贝中，只是实现了引用的拷贝，只有一层拷贝。<br>值类型被拷贝了出来，有独立的一份；<br>引用类型只拷贝了引用，修改新对象，会全部修改原对象；</p>
+<p><strong>[但是，string类型比较特殊，虽然是引用类型，但是仍然会被创建副本。]</strong></p>
+<p>浅拷贝　将对象中的所有字段复制到新的对象（副本）中。其中，值类型字段的值被复制到副本中后，在副本中的修改不会影响到源对象对应的值。而引用类型的字段被复制到副本中的是引用类型的引用，而不是引用的对象，在副本中对引用类型的字段值做修改会影响到源对象本身。</p>
+<p>深拷贝　同样，将对象中的所有字段复制到新的对象中。不过，无论是对象的值类型字段，还是引用类型字段，都会被重新创建并赋值，对于副本的修改，不会影响到源对象本身。</p>
+<p><strong>实现浅拷贝</strong><br>使用MemberwiseClone,Room为引用类型，Film为值类型</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Room</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">int</span> _maxSeat;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Room</span>(<span class="params"><span class="keyword">int</span> maxSeat</span>)</span></span><br><span class="line"><span class="function"></span>  &#123;</span><br><span class="line">    <span class="keyword">this</span>._maxSeat = maxSeat;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">struct</span> Film</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">string</span> _name;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Film</span>(<span class="params"><span class="keyword">string</span> name</span>)</span></span><br><span class="line"><span class="function"></span>  &#123;</span><br><span class="line">    <span class="keyword">this</span>._name = name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Cinema</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">public</span> Room _room;</span><br><span class="line">  <span class="keyword">public</span> Film _film;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Cinema</span>(<span class="params">Room room, Film film</span>)</span></span><br><span class="line"><span class="function"></span>  &#123;</span><br><span class="line">    <span class="keyword">this</span>._room = room;</span><br><span class="line">    <span class="keyword">this</span>._film = film;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">object</span> <span class="title">Clone</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>  &#123;</span><br><span class="line">    <span class="keyword">return</span> MemberwiseClone(); <span class="comment">//对引用类型实施浅复制</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试代码：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Room room1 = <span class="keyword">new</span> Room(<span class="number">60</span>);</span><br><span class="line">  Film film1 = <span class="keyword">new</span> Film(<span class="string">"家园防线"</span>);</span><br><span class="line">  Cinema cinema1 = <span class="keyword">new</span> Cinema(room1, film1);</span><br><span class="line">  Cinema cinema2 = (Cinema)cinema1.Clone();</span><br><span class="line">  Console.WriteLine(<span class="string">"拷贝之前，结构成员的字段值为&#123;0&#125;，引用类型成员的字段值为&#123;1&#125;"</span>, cinema1._film._name,cinema1._room._maxSeat);</span><br><span class="line"> </span><br><span class="line">  Console.WriteLine(<span class="string">"拷贝之后，新的结构成员的字段值为&#123;0&#125;，引用类型成员的字段值为&#123;1&#125;"</span>, cinema2._film._name, cinema2._room._maxSeat);</span><br><span class="line"> </span><br><span class="line">  <span class="comment">//修改拷贝之前引用类型的字段值</span></span><br><span class="line">  cinema1._film._name = <span class="string">"极品飞车"</span>;</span><br><span class="line">  cinema1._room._maxSeat = <span class="number">80</span>;</span><br><span class="line"> </span><br><span class="line">  Console.WriteLine(<span class="string">"修改之后，结构成员的字段值为&#123;0&#125;，引用类型成员的字段值为&#123;1&#125;"</span>, cinema1._film._name, cinema1._room._maxSeat);</span><br><span class="line">  Console.WriteLine(<span class="string">"修改之后，新的结构成员的字段值为&#123;0&#125;，引用类型成员的字段值为&#123;1&#125;"</span>, cinema2._film._name, cinema2._room._maxSeat);</span><br><span class="line"> </span><br><span class="line">  Console.ReadKey();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p>拷贝前：结构 家园，引用 60；</p>
+<p>拷贝后：新结构 家园，引用 60；</p>
+<p>修改前：结构 极品，引用 80；</p>
+<p>修改后：新结构 家园，引用 80；</p>
+<p><strong>实现深拷贝</strong></p>
+<p>4种方法</p>
+<p>1 二进制的序列化和反序列化</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> T DeepCopy&lt;T&gt;(T obj)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">object</span> retval;</span><br><span class="line">  <span class="keyword">using</span> (MemoryStream ms = <span class="keyword">new</span> MemoryStream())</span><br><span class="line">  &#123;</span><br><span class="line">    BinaryFormatter bf = <span class="keyword">new</span> BinaryFormatter();</span><br><span class="line">    <span class="comment">//序列化成流</span></span><br><span class="line">    bf.Serialize(ms, obj);</span><br><span class="line">    ms.Seek(<span class="number">0</span>, SeekOrigin.Begin);</span><br><span class="line">    <span class="comment">//反序列化成对象</span></span><br><span class="line">    retval = bf.Deserialize(ms);</span><br><span class="line">    ms.Close();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> (T)retval;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2 XML序列化和反序列化</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> T DeepCopy&lt;T&gt;(T obj)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">object</span> retval;</span><br><span class="line">      <span class="keyword">using</span> (MemoryStream ms = <span class="keyword">new</span> MemoryStream())</span><br><span class="line">      &#123;</span><br><span class="line">        XmlSerializer xml = <span class="keyword">new</span> XmlSerializer(<span class="keyword">typeof</span>(T));</span><br><span class="line">        xml.Serialize(ms, obj);</span><br><span class="line">        ms.Seek(<span class="number">0</span>, SeekOrigin.Begin);</span><br><span class="line">        retval = xml.Deserialize(ms);</span><br><span class="line">        ms.Close();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> (T)retval;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>3 反射实现</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> T DeepCopy&lt;T&gt;(T obj)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//如果是字符串或值类型则直接返回</span></span><br><span class="line">  <span class="keyword">if</span> (obj <span class="keyword">is</span> <span class="keyword">string</span> || obj.GetType().IsValueType) <span class="keyword">return</span> obj;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">object</span> retval = Activator.CreateInstance(obj.GetType());</span><br><span class="line">  FieldInfo[] fields = obj.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);</span><br><span class="line">  <span class="keyword">foreach</span> (FieldInfo field <span class="keyword">in</span> fields)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123; field.SetValue(retval, DeepCopy(field.GetValue(obj))); &#125;</span><br><span class="line">    <span class="keyword">catch</span> &#123; &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> (T)retval;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4 利用silverlight DataContractSerializer实现，用于在silverlight 客户端使用</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> T DeepCopy&lt;T&gt;(T obj)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">object</span> retval;</span><br><span class="line">      <span class="keyword">using</span> (MemoryStream ms = <span class="keyword">new</span> MemoryStream())</span><br><span class="line">      &#123;</span><br><span class="line">        DataContractSerializer ser = <span class="keyword">new</span> DataContractSerializer(<span class="keyword">typeof</span>(T));</span><br><span class="line">        ser.WriteObject(ms, obj);</span><br><span class="line">        ms.Seek(<span class="number">0</span>, SeekOrigin.Begin);</span><br><span class="line">        retval = ser.ReadObject(ms);</span><br><span class="line">        ms.Close();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> (T)retval;</span><br></pre></td></tr></table></figure>
+<p>补充：第一个已经通过递归实现了深拷贝。</p>
+<p>同浅拷贝类似的实现代码：（注意 需要序列化的类必须标明）</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Room</span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">int</span> _maxSeat;</span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Room</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>  &#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Room</span>(<span class="params"><span class="keyword">int</span> maxSeat</span>)</span></span><br><span class="line"><span class="function"></span>  &#123;</span><br><span class="line">    <span class="keyword">this</span>._maxSeat = maxSeat;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">[<span class="meta">Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">struct</span> Film&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">string</span> _name;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Film</span>(<span class="params"><span class="keyword">string</span> name</span>)</span></span><br><span class="line"><span class="function"></span>  &#123;</span><br><span class="line">    <span class="keyword">this</span>._name = name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">[<span class="meta">Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Cinema</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">public</span> Room _room;</span><br><span class="line">  <span class="keyword">public</span> Film _film;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Cinema</span>(<span class="params">Room room, Film film</span>)</span></span><br><span class="line"><span class="function"></span>  &#123;</span><br><span class="line">    <span class="keyword">this</span>._room = room;</span><br><span class="line">    <span class="keyword">this</span>._film = film;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">//浅拷贝</span></span><br><span class="line">  <span class="comment">//public object Clone()</span></span><br><span class="line">  <span class="comment">//&#123;</span></span><br><span class="line">  <span class="comment">//  return MemberwiseClone(); //对引用类型实施浅复制</span></span><br><span class="line">  <span class="comment">//&#125;</span></span><br><span class="line"> </span><br><span class="line">  <span class="comment">//深拷贝 对每个对象成员进行复制</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">object</span> <span class="title">Clone</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>  &#123;</span><br><span class="line">    Room room = <span class="keyword">new</span> Room();</span><br><span class="line">    room._maxSeat = <span class="keyword">this</span>._room._maxSeat;<span class="comment">//复制当前引用类型成员的值到新对象 </span></span><br><span class="line">    Film film = <span class="keyword">this</span>._film; <span class="comment">//值类型直接赋值</span></span><br><span class="line">    Cinema cinema = <span class="keyword">new</span> Cinema(room, film);</span><br><span class="line">    <span class="keyword">return</span> cinema;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">//使用序列化和反序列化进行复制</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">object</span> <span class="title">Clone1</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>  &#123;</span><br><span class="line">    BinaryFormatter bf = <span class="keyword">new</span> BinaryFormatter();</span><br><span class="line">    MemoryStream ms = <span class="keyword">new</span> MemoryStream();</span><br><span class="line">    bf.Serialize(ms, <span class="keyword">this</span>); <span class="comment">//复制到流中</span></span><br><span class="line">    ms.Position = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> (bf.Deserialize(ms));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试代码；</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></span><br><span class="line"><span class="function"></span>   &#123;</span><br><span class="line">     Room room1 = <span class="keyword">new</span> Room(<span class="number">60</span>);</span><br><span class="line">     Film film1 = <span class="keyword">new</span> Film(<span class="string">"家园防线"</span>);</span><br><span class="line">     Cinema cinema1 = <span class="keyword">new</span> Cinema(room1, film1);</span><br><span class="line">     Cinema cinema2 = (Cinema)cinema1.Clone1();</span><br><span class="line">     Console.WriteLine(<span class="string">"拷贝之前，结构成员的字段值为&#123;0&#125;，引用类型成员的字段值为&#123;1&#125;"</span>, cinema1._film._name,cinema1._room._maxSeat);</span><br><span class="line"> </span><br><span class="line">     Console.WriteLine(<span class="string">"拷贝之后，新的结构成员的字段值为&#123;0&#125;，引用类型成员的字段值为&#123;1&#125;"</span>, cinema2._film._name, cinema2._room._maxSeat);</span><br><span class="line"> </span><br><span class="line">     <span class="comment">//修改拷贝之前引用类型的字段值</span></span><br><span class="line">     cinema1._film._name = <span class="string">"极品飞车"</span>;</span><br><span class="line">     cinema1._room._maxSeat = <span class="number">80</span>;</span><br><span class="line"> </span><br><span class="line">     Console.WriteLine(<span class="string">"修改之后，结构成员的字段值为&#123;0&#125;，引用类型成员的字段值为&#123;1&#125;"</span>, cinema1._film._name, cinema1._room._maxSeat);</span><br><span class="line">     Console.WriteLine(<span class="string">"修改之后，新的结构成员的字段值为&#123;0&#125;，引用类型成员的字段值为&#123;1&#125;"</span>, cinema2._film._name, cinema2._room._maxSeat);</span><br><span class="line"> </span><br><span class="line">     Console.ReadKey();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<p><a href="https://blog.csdn.net/mochounv/article/details/52575700" target="_blank" rel="noopener">https://blog.csdn.net/mochounv/article/details/52575700</a></p>
+<p><a href="https://blog.csdn.net/bigpudding24/article/details/48490145" target="_blank" rel="noopener">https://blog.csdn.net/bigpudding24/article/details/48490145</a> 具体例子 很清晰</p>
+<h2 id="语言横向比较"><a href="#语言横向比较" class="headerlink" title="语言横向比较"></a>语言横向比较</h2><h3 id="CPP"><a href="#CPP" class="headerlink" title="CPP"></a>CPP</h3><p>内存管理、函数指针（委托）、多重继承</p>
+<ol>
+<li>csharp不需要特别注意内存管理</li>
+<li>csharp强调类、市里的使用，而不需要和cpp一样频繁地使用指针</li>
+<li>csharp的委托相当于cpp中的函数指针</li>
+</ol>
+<p>参考：</p>
+<p><a href="https://www.cnblogs.com/to-creat/p/4925729.html" target="_blank" rel="noopener">https://www.cnblogs.com/to-creat/p/4925729.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSharp/" rel="tag"># CSharp</a>
+          
+            <a href="/tags/面试/" rel="tag"># 面试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/26/hello-world/" rel="prev" title="April is Coming">
+                April is Coming <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="KinGil">
+          <p class="site-author-name" itemprop="name">KinGil</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kingiluob" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/2283641104/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100007092155441" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Facebook
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#面试问题汇总"><span class="nav-number">1.1.</span> <span class="nav-text">面试问题汇总</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字段-属性-方法"><span class="nav-number">1.2.</span> <span class="nav-text">字段 属性 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体和类"><span class="nav-number">1.3.</span> <span class="nav-text">结构体和类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象"><span class="nav-number">1.4.</span> <span class="nav-text">面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实例化"><span class="nav-number">1.4.1.</span> <span class="nav-text">实例化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#this-关键字"><span class="nav-number">1.4.2.</span> <span class="nav-text">this 关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Base关键字"><span class="nav-number">1.4.3.</span> <span class="nav-text">Base关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#static关键字"><span class="nav-number">1.4.4.</span> <span class="nav-text">static关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Override-amp-New"><span class="nav-number">1.4.5.</span> <span class="nav-text">Override&amp;New</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#封装"><span class="nav-number">1.4.6.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#继承"><span class="nav-number">1.4.7.</span> <span class="nav-text">继承</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Interface"><span class="nav-number">1.4.7.1.</span> <span class="nav-text">Interface</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Abstract"><span class="nav-number">1.4.7.2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Virtual"><span class="nav-number">1.4.7.3.</span> <span class="nav-text">Virtual</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Static"><span class="nav-number">1.4.7.4.</span> <span class="nav-text">Static</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多态"><span class="nav-number">1.4.8.</span> <span class="nav-text">多态</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用数据类型的使用"><span class="nav-number">1.5.</span> <span class="nav-text">常用数据类型的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#int-string转换"><span class="nav-number">1.5.1.</span> <span class="nav-text">int string转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组Array："><span class="nav-number">1.5.2.</span> <span class="nav-text">数组Array：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList动态数组"><span class="nav-number">1.5.3.</span> <span class="nav-text">ArrayList动态数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#List"><span class="nav-number">1.5.4.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dictionary-类型安全"><span class="nav-number">1.5.5.</span> <span class="nav-text">Dictionary 类型安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashTable"><span class="nav-number">1.5.6.</span> <span class="nav-text">HashTable</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶"><span class="nav-number">2.</span> <span class="nav-text">进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件IO"><span class="nav-number">2.1.</span> <span class="nav-text">文件IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引器"><span class="nav-number">2.2.</span> <span class="nav-text">索引器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LINQ"><span class="nav-number">2.3.</span> <span class="nav-text">LINQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例"><span class="nav-number">2.4.</span> <span class="nav-text">单例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程"><span class="nav-number">2.5.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Lock"><span class="nav-number">2.5.1.</span> <span class="nav-text">Lock</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Loom"><span class="nav-number">2.5.2.</span> <span class="nav-text">Loom</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#socket汇总"><span class="nav-number">2.6.</span> <span class="nav-text">socket汇总</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范型"><span class="nav-number">2.7.</span> <span class="nav-text">范型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#委托和事件"><span class="nav-number">2.8.</span> <span class="nav-text">委托和事件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存相关"><span class="nav-number">3.</span> <span class="nav-text">内存相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存"><span class="nav-number">3.1.</span> <span class="nav-text">内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#托管和非托管资源"><span class="nav-number">3.2.</span> <span class="nav-text">托管和非托管资源</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#非托管资源"><span class="nav-number">3.2.1.</span> <span class="nav-text">非托管资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GC的问题"><span class="nav-number">3.2.2.</span> <span class="nav-text">GC的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断一个对象为垃圾的办法"><span class="nav-number">3.2.3.</span> <span class="nav-text">判断一个对象为垃圾的办法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#计数器算法"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">计数器算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可达性算法"><span class="nav-number">3.2.3.2.</span> <span class="nav-text">可达性算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装箱和拆箱"><span class="nav-number">3.3.</span> <span class="nav-text">装箱和拆箱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#序列化和反序列化"><span class="nav-number">3.4.</span> <span class="nav-text">序列化和反序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#值类型引用类型、堆栈"><span class="nav-number">3.5.</span> <span class="nav-text">值类型引用类型、堆栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深拷贝和浅拷贝"><span class="nav-number">3.6.</span> <span class="nav-text">深拷贝和浅拷贝</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语言横向比较"><span class="nav-number">4.</span> <span class="nav-text">语言横向比较</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPP"><span class="nav-number">4.1.</span> <span class="nav-text">CPP</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KinGil</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
