@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+
+
+<script type="text/javascript" color="253,253,253" opacity="0.5" zindex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Memory,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="前言">
+<meta name="keywords" content="Memory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity-Memory-Basic">
+<meta property="og:url" content="http://kangzhi.github.io/2018/04/22/Unity-Memory-Basic/index.html">
+<meta property="og:site_name" content="KinGil&#39;s Blog">
+<meta property="og:description" content="前言">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-01-15T04:43:06.891Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unity-Memory-Basic">
+<meta name="twitter:description" content="前言">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kangzhi.github.io/2018/04/22/Unity-Memory-Basic/">
+
+
+
+
+
+  <title>Unity-Memory-Basic | KinGil's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KinGil's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">April is coming</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kangzhi.github.io/2018/04/22/Unity-Memory-Basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KinGil">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KinGil's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Unity-Memory-Basic</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-22T18:10:05+08:00">
+                2018-04-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity/" itemprop="url" rel="index">
+                    <span itemprop="name">Unity</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity/CSharp/" itemprop="url" rel="index">
+                    <span itemprop="name">CSharp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前言</p>
+<a id="more"></a>
+<h1 id="UnityProfiler"><a href="#UnityProfiler" class="headerlink" title="UnityProfiler"></a>UnityProfiler</h1><h2 id="使用介绍"><a href="#使用介绍" class="headerlink" title="使用介绍"></a>使用介绍</h2><p>一种是editor下面的profiler </p>
+<p>另一种是在目标平台上的profiler </p>
+<h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><ol>
+<li>GFX 通常指的是GPU的调用，所以可以不用太关心，想要关注的话专门切到GPU上去 </li>
+<li>behaviour.update是比较常用和关心的项 </li>
+</ol>
+<p>batches </p>
+<p>比如不同的物体使用相同的材质， </p>
+<p>if you have multi objects of uniform scale using same materials,get batched in 1 draw call </p>
+<p>memory 里面可以看到GC的频率，越低越好 </p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>update里面的debug很耗费性能，在deep profiler里面，<br>Profiler.BeginSample(“test”);<br>//debug.log<br>Profiler.Endsample(); </p>
+<p>频率没有那么高的调用 每十帧调用一次<br>Framedebugger： </p>
+<p>性能分析的文章<br><a href="https://unity3d.com/learn/tutorials/temas/performance-optimization/diagnosing-performance-problems-using-profiler-window?playlist=44069" target="_blank" rel="noopener">https://unity3d.com/learn/tutorials/temas/performance-optimization/diagnosing-performance-problems-using-profiler-window?playlist=44069</a></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>CPU 85.95ms表示这一帧的总CPU时间 </p>
+<h2 id="性能问题的原因"><a href="#性能问题的原因" class="headerlink" title="性能问题的原因"></a>性能问题的原因</h2><h3 id="Vsync-垂直同步"><a href="#Vsync-垂直同步" class="headerlink" title="Vsync 垂直同步"></a>Vsync 垂直同步</h3><p>这个一般不关心； </p>
+<p>看到waitfortargetFPS的时候，意味着游戏正在等待Vsync，忽略即可； </p>
+<p>ios强制执行vsync，其他平台可以关掉； </p>
+<h3 id="渲染分析"><a href="#渲染分析" class="headerlink" title="渲染分析"></a>渲染分析</h3><p>看看游戏的渲染的性能瓶颈主要在CPU还是GPU，方法是使用GPU分析器。（并不是所有设备都支持。） </p>
+<ol>
+<li><p>开启GPU分析后，如果看到GPU时间超过CPU时间，则我们的性能瓶颈主要在GPU。 </p>
+</li>
+<li><p>如果没法开启GPU，按时间排序，看gfx.waitforPresent在CPU中所占的时间最长，就是CPU在等待GPU </p>
+</li>
+</ol>
+<p>不管CPU还是GPU限制性能，分别进行优化。 </p>
+<h3 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h3><p>对于GC，查看该帧里面GC时间占整个帧时间的长度。 </p>
+<h3 id="物理"><a href="#物理" class="headerlink" title="物理"></a>物理</h3><p>常用的方法和思路： </p>
+<ol>
+<li>碰撞层的设定layercollision matrix </li>
+</ol>
+<p>1000绿色+1000红色，都只跟相同颜色的碰撞 </p>
+<p>在其中一个测试中，所有实例都属于Default层，并且通过字符串比较碰撞监听器上的游戏对象标签来完成交互。 在另一个测试中，每个对象类型都在它们自己的Layer上设置，我通过碰撞矩阵配置每个层的交互。 在这种情况下不需要进行字符串测试，因为只发生正确的冲突。 </p>
+<ol start="2">
+<li>射线 </li>
+</ol>
+<p>坚决不要在fixedupdate里面发射线； </p>
+<p>使用默认类型的碰撞体，而不是meshcollider </p>
+<p>在射线函数上设定一个layer mask </p>
+<ol start="3">
+<li>不要尝试移动静态的碰撞器，最好加刚体。如果要通过代码控制移动，标记rigidbody为kinematic </li>
+</ol>
+<h3 id="慢脚本"><a href="#慢脚本" class="headerlink" title="慢脚本"></a>慢脚本</h3><p>注意的是：比如ImageEffects和OnwillRenderObject和OnPreCull函数是当作渲染数据，而不是脚本数据。 </p>
+<p>[unity性能优化]</p>
+<p>性能分析\使用profile</p>
+<p><a href="https://unity3d.com/learn/tutorials/temas/performance-optimization/diagnosing-performance-problems-using-profiler-window?playlist=44069" target="_blank" rel="noopener">https://unity3d.com/learn/tutorials/temas/performance-optimization/diagnosing-performance-problems-using-profiler-window?playlist=44069</a></p>
+<p>UnityGC机制和优化</p>
+<p><a href="https://unity3d.com/cn/learn/tutorials/topics/performance-optimization/optimizing-garbage-collection-unity-games" target="_blank" rel="noopener">https://unity3d.com/cn/learn/tutorials/topics/performance-optimization/optimizing-garbage-collection-unity-games</a></p>
+<p>性能</p>
+<p><a href="https://docs.unity3d.com/Manual/BestPracticeUnderstandingPerformanceInUnity4-1.html?_ga=2.201618392.833542919.1553218124-1934737889.1507532948" target="_blank" rel="noopener">https://docs.unity3d.com/Manual/BestPracticeUnderstandingPerformanceInUnity4-1.html?_ga=2.201618392.833542919.1553218124-1934737889.1507532948</a></p>
+<p>unity优化和测试：<br><a href="https://blog.csdn.net/qq_32418469/article/details/8132173" target="_blank" rel="noopener">https://blog.csdn.net/qq_32418469/article/details/8132173</a></p>
+<p>零容忍warning allocate</p>
+<p>get component find object避免 比较慢</p>
+<p>问题？</p>
+<p>什么时候对象会被系统判定并且进行GC操作？？？怎么避免被释放掉内存</p>
+<p>几个参考链接： </p>
+<p><a href="https://kb.cnblogs.com/page/106720/" target="_blank" rel="noopener">https://kb.cnblogs.com/page/106720/</a></p>
+<p><a href="https://www.jianshu.com/p/e597a74c4938" target="_blank" rel="noopener">https://www.jianshu.com/p/e597a74c4938</a></p>
+<p><a href="https://zhidao.baidu.com/question/172960970.html" target="_blank" rel="noopener">https://zhidao.baidu.com/question/172960970.html</a></p>
+<h1 id="Garbage-Collect"><a href="#Garbage-Collect" class="headerlink" title="Garbage Collect"></a>Garbage Collect</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>栈 用完释放 局部值类型<br>堆 定期释放 </p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>用profiler分析，确定在哪些帧哪些函数出发了堆的重新分配 </p>
+<h2 id="减少GC的三种方法"><a href="#减少GC的三种方法" class="headerlink" title="减少GC的三种方法"></a>减少GC的三种方法</h2><ul>
+<li>减少堆的分配和更少的对象引用，堆上对象越少，表示出发垃圾收集时候，进行的检测越少 </li>
+<li>在性能关键时刻，减少堆的分配和解除分配 </li>
+<li>对GC和堆扩展进行计时，以便让他们在可预测和方便的时间</li>
+</ul>
+<h3 id="减少创建的垃圾量"><a href="#减少创建的垃圾量" class="headerlink" title="减少创建的垃圾量"></a>减少创建的垃圾量</h3><p>不要在update里频繁创建对象。</p>
+<ol>
+<li>高速缓存 </li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnTriggerEnter</span>(<span class="params">Collider other</span>) </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    Renderer [] allRenderers = FindObjectsOfType &lt;Renderer&gt;(); </span><br><span class="line">​    ExampleFunction(allRenderers); </span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">//&gt;&gt;&gt; </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    allRenderers = FindObjectsOfType &lt;Renderer&gt;(); </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnTriggerEnter</span>(<span class="params">Collider other</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ExampleFunction(allRenderers); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>不要分配频繁调用的函数 </li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    ExampleGarbageGeneratingFunction(transform.position.x); </span><br><span class="line">&#125; </span><br><span class="line">&gt;&gt;&gt; </span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">float</span> previousTransformPositionX; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    <span class="keyword">float</span> transformPositionX = transform.position.x; </span><br><span class="line">​    <span class="keyword">if</span>(transformPositionX！= previousTransformPositionX)</span><br><span class="line">​    &#123; </span><br><span class="line">​        ExampleGarbageGeneratingFunction(transformPositionX); </span><br><span class="line">​        previousTransformPositionX = transformPositionX;</span><br><span class="line">​    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者给调用设定计时器，不要每帧调用 </p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>) </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    ExampleGarbageGeneratingFunction(); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; </span><br><span class="line"><span class="keyword">private</span> <span class="keyword">float</span> timeSinceLastCalled; </span><br><span class="line"><span class="keyword">private</span> <span class="keyword">float</span> delay = <span class="number">1f</span>; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    timeSinceLastCalled + = Time.deltaTime; </span><br><span class="line">​    <span class="keyword">if</span>(timeSinceLastCalled&gt;DelayTime) </span><br><span class="line">​    &#123; </span><br><span class="line">​        ExampleGarbageGeneratingFunction(); </span><br><span class="line">​        timeSinceLastCalled = <span class="number">0f</span>; </span><br><span class="line">​    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>清空集合 </li>
+</ol>
+<p>对于collections，在创建集合或者调整集合大小时候才会分配<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    列出myList = <span class="keyword">new</span> List(); </span><br><span class="line">​    PopulateList(myList中); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">//&gt;&gt;&gt; </span></span><br><span class="line"><span class="keyword">private</span> List myList = <span class="keyword">new</span> List(); </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>) </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    myList.Clear(); </span><br><span class="line">​    PopulateList(myList中); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol start="4">
+<li>对象池 </li>
+</ol>
+<p>略 </p>
+<h3 id="不必要的常见堆内存分配"><a href="#不必要的常见堆内存分配" class="headerlink" title="不必要的常见堆内存分配"></a>不必要的常见堆内存分配</h3><h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>字符串的操作会带来大量的gc，下面例子减少在update里操作字符串的次数 </p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Text timerText; </span><br><span class="line"><span class="keyword">private</span> <span class="keyword">float</span> timer; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>) </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    timer += Time.deltaTime; </span><br><span class="line">​    timerText.text = <span class="string">"TIME:"</span> + timer.ToString(); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; </span><br><span class="line"><span class="keyword">public</span> Text timerHeaderText; </span><br><span class="line"><span class="keyword">public</span> Text timerValueText;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">float</span> timer; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>) </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    timerHeaderText.text = <span class="string">"TIME:"</span>; </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>) </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    timerValueText.text = timer.toString(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="unity函数调用"><a href="#unity函数调用" class="headerlink" title="unity函数调用"></a>unity函数调用</h4><p>在这种情况下减少分配很容易：我们可以简单地缓存对数组的引用。当我们这样做时，只创建一个数组，并相应减少创建的垃圾量。以下代码演示了这一点。在这种情况下，我们在循环运行之前调用Mesh.normals并缓存引用，以便只创建一个数组。 </p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ExampleFunction</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;myMesh.normals.Length; i ++) </span><br><span class="line">​    &#123; </span><br><span class="line">​        Vector3 normal = myMesh.normals [i]; </span><br><span class="line">​    &#125; </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ExampleFunction</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    Vector3 [] meshNormals = myMesh.normals; </span><br><span class="line">​    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;meshNormals.Length; i ++) </span><br><span class="line">​    &#123; </span><br><span class="line">​        Vector3 normal = meshNormals[i]; </span><br><span class="line">​    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另外一个例子 </p>
+<p>在以下示例代码中，通过调用GameObject.tag创建垃圾：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">string</span> playerTag =“Player”; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnTriggerEnter</span>(<span class="params">Collider other</span>) </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">​    <span class="keyword">bool</span> isPlayer = other.gameObject.tag == playerTag; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果我们使用<a href="http://gameobject.comparetag/" target="_blank" rel="noopener">GameObject.CompareTag</a>（），则此函数不再生成任何垃圾：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">string</span> playerTag =“Player”; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnTriggerEnter</span>(<span class="params">Collider other</span>) </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    <span class="keyword">bool</span> isPlayer = [other.gameObject.CompareTag](http:<span class="comment">//other.gameobject.comparetag/)(playerTag); </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><a href="http://gameobject.comparetag/" target="_blank" rel="noopener">GameObject.CompareTag</a>不是唯一的; 许多Unity函数调用具有不会导致堆分配的替代版本。例如，我们可以使用Input.GetTouch()和Input.touchCount代替Input.touches，或使用Physics.SphereCastNonAlloc()代替Physics.SphereCastAll()。 </p>
+<h4 id="Boxing"><a href="#Boxing" class="headerlink" title="Boxing"></a>Boxing</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ExampleFunction</span>(<span class="params"></span>) </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    <span class="keyword">int</span> cost = <span class="number">5</span>; </span><br><span class="line">​    <span class="keyword">string</span> displayString = String.Format(<span class="string">"Price: &#123;0&#125; gold"</span>, cost); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h4><p>产生GC<br>yield return 0;<br>不产生GC<br>yield return null; </p>
+<p>不好的例子,每次循环迭代时创建waitforseconds对象：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (!isComplete) </span><br><span class="line">&#123; </span><br><span class="line">​    <span class="function"><span class="keyword">yield</span> return new <span class="title">WaitForSeconds</span>(<span class="params"><span class="number">1f</span></span>)</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>缓存并重用waitforseconds对象可以减少垃圾：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">WaitForSeconds delay = <span class="keyword">new</span> WaitForSeconds(<span class="number">1f</span>); </span><br><span class="line"><span class="keyword">while</span> (!isComplete) </span><br><span class="line">&#123;</span><br><span class="line">​    <span class="keyword">yield</span> <span class="keyword">return</span> delay; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于需要使用协程的地方，通常有两个代替方案： </p>
+<ol>
+<li>跟时间相关的，在update里面监视时间 </li>
+<li>跟顺序逻辑相关的，我们优先使用对象之间的消息机制 </li>
+</ol>
+<h4 id="foreach循环"><a href="#foreach循环" class="headerlink" title="foreach循环"></a>foreach循环</h4><p>旧版本 </p>
+<h4 id="函数引用"><a href="#函数引用" class="headerlink" title="函数引用"></a>函数引用</h4><p>不管匿名的还是命名的函数，都是引用类型 </p>
+<h4 id="LINQ-and-Regular-Expressions"><a href="#LINQ-and-Regular-Expressions" class="headerlink" title="LINQ and Regular Expressions"></a>LINQ and Regular Expressions</h4><h3 id="优化代码"><a href="#优化代码" class="headerlink" title="优化代码"></a>优化代码</h3><ol>
+<li>下面是值类型，但是引用了string，所以整个结构体的数组也会被GC在运行时检查。 </li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">struct</span> ItemData </span><br><span class="line">&#123; </span><br><span class="line">​    <span class="keyword">public</span> <span class="keyword">string</span> name; </span><br><span class="line">​    <span class="keyword">public</span> <span class="keyword">int</span> cost; </span><br><span class="line">​    <span class="keyword">public</span> Vector3 position; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> ItemData[] itemData; </span><br><span class="line"></span><br><span class="line"><span class="comment">//&gt;&gt;&gt;单独定义，这样只检查string数组对象，而不是所有的都检查 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">string</span>[] itemNames; </span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span>[] itemCosts; </span><br><span class="line"><span class="keyword">private</span> Vector3[] itemPositions;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>尽量减少对对象的引用： </li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DialogData</span> </span><br><span class="line">&#123; </span><br><span class="line">​    <span class="keyword">private</span> DialogData nextDialog; </span><br><span class="line">​    <span class="function"><span class="keyword">public</span> DialogData <span class="title">GetNextDialog</span>(<span class="params"></span>) </span></span><br><span class="line"><span class="function">​</span>    &#123; </span><br><span class="line">​        <span class="keyword">return</span> nextDialog; </span><br><span class="line">​    &#125; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">//&gt;&gt;&gt; </span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DialogData</span></span><br><span class="line">&#123; </span><br><span class="line">​    <span class="keyword">private</span> <span class="keyword">int</span> nextDialogID; </span><br><span class="line">​    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">GetNextDialogID</span>(<span class="params"></span>) </span></span><br><span class="line"><span class="function">​</span>    &#123; </span><br><span class="line">​        <span class="keyword">return</span> nextDialogID; </span><br><span class="line">​    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="强制进行GC处理"><a href="#强制进行GC处理" class="headerlink" title="强制进行GC处理"></a>强制进行GC处理</h3><p>System.GC.Collect();<br>在重要节点前进行GC处理 </p>
+<p>参考链接</p>
+<p>// <a href="https://unity3d.com/cn/learn/tutorials/topics/performance-optimization/optimizing-garbage-collection-unity-games" target="_blank" rel="noopener">https://unity3d.com/cn/learn/tutorials/topics/performance-optimization/optimizing-garbage-collection-unity-games</a> //</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Memory/" rel="tag"># Memory</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/23/CsharpBasic/" rel="next" title="CSharp-Basic-Sum">
+                <i class="fa fa-chevron-left"></i> CSharp-Basic-Sum
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/26/hello-world/" rel="prev" title="April is Coming">
+                April is Coming <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="KinGil">
+          <p class="site-author-name" itemprop="name">KinGil</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kingiluob" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/2283641104/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100007092155441" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Facebook
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UnityProfiler"><span class="nav-number">1.</span> <span class="nav-text">UnityProfiler</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用介绍"><span class="nav-number">1.1.</span> <span class="nav-text">使用介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#细节"><span class="nav-number">1.2.</span> <span class="nav-text">细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">1.3.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析"><span class="nav-number">1.4.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能问题的原因"><span class="nav-number">1.5.</span> <span class="nav-text">性能问题的原因</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vsync-垂直同步"><span class="nav-number">1.5.1.</span> <span class="nav-text">Vsync 垂直同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染分析"><span class="nav-number">1.5.2.</span> <span class="nav-text">渲染分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GC"><span class="nav-number">1.5.3.</span> <span class="nav-text">GC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#物理"><span class="nav-number">1.5.4.</span> <span class="nav-text">物理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#慢脚本"><span class="nav-number">1.5.5.</span> <span class="nav-text">慢脚本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Garbage-Collect"><span class="nav-number">2.</span> <span class="nav-text">Garbage Collect</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">2.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-number">2.2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#减少GC的三种方法"><span class="nav-number">2.3.</span> <span class="nav-text">减少GC的三种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#减少创建的垃圾量"><span class="nav-number">2.3.1.</span> <span class="nav-text">减少创建的垃圾量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不必要的常见堆内存分配"><span class="nav-number">2.3.2.</span> <span class="nav-text">不必要的常见堆内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unity函数调用"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">unity函数调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Boxing"><span class="nav-number">2.3.2.3.</span> <span class="nav-text">Boxing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#协程"><span class="nav-number">2.3.2.4.</span> <span class="nav-text">协程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#foreach循环"><span class="nav-number">2.3.2.5.</span> <span class="nav-text">foreach循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数引用"><span class="nav-number">2.3.2.6.</span> <span class="nav-text">函数引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LINQ-and-Regular-Expressions"><span class="nav-number">2.3.2.7.</span> <span class="nav-text">LINQ and Regular Expressions</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化代码"><span class="nav-number">2.3.3.</span> <span class="nav-text">优化代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#强制进行GC处理"><span class="nav-number">2.3.4.</span> <span class="nav-text">强制进行GC处理</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KinGil</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
