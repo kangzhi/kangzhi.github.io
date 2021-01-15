@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+
+
+<script type="text/javascript" color="253,253,253" opacity="0.5" zindex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Gene Algorithm,javascript,echarts,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="前言">
+<meta name="keywords" content="Gene Algorithm,javascript,echarts">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gene-Algorithm">
+<meta property="og:url" content="http://kangzhi.github.io/2020/02/23/GeneAlgorithm/index.html">
+<meta property="og:site_name" content="KinGil&#39;s Blog">
+<meta property="og:description" content="前言">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-01-15T05:01:12.411Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gene-Algorithm">
+<meta name="twitter:description" content="前言">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kangzhi.github.io/2020/02/23/GeneAlgorithm/">
+
+
+
+
+
+  <title>Gene-Algorithm | KinGil's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KinGil's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">April is coming</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kangzhi.github.io/2020/02/23/GeneAlgorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KinGil">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KinGil's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Gene-Algorithm</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-23T21:10:52+08:00">
+                2020-02-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前言</p>
+<a id="more"></a>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>遗传算法思路最开始来源于达尔文的进化论。可以简单设想成某物种表示某个性状的某条基因，基于变异和自然选择，经过N代的遗传、交叉、变异、复制以及选择等过程，进化出最优或者较优的基因/染色体。其实思路比较简单，就是引入随机的变异，由于染色体基因点位众多，经过多次多代的进化之后，会得到最终的基因表现。<br>像这样可以适应很多问题的算法还有模拟退火算法、粒子群算法、蚁群算法、禁忌搜索等等，统称为元启发式算法（Meta-heuristic algorithms）。具体遗传算法来说，包括产线排产算法、节点调度类型问题、函数的全局最优解。。。</p>
+<p><strong>KeyWords：随机生成、变异、适应函数、终止条件</strong><br>定义好基因，写好繁衍、变异、评价适应性、淘汰和终止的代码之后，只需要随机产生一个适当大小的种群，然后让它这样一代代的繁衍、变异和淘汰下去，到最后终止我们就会获得一个想要的结果。</p>
+<h3 id="概念1-基因、染色体、种群"><a href="#概念1-基因、染色体、种群" class="headerlink" title="概念1 基因、染色体、种群"></a>概念1 基因、染色体、种群</h3><p>进行数学建模，这个问题的一个可行解对应一条染色体。一般来讲我们只需要某个问题的一个解决方案，很有可能就是一个一维的数组。<br>比如对于3x+2Y+4Z&lt;100这个问题来说，[1,2,3]就是一个可行解，就是一条染色体，点位1,2,3就是组成染色体的基因。</p>
+<p>基因组成染色体，染色体组成种群。</p>
+<p>种群数量我们也假定是不变的，出生率和死亡率保持一致。至于种群数量增长是否影响最终结果，暂时也不考虑。</p>
+<h3 id="概念2-适应度函数"><a href="#概念2-适应度函数" class="headerlink" title="概念2 适应度函数"></a>概念2 适应度函数</h3><p>自然怎么选择呢，在实际的进化过程中，环境是扮演自然选择的上帝。对应到算法中，我们对这条染色体或者基因有一个判定它好的、适宜的标准。算法的总体目标：选择好的，淘汰差的。<br>在每次迭代或者进化中，都会计算适应度，基于适应度来评判和选择。</p>
+<h3 id="概念3-交叉"><a href="#概念3-交叉" class="headerlink" title="概念3 交叉"></a>概念3 交叉</h3><p>交叉的过程保留基因，但是会进行染色体的重组。实际中你可以跟交配过程联系起来，这样的一次过程叫做进化。<br>交叉的过程：<br>上一代染色体中选出一条爸爸和一条妈妈，用轮盘赌的算法来选（选择的基准是适应度概率分布）。选择爸爸和妈妈的操作完全平等。<br>随机一个位置，将爸爸和妈妈的染色体交叉互换，即形成1条完成交叉的下一代染色体。</p>
+<h3 id="概念4-变异"><a href="#概念4-变异" class="headerlink" title="概念4 变异"></a>概念4 变异</h3><p>对于交叉后得到的染色体，随机选择若干染色体的若干随机位置，进行若干基因的突变。突变的方向在一般问题中也应该是随机的。我的理解，在自然过程中应该也是随机的。<br>突变的基因比例会对最终的结果造成怎样的影响暂时还没有研究。</p>
+<h3 id="概念5-复制-继承"><a href="#概念5-复制-继承" class="headerlink" title="概念5 复制/继承"></a>概念5 复制/继承</h3><p>对于上一代种群中适应度最为优秀的若干染色体（适应度最好的），进行完全的继承，模拟适者生存。</p>
+<p>对于每一代需要生成的种群中的N个个体/N条染色体，其中需要交叉的M条，那么需要复制的就是N-M条。这个比例怎么约定，暂时不说，我的理解肯定完全遗传的数量要少很多。</p>
+<h3 id="概念6-自然选择"><a href="#概念6-自然选择" class="headerlink" title="概念6 自然选择"></a>概念6 自然选择</h3><p>这个过程体现在每一代进化过程中，包括复制本身以及交叉的选择策略。核心是适应度函数。</p>
+<h2 id="其他知识"><a href="#其他知识" class="headerlink" title="其他知识"></a>其他知识</h2><p>介绍相关涉及知识时，包括我在学习过程中看博文遇到最普遍的问题就是。虽然比如轮盘赌这样的算法广泛应用在遗传算法中，但是很多将遗传算法和轮盘赌混着来讲实在是太蠢了，对于我们的目标而言，我们需要轮盘赌算法给我们的输出很简单，我们只需要知道在某一步为什么用这个算法来选择即可，所以独立的介绍轮盘赌的思想才是目标读者最应该也最愿意看到的。</p>
+<h3 id="矩阵排序等算法"><a href="#矩阵排序等算法" class="headerlink" title="矩阵排序等算法"></a>矩阵排序等算法</h3><p>不再详细介绍。</p>
+<h3 id="轮盘赌算法"><a href="#轮盘赌算法" class="headerlink" title="轮盘赌算法"></a>轮盘赌算法</h3><p>这个本质上是一个概率学上的样本选择问题。</p>
+<p>各个个体被选中的概率与其适应度函数值大小成正比，它是为了防止适应度数值较小的个体被直接淘汰而提出的。</p>
+<p>概率分布累计为1的一个空间，要恰当的选择一定数量的样本，来使样本选择反应真实的概率分布（否则，很有可能大概率选择那些分布较宽的概率区间）。<br>避免小概率的个体被完全淘汰，尽可能还原真实的选择样本最优分布。</p>
+<p>[图-轮盘赌]</p>
+<p>轮盘赌算法的实现步骤为:<br>（i）初始化各个个体的适应度值（适应度值就是某个数值，什么数据都可以，只是对于不同的问题，这个适应度值代表的意义不一样）<br>（ii）根据公式计算各个个体的个体选择概率和累积概率<br>（iii）在区间[0 1]之间随机生成一个数，判断该数落在哪个区间内，如果落在某个区间，则该区间被选中。</p>
+<p>代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">RWS</span>(<span class="params">selectionProbability</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> rand = <span class="built_in">Math</span>.random();<span class="comment">//0~1</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;selectionProbability.length; i++) &#123;</span><br><span class="line">        sum += selectionProbability[i];</span><br><span class="line">        <span class="keyword">if</span> (sum &gt;= rand) &#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="编码问题"><a href="#编码问题" class="headerlink" title="编码问题"></a>编码问题</h4><p>待补充。其实就是如果用二进制，会简化运算次数。但是额外的需要进行编解码。比如一个染色体有8位，二进制XXX3bit就可以完全表示。没有十进制直观，但是计算效率高。</p>
+<h2 id="算法流程和图示"><a href="#算法流程和图示" class="headerlink" title="算法流程和图示"></a>算法流程和图示</h2><p>下面来考虑一个遗传算法最简单的应用案例。这是一个典型的网络请求负载均衡问题。假定我们有N个任务，需要负载均衡器分布给M个服务器节点去处理。模型中每个任务的长度以及节点服务器的处理速度已知。目标是求得一种分配方案，使得任务的总处理时间最短。</p>
+<h3 id="初始化和输入"><a href="#初始化和输入" class="headerlink" title="初始化和输入"></a>初始化和输入</h3><p>我们假定：<br>任务，100个，task矩阵，1行100列，随机初始化长度；<br>服务器处理节点，10个节点，1行10列，随机每个节点的处理速度；<br>辅助矩阵，timeMatrix，10行100列，分别是每个节点处理每个任务的时间，优化迭代算法效率；<br>种群数量，20个；<br>迭代次数，我们设定50次，相对来说基本能较好的收敛。具体动手即可；<br>复制概率，设置为0.2；<br>初始种群基因阵列，chromosomeMatrix，20X100列矩阵，随机初始化的初始种群。<br>每一代的适应度，adapbability，1X20矩阵，每个染色体的适应度 = 1/每条染色体的任务时长；<br>每一代的选择概率矩阵，selectProbability，1X20矩阵，每个染色体的Pi = ad[i]/Sum(ad[i])；<br>最后，我们设定一个ResultData矩阵，50行20列，记录每一次进化迭代的结果，元素的值对应的是每个个体-染色体的时长。注意对于每条染色体来说，进行任务处理的长度是，每个节点处处理时间的最大值，因为节点是并行工作的。</p>
+<p>处理流程：<br>画个图<br>初始化第一代染色体，随机处理即可。每一次迭代计算出适应度矩阵，选择概率矩阵。<br>Corss<br>每一代里面，轮盘算法选择出一个baba，一个mama染色体，进行随机位置的交叉换位组合，每代选择出20X(1-0.2)=16条染色体。<br>Mutation<br>上一步得出的16条染色体，随机1条染色体1个位置进行变异。<br>Copy<br>选择20X0.2=4条适应度概率最大的染色体，复制到下一代。</p>
+<h3 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h3><p>[遗传算法流程图]</p>
+<h3 id="进化次数-完成条件"><a href="#进化次数-完成条件" class="headerlink" title="进化次数/完成条件"></a>进化次数/完成条件</h3><p>1 限定进化次数<br>在迭代和进化一定次数后，终止遗传。这个次数可以通过大量的实验来大致确定。<br>2 限定范围<br>如果你有一个很明确的目标，比如两次进化将的差异满足一定的条件，就可以终止计算。<br>实际情况要看具体问题来定。</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>伪代码流程图：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//javascript+echarts</span></span><br><span class="line"><span class="comment">/** * 遗传算法 * </span></span><br><span class="line"><span class="comment"><span class="doctag">@param </span>iteratorNum 迭代次数 * </span></span><br><span class="line"><span class="comment"><span class="doctag">@param </span>chromosomeNum 染色体数量 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">gaSearch</span>(<span class="params">iteratorNum, chromosomeNum</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 初始化第一代染色体</span></span><br><span class="line">    <span class="keyword">var</span> chromosomeMatrix = createGeneration();</span><br><span class="line">    <span class="comment">// 迭代繁衍</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> itIndex=<span class="number">1</span>; itIndex&lt;iteratorNum; itIndex++) &#123;</span><br><span class="line">        <span class="comment">// 计算上一代各条染色体的适应度</span></span><br><span class="line">        calAdaptability(chromosomeMatrix);</span><br><span class="line">        <span class="comment">// 计算自然选择概率</span></span><br><span class="line">        calSelectionProbability(adaptability);</span><br><span class="line">        <span class="comment">// 生成新一代染色体</span></span><br><span class="line">        chromosomeMatrix = createGeneration(chromosomeMatrix);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 繁衍新一代染色体</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>chromosomeMatrix 上一代染色体</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createGeneration</span>(<span class="params">chromosomeMatrix</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 第一代染色体，随机生成</span></span><br><span class="line">    <span class="keyword">if</span> (chromosomeMatrix == <span class="literal">null</span> || chromosomeMatrix == <span class="literal">undefined</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> newChromosomeMatrix = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> chromosomeIndex=<span class="number">0</span>; chromosomeIndex&lt;chromosomeNum; chromosomeIndex++) &#123;</span><br><span class="line">            <span class="keyword">var</span> chromosomeMatrix_i = [];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> taskIndex=<span class="number">0</span>; taskIndex&lt;taskNum; taskIndex++) &#123;</span><br><span class="line">                chromosomeMatrix_i.push(random(<span class="number">0</span>, nodeNum<span class="number">-1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            newChromosomeMatrix.push(chromosomeMatrix_i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//console.log(newChromosomeMatrix);</span></span><br><span class="line">        <span class="comment">// 计算当前染色体的任务处理时间</span></span><br><span class="line">        calTime_oneIt(newChromosomeMatrix);</span><br><span class="line">        <span class="keyword">return</span> newChromosomeMatrix;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 交叉生成&#123;crossoverMutationNum&#125;条染色体</span></span><br><span class="line">    <span class="keyword">var</span> newChromosomeMatrix = cross(chromosomeMatrix);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 变异</span></span><br><span class="line">    newChromosomeMatrix = mutation(newChromosomeMatrix);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 复制</span></span><br><span class="line">    newChromosomeMatrix = copy(chromosomeMatrix, newChromosomeMatrix);</span><br><span class="line">    <span class="comment">// 计算当前染色体的任务处理时间</span></span><br><span class="line">    calTime_oneIt(newChromosomeMatrix);</span><br><span class="line">    <span class="keyword">return</span> newChromosomeMatrix;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://blog.csdn.net/qq_33649817/article/details/86582420" target="_blank" rel="noopener">https://blog.csdn.net/qq_33649817/article/details/86582420</a> 轮盘赌<br><a href="https://github.com/bz51/GeneticAlgorithm" target="_blank" rel="noopener">https://github.com/bz51/GeneticAlgorithm</a><br><a href="https://www.zhihu.com/question/23293449?utm_source=wechat_session&amp;utm_medium=social&amp;utm_oi=34794360537088" target="_blank" rel="noopener">https://www.zhihu.com/question/23293449?utm_source=wechat_session&amp;utm_medium=social&amp;utm_oi=34794360537088</a></p>
+<h3 id="其它案例"><a href="#其它案例" class="headerlink" title="其它案例"></a>其它案例</h3><h4 id="随机图片组装"><a href="#随机图片组装" class="headerlink" title="随机图片组装"></a>随机图片组装</h4><p>设想找到某个图标由三角形组成的最佳选项。</p>
+<p>假设我们需要100个这样的三角形，每个三角形都是半透明三角形，初始100个位置方向都随机。然后我们随机选中其中的几个进行颜色或者位置的改变，这样就引入了变异。其它三角形复制到下一代即可。对于每一代我们选择跟目标图片最接近的那些（用最笨的像素逐个比对），复制一部分到下一代，进行交叉组装一部分到下一代。这个过程中一般保持种群的数量不变。这样，经过我们定义好的多少代，或者差异缩小到足够小，完成整个进化过程，得到跟目标图片最接近的组装图片基因，一个最高层一维的数据，每个元素就是这个三角形的颜色和位置。</p>
+<h4 id="函数极值"><a href="#函数极值" class="headerlink" title="函数极值"></a>函数极值</h4><p>求解函数 f(x) = X+ 10sin(5X) + 7cos(4X) 在区间[0,9]的最大值</p>
+<h4 id="负载均衡问题-类似产线排产"><a href="#负载均衡问题-类似产线排产" class="headerlink" title="负载均衡问题-类似产线排产"></a>负载均衡问题-类似产线排产</h4><p>假设有N个任务，需要负载均衡器分配给M个服务器节点去处理。每个任务的任务长度、每台服务器节点(下面简称“节点”)的处理速度已知，请给出一种任务分配方式，使得所有任务的总处理时间最短。</p>
+<h4 id="python遗传算法库-geatpy-谷歌即可，华人项目"><a href="#python遗传算法库-geatpy-谷歌即可，华人项目" class="headerlink" title="python遗传算法库 geatpy 谷歌即可，华人项目"></a>python遗传算法库 geatpy 谷歌即可，华人项目</h4><p><a href="https://github.com/yanshengjia/artificial-intelligence" target="_blank" rel="noopener">https://github.com/yanshengjia/artificial-intelligence</a><br><a href="https://github.com/bz51/GeneticAlgorithm" target="_blank" rel="noopener">https://github.com/bz51/GeneticAlgorithm</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Gene-Algorithm/" rel="tag"># Gene Algorithm</a>
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/echarts/" rel="tag"># echarts</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/23/CsharpDesignPattern/" rel="next" title="CSharp-Design-Pattern">
+                <i class="fa fa-chevron-left"></i> CSharp-Design-Pattern
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/13/Move-to-ubuntu/" rel="prev" title="Move to ubuntu">
+                Move to ubuntu <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="KinGil">
+          <p class="site-author-name" itemprop="name">KinGil</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kingiluob" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/2283641104/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100007092155441" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Facebook
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念1-基因、染色体、种群"><span class="nav-number">1.1.</span> <span class="nav-text">概念1 基因、染色体、种群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概念2-适应度函数"><span class="nav-number">1.2.</span> <span class="nav-text">概念2 适应度函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概念3-交叉"><span class="nav-number">1.3.</span> <span class="nav-text">概念3 交叉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概念4-变异"><span class="nav-number">1.4.</span> <span class="nav-text">概念4 变异</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概念5-复制-继承"><span class="nav-number">1.5.</span> <span class="nav-text">概念5 复制/继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概念6-自然选择"><span class="nav-number">1.6.</span> <span class="nav-text">概念6 自然选择</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他知识"><span class="nav-number">2.</span> <span class="nav-text">其他知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵排序等算法"><span class="nav-number">2.1.</span> <span class="nav-text">矩阵排序等算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#轮盘赌算法"><span class="nav-number">2.2.</span> <span class="nav-text">轮盘赌算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#编码问题"><span class="nav-number">2.2.1.</span> <span class="nav-text">编码问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法流程和图示"><span class="nav-number">3.</span> <span class="nav-text">算法流程和图示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化和输入"><span class="nav-number">3.1.</span> <span class="nav-text">初始化和输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法流程"><span class="nav-number">3.2.</span> <span class="nav-text">算法流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进化次数-完成条件"><span class="nav-number">3.3.</span> <span class="nav-text">进化次数/完成条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">5.1.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它案例"><span class="nav-number">5.2.</span> <span class="nav-text">其它案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#随机图片组装"><span class="nav-number">5.2.1.</span> <span class="nav-text">随机图片组装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数极值"><span class="nav-number">5.2.2.</span> <span class="nav-text">函数极值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#负载均衡问题-类似产线排产"><span class="nav-number">5.2.3.</span> <span class="nav-text">负载均衡问题-类似产线排产</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python遗传算法库-geatpy-谷歌即可，华人项目"><span class="nav-number">5.2.4.</span> <span class="nav-text">python遗传算法库 geatpy 谷歌即可，华人项目</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KinGil</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
