@@ -106,7 +106,7 @@
 <meta property="og:site_name" content="KinGil&#39;s Blog">
 <meta property="og:description" content="场景基本渲染的最后一块内容，天空盒，这里能了解到整体的反折射的概念。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-18T02:52:16.000Z">
+<meta property="og:updated_time" content="2021-01-19T10:33:48.122Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenGL-Learning-4">
 <meta name="twitter:description" content="场景基本渲染的最后一块内容，天空盒，这里能了解到整体的反折射的概念。">
@@ -375,7 +375,7 @@
 <li>loading a skybox<br>没啥新的内容，就是加载6张图给返货一个表示GL_TEXTURE_CUBE_MAP的textureID。</li>
 <li>渲染skybox<br>这里要注意，我们要实现的效果，不管player怎么移动，这个cube都不会移动。在基本光照里，有这么一个技术处理，我么可以把变换矩阵的平移分量去掉，只取左上方33的矩阵,然后再变换回到44矩阵。这样就消除了平移分量，保留了旋转，你仍然可以查看不同的天空盒视角：<br><strong>glm::mat4 view = glm::mat4(glm::mat3(camera.GetViewMatrix()));</strong></li>
 </ol>
-<h3 id="优化天空盒"><a href="#优化天空盒" class="headerlink" title="优化天空盒"></a>优化天空盒</h3><p>如果预先渲染天空盒的话，会浪费不少资源，因为很多天空盒的fragment最后要被舍弃掉。所以，一般最后渲染，类似于放在unity里面最底层？？？<br>用一个技巧，在深度测试的时候，把天空盒的深度看成最大值1.实际上不是，因为天空盒知识一个1x1x1的立方体，无法通过深度测试。不管物体是什么，天空盒的相应片元都不通过深度测试，这样就不用渲染了。<br>在坐标系一节，我们说perpective division实在vertex shader以后进行的，用w因子除以gl_position的xyz坐标。而且在深度测试（一节）中，顶点的深度值实际上等于division以后的z值。<br>利用这个，将输出的z设置成它的w值，导致深度测试中的z始终是1，为什呢？这样进行perpective division的时候，它的z就会编程w/w = 1.</p>
+<h3 id="优化天空盒"><a href="#优化天空盒" class="headerlink" title="优化天空盒"></a>优化天空盒</h3><p>如果预先渲染天空盒的话，会浪费不少资源，因为很多天空盒的fragment最后要被舍弃掉。所以，一般最后渲染，类似于放在unity里面最底层？？？<br>用一个技巧，在深度测试的时候，把天空盒的深度看成最大值1.实际上不是，因为天空盒只是一个1x1x1的立方体，无法通过深度测试。不管物体是什么，天空盒的相应片元都不通过深度测试，这样就不用渲染了。<br>在坐标系一节，我们说perpective division实在vertex shader以后进行的，用w因子除以gl_position的xyz坐标。而且在深度测试（一节）中，顶点的深度值实际上等于division以后的z值。<br>利用这个，将输出的z设置成它的w值，导致深度测试中的z始终是1，为什呢？这样进行perpective division的时候，它的z就会编程w/w = 1.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    TexCoords = aPos;</span><br><span class="line">    vec4 pos = projection * view * vec4(aPos, <span class="number">1.0</span>);</span><br><span class="line">    gl_Position = pos.xyww;&#125;</span><br></pre></td></tr></table></figure>
 <p>NDC空间内，z值是1就是最大值，就是永远在背景的东西。其他都在前面。同时，gl_lequal也应该变成gl_less，确保让天空盒通过测试正确渲染。因为它的值是1。</p>
 <h3 id="environment-mapping"><a href="#environment-mapping" class="headerlink" title="environment mapping"></a>environment mapping</h3><h4 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h4><p>根据观察者和相应物体表面的位置，得到出射的角度，然后根据表面的法向，来确定颜色入射的角度。再根据入射的角度计算最终能得到的天空盒的颜色。全反射，那就肯定是全部颜色了，没有其他颜色。<br>参考learn4-001<br>cube顶点shader需要输入：apos 顶点坐标 anormal 法向量（物体的法向量一定要在程序里向vertex输入）<br>输出：法向量Normal以及世界坐标的位置</p>
@@ -503,7 +503,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -514,7 +514,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -525,7 +525,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
