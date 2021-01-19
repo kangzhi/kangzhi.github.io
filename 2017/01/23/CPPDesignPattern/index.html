@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+
+
+<script type="text/javascript" color="253,253,253" opacity="0.5" zindex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="DesignPattern,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="前言">
+<meta name="keywords" content="DesignPattern">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CPP-DesignPattern">
+<meta property="og:url" content="http://kangzhi.github.io/2017/01/23/CPPDesignPattern/index.html">
+<meta property="og:site_name" content="KinGil&#39;s Blog">
+<meta property="og:description" content="前言">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-01-19T11:03:59.334Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CPP-DesignPattern">
+<meta name="twitter:description" content="前言">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kangzhi.github.io/2017/01/23/CPPDesignPattern/">
+
+
+
+
+
+  <title>CPP-DesignPattern | KinGil's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KinGil's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">April is coming</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kangzhi.github.io/2017/01/23/CPPDesignPattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KinGil">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KinGil's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CPP-DesignPattern</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-23T21:10:52+08:00">
+                2017-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CPP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前言</p>
+<a id="more"></a>
+<h2 id="简单工厂SimpleFactory"><a href="#简单工厂SimpleFactory" class="headerlink" title="简单工厂SimpleFactory"></a>简单工厂SimpleFactory</h2><p><strong>工厂、抽象产品、具体产品</strong></p>
+<p>代码</p>
+<p><strong>//Factory</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Factory</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    Factory(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~Factory(); </span><br><span class="line">​    <span class="function"><span class="keyword">static</span> Product * <span class="title">createProduct</span><span class="params">(<span class="built_in">string</span> proname)</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"><span class="comment">// </span></span><br><span class="line">Factory::Factory()&#123; </span><br><span class="line">&#125; </span><br><span class="line">Factory::~Factory()&#123; </span><br><span class="line">&#125; </span><br><span class="line"><span class="function">Product* <span class="title">Factory::createProduct</span><span class="params">(<span class="built_in">string</span> proname)</span></span>&#123; </span><br><span class="line">​    <span class="keyword">if</span> ( <span class="string">"A"</span> == proname ) </span><br><span class="line">​    &#123; </span><br><span class="line">​        <span class="keyword">return</span> <span class="keyword">new</span> ConcreteProductA(); </span><br><span class="line">​    &#125; </span><br><span class="line">​    <span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">"B"</span> == proname) </span><br><span class="line">​    &#123; </span><br><span class="line">​        <span class="keyword">return</span> <span class="keyword">new</span> ConcreteProductB(); </span><br><span class="line">​    &#125; </span><br><span class="line">​    <span class="keyword">return</span>  <span class="literal">NULL</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//Product</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    Product(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~Product(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Use</span><span class="params">()</span> </span>= <span class="number">0</span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">Product::Product()&#123; </span><br><span class="line">&#125; </span><br><span class="line">Product::~Product()&#123; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>// ConcreteProductA/B</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteProductA</span> :</span> <span class="keyword">public</span> Product </span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    ConcreteProductA(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~ConcreteProductA(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Use</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">ConcreteProductA::ConcreteProductA()&#123; </span><br><span class="line">&#125; </span><br><span class="line">ConcreteProductA::~ConcreteProductA()&#123; </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConcreteProductA::Use</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    <span class="built_in">cout</span> &lt;&lt; <span class="string">"use productB"</span> &lt;&lt; <span class="built_in">endl</span>;     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//main.cpp</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    Product * prod = Factory::createProduct(<span class="string">"A"</span>); </span><br><span class="line">​    prod-&gt;Use(); </span><br><span class="line">​    <span class="keyword">delete</span> prod; </span><br><span class="line">​    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="工厂模式FactoryMethod"><a href="#工厂模式FactoryMethod" class="headerlink" title="工厂模式FactoryMethod"></a>工厂模式FactoryMethod</h2><p><strong>抽象工厂、抽象产品、具体工厂、具体产品</strong></p>
+<p><strong>//Factory</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Factory</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    Factory(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~Factory(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> Product* <span class="title">factoryMethod</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">Factory::Factory()&#123; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">Factory::~Factory()&#123; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function">Product* <span class="title">Factory::factoryMethod</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    <span class="keyword">return</span>  <span class="literal">NULL</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>//ConcreteFactory</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteFactory</span> :</span> <span class="keyword">public</span> Factory </span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    ConcreteFactory(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~ConcreteFactory(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> Product* <span class="title">factoryMethod</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="comment">// </span></span><br><span class="line">ConcreteFactory::ConcreteFactory()&#123; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">ConcreteFactory::~ConcreteFactory()&#123; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function">Product* <span class="title">ConcreteFactory::factoryMethod</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    <span class="keyword">return</span>  <span class="keyword">new</span> ConcreteProduct(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//Client</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    Client(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~Client(); </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//ConcreteProduct</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteProduct</span> :</span> <span class="keyword">public</span> Product </span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    ConcreteProduct(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~ConcreteProduct(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">use</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">ConcreteProduct::ConcreteProduct()&#123; </span><br><span class="line">&#125; </span><br><span class="line">ConcreteProduct::~ConcreteProduct()&#123; </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConcreteProduct::use</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    <span class="built_in">cout</span> &lt;&lt; <span class="string">"use prodect A"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//main</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    Factory * fc = <span class="keyword">new</span> ConcreteFactory(); </span><br><span class="line">​    Product * prod = fc-&gt;factoryMethod(); </span><br><span class="line">​    prod-&gt;use(); </span><br><span class="line">​     </span><br><span class="line">​    <span class="keyword">delete</span> fc; </span><br><span class="line">​    <span class="keyword">delete</span> prod; </span><br><span class="line">​    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="抽象工厂AbstractFactory"><a href="#抽象工厂AbstractFactory" class="headerlink" title="抽象工厂AbstractFactory"></a>抽象工厂AbstractFactory</h2><p><strong>//AbstractProductA/B</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AbstractProductA</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    AbstractProductA(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~AbstractProductA(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">use</span><span class="params">()</span> </span>= <span class="number">0</span>; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//具体产品A1/2，B1/2</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProductA1</span> :</span> <span class="keyword">public</span> AbstractProductA </span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    ProductA1(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~ProductA1(); </span><br><span class="line">​    <span class="function"><span class="keyword">void</span> <span class="title">use</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">ProductA1::ProductA1()&#123; </span><br><span class="line">&#125; </span><br><span class="line">ProductA1::~ProductA1()&#123; </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ProductA1::use</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    <span class="built_in">cout</span> &lt;&lt; <span class="string">"use Product A1"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//具体工厂</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteFactory1</span> :</span> <span class="keyword">public</span> AbstractFactory </span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    ConcreteFactory1(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~ConcreteFactory1(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> AbstractProductA * <span class="title">createProductA</span><span class="params">()</span></span>; </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> AbstractProductB * <span class="title">createProductB</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ConcreteFactory1::ConcreteFactory1()&#123; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">ConcreteFactory1::~ConcreteFactory1()&#123; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function">AbstractProductA * <span class="title">ConcreteFactory1::createProductA</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    <span class="keyword">return</span> <span class="keyword">new</span> ProductA1(); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function">AbstractProductB * <span class="title">ConcreteFactory1::createProductB</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    <span class="keyword">return</span> <span class="keyword">new</span> ProductB1(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//AbstractFactory</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AbstractFactory</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    AbstractFactory(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~AbstractFactory(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> AbstractProductA * <span class="title">createProductA</span><span class="params">()</span> </span>= <span class="number">0</span>; </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> AbstractProductB * <span class="title">createProductB</span><span class="params">()</span> </span>= <span class="number">0</span>; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//main</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    AbstractFactory * fc = <span class="keyword">new</span> ConcreteFactory1(); </span><br><span class="line">​    AbstractProductA * pa =  fc-&gt;createProductA(); </span><br><span class="line">​    AbstractProductB * pb = fc-&gt;createProductB(); </span><br><span class="line">​    pa-&gt;use(); </span><br><span class="line">​    pb-&gt;eat(); </span><br><span class="line">​     </span><br><span class="line">​    AbstractFactory * fc2 = <span class="keyword">new</span> ConcreteFactory2(); </span><br><span class="line">​    AbstractProductA * pa2 =  fc2-&gt;createProductA(); </span><br><span class="line">​    AbstractProductB * pb2 = fc2-&gt;createProductB(); </span><br><span class="line">​    pa2-&gt;use(); </span><br><span class="line">​    pb2-&gt;eat(); </span><br><span class="line">​     </span><br><span class="line">​    <span class="keyword">delete</span> fc; </span><br><span class="line">​    <span class="keyword">delete</span> pa; </span><br><span class="line">​    <span class="keyword">delete</span> pb; </span><br><span class="line">​    <span class="keyword">delete</span> fc2; </span><br><span class="line">​    <span class="keyword">delete</span> pa2; </span><br><span class="line">​    <span class="keyword">delete</span> pb2;     </span><br><span class="line">​     </span><br><span class="line">​    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>Builder</strong></p>
+<p><strong>//指挥者</strong><br>class Director<br>{<br>public:<br>​    Director();<br>​    virtual ~Director();<br>​    Builder <em>m_Builder;<br>​    Product</em> constuct();<br>​    void setBuilder(Builder<em> buider);<br>private:<br>​    Builder </em> m_pbuilder;<br>}; </p>
+<p>Director::Director(){<br>}<br>Director::~Director(){<br>}<br>Product* Director::constuct(){<br>​    m_pbuilder-&gt;buildPartA();<br>​    m_pbuilder-&gt;buildPartB();<br>​    m_pbuilder-&gt;buildPartC();<br>​    return m_pbuilder-&gt;getResult(); </p>
+<p>} </p>
+<p>void Director::setBuilder(Builder* buider){<br>​    m_pbuilder = buider;<br>} </p>
+<p><strong>//抽象建造者</strong><br>class Builder<br>{<br>public:<br>​    Builder();<br>​    virtual ~Builder();<br>​    virtual void buildPartA();<br>​    virtual void buildPartB();<br>​    virtual void buildPartC();<br>​    virtual Product * getResult(); </p>
+<p>protected :<br>​    Product * m_prod;<br>}; </p>
+<p>Builder::Builder(){<br>​    m_prod = new Product();<br>}<br>Builder::~Builder(){<br>}<br>void Builder::buildPartA(){<br>}<br>void Builder::buildPartB(){<br>}<br>void Builder::buildPartC(){<br>}<br>Product* Builder::getResult(){<br>​    return m_prod;<br>} </p>
+<p><strong>//具体建造者</strong></p>
+<p>class ConcreteBuilder : public Builder<br>{<br>public:<br>​    ConcreteBuilder();<br>​    virtual ~ConcreteBuilder();<br>​    virtual void buildPartA();<br>​    virtual void buildPartB();<br>​    virtual void buildPartC();<br>}; </p>
+<p>ConcreteBuilder::ConcreteBuilder(){<br>}<br>ConcreteBuilder::~ConcreteBuilder(){<br>}<br>void ConcreteBuilder::buildPartA(){<br>​    m_prod-&gt;setA(“A Style “); //不同的建造者，可以实现不同产品的建造<br>}<br>void ConcreteBuilder::buildPartB(){<br>​    m_prod-&gt;setB(“B Style “);<br>}<br>void ConcreteBuilder::buildPartC(){<br>​    m_prod-&gt;setC(“C style “);<br>} </p>
+<p><strong>//产品</strong></p>
+<p>class Product<br>{<br>public:<br>​    Product();<br>​    virtual ~Product();<br>​    void setA(string str);<br>​    void setB(string str);<br>​    void setC(string str);<br>​    void show(); </p>
+<p>private: </p>
+<p>​    string m_a;<br>​    string m_b;<br>​    string m_c;<br>}; </p>
+<p>Product::Product(){<br>} </p>
+<p>Product::~Product(){<br>} </p>
+<p>void Product::setA(string str)<br>{<br>​    m_a = str;<br>} </p>
+<p>void Product::setB(string str)<br>{<br>​    m_b = str;<br>} </p>
+<p>void Product::setC(string str)<br>{<br>​    m_c = str;<br>} </p>
+<p>void Product::show()<br>{<br>​    cout &lt;&lt; “product has” &lt;&lt; m_a &lt;&lt; m_b &lt;&lt; m_c &lt;&lt; endl;<br>} </p>
+<p><strong>//main</strong></p>
+<p>int main(int argc, char <em>argv[])<br>{<br>​    ConcreteBuilder </em> builder = new ConcreteBuilder();<br>​    Director  director;<br>​    director.setBuilder(builder);<br>​    Product * pd =  director.constuct();<br>​    pd-&gt;show();<br>​<br>​    delete builder;<br>​    delete pd;<br>​    return 0;<br>} </p>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LazySingleton</span> &#123;</span> </span><br><span class="line">​     <span class="comment">//私有，静态的类自身实例 </span></span><br><span class="line">​    <span class="comment">//初始为null，暂不实例化 </span></span><br><span class="line">​    <span class="keyword">private</span> <span class="keyword">static</span> LazySingleton instance = null; </span><br><span class="line">​      </span><br><span class="line">​    <span class="comment">//私有的构造子(构造器,构造函数,构造方法) </span></span><br><span class="line">​    <span class="function"><span class="keyword">private</span> <span class="title">LazySingleton</span><span class="params">()</span></span>&#123;&#125; </span><br><span class="line">​      </span><br><span class="line">​    <span class="comment">//公开，静态的工厂方法，需要使用时才去创建该单体 </span></span><br><span class="line">​    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> LazySingleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123; </span><br><span class="line">​        <span class="keyword">if</span>( instance == null ) &#123; </span><br><span class="line">​            instance = <span class="keyword">new</span> LazySingleton(); </span><br><span class="line">​        &#125; </span><br><span class="line">​        <span class="keyword">return</span> instance; </span><br><span class="line">​    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：<br>现在很多面向对象语言(如Java、C#)的运行环境都提供了自动垃圾回收的技术，因此，如果实例化的对象长时间不被利用，系统会认为它是垃圾，会自动销毁并回收资源，下次利用时又将重新实例化，这将导致对象状态的丢失。 </p>
+<p><strong>结构型</strong><br>结构型模式(Structural Pattern)描述如何将类或者对 象结合在一起形成更大的结构，就像搭积木，可以通过简单积木的组合形成复杂的、功能更为强大的结构。 </p>
+<p>结构型模式可以分为类结构型模式和对象结构型模式： </p>
+<p><strong>类结构型模式</strong><br>关心类的组合，由多个类可以组合成一个更大的系统，在类结构型模式中一般只存在继承关系和实现关系。 </p>
+<p><strong>对象结构型模式</strong><br>关心类与对象的组合，通过关联关系使得在一个类中定义另一个类的实例对象，然后通过该对象调用其方法。根据“合成复用原则”，在系统中尽量使用关联关系来替代继 承关系，因此大部分结构型模式都是对象结构型模式。 </p>
+<h2 id="适配器Adaptor"><a href="#适配器Adaptor" class="headerlink" title="适配器Adaptor"></a>适配器Adaptor</h2><p>adaptor适配器<br>adapted需要适配的类，不暴露给用户<br>四个类：<br>客户Client<br>目标抽象类Target<br>适配器Adaptor<br>适配者Adaptee</p>
+<p><strong>//Target</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Target</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​     Target(); </span><br><span class="line">​     <span class="keyword">virtual</span> ~Target(); </span><br><span class="line">​     <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Target::request</span><span class="params">()</span></span>&#123; </span><br><span class="line">​     <span class="built_in">cout</span> &lt;&lt; <span class="string">"this is original request "</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//Adapter</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> :</span> <span class="keyword">public</span> Target </span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​     Adapter(Adaptee *adaptee); </span><br><span class="line">​     <span class="keyword">virtual</span> ~Adapter(); </span><br><span class="line">​     <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>: </span><br><span class="line">​     Adaptee* m_pAdaptee; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">Adapter::Adapter(Adaptee * adaptee)&#123; </span><br><span class="line">​     m_pAdaptee =  adaptee; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">Adapter::~Adapter()&#123; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Adapter::request</span><span class="params">()</span></span>&#123; </span><br><span class="line">​     m_pAdaptee-&gt;specificRequest(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//adaptee</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Adaptee</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​     Adaptee(); </span><br><span class="line">​     <span class="keyword">virtual</span> ~Adaptee(); </span><br><span class="line">​     <span class="function"><span class="keyword">void</span> <span class="title">specificRequest</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Adaptee::specificRequest</span><span class="params">()</span></span>&#123; </span><br><span class="line">​     <span class="built_in">cout</span> &lt;&lt; <span class="string">"specificRequest()|this is real Request from Adaptee!"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//main</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​     Adaptee * adaptee  = <span class="keyword">new</span> Adaptee(); </span><br><span class="line">​     Target * tar = <span class="keyword">new</span> Adapter(adaptee); </span><br><span class="line">​     tar-&gt;request(); </span><br><span class="line">​     <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="桥接关系"><a href="#桥接关系" class="headerlink" title="桥接关系"></a>桥接关系</h2><p>将继承关系转化成关联关系。如绘制四个形状，四种颜色，考虑桥接。将抽象和实现分离开来。 </p>
+<p>Abstraction：抽象类<br>RefinedAbstraction：扩充抽象类<br>Implementor：实现类接口<br>ConcreteImplementor：具体实现类<br>//main<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​     Implementor * pImp = <span class="keyword">new</span> ConcreteImplementorA(); </span><br><span class="line">​     Abstraction * pa = <span class="keyword">new</span> RefinedAbstraction(pImp); </span><br><span class="line">​     pa-&gt;operation();</span><br><span class="line"></span><br><span class="line">​     Abstraction * pb = <span class="keyword">new</span> RefinedAbstraction(<span class="keyword">new</span> ConcreteImplementorB()); </span><br><span class="line">​     pb-&gt;operation();           </span><br><span class="line">​     <span class="keyword">delete</span> pa; </span><br><span class="line">​     <span class="keyword">delete</span> pb; </span><br><span class="line">​     <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//Abstraction</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Abstraction</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​     Abstraction(); </span><br><span class="line">​     <span class="keyword">virtual</span> ~Abstraction(); </span><br><span class="line">​     Abstraction(Implementor* imp); </span><br><span class="line">​     <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span></span>; </span><br><span class="line"><span class="keyword">protected</span>: </span><br><span class="line">​     Implementor* m_pImp; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">Abstraction::Abstraction()&#123; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">Abstraction::~Abstraction()&#123; </span><br><span class="line">​     <span class="keyword">delete</span> m_pImp;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">Abstraction::Abstraction(Implementor* imp)&#123; </span><br><span class="line">​     m_pImp = imp; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Abstraction::operation</span><span class="params">()</span></span>&#123; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//RefinedAbstraction</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RefinedAbstraction</span> :</span> <span class="keyword">public</span> Abstraction </span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​     RefinedAbstraction(); </span><br><span class="line">​     RefinedAbstraction(Implementor* imp); </span><br><span class="line">​     <span class="keyword">virtual</span> ~RefinedAbstraction(); </span><br><span class="line">​     <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">RefinedAbstraction::RefinedAbstraction()&#123; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">RefinedAbstraction::RefinedAbstraction(Implementor* imp) </span><br><span class="line">​     :Abstraction(imp)&#123; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">这里做的实际上是基类的初始化。 </span><br><span class="line">RefinedAbstraction::~RefinedAbstraction()&#123; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">RefinedAbstraction::operation</span><span class="params">()</span></span>&#123; </span><br><span class="line">​     <span class="built_in">cout</span> &lt;&lt; <span class="string">"do something else ,and then "</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">​     m_pImp-&gt;operationImp(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//Implementor</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Implementor</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​     Implementor(); </span><br><span class="line">​     <span class="keyword">virtual</span> ~Implementor(); </span><br><span class="line">​     <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">operationImp</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">空实现</span><br></pre></td></tr></table></figure></p>
+<p><strong>//ConcreteImplementorA/B具体实现类</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteImplementorA</span> :</span> <span class="keyword">public</span> Implementor </span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​     ConcreteImplementorA(); </span><br><span class="line">​     <span class="keyword">virtual</span> ~ConcreteImplementorA(); </span><br><span class="line">​     <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">operationImp</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConcreteImplementorA::operationImp</span><span class="params">()</span></span>&#123; </span><br><span class="line">​     <span class="built_in">cout</span> &lt;&lt; <span class="string">"imp in ConcreteImplementorA style."</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h2><p>Component是定义一个对象接口，可以给这些对象动态地添加职责。<br>ConcreteComponent是定义了一个具体的对象，也可以给这个对象添加一些职责。<br>Decorator，装饰抽象类，继承了Component，从外类来扩展Component类的功能，<br>Component来说，是无需知道Decorator的存在的。<br>ConcreteDecorator就是具体的装饰对象，起到给Component添加职责的功能。 </p>
+<p>要善于变通，如果只有一个ConcreteComponent类而没有抽象的Component类，那么Decorator类可以是ConcreteComponent的一个子类。 </p>
+<p>同样道理，如果只有一个ConcreteDecorator类，那么就没有必要建立一个单独的Decorator类，而可以把Decorator和ConcreteDecorator的责任合并成一个类。 </p>
+<p>新加入的东西仅仅是为了满足一些只在某种特定情况下才会执行的特殊行为 的需要。而装饰模式却提供了一个非常好的解决方案，它把每个要装饰的功能放在单独的类中，并让这个类包装它所要装饰的对象，因此，当需要执行特殊行为 时，客户代码就可以在运行时根据需要有选择地、按顺序地使用装饰功能包装对象了。 </p>
+<p><strong>//Component</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Component</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    Component(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~Component(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span></span>; </span><br><span class="line">&#125;;空实现</span><br></pre></td></tr></table></figure></p>
+<p><strong>//ConcreteComponent</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteComponent</span> :</span> <span class="keyword">public</span> Component </span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    ConcreteComponent(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~ConcreteComponent(); </span><br><span class="line">​    <span class="function"><span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">ConcreteComponent::ConcreteComponent()&#123; </span><br><span class="line">&#125; </span><br><span class="line">ConcreteComponent::~ConcreteComponent()&#123; </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConcreteComponent::operation</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    <span class="built_in">cout</span> &lt;&lt; <span class="string">"ConcreteComponent's normal operation!"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//Decorator</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Decorator</span> :</span> <span class="keyword">public</span> Component </span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    Decorator(Component* pcmp); </span><br><span class="line">​    <span class="keyword">virtual</span> ~Decorator(); </span><br><span class="line">​    <span class="function"><span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span></span>; </span><br><span class="line"><span class="keyword">private</span>: </span><br><span class="line">​    Component * m_pComponent; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">Decorator::Decorator(Component* pcmp)&#123; </span><br><span class="line">​    m_pComponent = pcmp; </span><br><span class="line">&#125; </span><br><span class="line">Decorator::~Decorator()&#123; </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Decorator::operation</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    m_pComponent-&gt;operation(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//ConcreteDecoratorA</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteDecoratorA</span> :</span> <span class="keyword">public</span> Decorator </span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    ConcreteDecoratorA(Component* pcmp); </span><br><span class="line">​    <span class="keyword">virtual</span> ~ConcreteDecoratorA(); </span><br><span class="line">​    <span class="function"><span class="keyword">void</span> <span class="title">addBehavior</span><span class="params">()</span></span>; </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">ConcreteDecoratorA::ConcreteDecoratorA(Component* pcmp) </span><br><span class="line">:Decorator(pcmp)&#123; </span><br><span class="line">&#125; </span><br><span class="line">ConcreteDecoratorA::~ConcreteDecoratorA()&#123; </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConcreteDecoratorA::addBehavior</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    <span class="built_in">cout</span> &lt;&lt; <span class="string">"addBehavior AAAA"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConcreteDecoratorA::operation</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    Decorator::operation(); </span><br><span class="line">​    addBehavior(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>int main(int argc, char *argv[])</strong><br>{<br>​    ConcreteComponent <em> pRealProd = new ConcreteComponent();<br>​    //动态增加行为<br>​    Component </em> pA = new ConcreteDecoratorA(pRealProd);<br>​    pA-&gt;operation();<br>​    //继续动态增加行为<br>​    Component * pB = new ConcreteDecoratorB(pA);<br>​    pB-&gt;operation();<br>​<br>​    delete pRealProd;<br>​    delete pA;<br>​    delete pB;<br>​    return 0;<br>}<br>输出：<br>cnp<br>AAA<br>cnp<br>AAA<br>BBB </p>
+<h2 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h2><p><strong>//main</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    Facade fa; </span><br><span class="line">​    fa.wrapOpration(); </span><br><span class="line">​    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//Facade</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Facade</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    Facade(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~Facade(); </span><br><span class="line">​    <span class="function"><span class="keyword">void</span> <span class="title">wrapOpration</span><span class="params">()</span></span>; </span><br><span class="line"><span class="keyword">private</span>: </span><br><span class="line">​    SystemC *m_SystemC; </span><br><span class="line">​    SystemA *m_SystemA; </span><br><span class="line">​    SystemB *m_SystemB; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">Facade::Facade()&#123; </span><br><span class="line">​    m_SystemA  = <span class="keyword">new</span> SystemA(); </span><br><span class="line">​    m_SystemB = <span class="keyword">new</span> SystemB(); </span><br><span class="line">​    m_SystemC = <span class="keyword">new</span> SystemC(); </span><br><span class="line">&#125; </span><br><span class="line">Facade::~Facade()&#123; </span><br><span class="line">​    <span class="keyword">delete</span> m_SystemA; </span><br><span class="line">​    <span class="keyword">delete</span> m_SystemB; </span><br><span class="line">​    <span class="keyword">delete</span> m_SystemC; </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Facade::wrapOpration</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    m_SystemA-&gt;operationA(); </span><br><span class="line">​    m_SystemB-&gt;operationB(); </span><br><span class="line">​    m_SystemC-&gt;opeartionC(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>//SystemA<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SystemA</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    SystemA(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~SystemA(); </span><br><span class="line">​    <span class="function"><span class="keyword">void</span> <span class="title">operationA</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">SystemA::SystemA()&#123; </span><br><span class="line">&#125; </span><br><span class="line">SystemA::~SystemA()&#123; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SystemA::operationA</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    <span class="built_in">cout</span> &lt;&lt; <span class="string">"operationA"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="享元模式-不是很明白"><a href="#享元模式-不是很明白" class="headerlink" title="享元模式//不是很明白"></a>享元模式//不是很明白</h2><p>享元模式是一个考虑系统性能的设计模式，通过使用享元模式可以节约内存空间，提高系统的性能。 </p>
+<p>享元模式的核心在于享元工厂类，享元工厂类的作用在于提供一个用于存储享元对象的享元池，用户需要对象时，首先从享元池中获取，如果享元池中不存在，则创建一个新的享元对象返回给用户，并在享元池中保存该新增对象。 </p>
+<p>享元模式以共享的方式高效地支持大量的细粒度对象，享元对象能做到共享的关键是区分内部状态(Internal State)和外部状态(External State)。 </p>
+<p>内部状态是存储在享元对象内部并且不会随环境改变而改变的状态，因此内部状态可以共享。 </p>
+<p>外部状态是随环境改变而改变的、不可以共享的状态。享元对象的外部状态必须由客户端保存，并在享元对象被创建之后，在需要使用的时候再传入到享元对象内部。一个外部状态与另一个外部状态之间是相互独立的。<br><strong>//main</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    FlyweightFactory factory; </span><br><span class="line">​    Flyweight * fw = factory.getFlyweight(<span class="string">"one"</span>); </span><br><span class="line">​    fw-&gt;operation(); </span><br><span class="line">​     </span><br><span class="line">​    Flyweight * fw2 = factory.getFlyweight(<span class="string">"two"</span>); </span><br><span class="line">​    fw2-&gt;operation(); </span><br><span class="line"></span><br><span class="line">​    <span class="comment">//aready exist in pool </span></span><br><span class="line">​    Flyweight * fw3 = factory.getFlyweight(<span class="string">"one"</span>); </span><br><span class="line">​    fw3-&gt;operation(); </span><br><span class="line">​    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//Flyweight</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Flyweight</span>&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    Flyweight(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~Flyweight(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Flyweight::Flyweight()&#123;&#125; </span><br><span class="line">Flyweight::~Flyweight()&#123;&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Flyweight::operation</span><span class="params">()</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//FlyweightFactory</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FlyweightFactory</span>&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    FlyweightFactory(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~FlyweightFactory(); </span><br><span class="line">​    <span class="function">Flyweight*  <span class="title">getFlyweight</span><span class="params">(<span class="built_in">string</span> str)</span></span>; </span><br><span class="line"><span class="keyword">private</span>: </span><br><span class="line">​    <span class="built_in">map</span>&lt;<span class="built_in">string</span>,Flyweight*&gt; m_mpFlyweight; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">FlyweightFactory::FlyweightFactory()&#123;&#125; </span><br><span class="line">FlyweightFactory::~FlyweightFactory()&#123;&#125; </span><br><span class="line"><span class="function">Flyweight* <span class="title">FlyweightFactory::getFlyweight</span><span class="params">(<span class="built_in">string</span> str)</span></span>&#123; </span><br><span class="line"></span><br><span class="line">​    <span class="built_in">map</span>&lt;<span class="built_in">string</span>,Flyweight*&gt;::iterator itr = m_mpFlyweight.find(str); </span><br><span class="line">​    <span class="keyword">if</span>(itr == m_mpFlyweight.end()) </span><br><span class="line">​    &#123; </span><br><span class="line">​        Flyweight * fw = <span class="keyword">new</span> ConcreteFlyweight(str); </span><br><span class="line">​        m_mpFlyweight.insert(make_pair(str,fw)); </span><br><span class="line">​        <span class="keyword">return</span> fw;     </span><br><span class="line">​    &#125; </span><br><span class="line">​    <span class="keyword">else</span> </span><br><span class="line">​    &#123; </span><br><span class="line">​        <span class="built_in">cout</span> &lt;&lt; <span class="string">"aready in the pool,use the exist one:"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">​        <span class="keyword">return</span> itr-&gt;second; </span><br><span class="line">​    &#125;         </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//ConcreteFlyweight</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteFlyweight</span> :</span> <span class="keyword">public</span> Flyweight&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    ConcreteFlyweight(<span class="built_in">string</span> str); </span><br><span class="line">​    <span class="keyword">virtual</span> ~ConcreteFlyweight(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span></span>; </span><br><span class="line"><span class="keyword">private</span>: </span><br><span class="line">​    <span class="built_in">string</span> intrinsicState; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">ConcreteFlyweight::ConcreteFlyweight(<span class="built_in">string</span> str)&#123; </span><br><span class="line">​    intrinsicState = str; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">ConcreteFlyweight::~ConcreteFlyweight()&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConcreteFlyweight::operation</span><span class="params">()</span></span>&#123; </span><br><span class="line"></span><br><span class="line">​    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Flyweight["</span> &lt;&lt; intrinsicState &lt;&lt; <span class="string">"] do operation."</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//UnsharedConcreteFlyweight</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnsharedConcreteFlyweight</span> :</span> <span class="keyword">public</span> Flyweight&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    UnsharedConcreteFlyweight(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~UnsharedConcreteFlyweight(); </span><br><span class="line">​    <span class="function"><span class="keyword">void</span> <span class="title">operation</span><span class="params">()</span></span>; </span><br><span class="line"><span class="keyword">private</span>: </span><br><span class="line">​    <span class="keyword">int</span> allState; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">UnsharedConcreteFlyweight::UnsharedConcreteFlyweight()&#123;&#125; </span><br><span class="line">UnsharedConcreteFlyweight::~UnsharedConcreteFlyweight()&#123;&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">UnsharedConcreteFlyweight::operation</span><span class="params">()</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><p>主要有三个角色： </p>
+<p>Subject：<br>Proxy：<br>Realsubject：<br>//<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span>&#123; </span><br><span class="line">​    Proxy proxy; </span><br><span class="line">​    proxy.request(); </span><br><span class="line">​    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//subject 接口</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Subject</span>&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    Subject(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~Subject(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">空实现</span><br></pre></td></tr></table></figure></p>
+<p><strong>//RealSubject</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RealSubject</span> :</span> <span class="keyword">public</span> Subject&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    RealSubject(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~RealSubject(); </span><br><span class="line">​    <span class="function"><span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">RealSubject::RealSubject()&#123;&#125; </span><br><span class="line">RealSubject::~RealSubject()&#123;&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">RealSubject::request</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    <span class="built_in">cout</span> &lt;&lt; <span class="string">"RealSubject::request"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//Proxy</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Proxy</span> :</span> <span class="keyword">public</span> Subject&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    Proxy(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~Proxy(); </span><br><span class="line">​    <span class="function"><span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>; </span><br><span class="line"><span class="keyword">private</span>: </span><br><span class="line">​    <span class="function"><span class="keyword">void</span> <span class="title">afterRequest</span><span class="params">()</span></span>; </span><br><span class="line">​    <span class="function"><span class="keyword">void</span> <span class="title">preRequest</span><span class="params">()</span></span>;     </span><br><span class="line">​    RealSubject *m_pRealSubject; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">Proxy::Proxy()&#123; </span><br><span class="line">​    <span class="comment">//有人觉得 RealSubject对象的创建应该是在main中实现；我认为RealSubject应该 </span></span><br><span class="line">​    <span class="comment">//对用户是透明的，用户所面对的接口都是通过代理的；这样才是真正的代理； </span></span><br><span class="line">​    m_pRealSubject = <span class="keyword">new</span> RealSubject(); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">Proxy::~Proxy()&#123; </span><br><span class="line">​    <span class="keyword">delete</span> m_pRealSubject; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Proxy::afterRequest</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Proxy::afterRequest"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Proxy::preRequest</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Proxy::preRequest"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Proxy::request</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    preRequest(); </span><br><span class="line">​    m_pRealSubject-&gt;request(); </span><br><span class="line">​    afterRequest(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h2><p>Command: 抽象命令类<br>ConcreteCommand: 具体命令类<br>Invoker: 调用者<br>Receiver: 接收者<br>Client:客户类 </p>
+<p><strong>//main</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span>&#123; </span><br><span class="line">​    Receiver * pReceiver = <span class="keyword">new</span> Receiver(); </span><br><span class="line">​    ConcreteCommand * pCommand = <span class="keyword">new</span> ConcreteCommand(pReceiver); </span><br><span class="line">​    Invoker * pInvoker = <span class="keyword">new</span> Invoker(pCommand); </span><br><span class="line">​    pInvoker-&gt;call(); </span><br><span class="line">​    <span class="keyword">delete</span> pReceiver; </span><br><span class="line">​    <span class="keyword">delete</span> pCommand; </span><br><span class="line">​    <span class="keyword">delete</span> pInvoker; </span><br><span class="line">​    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//Receiver</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Receiver</span>&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    Receiver(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~Receiver(); </span><br><span class="line">​    <span class="function"><span class="keyword">void</span> <span class="title">action</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">Receiver::Receiver()&#123;&#125; </span><br><span class="line"></span><br><span class="line">Receiver::~Receiver()&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Receiver::action</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    <span class="built_in">cout</span> &lt;&lt; <span class="string">"receiver action."</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//Command</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Command</span>&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    Command(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~Command(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line">空实现</span><br></pre></td></tr></table></figure></p>
+<p><strong>//ConcreteCommand</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteCommand</span> :</span> <span class="keyword">public</span> Command&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    ConcreteCommand(Receiver * pReceiver); </span><br><span class="line">​    <span class="keyword">virtual</span> ~ConcreteCommand(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>; </span><br><span class="line"><span class="keyword">private</span>: </span><br><span class="line">​    Receiver *m_pReceiver; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">ConcreteCommand::ConcreteCommand(Receiver *pReceiver)&#123; </span><br><span class="line">​    m_pReceiver = pReceiver; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">ConcreteCommand::~ConcreteCommand()&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConcreteCommand::execute</span><span class="params">()</span></span>&#123;</span><br><span class="line">​    <span class="built_in">cout</span> &lt;&lt; <span class="string">"ConcreteCommand::execute"</span>  &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">​    m_pReceiver-&gt;action(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//Invoker</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Invoker</span>&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    Invoker(Command * pCommand); </span><br><span class="line">​    <span class="keyword">virtual</span> ~Invoker(); </span><br><span class="line">​    <span class="function"><span class="keyword">void</span> <span class="title">call</span><span class="params">()</span></span>; </span><br><span class="line"><span class="keyword">private</span>: </span><br><span class="line">​    Command *m_pCommand; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Invoker::Invoker(Command * pCommand)&#123; </span><br><span class="line">​    m_pCommand = pCommand; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">Invoker::~Invoker()&#123;&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Invoker::call</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    <span class="built_in">cout</span> &lt;&lt; <span class="string">"invoker calling"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">​    m_pCommand-&gt;execute(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="中介模式"><a href="#中介模式" class="headerlink" title="中介模式"></a>中介模式</h2><p>中介者模式(Mediator Pattern)定义：用一个中介对象来封装一系列的对象交互，中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。中介者模式又称为调停者模式，它是一种对象行为型模式。 </p>
+<p>Colleage抽象同事类，而ConcreteColleage是具体同时类，每个具体同事只知道自己的行为，而不了解其他同事类的情况，但它们却都认识中介者对象，Mediator是抽象中介者，定义了同事对象到中介者对象的接口，ConcreteMediator是具体中介者对象，实现抽象类的方法，它需要知道所有具体同事类，并从具体同事接受消息，向具体同事对象发出命令。 </p>
+<p>Colleage类，抽象同事类 </p>
+<p>Mediator，抽象中介者类 </p>
+<p>说明： </p>
+<p>\1. Mediator 模式中，每个Colleague 维护一个 Mediator，当要进行通信时，每个具体的 Colleague 直接向ConcreteMediator 发信息，至于信息发到哪里，则由 ConcreteMediator 来决定。 </p>
+<p>\2. ConcreteColleagueA 和 ConcreteColleagueB 不必维护对各自的引用，甚至它们也不知道各个的存在。 </p>
+<p>\3. 优点是，各个 Colleague 减少了耦合。 </p>
+<p>\4. 缺点是，由于 Mediator 控制了集中化，于是就把 Colleague 之间的交互复杂性变为了中介者的复杂性，也就是中介者会变的比任何一个 Colleague 都复杂。 </p>
+<p>中介者模式很容易在系统中应用，也很容易在系统中误用。当系统中出现了“多对多”交互复杂的对象群时，不要急于使用中介者模式，而要先反思你的系统在设计上是不是合理。 </p>
+<p>Mediator的出现减少了各个Colleage的耦合，使得可以独立地改变和复用各个Colleage类和Mediator; </p>
+<p>由于把对象如何协作进行了抽象，将中介作为一个独立的概念并将其封装在一个对象中，这样关注的对象就从对象各自本身的行为转移到它们之间的交互上来，也就是站在一个更宏观的角度去看待系统。 </p>
+<p>由于ConcreteMediator控制了集中化，于是就把交互复杂性变为了中介者的复杂性，这使得中介者会变得比任何一个ConcreteColleage都复杂。 </p>
+<p>中介者模式的优点来自集中控制，其缺点也是它。 </p>
+<p>中介者模式一般应用于一组对象以定义良好但是复杂的方式进行通信的场合。 </p>
+<p><strong>举例，虚拟聊天室</strong></p>
+<p>某论坛系统欲增加一个虚拟聊天室，允许论坛会员通过该聊天室进行信息交流，普通会员(CommonMember)可以给其他会员发送文本信息，钻石会员(DiamondMember)既可以给其他会员发送文本信息，还可以发送图片信息。该聊天室可以对不雅字符进行过滤，如“日”等字符；还可以对发送的图片大小进行控制。 </p>
+<p>主要有四个类，抽象中介/具体中介，抽象同事/具体同事 </p>
+<p><strong>//main</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span>&#123; </span><br><span class="line">​    ConcreteColleagueA * pa = <span class="keyword">new</span> ConcreteColleagueA(); </span><br><span class="line">​    ConcreteColleagueB * pb = <span class="keyword">new</span> ConcreteColleagueB(); </span><br><span class="line">​    ConcreteMediator * pm = <span class="keyword">new</span> ConcreteMediator(); </span><br><span class="line">​    pm-&gt;registered(<span class="number">1</span>,pa); </span><br><span class="line">​    pm-&gt;registered(<span class="number">2</span>,pb); </span><br><span class="line">​    <span class="comment">// sendmsg from a to b </span></span><br><span class="line">​    pa-&gt;sendmsg(<span class="number">2</span>,<span class="string">"hello,i am a"</span>); </span><br><span class="line">​    <span class="comment">// sendmsg from b to a </span></span><br><span class="line">​    pb-&gt;sendmsg(<span class="number">1</span>,<span class="string">"hello,i am b"</span>); </span><br><span class="line">​    <span class="keyword">delete</span> pa,pb,pm; </span><br><span class="line">​    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//Mediator</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mediator</span>&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    Mediator(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~Mediator(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">(<span class="keyword">int</span> nWho,<span class="built_in">string</span> str)</span></span>; </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">registered</span><span class="params">(<span class="keyword">int</span> nWho, Colleague * aColleague)</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Mediator::Mediator()&#123;&#125; </span><br><span class="line"></span><br><span class="line">Mediator::~Mediator()&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Mediator::operation</span><span class="params">(<span class="keyword">int</span> nWho,<span class="built_in">string</span> str)</span></span>&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Mediator::registered</span><span class="params">(<span class="keyword">int</span> nWho,Colleague * aColleague)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//ConcreteMediator</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteMediator</span> :</span> <span class="keyword">public</span> Mediator&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    ConcreteMediator(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~ConcreteMediator(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">(<span class="keyword">int</span> nWho,<span class="built_in">string</span> str)</span></span>; </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">registered</span><span class="params">(<span class="keyword">int</span> nWho, Colleague * aColleague)</span></span>; </span><br><span class="line"><span class="keyword">private</span>: </span><br><span class="line">​    <span class="built_in">map</span>&lt;<span class="keyword">int</span>,Colleague*&gt; m_mpColleague; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">ConcreteMediator::ConcreteMediator()&#123;&#125; </span><br><span class="line"></span><br><span class="line">ConcreteMediator::~ConcreteMediator()&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConcreteMediator::operation</span><span class="params">(<span class="keyword">int</span> nWho,<span class="built_in">string</span> str)</span></span>&#123; </span><br><span class="line">​    <span class="built_in">map</span>&lt;<span class="keyword">int</span>,Colleague*&gt;::const_iterator itr = m_mpColleague.find(nWho); </span><br><span class="line">​    <span class="keyword">if</span>(itr == m_mpColleague.end()) </span><br><span class="line">​    &#123; </span><br><span class="line">​        <span class="built_in">cout</span> &lt;&lt; <span class="string">"not found this colleague!"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">​        <span class="keyword">return</span>; </span><br><span class="line">​    &#125; </span><br><span class="line">​    Colleague* pc = itr-&gt;second; </span><br><span class="line">​    pc-&gt;receivemsg(str); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConcreteMediator::registered</span><span class="params">(<span class="keyword">int</span> nWho,Colleague * aColleague)</span></span>&#123; </span><br><span class="line">​    <span class="built_in">map</span>&lt;<span class="keyword">int</span>,Colleague*&gt;::const_iterator itr = m_mpColleague.find(nWho); </span><br><span class="line">​    <span class="keyword">if</span>(itr == m_mpColleague.end()) </span><br><span class="line">​    &#123; </span><br><span class="line">​        m_mpColleague.insert(make_pair(nWho,aColleague)); </span><br><span class="line">​        <span class="comment">//同时将中介类暴露给colleague </span></span><br><span class="line">​        aColleague-&gt;setMediator(<span class="keyword">this</span>); </span><br><span class="line">​    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//Colleague</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Colleague</span>&#123;</span> </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    Colleague(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~Colleague(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">receivemsg</span><span class="params">(<span class="built_in">string</span> str)</span></span>; </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">sendmsg</span><span class="params">(<span class="keyword">int</span> toWho,<span class="built_in">string</span> str)</span></span>; </span><br><span class="line">​    <span class="function"><span class="keyword">void</span> <span class="title">setMediator</span><span class="params">(Mediator * aMediator)</span></span>; </span><br><span class="line"><span class="keyword">protected</span>: </span><br><span class="line">​    Mediator * m_pMediator; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">Colleague::Colleague()&#123;&#125; </span><br><span class="line"></span><br><span class="line">Colleague::~Colleague()&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Colleague::receivemsg</span><span class="params">(<span class="built_in">string</span> str)</span></span>&#123; </span><br><span class="line">​    <span class="built_in">cout</span> &lt;&lt; <span class="string">"reveivemsg:"</span> &lt;&lt; str &lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Colleague::sendmsg</span><span class="params">(<span class="keyword">int</span> toWho,<span class="built_in">string</span> str)</span></span>&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Colleague::setMediator</span><span class="params">(Mediator * aMediator)</span></span>&#123; </span><br><span class="line">​    m_pMediator = aMediator; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//ConcreteColleagueA</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteColleagueA</span> :</span> <span class="keyword">public</span> Colleague&#123; </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    ConcreteColleagueA(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~ConcreteColleagueA(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">sendmsg</span><span class="params">(<span class="keyword">int</span> toWho,<span class="built_in">string</span> str)</span></span>; </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">receivemsg</span><span class="params">(<span class="built_in">string</span> str)</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">ConcreteColleagueA::ConcreteColleagueA()&#123;&#125; </span><br><span class="line"></span><br><span class="line">ConcreteColleagueA::~ConcreteColleagueA()&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConcreteColleagueA::sendmsg</span><span class="params">(<span class="keyword">int</span> toWho,<span class="built_in">string</span> str)</span></span>&#123; </span><br><span class="line">​    <span class="built_in">cout</span> &lt;&lt; <span class="string">"send msg from colleagueA,to:"</span> &lt;&lt; toWho &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">​    m_pMediator-&gt;operation(toWho,str); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConcreteColleagueA::receivemsg</span><span class="params">(<span class="built_in">string</span> str)</span></span>&#123; </span><br><span class="line">​    <span class="built_in">cout</span> &lt;&lt; <span class="string">"ConcreteColleagueA reveivemsg:"</span> &lt;&lt; str &lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h2><p>MVC框架，省略 </p>
+<h2 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h2><p>Context: 环境类 </p>
+<p>State: 抽象状态类 </p>
+<p>ConcreteState: 具体状态类<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">​    <span class="keyword">char</span> a = <span class="string">'0'</span>; </span><br><span class="line">​    <span class="keyword">if</span>(<span class="string">'0'</span> == a) </span><br><span class="line">​        <span class="built_in">cout</span> &lt;&lt; <span class="string">"yes"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">​    <span class="keyword">else</span> </span><br><span class="line">​        <span class="built_in">cout</span> &lt;&lt; <span class="string">"no"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">​    Context * c = <span class="keyword">new</span> Context(); </span><br><span class="line">​    c-&gt;request(); </span><br><span class="line">​    c-&gt;request(); </span><br><span class="line">​    c-&gt;request(); </span><br><span class="line">​    <span class="keyword">delete</span> c; </span><br><span class="line">​    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//Context</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Context</span> </span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    Context(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~Context(); </span><br><span class="line">​    <span class="function"><span class="keyword">void</span> <span class="title">changeState</span><span class="params">(State * st)</span></span>; </span><br><span class="line">​    <span class="function"><span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>: </span><br><span class="line">​    State *m_pState; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">Context::Context()&#123; </span><br><span class="line">​    <span class="comment">//default is a </span></span><br><span class="line">​    m_pState = ConcreteStateA::Instance(); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">Context::~Context()&#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Context::changeState</span><span class="params">(State * st)</span></span>&#123; </span><br><span class="line">​    m_pState = st; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Context::request</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    m_pState-&gt;handle(<span class="keyword">this</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//State</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">State</span>&#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    State(); </span><br><span class="line">​    <span class="keyword">virtual</span> ~State(); </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(Context * c)</span></span>; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">空实现</span><br></pre></td></tr></table></figure></p>
+<p><strong>//ConcreteStateA</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteStateA</span> :</span> <span class="keyword">public</span> State&#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">​    <span class="keyword">virtual</span> ~ConcreteStateA(); </span><br><span class="line">​    <span class="function"><span class="keyword">static</span> State * <span class="title">Instance</span><span class="params">()</span></span>; </span><br><span class="line">​    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(Context * c)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>: </span><br><span class="line">​    ConcreteStateA(); </span><br><span class="line">​    <span class="keyword">static</span> State * m_pState; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">State * ConcreteStateA::m_pState = <span class="literal">NULL</span>; </span><br><span class="line">ConcreteStateA::ConcreteStateA()&#123;&#125; </span><br><span class="line">ConcreteStateA::~ConcreteStateA()&#123;&#125; </span><br><span class="line"><span class="function">State * <span class="title">ConcreteStateA::Instance</span><span class="params">()</span></span>&#123; </span><br><span class="line">​    <span class="keyword">if</span> ( <span class="literal">NULL</span> == m_pState) </span><br><span class="line">​    &#123; </span><br><span class="line">​        m_pState = <span class="keyword">new</span> ConcreteStateA(); </span><br><span class="line">​    &#125; </span><br><span class="line">​    <span class="keyword">return</span> m_pState; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConcreteStateA::handle</span><span class="params">(Context * c)</span></span>&#123; </span><br><span class="line">​    <span class="built_in">cout</span> &lt;&lt; <span class="string">"doing something in State A.\n done,change state to B"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">​    c-&gt;changeState(ConcreteStateB::Instance()); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>举例实现，一个TCP协议 </p>
+<h2 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h2><p>用不同的类封装不同的解决方案/算法策略，实际上编码本省的核心或者说前提条件就是，解决好解决方案或者方法的策略，设计。 </p>
+<p>环境类 Context<br>抽象策略类 Strategy<br>具体策略类 ConcreteStrategy </p>
+<p><strong>//main</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">​       Strategy * s1 = <span class="keyword">new</span> ConcreteStrategyA(); </span><br><span class="line">​       Context * cxt = <span class="keyword">new</span> Context(); </span><br><span class="line">​       cxt-&gt;setStrategy(s1);</span><br><span class="line">​       cxt-&gt;algorithm();</span><br><span class="line">​       Strategy *s2 = <span class="keyword">new</span> ConcreteStrategyB(); </span><br><span class="line">​       cxt-&gt;setStrategy(s2);</span><br><span class="line">​       cxt-&gt;algorithm();</span><br><span class="line">​       <span class="keyword">delete</span> s1; </span><br><span class="line">​       <span class="keyword">delete</span> s2; </span><br><span class="line">​       <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//Context</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Context</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">​       Context();</span><br><span class="line">​       <span class="keyword">virtual</span> ~Context(); </span><br><span class="line">​       <span class="function"><span class="keyword">void</span> <span class="title">algorithm</span><span class="params">()</span></span>; </span><br><span class="line">​       <span class="function"><span class="keyword">void</span> <span class="title">setStrategy</span><span class="params">(Strategy* st)</span></span>; </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">​       Strategy *m_pStrategy; </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Context::Context() &#123;&#125;</span><br><span class="line">Context::~Context() &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Context::algorithm</span><span class="params">()</span> </span>&#123; </span><br><span class="line">​       m_pStrategy-&gt;algorithm();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Context::setStrategy</span><span class="params">(Strategy* st)</span> </span>&#123; </span><br><span class="line">​       m_pStrategy = st; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>//Strategy</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Strategy</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">​       Strategy();</span><br><span class="line">​       <span class="keyword">virtual</span> ~Strategy(); </span><br><span class="line">​       <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">algorithm</span><span class="params">()</span></span>; </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Strategy::Strategy() &#123;&#125;</span><br><span class="line">Strategy::~Strategy() &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Strategy::algorithm</span><span class="params">()</span> </span>&#123;&#125; </span><br><span class="line"></span><br><span class="line">**<span class="comment">//ConcreteStrategy**</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteStrategyA</span> :</span> <span class="keyword">public</span> Strategy </span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">​       ConcreteStrategyA();</span><br><span class="line">​       <span class="keyword">virtual</span> ~ConcreteStrategyA(); </span><br><span class="line">​       <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">algorithm</span><span class="params">()</span></span>; </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">ConcreteStrategyA::ConcreteStrategyA() &#123;&#125;</span><br><span class="line">ConcreteStrategyA::~ConcreteStrategyA() &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConcreteStrategyA::algorithm</span><span class="params">()</span> </span>&#123; </span><br><span class="line">​       <span class="built_in">cout</span> &lt;&lt; <span class="string">"use algorithm A"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出：<br>两个算法的分别使用。 </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DesignPattern/" rel="tag"># DesignPattern</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/01/23/CPPBasic/" rel="next" title="CPP-Basic">
+                <i class="fa fa-chevron-left"></i> CPP-Basic
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/23/CsharpBasic/" rel="prev" title="CSharp-Basic-Sum">
+                CSharp-Basic-Sum <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="KinGil">
+          <p class="site-author-name" itemprop="name">KinGil</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kingiluob" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/2283641104/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100007092155441" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Facebook
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单工厂SimpleFactory"><span class="nav-number">1.</span> <span class="nav-text">简单工厂SimpleFactory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工厂模式FactoryMethod"><span class="nav-number">2.</span> <span class="nav-text">工厂模式FactoryMethod</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象工厂AbstractFactory"><span class="nav-number">3.</span> <span class="nav-text">抽象工厂AbstractFactory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式"><span class="nav-number">4.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#适配器Adaptor"><span class="nav-number">5.</span> <span class="nav-text">适配器Adaptor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#桥接关系"><span class="nav-number">6.</span> <span class="nav-text">桥接关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装饰器"><span class="nav-number">7.</span> <span class="nav-text">装饰器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外观模式"><span class="nav-number">8.</span> <span class="nav-text">外观模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#享元模式-不是很明白"><span class="nav-number">9.</span> <span class="nav-text">享元模式//不是很明白</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代理模式"><span class="nav-number">10.</span> <span class="nav-text">代理模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令模式"><span class="nav-number">11.</span> <span class="nav-text">命令模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中介模式"><span class="nav-number">12.</span> <span class="nav-text">中介模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#观察者模式"><span class="nav-number">13.</span> <span class="nav-text">观察者模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态模式"><span class="nav-number">14.</span> <span class="nav-text">状态模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#策略模式"><span class="nav-number">15.</span> <span class="nav-text">策略模式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KinGil</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

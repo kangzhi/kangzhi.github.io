@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+
+
+<script type="text/javascript" color="253,253,253" opacity="0.5" zindex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="CPP,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="前言">
+<meta name="keywords" content="CPP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CPP-Basic">
+<meta property="og:url" content="http://kangzhi.github.io/2015/01/23/CPPBasic/index.html">
+<meta property="og:site_name" content="KinGil&#39;s Blog">
+<meta property="og:description" content="前言">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-01-19T10:53:13.050Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CPP-Basic">
+<meta name="twitter:description" content="前言">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kangzhi.github.io/2015/01/23/CPPBasic/">
+
+
+
+
+
+  <title>CPP-Basic | KinGil's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KinGil's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">April is coming</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kangzhi.github.io/2015/01/23/CPPBasic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KinGil">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KinGil's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CPP-Basic</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-01-23T21:10:52+08:00">
+                2015-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CPP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前言</p>
+<a id="more"></a>
+<p>CPPBasic</p>
+<h2 id="C的区别"><a href="#C的区别" class="headerlink" title="C的区别"></a>C的区别</h2><pre><code>1 如果函数没有参数，C语言建议使用void，而C++建议不写。
+2 C语言中用结构体定义变量时，“struct 结构体名 变量名”，在C++中“struct”可以省略。
+3 C语言的控制台输入输出是用函数来实现的，最常用的是printf()和scanf()函数。C++语言中一般使用运算符“&lt;&lt;”和“&gt;&gt;”，这比C语言中的函数的功能更强大、更方面，下面只介绍基本使用，更强大的功能要等学完了“类”之后才讲解，这样更容易理解。
+</code></pre><p>C语言中运算符“&lt;&lt;”和“&gt;&gt;”是位操作运算符，C++中仍然有效，而用作输入出时，最前面必须是cin或cout，表示从控制台输入或输出，cin和cout是C++定义好的输入出流。输出时当需要回车时，可以用“\n”，也可以用“endl”。</p>
+<h2 id="缺省指和重载"><a href="#缺省指和重载" class="headerlink" title="缺省指和重载"></a>缺省指和重载</h2><p>在C++中参数可以设置缺省值，设置了缺省值之后，这个参数在调用时可以省略。<br>注意：设置缺省值的参数只能是最后的几个参数。</p>
+<p>函数的重载在C++中具有重要作用，重载(overload)不要和后面要学的覆盖(override)混淆起来。重载是指相同的函数名，但参数的类型或个数中只要有所不同，便进行再定义，编译之后重载的函数都具有不同的地址，也就是说虽然函数名相同，实际上是不同的函数，在调用时，编译系统会根据不同之处自动区别是调用哪一个函数。对于普通函数和后面要学的类的成员函数都适用。</p>
+<p>覆盖（重写）只对类的构造函数或成员函数适用，是子类继承父类是才使用的非常有用的功能。重载可以针对运算符，而覆盖不行。上一节中缺省值的设置，实际上在编译时等价于重载，被生成了4个不同的函数。</p>
+<p>重载函数的地址：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">space</span><span class="params">(<span class="keyword">int</span> count)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">space</span><span class="params">(<span class="keyword">int</span> count, <span class="keyword">char</span> ch)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">//有一个整型参数的函数指针</span></span><br><span class="line">  <span class="keyword">void</span> (*fp1)(<span class="keyword">int</span>);</span><br><span class="line">  <span class="comment">//有一个整型参数、一个字符型参数的函数指针</span></span><br><span class="line">  <span class="keyword">void</span> (*fp2)(<span class="keyword">int</span>, <span class="keyword">char</span>);</span><br><span class="line">  fp1 = space; <span class="comment">//取space(int)函数的地址</span></span><br><span class="line">  fp2 = space; <span class="comment">//取space(int, char)函数的地址</span></span><br><span class="line">  fp1(<span class="number">20</span>); <span class="comment">//输出20个空格</span></span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  fp2(<span class="number">20</span>, <span class="string">'='</span>); <span class="comment">//输出20个等号</span></span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>“引用(reference)”与指针象似但不是指针。引用主要有3种用法：</p>
+<ul>
+<li>单独使用（一般称为“独立引用”）；</li>
+<li>作参数使用；</li>
+<li>作返回值使用。<br>从功能上来说，引用型变量又可以看做事被引用变量的“别名”，这两个变量只是名称不同，变量的地址是同一个（共用体中的元素也是一样）。使用“引用”的好处主要是可以“逆向引用”。</li>
+</ul>
+<p>常量也可以被引用，例如：“const int &amp;ref = 10;”，这也是正确的，但这样定义无任何意义。定义独立引用时需要注意以下规则：<br><em>引用型变量在定义时必须初始化。
+</em>被引用的对象必须已经分配了空间，即不能为空，或空指针。<br>*被引用的对象不能为地址，即指针变量、数组变量等不能被引用。</p>
+<p>生成实例的3种方法</p>
+<p>了解生成实例的三种方法的细微区别是很重要的：<br><em>申明为变量；
+</em>从无名对象复制；<br>*申明为指针并动态生成。<br>注意：指针的成员用“-&gt;”，而不用“.”。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">strA</span><span class="params">(<span class="string">"C语言中文网"</span>)</span></span>;  <span class="comment">//直接调用构造函数生成实例 </span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; strA &lt;&lt; <span class="string">"    "</span> &lt;&lt; strA.length() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">string</span> strB;  <span class="comment">//先调用构造函数生成空字符串实例</span></span><br><span class="line">    strB = <span class="built_in">string</span>(<span class="string">"C++60分钟入门教程"</span>);  <span class="comment">//再调用构造函数生成无名实例，然后复制给strB实例，无名实例立即销毁</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; strB &lt;&lt; <span class="string">"    "</span> &lt;&lt; strB.length() &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">//这和上面①的方法的结果相同</span></span><br><span class="line">    <span class="built_in">string</span> *strC;  <span class="comment">//先定义一个指针，尚未分配空间</span></span><br><span class="line">    <span class="comment">//动态调用构造函数生成实例后，再将实例地址赋给指针变量</span></span><br><span class="line">    strC = <span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">"http://see.xidian.edu.cn/cpp/biancheng/cpp/jichu/"</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; *strC &lt;&lt; <span class="string">"    "</span> &lt;&lt; strC-&gt;length() &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    <span class="keyword">delete</span> strC;              <span class="comment">//千万不要忘记释放</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="成员函数和运算符重载"><a href="#成员函数和运算符重载" class="headerlink" title="成员函数和运算符重载"></a>成员函数和运算符重载</h2><p>构造函数的重载</p>
+<p>构造函数可以重载，使得生成实例时非常方便。构造函数一般要对成员变量赋初值，有两种写法：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">stuff</span> &#123;</span></span><br><span class="line">  <span class="built_in">string</span> name;</span><br><span class="line">  <span class="keyword">int</span> age;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">stuff() &#123; <span class="comment">//这是写法一</span></span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; name &lt;&lt; <span class="string">"---"</span> &lt;&lt; age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  name = <span class="string">"空"</span>;</span><br><span class="line">  age = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; name &lt;&lt; <span class="string">"---"</span> &lt;&lt; age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line">stuff(<span class="built_in">string</span> n, <span class="keyword">int</span> a):name(n),age(a) <span class="comment">//这是写法二</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; name &lt;&lt; <span class="string">"---"</span> &lt;&lt; age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> age;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  stuff st2;</span><br><span class="line">  <span class="function">stuff <span class="title">st1</span><span class="params">(<span class="string">"C语言中文网"</span>, <span class="number">3</span>)</span></span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果：<br>—2817728<br>空—0<br>C语言中文网—3<br>写法一是在构造函数体中赋值，赋值前成员变量已经有了地址空间，尚未有值。写法二是一种特殊方法，是在成员变量分配空间的同时将参数的值赋给成员变量。虽然写法二用的人少，但明显优于写法一。</p>
+<p>运算符重载</p>
+<p>运算符重载对于普通函数和成员函数来说，格式稍有不同。</p>
+<p>//单目运算符<br>成员函数： 返回值类型 operator 运算符 () ;<br>普通函数： 返回值类型 operator 运算符 (对象的类型) ;</p>
+<p>//双目运算符<br>成员函数： 返回值类型 operator 运算符 (对象的类型) ;<br>普通函数： 返回值类型 operator 运算符 (对象的类型1, 对象的类型2) ;</p>
+<p>//函数调用<br>成员函数： 返回值类型 operator (任意的参数列) ;</p>
+<p>//数组元素<br>成员函数： 返回值类型 operator[] (参数类型) ;</p>
+<p>//增1/减1运算符<br>成员函数： 返回值类型 operator 运算符 (int) ;<br>普通函数： 返回值类型 operator 运算符 (对象的类型, int) ;</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">stuff</span> &#123;</span></span><br><span class="line">    <span class="built_in">string</span> name;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    stuff(<span class="built_in">string</span> n, <span class="keyword">int</span> a):name(n),age(a)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; name &lt;&lt; <span class="string">"---"</span> &lt;&lt; age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">void</span> <span class="keyword">operator</span> +(<span class="keyword">int</span> x);       <span class="comment">//运算符重载的定义</span></span><br><span class="line">    <span class="keyword">void</span> <span class="keyword">operator</span> +(<span class="built_in">string</span> s);    <span class="comment">//运算符重载的定义</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">void</span> stuff::<span class="keyword">operator</span> +(<span class="keyword">int</span> x)       <span class="comment">//运算符重载的实装</span></span><br><span class="line">&#123;</span><br><span class="line">    age = age + x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> stuff::<span class="keyword">operator</span> +(<span class="built_in">string</span> s)    <span class="comment">//运算符重载的实装</span></span><br><span class="line">&#123;</span><br><span class="line">    name = name + s;</span><br><span class="line">&#125;</span><br><span class="line">int main ( ).</span><br><span class="line">&#123;</span><br><span class="line"><span class="function">stuff <span class="title">st2</span><span class="params">(<span class="string">"C语言中文网"</span>, <span class="number">3</span>)</span></span>;</span><br><span class="line">    st2 + <span class="number">2</span>;          <span class="comment">//+运算</span></span><br><span class="line">    st2 + <span class="string">".C++ 60分钟入门教程"</span>;    <span class="comment">//+运算</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; st2.getName() &lt;&lt; st2.getAge() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：<br>C语言中文网—3<br>C语言中文网.C++ 60分钟入门教程5</p>
+<p>拷贝构造函数和赋值运算符</p>
+<p>“拷贝构造函数”和“赋值运算符”都是将对象的值复制一份然后传给另一对象。这二个功能也是类本身就具有的，但有很多场合原封不动地复制给另外一个对象时反而会出错，例如在成员函数中有动态分配内存，或者参数指针指向外部某一地址时，就有可能出错。</p>
+<p>要避免这些错误，我们可以重载“=”运算符以及拷贝构造函数，将出错的因素排除。下例中为了演示，故意将赋值运算符重载函数中不复制“姓名”，而拷贝构造函数中固定“年龄”。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">stuff</span> &#123;</span></span><br><span class="line">    <span class="built_in">string</span> name;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    stuff(<span class="built_in">string</span> n, <span class="keyword">int</span> a):name(n),age(a)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"构造函数  "</span> &lt;&lt; name &lt;&lt; age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  &#125;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    stuff&amp; <span class="keyword">operator</span> =(stuff&amp; x);    <span class="comment">//赋值运算符重载</span></span><br><span class="line">    stuff(stuff&amp; x):name(x.name),age(<span class="number">20</span>)    <span class="comment">//拷贝构造函数重载</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; <span class="string">"拷贝构造函数  "</span> &lt;&lt; name &lt;&lt; age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">stuff&amp; stuff::<span class="keyword">operator</span> =(stuff&amp; x)</span><br><span class="line">&#123;</span><br><span class="line">    age = x.age;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"赋值运算符  "</span> &lt;&lt; name &lt;&lt; age &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;    <span class="function">stuff <span class="title">st</span><span class="params">(<span class="string">"C语言中文网"</span>, <span class="number">3</span>)</span></span>;     <span class="comment">//调用通常的构造函数</span></span><br><span class="line">    <span class="function">stuff <span class="title">st1</span><span class="params">(<span class="string">"C++ 60入门教程"</span>, <span class="number">2</span>)</span></span>;   <span class="comment">//调用通常的构造函数</span></span><br><span class="line">    st1 = st;         <span class="comment">//因为不产生新的实例，所以调用的是赋值运算符</span></span><br><span class="line">    stuff st2 = st;   <span class="comment">//因为产生新的实例，所以调用的是拷贝构造函数</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; st.getName() &lt;&lt; st.getAge() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; st1.getName()  st1.getAge() &lt;&lt; dl;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; st2.getName() &lt;&lt; st2.getAge() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>类型转换</p>
+<p>当需要将当前类的实例直接赋值给其它类型的变量时自动转换类型，这其实还是运算符重载。当需要其它类型直接赋值给当前类的实例时，只要增加构造函数就行。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">stuff</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="built_in">string</span> name;</span><br><span class="line">  <span class="keyword">int</span> age;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">  stuff(<span class="built_in">string</span> n, <span class="keyword">int</span> a):name(n),age(a) &#123; &#125;</span><br><span class="line">  <span class="function"><span class="built_in">string</span> <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> name;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> age;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">operator</span> <span class="title">int</span><span class="params">()</span> </span>&#123; <span class="comment">//stuff →　int</span></span><br><span class="line">  <span class="keyword">return</span> age;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">operator</span> <span class="title">string</span><span class="params">()</span> </span>&#123; <span class="comment">//stuff →　string</span></span><br><span class="line">  <span class="keyword">return</span> name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="function">stuff <span class="title">st</span><span class="params">(<span class="string">"C语言中文网"</span>, <span class="number">3</span>)</span></span>; </span><br><span class="line"><span class="built_in">string</span> m_name = st; <span class="comment">//stuff →　string </span></span><br><span class="line"><span class="keyword">int</span> m_age = st; <span class="comment">//stuff →　int </span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; m_name &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; m_age &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>##C++继承</p>
+<h2 id="基类-派生类的构造函数"><a href="#基类-派生类的构造函数" class="headerlink" title="基类 派生类的构造函数"></a>基类 派生类的构造函数</h2><p>缺省构造函数的调用关系<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CBase</span> &#123;</span> </span><br><span class="line">  <span class="built_in">string</span> name; </span><br><span class="line">  <span class="keyword">int</span> age; </span><br><span class="line">  <span class="keyword">public</span>: </span><br><span class="line">  CBase() &#123; </span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"BASE"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">  &#125;</span><br><span class="line">  ~CBase() &#123;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"~BASE"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CDerive</span> :</span> <span class="keyword">public</span> CBase &#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">CDerive() &#123; </span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"DERIVE"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125; </span><br><span class="line">~CDerive() &#123; </span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"~DERIVE"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125; </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">CDerive d; </span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果：<br>BASE<br>DERIVE<br>~DERIVE<br>BASE</p>
+<p>有参数的传递：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">nclude &lt;iostream&gt;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">CBase</span> &#123;</span> </span><br><span class="line">  <span class="built_in">string</span> name; </span><br><span class="line">  <span class="keyword">public</span>: </span><br><span class="line">  CBase(<span class="built_in">string</span> s) : name(s) &#123; </span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"BASE: "</span> &lt;&lt; name &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  ~CBase() &#123;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"~BASE"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">  &#125; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CDerive</span> :</span> <span class="keyword">public</span> CBase &#123; </span><br><span class="line"><span class="keyword">int</span> age; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">CDerive(<span class="built_in">string</span> s, <span class="keyword">int</span> a) : CBase(s), age(a) &#123; </span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"DERIVE: "</span> &lt;&lt; age &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125; </span><br><span class="line">~CDerive() &#123; </span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"~DERIVE"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125; </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line"><span class="function">CDerive <span class="title">d</span><span class="params">(<span class="string">"小雅"</span>, <span class="number">27</span>)</span></span>; </span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="派生类调用基类成员"><a href="#派生类调用基类成员" class="headerlink" title="派生类调用基类成员"></a>派生类调用基类成员</h2><p>多重继承调用<br>派生类中的同名函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#ilude <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CBase</span> &#123;</span> </span><br><span class="line">    <span class="built_in">string</span> id; </span><br><span class="line">    <span class="built_in">string</span> name; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">    CBase(<span class="built_in">string</span> s1, <span class="built_in">string</span> s2) : name(s1), id(<span class="string">"base-"</span>+s2) &#123; &#125; </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"name: "</span> &lt;&lt; name &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"id: "</span> &lt;&lt; id &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CDerive</span> :</span> <span class="keyword">public</span> CBase &#123; </span><br><span class="line">    <span class="built_in">string</span> id; </span><br><span class="line">    <span class="keyword">int</span> age; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">    CDerive(<span class="built_in">string</span> s1, <span class="keyword">int</span> a, <span class="built_in">string</span> s2) : age(a), id(<span class="string">"DERIVE-"</span>+s2), CBase(s1, s2) &#123; &#125; </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"id: "</span> &lt;&lt; id &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"age: "</span> &lt;&lt; age &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">        <span class="comment">//派生类的内部调用基类的方法 </span></span><br><span class="line">        CBase::show();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//show();    //如果误写成这样，将不断地重复循环地调用自身(即死循环)。 </span></span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="function">CDerive <span class="title">d</span><span class="params">(<span class="string">"C语言中文网"</span>, <span class="number">3</span>, <span class="string">"8503026"</span>)</span></span>;    <span class="comment">//派生类的实例 </span></span><br><span class="line">    d.show();    <span class="comment">//运行的是CDerive类的show()函数 </span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"-------------"</span>&lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    <span class="comment">//类的外部调用基类的方法 </span></span><br><span class="line">    d.CBase::show();    <span class="comment">//运行的是CBase类的show()函数 </span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"-------------"</span>&lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">    <span class="function">CBase <span class="title">b</span><span class="params">(<span class="string">"C语言中文网"</span>, <span class="string">"8503026"</span>)</span></span>;    <span class="comment">//基类当作普通类直接产生的实例 </span></span><br><span class="line">    b.show();    <span class="comment">//运行的是CBase类的show()函数 </span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：<br>id: DERIVE-8503026<br>age: 3<br>name: C语言中文网<br>id: base-8503026<br>//————-<br>name: C语言中文网<br>id: base-8503026<br>//————-<br>name: C语言中文网<br>id: base-8503026</p>
+<h2 id="多重继承的先后问题－菱形问题"><a href="#多重继承的先后问题－菱形问题" class="headerlink" title="多重继承的先后问题－菱形问题"></a>多重继承的先后问题－菱形问题</h2><h2 id="虚函数和重虚函数"><a href="#虚函数和重虚函数" class="headerlink" title="虚函数和重虚函数"></a>虚函数和重虚函数</h2><p>注意 虚继承和虚函数的区别；<br>抽象类不能实例化；</p>
+<p>##多态的应用</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#incde <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">area</span> &#123;</span> </span><br><span class="line"><span class="keyword">double</span> dim1, dim2; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line"><span class="comment">//设置数据 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setData</span><span class="params">(<span class="keyword">double</span> d1, <span class="keyword">double</span> d2)</span> </span>&#123; </span><br><span class="line">dim1 = d1, dim2 = d2; </span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">//取数据 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getData</span><span class="params">(<span class="keyword">double</span>&amp; d1, <span class="keyword">double</span>&amp; d2)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">d1 = dim1, d2 = dim2; </span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">//求面积 </span></span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">double</span> <span class="title">getArea</span><span class="params">()</span> </span>= <span class="number">0</span>; <span class="comment">//纯虚函数 </span></span><br><span class="line">&#125;; </span><br><span class="line"><span class="comment">//长方形 </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">rectangle</span> :</span> <span class="keyword">public</span> area &#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getArea</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="keyword">double</span> d1, d2; </span><br><span class="line">getData(d1, d2); </span><br><span class="line"><span class="keyword">return</span> d1 * d2 ;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="comment">//三角形 </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">triangle</span> :</span> <span class="keyword">public</span> area &#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getArea</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="keyword">double</span> d1, d2; </span><br><span class="line">getData(d1, d2); </span><br><span class="line"><span class="keyword">return</span> d1 * d2 / <span class="number">2</span> ; </span><br><span class="line">&#125; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">area *p; </span><br><span class="line">rectangle r; <span class="comment">//长方形类的实例 </span></span><br><span class="line">triangle t; <span class="comment">//三角形类的实例 </span></span><br><span class="line">r.setData(<span class="number">35</span>, <span class="number">44</span>);</span><br><span class="line">t.setData(<span class="number">36</span>, <span class="number">25</span>);</span><br><span class="line">p = &amp;r;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"长方形的面积为： "</span> &lt;&lt; p-&gt;getArea() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">p = &amp;t;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"三角形的面积为： "</span> &lt;&lt; p-&gt;getArea() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>队列和栈实现：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#inclu <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cctype&gt; </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">list</span> &#123;</span> </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line"><span class="built_in">list</span> *head; <span class="comment">//头指针 </span></span><br><span class="line"><span class="built_in">list</span> *tail; <span class="comment">//尾指针 </span></span><br><span class="line"><span class="built_in">list</span> *next; <span class="comment">//下一个指针 </span></span><br><span class="line"><span class="keyword">int</span> num; <span class="comment">//当前节点的值 </span></span><br><span class="line"><span class="built_in">list</span>() &#123; head = tail = next = <span class="literal">NULL</span>; &#125; <span class="comment">//构造函数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">store</span><span class="params">(<span class="keyword">int</span> i)</span> </span>= <span class="number">0</span>; <span class="comment">//增加节点 </span></span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">retrive</span><span class="params">()</span> </span>= <span class="number">0</span>; <span class="comment">//删除节点 </span></span><br><span class="line">&#125;; </span><br><span class="line"><span class="comment">//队列 </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">queue</span> :</span> <span class="keyword">public</span> <span class="built_in">list</span> &#123; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line"><span class="comment">//增加节点 </span></span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">store</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123; </span><br><span class="line"><span class="built_in">list</span> *item = <span class="keyword">new</span> <span class="built_in">queue</span>; </span><br><span class="line"><span class="keyword">if</span> (!item) &#123; </span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"内存分配失败！"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line"><span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line">item-&gt;num = i; </span><br><span class="line"><span class="comment">//链表末尾插入 </span></span><br><span class="line"><span class="keyword">if</span> (tail) tail-&gt;next = item; </span><br><span class="line">tail = item; </span><br><span class="line">item-&gt;next = <span class="literal">NULL</span>; </span><br><span class="line"><span class="keyword">if</span> (!head) head = tail; </span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">//取值并删除节点 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">retrive</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="keyword">int</span> i; </span><br><span class="line"><span class="built_in">list</span> *p; </span><br><span class="line"><span class="keyword">if</span> (!head) &#123; </span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"链表已经为空"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">//从链表头部删除</span></span><br><span class="line">i = head-&gt;num;</span><br><span class="line">p = head;</span><br><span class="line">head = head-&gt;next;</span><br><span class="line"><span class="keyword">delete</span> p;</span><br><span class="line"><span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//堆栈</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">stack</span> :</span> <span class="keyword">public</span> <span class="built_in">list</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="comment">//增加节点</span></span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">store</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line"><span class="built_in">list</span> *item = <span class="keyword">new</span> <span class="built_in">stack</span>;</span><br><span class="line"><span class="keyword">if</span> (!item) &#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"内存分配失败！"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line">item-&gt;num = i;</span><br><span class="line"><span class="comment">//链表头部插入</span></span><br><span class="line"><span class="keyword">if</span> (head) item-&gt;next = head;</span><br><span class="line">head = item;</span><br><span class="line"><span class="keyword">if</span> (!tail) tail = head;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//取值并删除节点</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">retrive</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="built_in">list</span> *p;</span><br><span class="line"><span class="keyword">if</span> (!head) &#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"链表已经为空"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//从链表头部删除</span></span><br><span class="line">i = head-&gt;num;</span><br><span class="line">p = head;</span><br><span class="line">head = head-&gt;next;</span><br><span class="line"><span class="keyword">delete</span> p;</span><br><span class="line"><span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">list</span> *p;</span><br><span class="line"><span class="comment">//队列的演示</span></span><br><span class="line"><span class="built_in">queue</span> q;</span><br><span class="line">p = &amp;q;</span><br><span class="line">p-&gt;store(<span class="number">111</span>), p-&gt;store(<span class="number">222</span>), p-&gt;store(<span class="number">333</span>);</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"队列： "</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; p-&gt;retrive() &lt;&lt; <span class="string">" "</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; p-&gt;retrive() &lt;&lt; <span class="string">" "</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; p-&gt;retrive() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//堆栈的演示</span></span><br><span class="line"><span class="built_in">stack</span> s;</span><br><span class="line">p = &amp;s;</span><br><span class="line">p-&gt;store(<span class="number">111</span>), p-&gt;store(<span class="number">222</span>), p-&gt;store(<span class="number">333</span>);</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"堆栈： "</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; p-&gt;retrive() &lt;&lt; <span class="string">" "</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; p-&gt;retrive() &lt;&lt; <span class="string">" "</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; p-&gt;retrive() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="C-实例指针"><a href="#C-实例指针" class="headerlink" title="C++实例指针"></a>C++实例指针</h2><p>参与成员变量重名；<br>判断对象是否为自己；<br>运算符重载<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#includeiostream&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">rect</span> &#123;</span> </span><br><span class="line"><span class="keyword">int</span> x1, y1, x2, y2; <span class="comment">//矩形座标 </span></span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">rect() &#123; </span><br><span class="line">x1 = <span class="number">0</span>, y1 = <span class="number">0</span>, x2 = <span class="number">0</span>, y2 = <span class="number">0</span>; </span><br><span class="line">&#125; </span><br><span class="line">rect(<span class="keyword">int</span> m1, <span class="keyword">int</span> n1, <span class="keyword">int</span> m2, <span class="keyword">int</span> n2) &#123; </span><br><span class="line">x1 = m1, y1 = n1, x2 = m2, y2 = n2;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">" x1="</span> &lt;&lt; x1; </span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">" y1="</span> &lt;&lt; y1; </span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">" x2="</span> &lt;&lt; x2; </span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">" y2="</span> &lt;&lt; y2; </span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125; </span><br><span class="line">rect <span class="keyword">operator</span>++() &#123; </span><br><span class="line">x1++, y1++, x2++, y2++; </span><br><span class="line"><span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">//返回当前实例 </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line"><span class="function">rect <span class="title">r</span><span class="params">(<span class="number">12</span>, <span class="number">20</span>, <span class="number">50</span>, <span class="number">40</span>)</span></span>; </span><br><span class="line">r.print(); </span><br><span class="line">rect obj; </span><br><span class="line">obj = r++; </span><br><span class="line">obj.print(); </span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>编译有问题 通不过;</p>
+<h2 id="C-构造函数、explicit、类合成"><a href="#C-构造函数、explicit、类合成" class="headerlink" title="C++构造函数、explicit、类合成"></a>C++构造函数、explicit、类合成</h2><p>默认转换带来一定的方便，同时也造成不必要的失误，为了防止失误，可以在构造函数前加“explicit”。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">classA</span> &#123;</span> </span><br><span class="line"><span class="keyword">int</span> x; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">classA</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">this</span>-&gt;x = x; &#125; </span><br><span class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">classA</span><span class="params">(<span class="keyword">char</span> *x)</span> </span>&#123; <span class="keyword">this</span>-&gt;x = atoi(x); &#125; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getX</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> x; &#125; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line"><span class="function">classA <span class="title">ca</span><span class="params">(<span class="number">5</span>)</span></span>; <span class="comment">//正常调用构造函数 </span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"x = "</span> &lt;&lt; ca.getX() &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">ca = <span class="number">100</span>; <span class="comment">//编译出错 </span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"x = "</span> &lt;&lt; ca.getX() &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">ca = <span class="string">"255"</span>; <span class="comment">//编译出错 </span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"x = "</span> &lt;&lt; ca.getX() &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>类的合成</p>
+<p>当一个类的成员变量的类型是另一个类时，称之为“合成(composite)”。构造函数在对这个变量赋值时，不能在函数体里面赋值，只能用“第6节”中的方法2，即创建时赋值。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">classB</span> &#123;</span> </span><br><span class="line"><span class="keyword">int</span> x; </span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">classB(<span class="keyword">int</span> x) &#123; <span class="keyword">this</span>-&gt;x = x; &#125; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getB</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> x; &#125; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">classA</span> &#123;</span> </span><br><span class="line">classB xb; </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line"><span class="comment">//classA(classB b) &#123; xb = b; &#125; //编译出错 </span></span><br><span class="line">classA(classB b) : xb(b) &#123; &#125; <span class="comment">//只能用这种方法 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setX</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> xb.getB(); &#125; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line"><span class="function">classB <span class="title">cb</span><span class="params">(<span class="number">5</span>)</span></span>; <span class="comment">//先定义一个classB的实例 </span></span><br><span class="line"><span class="function">classA <span class="title">ca</span><span class="params">(cb)</span></span>; <span class="comment">//然后用这个实例创建classA的实例 </span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"x = "</span> &lt;&lt; ca.getX() &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="new-delete"><a href="#new-delete" class="headerlink" title="new delete"></a>new delete</h2><p>delete[]iArr;//注意数组的删除方法</p>
+<h2 id="静态"><a href="#静态" class="headerlink" title="静态"></a>静态</h2><p>C语言中也用static来修饰变量，C++中除了修饰变量外还可以修饰类的成员：<br><em><br>修饰函数中的局部变量，这个变量在这个函数中，无论调用多少次都是共有的。
+</em><br>修饰全局变量，则这个变量在当前文件中有效。在另一文件中，即使是同一程序也不再有效。<br><em><br>修饰类的成员变量或成员函数，则这个类无论产生多少实例，这个成员都是共有的。
+</em><br>static修饰的变量的初始值为0。<br><em><br>在类的静态成员函数中不能使用this指针，也不能作成静态虚函数。
+</em><br>类的静态成员函数不能用const、volatile申明。<br>静态成员变量</p>
+<p>下面演示静态成员变量的初始值、修改后的值和调用方法。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">classA</span> &#123;</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> sx;</span><br><span class="line"><span class="keyword">static</span> <span class="built_in">string</span> sstr;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> sy;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">set</span><span class="params">(<span class="keyword">int</span> x, <span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">sx = x;</span><br><span class="line">sstr = s;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">" x = "</span> &lt;&lt; sx ;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">" y = "</span> &lt;&lt; sy ;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">" s = "</span> &lt;&lt; sstr &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//下面的申明是必须的，这样不会改变访问权限(public,private)</span></span><br><span class="line"><span class="keyword">int</span> classA::sx;</span><br><span class="line"><span class="built_in">string</span> classA::sstr;</span><br><span class="line"><span class="keyword">int</span> classA::sy;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">classA ca1, ca2;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"ca1: "</span>, ca1.print(); <span class="comment">//实例1的初始值</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"ca2: "</span>, ca2.print(); <span class="comment">//实例2的初始值</span></span><br><span class="line">ca1.<span class="built_in">set</span>(<span class="number">25</span>, <span class="string">"C语言中文网"</span>); <span class="comment">//设定实例1，实例2 也会改变</span></span><br><span class="line">ca1.sy = <span class="number">100</span>; <span class="comment">//公有静态成员可以通过实例来设定</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"ca1: "</span>, ca1.print(); <span class="comment">//实例1的设定值</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"ca2: "</span>, ca2.print(); <span class="comment">//实例2的设定值</span></span><br><span class="line">ca2.<span class="built_in">set</span>(<span class="number">80</span>, <span class="string">"C++ 60分钟入门教程"</span>); <span class="comment">//设定实例2，实例1 也会改变</span></span><br><span class="line">classA::sy = <span class="number">125</span>; <span class="comment">//公有静态成员也可以不通过实例来设定</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"ca1: "</span>, ca1.print(); <span class="comment">//实例1的设定值</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"ca2: "</span>, ca2.print(); <span class="comment">//实例2的设定值</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果：<br>ca1:   x = 0  y = 0  s =<br>ca2:   x = 0  y = 0  s =<br>ca1:   x = 25  y = 100  s = C语言中文网<br>ca2:   x = 25  y = 100  s = C语言中文网<br>ca1:   x = 80  y = 125  s = C++ 60分钟入门教程<br>ca2:   x = 80  y = 125  s = C++ 60分钟入门教程<br>静态成员函数</p>
+<p>笔者多年从事Java程序设计，按Java的经验，静态成员函数一般在公共程序中用的比较多。这样的程序与类自身关系不大，只是归类性质放在某个类中。还有一些与类转换或交换但不需要实例时使用的情况。<br>静态成员函数不能调用非晶态成员函数<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Integer</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">atoi</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *s)</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> ::atoi(s);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">float</span> <span class="title">atof</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *s)</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> ::atof(s);</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> x = Integer::atoi(<span class="string">"322"</span>);</span><br><span class="line"><span class="keyword">float</span> y = Integer::atof(<span class="string">"3.14"</span>);</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"x = "</span> &lt;&lt; x &lt;&lt; <span class="string">" y = "</span> &lt;&lt; y &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果：<br>x = 322  y = 3.14<br>类的静态常数</p>
+<p>和静态成员变量类似功能，当不允许修改时，要定义成常数。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Integer</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> MAX_LEN = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> MIN_LEN = <span class="number">10</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//以下的申明不需要</span></span><br><span class="line"><span class="comment">//int Integer::MAX_LEN;</span></span><br><span class="line"><span class="comment">//int Integer::MIN_LEN;</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"MAX_LEN = "</span> &lt;&lt; Integer::MAX_LEN &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"MIN_LEN = "</span> &lt;&lt; Integer::MIN_LEN &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><p>1 const修饰变量<br>2 const修饰类的成员函数<br>用const修饰类的成员函数，可以使函数内不能对任何成员变量修改。不是成员变量当然可以修改。<br>3 mutable与const相反<br>它修饰成员变量，即使在const成员函数中也能修改</p>
+<h2 id="const修饰指针"><a href="#const修饰指针" class="headerlink" title="const修饰指针"></a>const修饰指针</h2><h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>C++基础<br><a href="http://blog.csdn.net/WaitForFree/article/category/1434466" target="_blank" rel="noopener">http://blog.csdn.net/WaitForFree/article/category/1434466</a></p>
+<p>C++ WIN32编程</p>
+<p>显式构造函数<br><a href="http://blog.csdn.net/starlee/article/details/1331268" target="_blank" rel="noopener">http://blog.csdn.net/starlee/article/details/1331268</a><br>C++结构体<br>    <a href="http://blog.sina.com.cn/s/blog_48f587a80100khtml" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_48f587a80100khtml</a><br><a href="http://www.cnblogs.com/gnuhpc/archive/2012/12/10/2811html" target="_blank" rel="noopener">http://www.cnblogs.com/gnuhpc/archive/2012/12/10/2811html</a><br>struct Point<br>{<br>double x,y;<br>Point() {}<br>Point(double _x,double _y):x(_x),y(_y) {}<br>}<br>其中第一个函数起什么作用，一定要次次都写吗？<br>第二个函数这样写等价吗？<br>Point(double _x,double _y)</p>
+<p>{<br>    x=_x;<br>    y=_y;<br>}</p>
+<p>无参构造函数，需要都写，可能你用不到，但这是一种良好的习惯。1,2可合并为   Point(double _x=1,double _y=2):x(_x),y(_y) {}<br>等价。但当字符（字符串）赋值时，为了安全，不能用初始化列表形式（第一种）。<br>第一个是默认构造函数，这个函数什么都不做。这个构造函数有可能被编译器优化掉。<br>第二个构造函数的写法和你说的那个写法不一样。第一种写法中变量”初始化”的位置是在构造函数初始化列表，所以是真正的初始化。你说的那种写法不是初始化，是赋值。赋值和初始化是不一样的。<br>第一个构造函数不是一定要写的。。。。。类中有哪些构造函数要根据类的用途来看。</p>
+<p>为什么在结构体里面自己写了个构造函数，被报错了，但是我加上默认形参值就不会报错了<br>struct EDGE<br>{<br>    int from, to;<br>    double cost;</p>
+<pre><code>EDGE(int a, int b, double c)//EDGE(int a = 0, int b = 0, double c = 0.0)
+: from(a), to(b), cost(c){}
+</code></pre><p>}edge[MAX <em> MAX];<br>// 这里定义了一个 EDGE 类型的变量数组，由于没有提供参数，数组的每一个元素会调用默认构造函数初始化，而 EDGE 类没有提供默认构造函数，所以会报错。<br>数组里的对象，不论是类对象（struct或者class），还是基础数据类型，如果没有给初始化列表，一律执行值初始化，即基础数据类型都初始化为0，类对象执行默认构造函数（即不接受任何参数的构造函数）。<br>你写的struct里面因为自己定义了一个构造函数，所以编译器不会隐式地帮你声明一个默认构造函数，而你定义了一个数组，又没有默认构造函数，编译器就报错。
+</em>vector*<br><a href="https://www.jianshu.com/p/d6963a62fdf2" target="_blank" rel="noopener">https://www.jianshu.com/p/d6963a62fdf2</a></p>
+<p>runjs codepad</p>
+<p>实例化的两种方式：一种指针。一种非指针。对应在堆中或者栈中</p>
+<p><a href="https://blog.csdn.net/sun980984305/article/details/52959893" target="_blank" rel="noopener">https://blog.csdn.net/sun980984305/article/details/52959893</a></p>
+<p><a href="https://blog.csdn.net/u010039733/article/details/51926966" target="_blank" rel="noopener">https://blog.csdn.net/u010039733/article/details/51926966</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CPP/" rel="tag"># CPP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/23/CPPDesignPattern/" rel="prev" title="CPP-DesignPattern">
+                CPP-DesignPattern <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="KinGil">
+          <p class="site-author-name" itemprop="name">KinGil</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kingiluob" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/2283641104/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100007092155441" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      Facebook
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C的区别"><span class="nav-number">1.</span> <span class="nav-text">C的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺省指和重载"><span class="nav-number">2.</span> <span class="nav-text">缺省指和重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">3.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成员函数和运算符重载"><span class="nav-number">4.</span> <span class="nav-text">成员函数和运算符重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基类-派生类的构造函数"><span class="nav-number">5.</span> <span class="nav-text">基类 派生类的构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#派生类调用基类成员"><span class="nav-number">6.</span> <span class="nav-text">派生类调用基类成员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多重继承的先后问题－菱形问题"><span class="nav-number">7.</span> <span class="nav-text">多重继承的先后问题－菱形问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚函数和重虚函数"><span class="nav-number">8.</span> <span class="nav-text">虚函数和重虚函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-实例指针"><span class="nav-number">9.</span> <span class="nav-text">C++实例指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-构造函数、explicit、类合成"><span class="nav-number">10.</span> <span class="nav-text">C++构造函数、explicit、类合成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#new-delete"><span class="nav-number">11.</span> <span class="nav-text">new delete</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态"><span class="nav-number">12.</span> <span class="nav-text">静态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const"><span class="nav-number">13.</span> <span class="nav-text">const</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const修饰指针"><span class="nav-number">14.</span> <span class="nav-text">const修饰指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后续"><span class="nav-number">15.</span> <span class="nav-text">后续</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KinGil</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
